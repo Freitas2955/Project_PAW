@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Entity List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/entities/create">Create Entity</a></h3>
+      <h1>Entity List</h1>
+      <% if(entities.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Entity Name</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<entities.length;i++) { %>
+            <tr>
+              <td><a href="/entities/show/<%= entities[i]._id%>"><%= Entitys[i].name%></a></td>
+              <td><%= entities[i].position%></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No entities found.</div>
+      <% } %>
+    </div>
+  </body>
+</html>

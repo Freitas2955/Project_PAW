@@ -4,8 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://user:user@basepaw.e8ypv1l.mongodb.net/trabalhoPaw?retryWrites=true&w=majority&appName=BASEPAW')
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var employeesRouter = require('./routes/employees');
+var entitiesRouter = require('./routes/entities');
+var donatorsRouter = require('./routes/donators');
+var donationsRouter = require('./routes/donations');
 
 var app = express();
 
@@ -21,6 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/employees', employeesRouter);
+app.use('/entities', entitiesRouter);
+app.use('/donators', donatorsRouter);
+app.use('/donations', donationsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

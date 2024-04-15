@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Donators Detail</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/donators">Donators List</a></h3>
+      <h1>Donators Detail</h1>
+      <table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td><%= donator.name %></td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>:</td>
+            <td><%= donator.address %></td>
+          </tr>
+          <tr>
+            <td>Position</td>
+            <td>:</td>
+            <td><%= donator.position %></td>
+          </tr>
+          <tr>
+            <td>Salary</td>
+            <td>:</td>
+            <td>$<%= donator.salary %>/year</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a href="/employees/edit/<%= donator._id%>">EDIT</a></h3>
+      <form action="/employees/delete/<%= donator._id%>" method="post">
+        <button type="submit">DELETE</button>
+      </form>
+    </div>
+  </body>
+</html>

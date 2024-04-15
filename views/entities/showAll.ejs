@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Entity Detail</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div class="container">
+    <h3><a href="/entities">Entity List</a></h3>
+    <h1>Entity Detail</h1>
+    <% entities.forEach(entity=> {%>
+      <table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td>
+              <%= entity.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>:</td>
+            <td>
+              <%= entity.address %>
+            </td>
+          </tr>
+          <tr>
+            <td>Position</td>
+            <td>:</td>
+            <td>
+              <%= entity.position %>
+            </td>
+          </tr>
+          <tr>
+            <td>Salary</td>
+            <td>:</td>
+            <td>$<%= entity.salary %>/year</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a href="/entities/edit/<%=entity._id%>">EDIT</a></h3>
+        <form action="/entities/delete/<%=entity._id%>" method="post">
+          <button type="submit">DELETE</button>
+        </form>
+      <% });%>
+
+        
+  </div>
+</body>
+
+</html>

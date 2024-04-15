@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Donators List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/donators/create">Create Donators</a></h3>
+      <h1>Donators List</h1>
+      <% if(donators.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Donators Name</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<donators.length;i++) { %>
+            <tr>
+              <td><a href="/donators/show/<%= donators[i]._id%>"><%= donators[i].name%></a></td>
+              <td><%= donators[i].position%></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No donators found.</div>
+      <% } %>
+    </div>
+  </body>
+</html>
