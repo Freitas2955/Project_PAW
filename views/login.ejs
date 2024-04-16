@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teste de CSS</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel='stylesheet' href='/stylesheets/login.css' />
 </head>
 
 <body>
-  <nav>
-    <div id="imagensNav">
-      <img src="images/Image 207.png" alt="Logo" width="50" height="50">
-      <img src="images/Image 207 (1).png" alt="Logo" height="50">
-    </div>
-    <div id="opcoesNav">
-      <a href=""><img src="images/icone-de-cloche-et-d-alerte-gris.png" alt="Notifications" width="40" height="40"></a>
-      <img src="images/cara.png" alt="profile" width="40" height="40" id="profile">
-      <p>Nome nome</p>
-      <a href="" id=""><img src="images/arrow_down_icon_242220.png" alt="More options" width="40" height="40"></a>
-    </div>
-  </nav>
+    <nav>
+        <div id="imagemlogo">
+            <img src="images/logo.png" alt="Logo" width="50" height="50"/>
+        </div>
+        <div id="blococentral">
+            <h2>Iniciar sessão</h2>
+
+
+
+
+
+            <form action="#" method="POST">
+
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" required>
+                        <span class="mudar" onclick="visualizarpass()">&#x1F441;</span>
+                    </div>
+                </div>
+
+                <button type="submit">Entrar</button>
+            </form>
+            <div class="recuperarpass">
+                <a href="recuperar-password.html">Recuperar senha?</a>
+            </div>
+
+            
+
+
+            
+        </div>
+    </nav>
+    <script src="script.js"></script>
 </body>
 
 </html>
