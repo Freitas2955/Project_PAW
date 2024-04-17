@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var employee = require("../controllers/EmployeeController.js");
 
+router.get('/gerir', function(req, res, next) {
+  res.render('duarte',);//fazer render com os funcionarios todos
+});
+
 // Get all employees
 router.get('/', function(req, res) {
   employee.list(req, res);

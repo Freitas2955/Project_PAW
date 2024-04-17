@@ -1,16 +1,89 @@
+* {
+  margin: 0px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+  height: 92.5vh;
+}
+
 #profile {
   border-radius: 100%;
 }
 
-nav {
+header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.336);
+  height: 7vh;
+  margin: auto;
+  position: relative;
 }
 
 #opcoesNav {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 15%;
 }
 
-#opcoesNav>{
+.user{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-left: 2px solid #dee1e6;
+}
 
+.user>*{
+  margin: 0px 10px;
+}
+
+.sidebar {
+  background-color: #fafafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  padding-right: 3%;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 30%;
+}
+
+li{
+  margin-top: 2px;
+  padding: 10px 30px 10px 10px;
+  border-radius: 10px;
+}
+
+li:hover{
+  background-color: #6d31ed85;
+  transition: background-color 0.4s ease;
+}
+
+li:hover a{
+  color: white;
+}
+
+li > a {
+  text-decoration: none;
+  color: #565d6d;
+  
+}
+
+li#current{
+  background-color: #6d31ed;
+}
+
+li#current>a{
+  color: white;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  margin-top: 1px;
 }
