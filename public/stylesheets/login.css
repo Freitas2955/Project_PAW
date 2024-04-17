@@ -1,0 +1,61 @@
+/*body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}*/
+
+
+#imagem-logo {
+    position: absolute;
+    top: 10px; 
+    left: 10px; 
+}
+
+/*.blococentral {
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}*/
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button{
+    background-color: rgb(42, 170, 255);
+}
+
+.grupo {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.grupo input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.password-input {
+    position: relative;
+}
+
+.mudar {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
