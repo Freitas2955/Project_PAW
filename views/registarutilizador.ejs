@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registar Utilizador</title>
+    <link rel='stylesheet' href='/stylesheets/registarutilizado.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <header>
+        <div id="imagensNav">
+          <img src="../images/Image 207.png" alt="Logo" width="50" height="50">
+          <img src="../images/Image 207 (1).png" alt="Logo" height="50">
+        </div>
+        <div id="opcoesNav">
+          <a href=""><img src="../images/icone-de-cloche-et-d-alerte-gris.png" alt="Notifications" width="20"
+              height="20"></a>
+          <div class="user">
+            <img src="../images/cara.png" alt="profile" width="30" height="30" id="profile">
+            <p>Nome nome</p>
+          </div>
+          <a href="" id=""><img src="../images/arrow_down_icon_242220.png" alt="More options" width="20" height="20"></a>
+        </div>
+      </header>
+      <main>
+        <div class="sidebar">
+          <ul>
+            <li><a href="">Menu Inicial</a></li>
+            <li><a href="">Doações</a></li>
+            <li id="current"><a href="">Utilizadores</a></li>
+            <li><a href="">Pedidos</a></li>
+            <li><a href="">Pontos</a></li>
+          </ul>
+        </div>
+
+        <div class="content">
+
+            <div class="informacaogeral">
+              <h2>Informação Geral</h2> <br><br>
+
+                <div class="grupo">
+                    <label for="email">Primeiro Nome:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Ultimo Nome:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Telemovel:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Morada:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Codigo-Postal:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Cidade:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Password:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Confirmar Password:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+    <br /><br />
+    <h4>Selecionar opção:</h4>
+    <form>
+        <input type="checkbox" id="doador" name="opcao" value="doador">
+        <label for="doador">Doador</label><br>
+        <input type="checkbox" id="instituicao" name="opcao" value="instituicao">
+        <label for="instituicao">Instituição</label><br>
+        <input type="checkbox" id="funcionario" name="opcao" value="funcionario">
+        <label for="funcionario">Funcionário</label><br>
+        <input type="checkbox" id="parceiro" name="opcao" value="parceiro">
+        <label for="parceiro">Parceiro</label><br>
+        <br>
+        <button type="button" onclick="mostrarSelecao()">Continuar</button>
+    </form>
+    <p id="resultado"></p>
+    <script src="script.js"></script>
+            </div>
+
+
+
+            <br /><br />
+            <div class="informacaoinstituicao">
+                <h2>Informação Instituição</h2> <br><br>
+  
+                  <div class="grupo">
+                      <label for="email">Nome Instituição:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Telemovel:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Morada:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Codigo-Postal:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Cidade:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Descrição:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+            </div>
+
+
+
+            <br /><br />
+            <div class="informacaoparceiro">
+                <h2>Informação Parceiro</h2> <br><br>
+  
+                  <div class="grupo">
+                      <label for="email">Nome:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Telemovel:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Morada:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Codigo-Postal:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Cidade:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+                  <div class="grupo">
+                      <label for="email">Descrição:</label>
+                      <input type="email" id="email" name="email" required>
+                  </div>
+            </div>
+
+            <br /><br />
+           <button type="button" onclick="guardar()">Guardar</button> 
+        </div>
+    </main>
+</body>
+</html>

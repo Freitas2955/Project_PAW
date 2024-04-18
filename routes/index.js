@@ -22,4 +22,8 @@ router.get('/doar', function(req, res, next) {
   res.render('doar', { title: 'Express' });
 });
 
+router.get('/registarutilizador', function(req, res, next) {
+  res.render('registarutilizador', { title: 'Express' });
+});
+
 module.exports = router;
