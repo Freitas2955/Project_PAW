@@ -27,8 +27,13 @@
                     <label for="password">Password:</label>
                     <div class="password-input">
                         <input type="password" id="password" name="password" required>
-                        <span class="mudar" onclick="visualizarpass()">&#x1F441;</span>
+                        <span class="mudar" onclick="togglePasswordVisibility()">&#x1F441;</span>
                     </div>
+                </div>
+
+                <div class="grupo">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <label for="rememberMe">Lembrar-me</label>
                 </div>
 
                 <button type="submit" id="botao">Entrar</button>
@@ -37,10 +42,7 @@
                 <a href="recuperar-password.html">Recuperar senha?</a>
             </div>
 
-            
 
-
-            
         </div>
     </nav>
     <script src="script.js"></script>

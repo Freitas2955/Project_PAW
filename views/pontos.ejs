@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar Pontos</title>
+    <link rel='stylesheet' href='/stylesheets/pontos.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <header>
+        <div id="imagensNav">
+          <img src="../images/Image 207.png" alt="Logo" width="50" height="50">
+          <img src="../images/Image 207 (1).png" alt="Logo" height="50">
+        </div>
+        <div id="opcoesNav">
+          <a href=""><img src="../images/icone-de-cloche-et-d-alerte-gris.png" alt="Notifications" width="20"
+              height="20"></a>
+          <div class="user">
+            <img src="../images/cara.png" alt="profile" width="30" height="30" id="profile">
+            <p>Nome nome</p>
+          </div>
+          <a href="" id=""><img src="../images/arrow_down_icon_242220.png" alt="More options" width="20" height="20"></a>
+        </div>
+      </header>
+      <main>
+        <div class="sidebar">
+          <ul>
+            <li><a href="">Menu Inicial</a></li>
+            <li><a href="">Doações</a></li>
+            <li><a href="">Utilizadores</a></li>
+            <li><a href="">Pedidos</a></li>
+            <li id="current"><a href="">Pontos</a></li>
+          </ul>
+        </div>
+
+        <div class="content">
+            <div class="contentHeader">
+              <h1>Sistema de Pontos</h1> <br><br>
+                <h2>Roupa</h2> <br/>
+
+                <form id="pontosForm">
+                    <label for="pontosCamisola">Pontos por Camisola:</label>
+                    <input type="number" id="pontosCamisola" name="pontosCamisola" min="0"><br><br>
+            
+                    <label for="pontosCasaco">Pontos por Casaco:</label>
+                    <input type="number" id="pontosCasaco" name="pontosCasaco" min="0"><br><br>
+
+                    <label for="pontosCalcas">Pontos por Calças:</label>
+                    <input type="number" id="pontosCalcas" name="pontosCalcas" min="0"><br><br>
+
+                    <label for="pontosSapatos">Pontos por par de Sapatos:</label>
+                    <input type="number" id="pontosSapatos" name="pontosSapatos" min="0"><br><br>
+
+                    <label for="pontosAcessorios">Pontos por Acessorios:</label>
+                    <input type="number" id="pontosAcessorios" name="pontosAcessorios" min="0"><br><br>
+
+                    <label for="pontosRoupaInterior">Pontos por peça Roupa Interior:</label>
+                    <input type="number" id="pontosRoupaInterior" name="pontosRoupaInterior" min="0"><br><br>
+                </form>
+                <br><br>
+
+                <h2>Dinheiro</h2> <br/>
+                <form id="pontosForm">
+                    <label for="pontosDinheiro">Pontos por cada 5€:</label>
+                    <input type="number" id="pontosDinheiro" name="pontosDinheiro" min="0"><br><br>
+                </form>
+
+                <button type="button" onclick="guardarpontos()">Guardar</button>
+</body>
+</html>
