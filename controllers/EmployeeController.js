@@ -10,6 +10,16 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
+  employeeController.management = function (req, res) {
+    Employee.find()
+      .then((employee) => {
+        res.render("../views/usersManagement", { employees: employee });
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+      });
+  };
+
 employeeController.list = function (req, res) {
   Employee.find()
     .then((employee) => {

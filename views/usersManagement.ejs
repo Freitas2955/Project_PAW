@@ -27,11 +27,19 @@
   <main>
     <div class="sidebar">
       <ul>
-        <li><a href="">Menu Inicial</a></li>
-        <li><a href="">Doações</a></li>
-        <li id="current"><a href="">Utilizadores</a></li>
-        <li><a href="">Pedidos</a></li>
-        <li><a href="">Pontos</a></li>
+        <li onclick="redirectToLink()"><a href="">Menu Inicial</a></li>
+        <li onclick="redirectToLink()"><a href="">Doações</a></li>
+        <li id="current" onclick="redirectToLink()"><a href="">Utilizadores</a></li>
+        <li onclick="redirectToLink()"><a href="">Pedidos</a></li>
+        <li onclick="redirectToLink()"><a href="">Pontos</a></li>
+        <script>
+          function redirectToLink() {
+              var link = document.querySelector('li>a');
+              if (link) {
+                  window.location.href = link.getAttribute('href');
+              }
+          }
+      </script>
       </ul>
     </div>
 
@@ -55,7 +63,30 @@
         <input type="text" placeholder="&#128269;  Pesquisa">
       </div>
       <table>
-
+        <thead>
+          <th>Nome</th>
+          <th>Cidade</th>
+          <th>Morada</th>
+          <th>Código Postal</th>
+        </thead>
+        <tbody>
+          <% employees.forEach(employee=> {%>
+            <tr>
+              <td>
+                <%=employee.name%>
+              </td>
+              <td>
+                <%=employee.name%>
+              </td>
+              <td>
+                <%=employee.name%>
+              </td>
+              <td>
+                <%=employee.name%>
+              </td>
+            </tr>
+            <% });%>
+        </tbody>
       </table>
     </div>
   </main>

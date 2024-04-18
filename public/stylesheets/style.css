@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
 * {
   margin: 0px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Lexend", sans-serif;
 }
 
 body{
@@ -86,4 +88,12 @@ main {
   height: 100%;
   display: flex;
   margin-top: 1px;
+}
+
+table tr:nth-child(even) {
+  background-color: #fafafb; 
+}
+
+thead tr{
+  background-color: #fafafb;
 }
