@@ -35,14 +35,19 @@
         </div>
 
         <div class="content">
+
             <div class="contentHeader">
-              <h1>Sistema de Pontos</h1> <br><br>
-                <h2>Roupa</h2> <br/>
+              <h1>Informação Geral</h1> <br><br>
+
+                <h2> Roupa</h2> <br/>
 
                 <form id="pontosForm">
                     <label for="pontosCamisola">Pontos por Camisola:</label>
                     <input type="number" id="pontosCamisola" name="pontosCamisola" min="0"><br><br>
-            
+
+                    <label for="pontosAcessorios">Pontos por Acessorios:</label>
+                    <input type="number" id="pontosAcessorios" name="pontosAcessorios" min="0"><br><br>
+                    
                     <label for="pontosCasaco">Pontos por Casaco:</label>
                     <input type="number" id="pontosCasaco" name="pontosCasaco" min="0"><br><br>
 
@@ -52,20 +57,17 @@
                     <label for="pontosSapatos">Pontos por par de Sapatos:</label>
                     <input type="number" id="pontosSapatos" name="pontosSapatos" min="0"><br><br>
 
-                    <label for="pontosAcessorios">Pontos por Acessorios:</label>
-                    <input type="number" id="pontosAcessorios" name="pontosAcessorios" min="0"><br><br>
-
                     <label for="pontosRoupaInterior">Pontos por peça Roupa Interior:</label>
                     <input type="number" id="pontosRoupaInterior" name="pontosRoupaInterior" min="0"><br><br>
-                </form>
-                <br><br>
 
-                <h2>Dinheiro</h2> <br/>
-                <form id="pontosForm">
-                    <label for="pontosDinheiro">Pontos por cada 5€:</label>
-                    <input type="number" id="pontosDinheiro" name="pontosDinheiro" min="0"><br><br>
-                </form>
+                    <br><br>
 
+                    <h2>Dinheiro</h2> <br/>
+                    <form id="pontosForm">
+                        <label for="pontosDinheiro">Pontos por cada 5€:</label>
+                        <input type="number" id="pontosDinheiro" name="pontosDinheiro" min="0"><br><br>
+                    </form>
+                </form>
                 <button type="button" onclick="guardarpontos()">Guardar</button>
 </body>
 </html>
