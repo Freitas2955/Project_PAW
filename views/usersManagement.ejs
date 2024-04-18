@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teste de CSS</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/management.css' />
 </head>
 
 <body>
@@ -39,17 +40,18 @@
       <div class="contentHeader">
         <h1>Utilizadores</h1>
         <div class="botoes">
-          <button>Exportar</button>
-          <button>Novo Utilizador</button>
+          <button id="exportar">Exportar</button>
+          <button id="novo">Novo Utilizador</button>
         </div>
-        <nav>
-          <a href="">Todos</a>
-          <a href="">Doadores</a>
-          <a href="">Instituições</a>
-          <a href="">Funcionários</a>
-          <a href="">Parceiros</a>
-        </nav>
       </div>
+      <nav id="filtros">
+        <a href="" id="current">Todos</a>
+        <a href="">Doadores</a>
+        <a href="">Instituições</a>
+        <a href="">Funcionários</a>
+        <a href="">Parceiros</a>
+      </nav>
+
       <div class="midbar">
         <p><strong>200</strong> no total</p>
         <input type="text" placeholder="&#128269;  Pesquisa">
@@ -60,6 +62,7 @@
           <th>Cidade</th>
           <th>Morada</th>
           <th>Código Postal</th>
+          <th></th>
         </thead>
         <tbody>
           <% employees.forEach(employee=> {%>
@@ -75,6 +78,15 @@
               </td>
               <td>
                 <%=employee.name%>
+              </td>
+              <td>
+                <form action="/employees/delete/<%=employee._id%>" method="post">
+                  <button id="delete" onclick="">&#x2715;</button>
+                </form>
+                <!-- <button style="background-color: green;">&#x2713;</button>-->
+                <form action="/employees/delete/<%=employee._id%>" method="post">
+                  <button>&#x270E;</button>
+                </form>
               </td>
             </tr>
             <% });%>

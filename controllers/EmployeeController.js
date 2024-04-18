@@ -93,7 +93,7 @@ employeeController.delete = function (req, res) {
   Employee.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Employee detected!");
-      res.redirect("/employees");
+      res.redirect("/users/gerir");
     })
     .catch((err) => {
       console.log(err);

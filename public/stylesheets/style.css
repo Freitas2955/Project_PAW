@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 
 * {
   margin: 0px;
   font-family: "Lexend", sans-serif;
 }
 
-body{
+body {
   height: 92.5vh;
 }
 
@@ -30,14 +30,14 @@ header {
   width: 15%;
 }
 
-.user{
+.user {
   display: flex;
   flex-direction: row;
   align-items: center;
   border-left: 2px solid #dee1e6;
 }
 
-.user>*{
+.user > * {
   margin: 0px 10px;
 }
 
@@ -55,32 +55,31 @@ ul {
   margin-top: 30%;
 }
 
-li{
+li {
   margin-top: 2px;
   padding: 10px 30px 10px 10px;
   border-radius: 10px;
 }
 
-li:hover{
+li:hover {
   background-color: #6d31ed85;
   transition: background-color 0.4s ease;
 }
 
-li:hover a{
+li:hover a {
   color: white;
 }
 
 li > a {
   text-decoration: none;
   color: #565d6d;
-  
 }
 
-li#current{
+li#current {
   background-color: #6d31ed;
 }
 
-li#current>a{
+li#current > a {
   color: white;
 }
 
@@ -91,9 +90,33 @@ main {
 }
 
 table tr:nth-child(even) {
-  background-color: #fafafb; 
+  background-color: #fafafb;
 }
 
-thead tr{
+thead tr {
   background-color: #fafafb;
+}
+
+.content{
+  width: 80%;
+  margin: 2%;
+}
+
+button {
+  border: none;
+  border-radius: 2px;
+}
+
+button#delete {
+  background-color: #df3c30;
+  color: white;
+}
+
+form{
+  display: inline;
+}
+
+button#exportar{
+  background-color: #f5f1fe;
+  color: #8c5cf1;
 }

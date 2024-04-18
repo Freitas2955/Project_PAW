@@ -1,0 +1,55 @@
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1.5%;
+}
+
+.botoes > button {
+  padding: 5px;
+  border-radius: 4px;
+}
+
+nav#filtros {
+  padding-bottom: 0.7%;
+  border-bottom: 3px solid #f3f4f6;
+  display: flex;
+  justify-content: flex-start;
+  gap: 3%;
+}
+
+nav#filtros > a {
+  text-decoration: none;
+  color: #565d6d;
+}
+
+nav#filtros > a#current {
+  border-bottom: 3px solid #6d31ed;
+  text-decoration: none;
+  color: #6d31ed;
+}
+
+.midbar {
+  color: #565d6d;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+}
+
+.midbar > input {
+  border-radius: 5px;
+  border: 1px solid #565d6d;
+  padding: 0.3%;
+}
+
+strong {
+  color: black;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 0.3%;
+}
