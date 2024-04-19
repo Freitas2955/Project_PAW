@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var DonationSchema = new mongoose.Schema({
   donatorId:String,
+  name:String,
   type:String,
   ammount:Number,
   collected:Boolean,

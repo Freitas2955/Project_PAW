@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestão de utilizadores</title>
+  <title>Teste de CSS</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' href='/stylesheets/management.css' />
+  <link rel='stylesheet' href='/stylesheets/management.css'/>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
         <div class="botoes">
           <button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
           <div class="dropdown">
-            <button onclick="toggleDropdown()" id="novo">&#x2b; Novo utilizador</button>
+            <button id="novo">&#x2b; Novo utilizador</button>
             <div id="dropdownContent" class="dropdown-content" style="display: none;">
               <a href="#">Funcionário</a>
               <a href="#">Doador</a>
@@ -73,22 +73,22 @@
           <th></th>
         </thead>
         <tbody>
-          <% employees.forEach(employee=> {%>
+          <% donations.forEach(donation=> {%>
             <tr>
               <td>
-                <%=employee.name%>
+                <%=donation.name%>
               </td>
               <td>
-                <%=employee.name%>
+                <%=donation.name%>
               </td>
               <td>
-                <%=employee.name%>
+                <%=donation.name%>
               </td>
               <td>
-                <%=employee.name%>
+                <%=donation.name%>
               </td>
               <td>
-                <form action="/employees/delete/<%=employee._id%>" method="post">
+                <form action="/donations/delete/<%=donation._id%>" method="post">
                   <button id="delete" type="submit">&#x2715;</button>
                 </form>
                 <!-- <button style="background-color: green;">&#x2713;</button>-->
@@ -101,18 +101,6 @@
         </tbody>
       </table>
     </div>
-
-    <script>
-      function toggleDropdown() {
-        var dropdownContent = document.getElementById("dropdownContent");
-        if (dropdownContent.style.display === "none") {
-          dropdownContent.style.display = "block";
-        } else {
-          dropdownContent.style.display = "none";
-        }
-      }
-    </script>
-
   </main>
 </body>
 

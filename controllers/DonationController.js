@@ -10,6 +10,16 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
+donationController.management = function (req, res) {
+  Donation.find()
+    .then((donation) => {
+      res.render("../views/donationManagement", { donations: donation });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
+
 donationController.list = function (req, res) {
   Donation.find()
     .then((donation) => {
