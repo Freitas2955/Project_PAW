@@ -10,31 +10,9 @@
 </head>
 
 <body>
-  <header>
-    <div id="imagensNav">
-      <img src="../images/Image 207.png" alt="Logo" width="50" height="50">
-      <img src="../images/Image 207 (1).png" alt="Logo" height="50">
-    </div>
-    <div id="opcoesNav">
-      <a href=""><img src="../images/icone-de-cloche-et-d-alerte-gris.png" alt="Notifications" width="20"
-          height="20"></a>
-      <div class="user">
-        <img src="../images/cara.png" alt="profile" width="30" height="30" id="profile">
-        <p>Nome nome</p>
-      </div>
-      <a href="" id=""><img src="../images/arrow_down_icon_242220.png" alt="More options" width="20" height="20"></a>
-    </div>
-  </header>
+  <%- include('general/header') -%>
   <main>
-    <div class="sidebar">
-      <ul>
-        <li><a href="">Menu Inicial</a></li>
-        <li><a href="">Doações</a></li>
-        <li id="current"><a href="">Utilizadores</a></li>
-        <li><a href="">Pedidos</a></li>
-        <li><a href="">Pontos</a></li>
-      </ul>
-    </div>
+    <%- include('general/sidebar') -%>
 
     <div class="content">
       <div class="contentHeader">

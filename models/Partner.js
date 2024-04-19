@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var EntitySchema = new mongoose.Schema({
+var PartnerSchema = new mongoose.Schema({
   name: String,
   description:String,
   address:String,
@@ -11,4 +11,4 @@ var EntitySchema = new mongoose.Schema({
   //imagens ainda nao sei como guardar pq n e suposto ser na base de dados acho eu
 });
 
-module.exports = mongoose.model('Entity', EntitySchema);
+module.exports = mongoose.model('Partner', PartnerSchema);

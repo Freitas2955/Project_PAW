@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestão de doações</title>
+  <title>Gestão de recolhas</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/management.css' />
 </head>
@@ -16,7 +16,7 @@
 
     <div class="content">
       <div class="contentHeader">
-        <h1>Doações</h1>
+        <h1>Pedidos de Recolha</h1>
         <div class="botoes">
           <button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
           <div class="dropdown">
@@ -32,23 +32,27 @@
         <thead>
           <th>Doador</th>
           <th>Estado</th>
-          <th>Pontos</th>
+          <th>Morada</th>
+          <th>Doação</th>
           <th></th>
         </thead>
         <tbody>
-          <% donations.forEach(donation=> {%>
+          <% requests.forEach(request=> {%>
             <tr>
               <td>
-                <%=donation.name%>
+                <%=request.name%>
               </td>
               <td>
-                <%=donation.name%>
+                <%=request.name%>
               </td>
               <td>
-                <%=donation.name%>
+                <%=request.name%>
+              </td>
+              <td>
+                <%=request.name%>
               </td>
               <td style="display: flex; justify-content: center; gap: 1%;">
-                <form action="/donations/delete/<%=donation._id%>" method="post">
+                <form action="/donations/delete/<%=request._id%>" method="post">
                   <button id="delete" type="submit">&#x2715;</button>
                 </form>
                 <form action="" method="post">

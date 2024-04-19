@@ -2,8 +2,12 @@ var mongoose = require('mongoose');
 
 var EmployeeSchema = new mongoose.Schema({
   name: String,
-  address:String,
-  position:String,
+  phone: Number,
+  email: String,
+  address: String,
+  postCode: String,
+  city:String,
+  password:String,
   updated_at: { type: Date, default: Date.now }
 });
 
