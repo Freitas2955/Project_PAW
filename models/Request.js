@@ -4,7 +4,7 @@ var DonationSchema = new mongoose.Schema({
   donationId: String,
   address: String,
   postCode: String,
-  state: String,
+  status: String,
   updated_at: { type: Date, default: Date.now },
 });
 

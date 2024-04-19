@@ -12,11 +12,11 @@
 <body>
     <div class="sidebar">
         <ul>
-            <li><a href="">Menu Inicial</a></li>
-            <li><a href="">Doações</a></li>
-            <li><a href="">Utilizadores</a></li>
-            <li id="current"><a href="">Pedidos</a></li>
-            <li><a href="">Pontos</a></li>
+            <li <% if (activeItem === 'pagina1') { %>class="current"<% }%> > <a href="">Menu Inicial</a></li>
+            <li <% if (activeItem === 'pagina2') { %>class="current"<% }%> ><a href="">Doações</a></li>
+            <li <% if (activeItem === 'pagina3') { %>class="current"<% }%>><a href="/users/gerir">Utilizadores</a></li>
+            <li <% if (activeItem === 'pagina4') { %>class="current"<% }%>><a href="">Pedidos</a></li>
+            <li <% if (activeItem === 'pagina5') { %>class="current"<% }%>><a href="/points">Pontos</a></li>
         </ul>
     </div>
 </body>

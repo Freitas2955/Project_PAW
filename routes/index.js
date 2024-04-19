@@ -22,8 +22,8 @@ router.get('/doar', function(req, res, next) {
   res.render('doar', { title: 'Express' });
 });
 
-router.get('/registarutilizador', function(req, res, next) {
-  res.render('utilizadores/registarutilizador', { title: 'Express' });
+router.get('/registardoador', function(req, res, next) {
+  res.render('utilizadores/registardoador', { title: 'Express' });
 });
 
 router.get('/registarfuncionario', function(req, res, next) {
