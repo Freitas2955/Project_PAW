@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Doador</title>
+    <link rel='stylesheet' href='/stylesheets/utilizadores/editardoador.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <%- include('../general/header') -%>
+  <main>
+    <%- include('../general/sidebar') -%>
+
+        <div class="content">
+
+            <div class="informacaogeral">
+              <h2>Informação Geral</h2> <br><br>
+                <div class="grupo">
+                    <label for="primeironome">Primeiro Nome:</label>
+                    <input type="text" id="primeironome" name="primeironome" value="<%= donator.primeironome %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="ultimonome">Último Nome:</label>
+                    <input type="text" id="ultimonome" name="ultimonome" value="<%= donator.ultimonome %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="telemovel">Telemóvel:</label>
+                    <input type="tel" id="telemovel" name="telemovel" value="<%= donator.telemovel %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= donator.email %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="morada">Morada:</label>
+                    <input type="text" id="morada" name="morada" value="<%= donator.morada %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="codigopostal">Código Postal:</label>
+                    <input type="text" id="codigopostal" name="codigopostal" value="<%= donator.codigopostal %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="cidade" value="<%= donator.cidade %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" value="<%= donator.password %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="confirmarpassword">Confirmar Password:</label>
+                    <input type="password" id="confirmarpassword" name="confirmarpassword" value="<%= donator.confirmarpassword %>" required>
+                </div>
+
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                
+                <div id="upload-box">
+                    <input type="file" id="upload-input" accept="image/*" onchange="previewImage(event)" />
+                    <p>Clique para fazer upload<br />ou arraste e solte uma imagem aqui</p>
+                </div>
+                <div id="preview-container"></div>
+                
+            </div>
+            <br /><br />
+           <button type="button" onclick="guardar()">Guardar</button> 
+        </div>
+    </main>
+    <script src="registar.js"></script>
+</body>
+</html>

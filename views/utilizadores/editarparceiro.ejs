@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Parceiro</title>
+    <link rel='stylesheet' href='/stylesheets/utilizadores/editarparceiro.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <%- include('../general/header') -%>
+  <main>
+    <%- include('../general/sidebar') -%>
+
+
+
+        <div class="content">
+
+            <div class="informacaoparceiro">
+                <h2>Informação Parceiro</h2> <br><br>
+  
+                <div class="grupo">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="<%= .nome %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="telemovel">Telemóvel:</label>
+                    <input type="tel" id="telemovel" name="telemovel" value="<%= .telemovel %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="morada">Morada:</label>
+                    <input type="text" id="morada" name="morada" value="<%= .morada %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="codigoPostal">Código-Postal:</label>
+                    <input type="text" id="codigoPostal" name="codigoPostal" value="<%= .codigoPostal %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="cidade" value="<%= .cidade %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" rows="4" value="<%= .descricao %>" required></textarea>
+                </div>
+            </div>
+            <br /><br />
+            <button type="button" onclick="guardar()">Guardar</button> 
+         </div>
+     </main>
+ </body>
+ </html>

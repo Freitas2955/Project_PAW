@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Instituição</title>
+    <link rel='stylesheet' href='/stylesheets/utilizadores/editarinstituicao.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <%- include('../general/header') -%>
+  <main>
+    <%- include('../general/sidebar') -%>
+
+
+
+        <div class="content">
+
+            <div class="informacaoinstituicao">
+                <h2>Informação Instituição</h2> <br><br>
+  
+                <div class="grupo">
+                    <label for="nomeInstituicao">Nome Instituição:</label>
+                    <input type="text" id="nomeInstituicao" name="nomeInstituicao" value="<%= entity.nomeInstituicao %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="telemovel">Telemóvel:</label>
+                    <input type="tel" id="telemovel" name="telemovel" value="<%= entity.telemovel %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="morada">Morada:</label>
+                    <input type="text" id="morada" name="morada" value="<%= entity.morada %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigoPostal" name="codigoPostal" value="<%= entity.codigoPostal %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="cidade" value="<%= entity.cidade %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" rows="4" value="<%= entity.descricao %>" required></textarea>
+                </div>
+            </div>
+            <br /><br />
+            <button type="button" onclick="guardar()">Guardar</button> 
+         </div>
+     </main>
+ </body>
+ </html>

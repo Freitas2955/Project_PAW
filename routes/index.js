@@ -38,4 +38,20 @@ router.get('/registarparceiro', function(req, res, next) {
   res.render('utilizadores/registarparceiro', { title: 'Express' });
 });
 
+router.get('/editarutilizador', function(req, res, next) {
+  res.render('utilizadores/editarutilizador', { title: 'Express' });
+});
+
+router.get('/editarfuncionario', function(req, res, next) {
+  res.render('utilizadores/editarfuncionario', { title: 'Express' });
+});
+
+router.get('/editarinstituicao', function(req, res, next) {
+  res.render('utilizadores/editarinstituicao', { title: 'Express' });
+});
+
+router.get('/editarparceiro', function(req, res, next) {
+  res.render('utilizadores/editarparceiro', { title: 'Express' });
+});
+
 module.exports = router;
