@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registar Instituição</title>
+    <link rel='stylesheet' href='/stylesheets/utilizadores/registarinstituicao.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <header>
+        <div id="imagensNav">
+          <img src="../images/Image 207.png" alt="Logo" width="50" height="50">
+          <img src="../images/Image 207 (1).png" alt="Logo" height="50">
+        </div>
+        <div id="opcoesNav">
+          <a href=""><img src="../images/icone-de-cloche-et-d-alerte-gris.png" alt="Notifications" width="20"
+              height="20"></a>
+          <div class="user">
+            <img src="../images/cara.png" alt="profile" width="30" height="30" id="profile">
+            <p>Nome nome</p>
+          </div>
+          <a href="" id=""><img src="../images/arrow_down_icon_242220.png" alt="More options" width="20" height="20"></a>
+        </div>
+      </header>
+      <main>
+        <div class="sidebar">
+          <ul>
+            <li><a href="">Menu Inicial</a></li>
+            <li><a href="">Doações</a></li>
+            <li id="current"><a href="">Utilizadores</a></li>
+            <li><a href="">Pedidos</a></li>
+            <li><a href="">Pontos</a></li>
+          </ul>
+        </div>
+
+
+
+        <div class="content">
+
+            <div class="informacaoinstituicao">
+                <h2>Informação Instituição</h2> <br><br>
+  
+                <div class="grupo">
+                    <label for="nomeInstituicao">Nome Instituição:</label>
+                    <input type="text" id="nomeInstituicao" name="nomeInstituicao" required>
+                </div>
+                <div class="grupo">
+                    <label for="telemovel">Telemóvel:</label>
+                    <input type="tel" id="telemovel" name="telemovel" required>
+                </div>
+                <div class="grupo">
+                    <label for="morada">Morada:</label>
+                    <input type="text" id="morada" name="morada" required>
+                </div>
+                <div class="grupo">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigoPostal" name="codigoPostal" required>
+                </div>
+                <div class="grupo">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="cidade" required>
+                </div>
+                <div class="grupo">
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" rows="4" required></textarea>
+                </div>
+            </div>
+            <br /><br />
+            <button type="button" onclick="guardar()">Guardar</button> 
+         </div>
+     </main>
+ </body>
+ </html>

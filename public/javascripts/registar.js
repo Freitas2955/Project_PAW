@@ -1,14 +1,17 @@
-function mostrarSelecao() {
-    const checkboxes = document.querySelectorAll('input[name="opcao"]:checked');
-    let selecionados = [];
+function previewImage(event) {
+    const input = event.target;
+    const reader = new FileReader();
 
-    checkboxes.forEach((checkbox) => {
-        selecionados.push(checkbox.value);
-    });
+    reader.onload = function() {
+        const imgElement = document.createElement('img');
+        imgElement.src = reader.result;
+        imgElement.style.maxWidth = '100%';
+        imgElement.style.maxHeight = '100%';
 
-    if (selecionados.length > 0) {
-        document.getElementById('resultado').textContent = `Selecionado(s): ${selecionados.join(', ')}`;
-    } else {
-        document.getElementById('resultado').textContent = 'Nenhuma opção selecionada.';
-    }
+        const previewContainer = document.querySelector('#preview-container');
+        previewContainer.innerHTML = ''; // Limpa qualquer prévia existente
+        previewContainer.appendChild(imgElement);
+    };
+
+    reader.readAsDataURL(input.files[0]);
 }

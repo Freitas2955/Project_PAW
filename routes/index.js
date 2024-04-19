@@ -23,7 +23,19 @@ router.get('/doar', function(req, res, next) {
 });
 
 router.get('/registarutilizador', function(req, res, next) {
-  res.render('registarutilizador', { title: 'Express' });
+  res.render('utilizadores/registarutilizador', { title: 'Express' });
+});
+
+router.get('/registarfuncionario', function(req, res, next) {
+  res.render('utilizadores/registarfuncionario', { title: 'Express' });
+});
+
+router.get('/registarinstituicao', function(req, res, next) {
+  res.render('utilizadores/registarinstituicao', { title: 'Express' });
+});
+
+router.get('/registarparceiro', function(req, res, next) {
+  res.render('utilizadores/registarparceiro', { title: 'Express' });
 });
 
 module.exports = router;
