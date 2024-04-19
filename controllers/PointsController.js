@@ -11,27 +11,26 @@ mongoose
   .catch((err) => console.error(err));
 
 pointsController.create = function (req, res) {
-  res.render("../views/points/create");
+  res.render("../views/pontos");
 };
 
 pointsController.save = function (req, res) {
   const point = new Points(req.body);
-  Points
-    .save()
+  point.save()
     .then(() => {
-      console.log("Successfully created an donator.");
+      console.log("Successfully created points.");
       res.redirect("show/" + point._id);
     })
     .catch((err) => {
       console.error(err);
-      res.render("../views/points/create");
+      res.render("../pontos");
     });
 };
 
 pointsController.edit = function (req, res) {
-  Points.findOne({ _id: req.params.id })
+  Points.findOne()
     .then((point) => {
-      res.render("../views/points/edit", { point: point });
+      res.render("../views/pontos", { point: point });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -39,17 +38,17 @@ pointsController.edit = function (req, res) {
 };
 
 pointsController.update = function (req, res) {
-    Points.findByIdAndUpdate(
+  Points.findByIdAndUpdate(
     req.params.id,
     {
       $set: {
-        camisola:req.body.camisola,
-        acessorios:req.body.acessorios,
-        casaco:req.body.casaco,
-        calcas:req.body.calcas,
-        sapatos:Numreq.body.sapatos,
-        roupainterior:req.body.roupainterior,
-        dinheiro:req.body.dinheiro,
+        camisola: req.body.camisola,
+        acessorios: req.body.acessorios,
+        casaco: req.body.casaco,
+        calcas: req.body.calcas,
+        sapatos: req.body.sapatos,
+        roupainterior: req.body.roupainterior,
+        dinheiro: req.body.dinheiro,
       },
     },
     { new: true }
