@@ -59,7 +59,7 @@
           <h2>Roupa</h2>
           <br />
 
-          <form id="pontosForm">
+          <form action="/points/save/"  id="pontosForm">
             <label for="pontosCamisola">Pontos por Camisola:</label>
             <input
               type="number"
@@ -114,17 +114,15 @@
 
             <h2>Dinheiro</h2>
             <br />
-            <form id="pontosForm">
-              <label for="pontosDinheiro">Pontos por cada 5€:</label>
-              <input
-                type="number"
-                id="pontosDinheiro"
-                name="pontosDinheiro"
-                min="0"
-              /><br /><br />
-            </form>
+            <label for="pontosDinheiro">Pontos por cada 5€:</label>
+            <input
+              type="number"
+              id="pontosDinheiro"
+              name="pontosDinheiro"
+              min="0"
+            /><br /><br />
+            <button type="button" type="submit">Guardar</button>
           </form>
-          <button type="button" onclick="guardarpontos()">Guardar</button>
         </div>
       </div>
     </main>
