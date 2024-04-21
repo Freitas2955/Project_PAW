@@ -10,19 +10,15 @@
 <body>
     <nav>
         <div id="imagemlogo">
-            <img src="../images/logo.png" alt="Logo" width="120" height="120"/>
+            <img src="../images/logo.png" alt="Logo" width="130" height="130"/>
         </div>
         <div id="blococentral">
             <h2>Iniciar sessão</h2>
-
-
             <form action="#" method="POST">
-
                 <div class="grupo">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-
                 <div class="grupo">
                     <label for="password">Password:</label>
                     <div class="password-input">
@@ -30,22 +26,17 @@
                         <span class="mudar" onclick="togglePasswordVisibility()">&#x1F441;</span>
                     </div>
                 </div>
-
                 <div class="grupo">
                     <input type="checkbox" id="rememberMe" name="rememberMe">
                     <label for="rememberMe">Lembrar-me</label>
                 </div>
-
                 <button type="submit" id="botao">Entrar</button>
             </form>
             <div class="recuperarpass">
                 <a href="recuperar-password.html">Recuperar senha?</a>
             </div>
-
-
         </div>
     </nav>
     <script src="/public/javascripts/login.js"></script>
 </body>
-
 </html>

@@ -62,7 +62,7 @@ li {
 }
 
 li:hover {
-  background-color: #6d31ed85;
+  background-color: #0698d4;
   transition: background-color 0.4s ease;
 }
 
@@ -76,7 +76,7 @@ li > a {
 }
 
 li#current {
-  background-color: #6d31ed;
+  background-color: #0698d4;
 }
 
 li#current > a {
@@ -118,5 +118,5 @@ form{
 
 button#exportar{
   background-color: #f5f1fe;
-  color: #8c5cf1;
+  color: #0698d4;
 }
