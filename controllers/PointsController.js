@@ -62,4 +62,14 @@ pointsController.update = function (req, res) {
     });
 };
 
+pointsController.simulate = function (req, res) {
+  Points.findOne()
+    .then((point) => {
+      res.render("../views/doar", { point: point });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
+
 module.exports = pointsController;

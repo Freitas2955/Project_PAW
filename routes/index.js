@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var point= require("../controllers/PointsController.js")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,7 +20,7 @@ router.get('/pontos', function(req, res, next) {
 });
 
 router.get('/doar', function(req, res, next) {
-  res.render('doar', { title: 'Express' });
+  point.simulate();
 });
 
 router.get('/registardoador', function(req, res, next) {
