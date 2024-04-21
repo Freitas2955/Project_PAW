@@ -41,8 +41,34 @@
                     <label for="Dinheiro">€:</label>
                     <input type="number" id="Dinheiro" name="Dinheiro" min="0"><br><br>
 
-                <button type="button" onclick="simulardoacao()">Simular Doação</button>
+                
                 <button type="button" onclick="doar()">Doar</button>
-                </form>          
+                </form>   
+                <button type="button" onclick="simulardoacao()">Simular Doação</button>
+
+                <script>
+                  
+function simulardoacao(){
+    const camisolas = parseInt(document.getElementById('Camisola').value) || 0;
+    const casacos = parseInt(document.getElementById('Casaco').value) || 0;
+    const calcas = parseInt(document.getElementById('Calcas').value) || 0;
+    const sapatos = parseInt(document.getElementById('Sapatos').value) || 0;
+    const acessorios = parseInt(document.getElementById('Acessorios').value) || 0;
+    const roupainterior = parseInt(document.getElementById('RoupaInterior').value) || 0;
+    const dinheiro = parseInt(document.getElementById('Dinheiro').value) || 0;
+
+    const pontcamisola = parseInt('<%= point.camisola %>');
+    const pontcasaco = parseInt('<%= point.casaco %>');
+    const pontcalcas = parseInt('<%= point.calcas %>');
+    const pontsapatos = parseInt('<%= point.sapatos %>');
+    const pontacessorios = parseInt('<%= point.acessorios %>');
+    const pontroupainterior = parseInt('<%= point.roupainterior %>');
+    const pontdinheiro = parseInt('<%= point.dinheiro %>');
+
+    const total=  camisolas*pontcamisola + casacos*pontcasaco + calcas*pontcalcas + sapatos*pontsapatos + acessorios*pontacessorios + roupainterior*pontroupainterior +  dinheiro*pontdinheiro;
+    alert(`Total Simulado da Doação: € ${total}`);
+  }
+            </script>
+
 </body>
 </html>
