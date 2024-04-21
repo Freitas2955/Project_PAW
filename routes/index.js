@@ -20,7 +20,7 @@ router.get('/pontos', function(req, res, next) {
 });
 
 router.get('/doar', function(req, res, next) {
-  point.simulate();
+  point.simulate(req,res);
 });
 
 router.get('/registardoador', function(req, res, next) {
