@@ -12,9 +12,7 @@
     <%- include('../general/header') -%>
   <main>
     <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
-
         <div class="content">
-
             <div class="informacaogeral">
               <h2>Informação Geral</h2> <br><br>
                 <div class="grupo">
@@ -57,18 +55,18 @@
                 <br /><br />
                 <br /><br />
                 <br /><br />
-                
                 <div id="upload-box">
                     <input type="file" id="upload-input" accept="image/*" onchange="previewImage(event)" />
                     <p>Clique para fazer upload<br />ou arraste e solte uma imagem aqui</p>
                 </div>
                 <div id="preview-container"></div>
-                
             </div>
             <br /><br />
            <button type="button" onclick="guardar()">Guardar</button> 
         </div>
     </main>
+
+
     <script>
         function previewImage(event) {
     const input = event.target;
