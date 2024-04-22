@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,54 +10,75 @@
 </head>
 
 <body>
-  <%- include('../general/header') -%>
-  <main>
-    <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
-        <div class="content">
+    <%- include('../general/header') -%>
+        <main>
+            <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
+                <div class="content">
+                    <h2>Informação Geral</h2>
+                    <form class="informacaogeral">
+                        <div id="formContent">
+                            <div id="leftside">
 
-            <div class="informacaogeral">
-              <h2>Informação Geral</h2> <br><br>
+                                <div id="upload-box">
+                                    <input type="file" id="upload-input" accept="image/*"
+                                        onchange="previewImage(event)" />
+                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
+                                </div>
+                                <div id="preview-container"></div>
+                                <div id="pass">
+                                    <div class="inputContainer">
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                    <div class="inputContainer">
+                                        <label for="confirmarpassword">Confirmar Password:</label>
+                                        <input type="password" id="confirmarpassword" name="confirmarpassword" placeholder="Password" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="rightside">
+                                <div class="nome">
+                                    <div class="inputContainer">
+                                        <label for="primeironome">Primeiro Nome:</label>
+                                        <input type="text" id="primeironome" name="primeironome" placeholder="Primeiro Nome" required>
+                                    </div>
+                                    <div class="inputContainer">
+                                        <label for="ultimonome">Último Nome:</label>
+                                        <input type="text" id="ultimonome" name="ultimonome" placeholder="Último Nome" required>
+                                    </div>
+                                </div>
+                                <div class="grupo">
+                                    <div class="inputContainer">
+                                        <label for="telemovel">Telemóvel:</label>
+                                        <input type="tel" id="telemovel" name="telemovel" placeholder="Telemóvel" required>
+                                    </div>
+                                    <div class="inputContainer">
+                                        <label for="email">Email:</label>
+                                        <input type="email" id="email" name="email" placeholder="Email" required>
+                                    </div>
+                                    <div class="inputContainer">
+                                        <label for="morada">Morada:</label>
+                                        <input type="text" id="morada" name="morada" placeholder="Morada" required>
+                                    </div>
+                                </div>
+                                <div class="detalhesMorada">
+                                    <div class="inputContainer">
+                                        <label for="codigopostal">Código-Postal:</label>
+                                        <input type="text" id="codigopostal" name="codigopostal" placeholder="Codigo-Postal" required>
+                                    </div>
+                                    <div class="inputContainer">
+                                        <label for="cidade">Cidade:</label>
+                                        <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit">Guardar</button>
+                    </form>
 
-                <div class="grupo">
-                    <label for="primeironome">Primeiro Nome:</label>
-                    <input type="text" id="primeironome" name="primeironome" required>
                 </div>
-                <div class="grupo">
-                    <label for="ultimonome">Último Nome:</label>
-                    <input type="text" id="ultimonome" name="ultimonome" required>
-                </div>
-                <div class="grupo">
-                    <label for="telemovel">Telemóvel:</label>
-                    <input type="tel" id="telemovel" name="telemovel" required>
-                </div>
-                <div class="grupo">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="grupo">
-                    <label for="morada">Morada:</label>
-                    <input type="text" id="morada" name="morada" required>
-                </div>
-                <div class="grupo">
-                    <label for="codigopostal">Código Postal:</label>
-                    <input type="text" id="codigopostal" name="codigopostal" required>
-                </div>
-                <div class="grupo">
-                    <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="cidade" required>
-                </div>
-                <div class="grupo">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="grupo">
-                    <label for="confirmarpassword">Confirmar Password:</label>
-                    <input type="password" id="confirmarpassword" name="confirmarpassword" required>
-                </div>
-            </div>
-            <br /><br />
-           <button type="button" onclick="guardar()">Guardar</button> 
-        </div>
-    </main>
+
+        </main>
 </body>
+
 </html>

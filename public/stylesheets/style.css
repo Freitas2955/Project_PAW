@@ -97,7 +97,7 @@ thead tr {
   background-color: #fafafb;
 }
 
-.content{
+.content {
   width: 80%;
   margin: 2%;
 }
@@ -112,11 +112,79 @@ button#delete {
   color: white;
 }
 
-form{
+form {
   display: inline;
 }
 
-button#exportar{
+button#exportar {
   background-color: #f5f1fe;
   color: #8c5cf1;
+}
+
+/*registarfuncionario.css*/
+
+#formContent {
+  display: flex;
+  width: 100%;
+  height: 80%;
+}
+
+#upload-box>input{
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+#upload-box{
+  height: 50%;
+}
+
+#leftside {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+#rightside {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+#nome {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#grupo {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 2%;
+  font-weight: bold;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-top: 2%;
+}
+
+input {
+  background-color: #f3f4f6;
+  border-radius: 5px;
+  border: none;
+  padding: 2% 2%;
+}
+
+button{
+  padding: 1%;
+  border-radius: 5px;
 }
