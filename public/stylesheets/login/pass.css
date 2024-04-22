@@ -1,0 +1,28 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif; /* Defina a fonte padrão para o corpo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Cor de fundo da página */
+}
+
+#imagemlogo {
+    position: absolute; /* Posicionamento absoluto */
+    top: 20px; /* Distância do topo */
+    left: 20px; /* Distância da esquerda */
+}
+
+#blococentral {
+    width: 100%; /* Largura do bloco central (80% da largura da tela) */
+    max-width: 600px; /* Largura máxima do bloco central */
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.grupo {
+    margin-bottom: 40px;
+}

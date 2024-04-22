@@ -44,6 +44,18 @@
                     <label for="descricao">Descrição:</label>
                     <textarea id="descricao" name="descricao" rows="4" value="<%= entity.descricao %>" required></textarea>
                 </div>
+                <div class="grupo">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= entity.email %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" value="<%= entity.password %>" required>
+                </div>
+                <div class="grupo">
+                    <label for="confirmarpassword">Confirmar Password:</label>
+                    <input type="password" id="confirmarpassword" name="confirmarpassword" value="<%= entity.confirmarpassword %>" required>
+                </div>
             </div>
             <br /><br />
             <button type="button" onclick="guardar()">Guardar</button> 

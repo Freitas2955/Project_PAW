@@ -18,7 +18,12 @@
       <div class="contentHeader">
         <h1>Utilizadores</h1>
         <div class="botoes">
-          <button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
+          <!--<button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button> -->
+
+          <button id="exportar" onclick="exportarUtilizadores()">
+            <img src="../images/download.webp" alt="" height="10" width="10"> Exportar
+          </button>
+          
           <div class="dropdown">
             <button onclick="toggleDropdown()" id="novo">&#x2b; Novo utilizador</button>
             <div id="dropdownContent" class="dropdown-content" style="display: none;">
@@ -90,6 +95,13 @@
         }
       }
     </script>
+
+    <script>
+      function exportarUtilizadores(){
+        
+      }
+    </script>
+
 
   </main>
 </body>

@@ -28,9 +28,9 @@ nav#filtros > a {
 }
 
 nav#filtros > a#current {
-  border-bottom: 3px solid #6d31ed;
+  border-bottom: 3px solid #0698d4;
   text-decoration: none;
-  color: #6d31ed;
+  color: #0698d4;
 }
 
 .midbar {
