@@ -14,11 +14,10 @@
         <main>
             <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
                 <div class="content">
-                    <h2>Informação Geral</h2>
-                    <form class="informacaogeral">
+                    <h2>Registar Funcionário</h2>
+                    <form class="informacaogeral" action="/employees/save" method="post">
                         <div id="formContent">
                             <div id="leftside">
-
                                 <div id="upload-box">
                                     <input type="file" id="upload-input" accept="image/*"
                                         onchange="previewImage(event)" />
@@ -39,45 +38,39 @@
                             <div id="rightside">
                                 <div class="nome">
                                     <div class="inputContainer">
-                                        <label for="primeironome">Primeiro Nome:</label>
-                                        <input type="text" id="primeironome" name="primeironome" placeholder="Primeiro Nome" required>
-                                    </div>
-                                    <div class="inputContainer">
-                                        <label for="ultimonome">Último Nome:</label>
-                                        <input type="text" id="ultimonome" name="ultimonome" placeholder="Último Nome" required>
-                                    </div>
+                                        <label for="name">Nome:</label>
+                                        <input type="text" id="name" name="name" placeholder="Nome" required>
+                                    </div>    
                                 </div>
                                 <div class="grupo">
                                     <div class="inputContainer">
-                                        <label for="telemovel">Telemóvel:</label>
-                                        <input type="tel" id="telemovel" name="telemovel" placeholder="Telemóvel" required>
+                                        <label for="phone">Telemóvel:</label>
+                                        <input type="tel" id="phone" name="phone" placeholder="Telemóvel" required>
                                     </div>
                                     <div class="inputContainer">
                                         <label for="email">Email:</label>
                                         <input type="email" id="email" name="email" placeholder="Email" required>
                                     </div>
                                     <div class="inputContainer">
-                                        <label for="morada">Morada:</label>
-                                        <input type="text" id="morada" name="morada" placeholder="Morada" required>
+                                        <label for="address">Morada:</label>
+                                        <input type="text" id="address" name="address" placeholder="Morada" required>
                                     </div>
                                 </div>
                                 <div class="detalhesMorada">
                                     <div class="inputContainer">
-                                        <label for="codigopostal">Código-Postal:</label>
-                                        <input type="text" id="codigopostal" name="codigopostal" placeholder="Codigo-Postal" required>
+                                        <label for="postCode">Código-Postal:</label>
+                                        <input type="text" id="postCode" name="postCode" placeholder="Codigo-Postal" required>
                                     </div>
                                     <div class="inputContainer">
-                                        <label for="cidade">Cidade:</label>
-                                        <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+                                        <label for="city">Cidade:</label>
+                                        <input type="text" id="city" name="city" placeholder="Cidade" required>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <button type="submit">Guardar</button>
                     </form>
-
                 </div>
-
         </main>
 </body>
 

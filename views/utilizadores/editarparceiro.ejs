@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,57 +10,63 @@
 </head>
 
 <body>
-  <%- include('../general/header') -%>
-  <main>
-    <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
+    <%- include('../general/header') -%>
+        <main>
+            <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
 
 
+                <div class="content">
+                    <h2>Informação Parceiro</h2>
+                    <form action="/partners/update/<% partner._id %>" method="post">
+                        <div id="formContent">
+                            <div id="leftside">
+                                <div id="upload-box">
+                                    <input type="file" id="upload-input" accept="image/*"
+                                        onchange="previewImage(event)" />
+                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="description">Descrição:</label>
+                                    <textarea id="description" name="description" rows="4"
+                                        placeholder="<% partner.description %>" required></textarea>
+                                </div>
+                            </div>
+                            <div id="rightside">
+                                <div class="inputContainer">
+                                    <label for="name">Nome Instituição:</label>
+                                    <input type="text" id="name" name="name" placeholder="<% partner.name %>" required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="phone">Telemóvel:</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="<% partner.phone %>"
+                                        required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" placeholder="<% partner.email %>"
+                                        required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="address">Morada:</label>
+                                    <input type="text" id="address" name="address" placeholder="<% partner.address %>"
+                                        required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="postCode">Código-Postal:</label>
+                                    <input type="text" id="postCode" name="postCode"
+                                        placeholder="<% partner.postCode %>" required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="city">Cidade:</label>
+                                    <input type="text" id="city" name="city" placeholder="<% partner.city %>" required>
+                                </div>
 
-        <div class="content">
+                            </div>
+                        </div>
+                        <button type="submit">Guardar</button>
+                    </form>
+                </div>
+        </main>
+</body>
 
-            <div class="informacaoparceiro">
-                <h2>Informação Parceiro</h2> <br><br>
-  
-                <div class="grupo">
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" value="<%= partner.nome %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="telemovel">Telemóvel:</label>
-                    <input type="tel" id="telemovel" name="telemovel" value="<%= partner.telemovel %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="morada">Morada:</label>
-                    <input type="text" id="morada" name="morada" value="<%= partner.morada %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="codigoPostal">Código-Postal:</label>
-                    <input type="text" id="codigoPostal" name="codigoPostal" value="<%= partner.codigoPostal %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="cidade" value="<%= partner.cidade %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="descricao">Descrição:</label>
-                    <textarea id="descricao" name="descricao" rows="4" value="<%= partner.descricao %>" required></textarea>
-                </div>
-                <div class="grupo">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="<%= partner.email %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" value="<%= partner.password %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="confirmarpassword">Confirmar Password:</label>
-                    <input type="password" id="confirmarpassword" name="confirmarpassword" value="<%= partner.confirmarpassword %>" required>
-                </div>
-            </div>
-            <br /><br />
-            <button type="button" onclick="guardar()">Guardar</button> 
-         </div>
-     </main>
- </body>
- </html>
+</html>

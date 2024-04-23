@@ -6,7 +6,7 @@
 }
 
 #upload-box > input {
-  height: 90%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: end;
@@ -20,9 +20,8 @@
 #leftside {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   width: 50%;
-  height: 90%;
+  height: 100%;
   margin-top: 1%;
 }
 
