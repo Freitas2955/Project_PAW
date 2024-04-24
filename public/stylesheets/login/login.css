@@ -23,9 +23,9 @@ nav {
 }
 
 #imagemlogo img {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%; /* Transforma a imagem em um círculo */
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 #blococentral {
@@ -57,20 +57,19 @@ input[type="password"] {
 
 .password-input {
     position: relative;
-}
-
-.password-input input {
-    padding-right: 40px;
+    width: 100%; /* Defina a largura desejada */
 }
 
 .password-input .mudar {
     position: absolute;
+    top: 50%; /* Alinhe verticalmente ao centro */
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
 }
+
 
 .checkbox {
     display: flex;

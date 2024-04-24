@@ -4,6 +4,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+/////////////////
+var multer  = require('multer');
+var cors  = require('cors');
+var bodyParser = require('body-parser');
+////////////////
+
 var mongoose = require("mongoose");
 
 mongoose
@@ -23,6 +29,39 @@ var pointsRouter = require("./routes/points");
 var partnersRouter = require("./routes/partners");
 
 var app = express();
+
+
+
+///////////////////////
+// Multer storage options
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'tmp/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+var upload = multer({ storage: storage });
+
+// init multer package on express to receive files
+app.use(upload.single('file'));
+
+app.use(express.urlencoded({extended: true }));
+app.use(express.json());
+
+app.use(cors());
+
+// view engine setup for ejs
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+////////////////////////
+
+
+
+
+
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

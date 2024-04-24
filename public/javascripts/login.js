@@ -13,6 +13,7 @@ function visualizarpass() {
 }
 */
 
+/*
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
     const icon = document.querySelector('.mudar');
@@ -25,6 +26,7 @@ function togglePasswordVisibility() {
         icon.textContent = '👁️';
     }
 }
+*/
 
 
 /*// 
@@ -54,7 +56,7 @@ Função para enviar o formulário
             }
         }
 
-*/
+
 
 window.onload = function() {
     const rememberMe = localStorage.getItem('rememberMe');
@@ -66,3 +68,4 @@ window.onload = function() {
         }
     }
 };
+*/

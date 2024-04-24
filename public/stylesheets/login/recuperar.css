@@ -23,8 +23,8 @@ nav {
 }
 
 #imagemlogo img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%; /* Transforma a imagem em um círculo */
 }
 
@@ -52,6 +52,8 @@ input[type="password"] {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
+    box-sizing: border-box; /* Garante que o tamanho total inclua o preenchimento e a borda */
+    margin-top: 8px; /* Adiciona um pequeno espaçamento superior entre os campos */
 }
 
 #botao {
