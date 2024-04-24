@@ -23,6 +23,20 @@ header {
   position: relative;
 }
 
+#imagensNav {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente os itens */
+}
+
+
+#imagensNav label {
+  font-family: "Lexend", sans-serif; /* Estilo da fonte */
+  font-size: 28px; /* Tamanho da fonte */
+  color: #0698d4; /* Cor do texto */
+  font-weight: bold; /* Peso da fonte (negrito) */
+}
+
+
 #opcoesNav {
   display: flex;
   align-items: center;
@@ -57,6 +71,7 @@ ul {
 
 li {
   margin-top: 2px;
+  margin-bottom: 25px; 
   padding: 10px 30px 10px 10px;
   border-radius: 10px;
 }
@@ -73,6 +88,7 @@ li:hover a {
 li > a {
   text-decoration: none;
   color: #565d6d;
+  font-size: 18px;
 }
 
 li#current {
