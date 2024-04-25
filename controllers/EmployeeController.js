@@ -10,15 +10,15 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-  employeeController.management = function (req, res) {
-    Employee.find()
-      .then((employee) => {
-        res.render("../views/usersManagement", { employees: employee });
-      })
-      .catch((err) => {
-        console.log("Error:", err);
-      });
-  };
+employeeController.management = function (req, res) {
+  Employee.find()
+    .then((employee) => {
+      res.render("../views/gestaoFuncionarios", { employees: employee });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
 
 employeeController.list = function (req, res) {
   Employee.find()
@@ -61,7 +61,9 @@ employeeController.save = function (req, res) {
 employeeController.edit = function (req, res) {
   Employee.findOne({ _id: req.params.id })
     .then((employee) => {
-      res.render("../views/employees/edit", { employee: employee });
+      res.render("../views/utilizadores/editarfuncionario", {
+        employee: employee,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -74,8 +76,11 @@ employeeController.update = function (req, res) {
     {
       $set: {
         name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
         address: req.body.address,
-        position: req.body.position,
+        postCode: req.body.postCode,
+        city: req.body.city
       },
     },
     { new: true }
@@ -85,7 +90,7 @@ employeeController.update = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/employees/edit", { employee: req.body });
+      res.render("../views/utilizadores/editarfuncionario", { employee: req.body });
     });
 };
 
@@ -93,7 +98,7 @@ employeeController.delete = function (req, res) {
   Employee.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Employee detected!");
-      res.redirect("/users/gerir");
+      res.redirect("/users/gerirFuncionarios");
     })
     .catch((err) => {
       console.log(err);

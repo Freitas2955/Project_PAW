@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Funcionário</title>
-    <link rel='stylesheet' href='/stylesheets/utilizadores/editarfuncionario.css' />
+    <link rel='stylesheet' href='/stylesheets/utilizadores/registarfuncionario.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
-  <%- include('../general/header') -%>
-  <main>
-    <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
-        <div class="content">
-
-            <div class="informacaogeral">
-              <h2>Informação Geral</h2> <br><br>
-
-                <div class="grupo">
-                    <label for="primeironome">Primeiro Nome:</label>
-                    <input type="text" id="primeironome" name="primeironome" value="<%= employee.primeironome %>" required >
+    <%- include('../general/header') -%>
+        <main>
+            <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
+                <div class="content">
+                    <h2>Informação Funcionário</h2>
+                    <form action="/employees/update/<% employee._id %>" method="post">
+                        <div id="formContent">
+                            <div id="leftside">
+                                <div id="upload-box">
+                                    <input type="file" id="upload-input" accept="image/*"
+                                        onchange="previewImage(event)" />
+                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
+                                </div>
+                            </div>
+                            <div id="rightside">
+                                <div class="inputContainer">
+                                    <label for="name">Nome:</label>
+                                    <input type="text" id="name" name="name" placeholder="<% employee.name %>" required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="phone">Telemóvel:</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="<% employee.phone %>" required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" placeholder="<% employee.email %>"
+                                        required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="address">Morada:</label>
+                                    <input type="text" id="address" name="address" placeholder="<% employee.address %>"
+                                        required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="postCode">Código-Postal:</label>
+                                    <input type="text" id="postCode" name="postCode" placeholder="<% employee.postCode %>"
+                                        required>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="city">Cidade:</label>
+                                    <input type="text" id="city" name="city" placeholder="<% employee.city %>" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit">Guardar</button>
+                    </form>
                 </div>
-                <div class="grupo">
-                    <label for="ultimonome">Último Nome:</label>
-                    <input type="text" id="ultimonome" name="ultimonome" value="<%= employee.ultimonome %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="telemovel">Telemóvel:</label>
-                    <input type="tel" id="telemovel" name="telemovel" value="<%= employee.telemovel %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="<%= employee.email %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="morada">Morada:</label>
-                    <input type="text" id="morada" name="morada" value="<%= employee.morada %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="codigopostal">Código Postal:</label>
-                    <input type="text" id="codigopostal" name="codigopostal" value="<%= employee.codigopostal %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="cidade" value="<%= employee.cidade %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" value="<%= employee.password %>" required>
-                </div>
-                <div class="grupo">
-                    <label for="confirmarpassword">Confirmar Password:</label>
-                    <input type="password" id="confirmarpassword" name="confirmarpassword" value="<%= employee.confirmarpassword %>" required>
-                </div>
-            </div>
-            <br /><br />
-           <button type="button" onclick="guardar()">Guardar</button> 
-        </div>
-    </main>
+        </main>
 </body>
 </html>

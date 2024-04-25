@@ -10,6 +10,16 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
+entityController.management = function (req, res) {
+  Entity.find()
+    .then((entity) => {
+      res.render("../views/gestaoInstituicoes", { entities: entity });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
+
 entityController.list = function (req, res) {
   Entity.find()
     .then((entity) => {
@@ -51,7 +61,7 @@ entityController.save = function (req, res) {
 entityController.edit = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.render("../views/entities/edit", { entity: entity });
+      res.render("../views/utilizadores/editarinstituicao", { entity: entity });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -64,8 +74,12 @@ entityController.update = function (req, res) {
     {
       $set: {
         name: req.body.name,
+        phone:req.body.phone,
         address: req.body.address,
-        position: req.body.position,
+        description: req.body.description,
+        email: req.body.email,
+        city: req.body.city,
+        postCode: req.body.postCode,
       },
     },
     { new: true }
@@ -75,7 +89,7 @@ entityController.update = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/entities/edit", { entity: req.body });
+      res.render("../views/utilizadores/editarinstituicao", { entity: req.body });
     });
 };
 
@@ -83,7 +97,7 @@ entityController.delete = function (req, res) {
   Entity.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Entity detected!");
-      res.redirect("/entities");
+      res.redirect("/users/gerirInstituicoes");
     })
     .catch((err) => {
       console.log(err);

@@ -10,6 +10,16 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
+  donatorController.management = function (req, res) {
+    Donator.find()
+      .then((donator) => {
+        res.render("../views/gestaoDoadores", { donators: donator });
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+      });
+  };
+
 donatorController.list = function (req, res) {
   Donator.find()
     .then((donator) => {
@@ -51,7 +61,7 @@ donatorController.save = function (req, res) {
 donatorController.edit = function (req, res) {
   Donator.findOne({ _id: req.params.id })
     .then((donator) => {
-      res.render("../views/donators/edit", { donator: donator });
+      res.render("../views/utilizadores/editarDoador", { donator: donator });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -64,8 +74,11 @@ donatorController.update = function (req, res) {
     {
       $set: {
         name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
         address: req.body.address,
-        position: req.body.position,
+        postCode: req.body.postCode,
+        city: req.body.city
       },
     },
     { new: true }
@@ -75,7 +88,7 @@ donatorController.update = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/donators/edit", { donator: req.body });
+      res.render("../views/utilizadores/editardoador", { donator: req.body });
     });
 };
 
@@ -83,7 +96,7 @@ donatorController.delete = function (req, res) {
   Donator.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Donator detected!");
-      res.redirect("/donators");
+      res.redirect("/users/gerirDoadores");
     })
     .catch((err) => {
       console.log(err);

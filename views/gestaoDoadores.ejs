@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Doadores</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/management.css' />
+</head>
+
+<body>
+  <%- include('general/header') -%>
+    <main>
+      <%- include('general/sidebar', { activeItem: 'pagina3' }) -%>
+
+        <div class="content">
+          <div class="contentHeader">
+            <h1>Doadores</h1>
+            <div class="botoes">
+              <!--<button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button> -->
+
+              <button id="exportar" onclick="exportarUtilizadores()">
+                <img src="../images/download.webp" alt="" height="10" width="10"> Exportar
+              </button>
+
+              <div class="dropdown">
+                <button onclick="toggleDropdown()" id="novo">&#x2b; Novo utilizador</button>
+                <div id="dropdownContent" class="dropdown-content" style="display: none;">
+                  <a href="/registarFuncionario">Funcionário</a>
+                  <a href="/registarDoador">Doador</a>
+                  <a href="/registarinstituicao">Instituição</a>
+                  <a href="/registarParceiro">Parceiro</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav id="filtros">
+            <a href="/users/gerirFuncionarios">Funcionários</a>
+            <a href="/users/gerirDoadores" id="current">Doadores</a>
+            <a href="/users/gerirInstituicoes">Instituições</a>
+            <a href="/users/gerirParceiros">Parceiros</a>
+          </nav>
+
+          <div class="midbar">
+            <p><strong>200</strong> no total</p>
+            <input type="text" placeholder="&#128269;  Pesquisa">
+          </div>
+          <table>
+            <thead>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Cidade</th>
+              <th>Pontos</th>
+              <th></th>
+            </thead>
+            <tbody>
+              <% donators.forEach(donator=> {%>
+                <tr>
+                  <td>
+                    <%=donator.name%>
+                  </td>
+                  <td>
+                    <%=donator.email%>
+                  </td>
+                  <td>
+                    <%=donator.city%>
+                  </td>
+                  <td>
+                    <%=donator.points%>
+                  </td>
+                  <td>
+                    <form action="/donators/delete/<%=donator._id%>" method="post">
+                      <button id="delete" type="submit">&#x2715;</button>
+                    </form>
+                    <!--Por o botao de editar-->
+                    <!-- <button style="background-color: green;">&#x2713;</button>-->
+                    <form action="/donators/edit/<%=donator._id%>">
+                      <button type="submit">&#x270E;</button>
+                    </form>
+                  </td>
+                </tr>
+                <% });%>
+            </tbody>
+          </table>
+        </div>
+
+        <script>
+          function toggleDropdown() {
+            var dropdownContent = document.getElementById("dropdownContent");
+            if (dropdownContent.style.display === "none") {
+              dropdownContent.style.display = "block";
+            } else {
+              dropdownContent.style.display = "none";
+            }
+          }
+        </script>
+
+        <script>
+          function exportarUtilizadores() {
+
+          }
+        </script>
+
+
+    </main>
+</body>
+
+</html>

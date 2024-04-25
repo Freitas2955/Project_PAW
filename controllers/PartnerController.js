@@ -13,7 +13,7 @@ mongoose
 partnerController.management = function (req, res) {
   Partner.find()
     .then((partner) => {
-      res.render("../views/partnerManagement", { partners: partner });
+      res.render("../views/gestaoParceiros", { partners: partner });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -61,7 +61,7 @@ partnerController.save = function (req, res) {
 partnerController.edit = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.render("../views/partners/edit", { partner: partner });
+      res.render("../views/utilizadores/editarparceiro", { partner: partner });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -75,11 +75,11 @@ partnerController.update = function (req, res) {
       $set: {
         name: req.body.name,
         address: req.body.address,
-        position: req.body.position,
+        phone: req.body.phone,
         description: req.body.description,
         postCode: req.body.postCode,
         email: req.body.email,
-        password: req.body.password
+        city:req.body.city
       },
     },
     { new: true }
@@ -89,7 +89,7 @@ partnerController.update = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/partners/edit", { partner: req.body });
+      res.render("../views/utilizadores/editarparceiro", { partner: req.body });
     });
 };
 
@@ -97,7 +97,7 @@ partnerController.delete = function (req, res) {
   Partner.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Partner detected!");
-      res.redirect("/partners");
+      res.redirect("/users/gerirParceiros");
     })
     .catch((err) => {
       console.log(err);
