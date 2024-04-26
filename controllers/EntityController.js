@@ -70,12 +70,7 @@ entityController.save = function(req, res) {
     .then(savedEntity => {
       console.log('Successfully created an entity.');
 
-      console.log('AQUI');
       var fileDestination = path.join(__dirname, "..", "images", savedEntity._id.toString() + ".jpg");
-      console.log('AQUI2');
-      console.log(fileDestination);
-
-console.log(req.file);
       fs.readFile(req.file.path, function(err, data) {
         if (err) {
           console.error("Error reading file:", err);

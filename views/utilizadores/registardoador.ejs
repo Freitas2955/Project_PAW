@@ -15,11 +15,11 @@
             <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
                 <div class="content">
                     <h2>Registar Doador</h2>
-                    <form class="informacaogeral" action="/donators/save" method="post">
+                    <form class="informacaogeral" action="/donators/save" method="post" enctype="multipart/form-data">
                         <div id="formContent">
                             <div id="leftside">
                                 <div id="upload-box">
-                                    <input type="file" id="upload-input" accept="image/*"
+                                    <input type="file" id="upload-input" name="file" accept="image/*"
                                         onchange="previewImage(event)" />
                                     <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
                                 </div>
