@@ -11,11 +11,11 @@ mongoose
   .catch((err) => console.error(err));
 
 partnerController.management = function (req, res) {
-  num = 0;
+  let num;
   
   (async () => {
     try {
-     num = await Employee.countDocuments({});
+     num = await Partner.countDocuments({});
       console.log('Número total de documentos:', num);
     } catch (error) {
       console.error('Ocorreu um erro ao contar os documentos:', error);

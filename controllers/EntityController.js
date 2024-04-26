@@ -13,7 +13,7 @@ mongoose
   .catch((err) => console.error(err));
 
 entityController.management = function (req, res) {
-  num = 0;
+  let num;
   
   (async () => {
     try {

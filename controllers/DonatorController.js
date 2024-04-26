@@ -11,7 +11,7 @@ mongoose
   .catch((err) => console.error(err));
 
   donatorController.management = function (req, res) {
-    num = 0;
+    let num;
   
   (async () => {
     try {
