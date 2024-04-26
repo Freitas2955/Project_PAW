@@ -11,9 +11,23 @@ mongoose
   .catch((err) => console.error(err));
 
 employeeController.management = function (req, res) {
+  num = 0;
+  
+  (async () => {
+    try {
+     num = await Employee.countDocuments({});
+      console.log('Número total de documentos:', num);
+    } catch (error) {
+      console.error('Ocorreu um erro ao contar os documentos:', error);
+    }
+  })();
+
   Employee.find()
     .then((employee) => {
-      res.render("../views/gestaoFuncionarios", { employees: employee });
+      res.render("../views/gestaoFuncionarios", {
+        employees: employee,
+        number: num,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -50,7 +64,7 @@ employeeController.save = function (req, res) {
     .save()
     .then(() => {
       console.log("Successfully created an employee.");
-      res.redirect("show/" + employee._id);
+      res.redirect("/users/gerirFuncionarios" /*+ employee._id*/);
     })
     .catch((err) => {
       console.error(err);
@@ -80,17 +94,19 @@ employeeController.update = function (req, res) {
         email: req.body.email,
         address: req.body.address,
         postCode: req.body.postCode,
-        city: req.body.city
+        city: req.body.city,
       },
     },
     { new: true }
   )
     .then((employee) => {
-      res.redirect("/employees/show/" + employee._id);
+      res.redirect("/users/gerirFuncionarios" /*+ employee._id*/);
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/utilizadores/editarfuncionario", { employee: req.body });
+      res.render("../views/utilizadores/editarfuncionario", {
+        employee: req.body,
+      });
     });
 };
 

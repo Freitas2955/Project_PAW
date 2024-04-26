@@ -11,9 +11,20 @@ mongoose
   .catch((err) => console.error(err));
 
   donatorController.management = function (req, res) {
+    num = 0;
+  
+  (async () => {
+    try {
+     num = await Donator.countDocuments({});
+      console.log('Número total de documentos:', num);
+    } catch (error) {
+      console.error('Ocorreu um erro ao contar os documentos:', error);
+    }
+  })();
+
     Donator.find()
       .then((donator) => {
-        res.render("../views/gestaoDoadores", { donators: donator });
+        res.render("../views/gestaoDoadores", { donators: donator,number:num });
       })
       .catch((err) => {
         console.log("Error:", err);
@@ -50,7 +61,7 @@ donatorController.save = function (req, res) {
     .save()
     .then(() => {
       console.log("Successfully created an donator.");
-      res.redirect("show/" + donator._id);
+      res.redirect("/users/gerirdoadores" /*+ donator._id*/);
     })
     .catch((err) => {
       console.error(err);
@@ -84,7 +95,7 @@ donatorController.update = function (req, res) {
     { new: true }
   )
     .then((donator) => {
-      res.redirect("/donators/show/" + donator._id);
+      res.redirect("/users/gerirdoadores" /*+ donator._id*/);
     })
     .catch((err) => {
       console.log(err);

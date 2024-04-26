@@ -11,9 +11,20 @@ mongoose
   .catch((err) => console.error(err));
 
 entityController.management = function (req, res) {
+  num = 0;
+  
+  (async () => {
+    try {
+     num = await Entity.countDocuments({});
+      console.log('Número total de documentos:', num);
+    } catch (error) {
+      console.error('Ocorreu um erro ao contar os documentos:', error);
+    }
+  })();
+
   Entity.find()
     .then((entity) => {
-      res.render("../views/gestaoInstituicoes", { entities: entity });
+      res.render("../views/gestaoInstituicoes", { entities: entity,number:num });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -50,7 +61,7 @@ entityController.save = function (req, res) {
     .save()
     .then(() => {
       console.log("Successfully created an entity.");
-      res.redirect("show/" + entity._id);
+      res.redirect("/users/gerirInstituicoes" /*+ entity._id*/);
     })
     .catch((err) => {
       console.error(err);
@@ -85,7 +96,7 @@ entityController.update = function (req, res) {
     { new: true }
   )
     .then((entity) => {
-      res.redirect("/entities/show/" + entity._id);
+      res.redirect("/users/gerirInstituicoes" /*+ entity._id*/);
     })
     .catch((err) => {
       console.log(err);
