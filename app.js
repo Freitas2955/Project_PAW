@@ -8,6 +8,22 @@ var logger = require("morgan");
 var multer  = require('multer');
 var cors  = require('cors');
 var bodyParser = require('body-parser');
+
+var fs = require('fs');
+
+function tmpExists() {
+  const tmpFolderPath = 'tmp/';
+
+  if (!fs.existsSync(tmpFolderPath)) {
+    fs.mkdirSync(tmpFolderPath);
+    console.log('Pasta "tmp" criada com sucesso.');
+  } else {
+    console.log('Pasta "tmp" já existe.');
+  }
+}
+
+tmpExists();
+
 ////////////////
 
 var mongoose = require("mongoose");
@@ -53,16 +69,6 @@ app.use(express.json());
 
 app.use(cors());
 
-// view engine setup for ejs
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-////////////////////////
-
-
-
-
-
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -72,6 +78,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

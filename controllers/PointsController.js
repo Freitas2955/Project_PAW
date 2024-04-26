@@ -53,9 +53,11 @@ pointsController.update = function (req, res) {
     },
     { new: true }
   )
+  //tirar isto ne?
     .then((point) => {
       res.redirect("/point/show/" + point._id);
     })
+    //tirar isto?
     .catch((err) => {
       console.log(err);
       res.render("../views/points/edit", { point: req.body });

@@ -82,7 +82,12 @@ entityController.save = function(req, res) {
             console.error("Error writing file:", err);
             return res.status(500).send("Error writing file");
           }
-
+          fs.unlink(req.file.path, function(err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+            //posso apagar esta linha certo?
             res.redirect("show/" + savedEntity._id);
           });
         });
@@ -102,7 +107,7 @@ entityController.edit = function (req, res) {
       console.log("Error:", err);
     });
 };
-
+/*
 entityController.update = function (req, res) {
   Entity.findByIdAndUpdate(
     req.params.id,
@@ -120,13 +125,76 @@ entityController.update = function (req, res) {
     { new: true }
   )
     .then((entity) => {
-      res.redirect("/users/gerirInstituicoes" /*+ entity._id*/);
+      res.redirect("/users/gerirInstituicoes" /*+ entity._id*//*);
     })
     .catch((err) => {
       console.log(err);
       res.render("../views/utilizadores/editarinstituicao", { entity: req.body });
     });
 };
+*/
+//////////////////////////////////////------Nao esta a dar nao sei porque-------------
+
+entityController.update = function (req, res) {
+  // Primeiro, verifique se uma nova imagem foi fornecida na solicitação
+  if (req.file) {
+    // Se sim, leia o arquivo da nova imagem
+    fs.readFile(req.file.path, function (err, data) {
+      if (err) {
+        console.error("Error reading file:", err);
+        return res.status(500).send("Error reading file");
+      }
+
+      // Determine o caminho para salvar a nova imagem
+      var fileDestination = path.join(__dirname, "..", "images", req.params.id + ".jpg");
+
+      // Escreva o arquivo da nova imagem
+      fs.writeFile(fileDestination, data, function (err) {
+        if (err) {
+          console.error("Error writing file:", err);
+          return res.status(500).send("Error writing file");
+        }
+
+        // Se a escrita do arquivo for bem-sucedida, atualize os outros campos da entidade
+        updateEntity(req, res);
+      });
+    });
+  } else {
+    // Se nenhuma nova imagem foi fornecida, apenas atualize os outros campos da entidade
+    updateEntity(req, res);
+  }
+};
+
+function updateEntity(req, res) {
+  Entity.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: {
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        description: req.body.description,
+        email: req.body.email,
+        city: req.body.city,
+        postCode: req.body.postCode,
+      },
+    },
+    { new: true }
+  )
+    .then((updatedEntity) => {
+      console.log('Successfully updated an entity.');
+
+      // Aqui você pode adicionar lógica adicional, se necessário, após a atualização do objeto
+
+      res.redirect("/users/gerirInstituicoes" /*+ updatedEntity._id*/);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.render("../views/utilizadores/editarinstituicao", { entity: req.body });
+    });
+}
+
+///////////////////////////////////
 
 entityController.delete = function (req, res) {
   Entity.deleteOne({ _id: req.params.id })
