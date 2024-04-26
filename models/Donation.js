@@ -10,6 +10,7 @@ var DonationSchema = new mongoose.Schema({
   interior:Number,
   dinheiro:Number,
   approved:Boolean,
+  points:Number,
   updated_at: { type: Date, default: Date.now }
 });
 

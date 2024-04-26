@@ -11,59 +11,58 @@
 
 <body>
   <%- include('general/header') -%>
-  <main>
-    <%- include('general/sidebar', {activeItem: 'pagina2'}) -%>
+    <main>
+      <%- include('general/sidebar', {activeItem: 'pagina2' }) -%>
 
-    <div class="content">
-      <div class="contentHeader">
-        <h1>Doações</h1>
-        <div class="botoes">
-          <button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
-          <div class="dropdown">
-            <button id="novo">&#x2b; Nova doação</button>
+        <div class="content">
+          <div class="contentHeader">
+            <h1>Doações</h1>
+            <div class="botoes">
+              <button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
+            </div>
           </div>
+          <div class="midbar">
+            <p><strong>
+                <%=number%>
+              </strong> no total</p>
+            <input type="text" placeholder="&#128269;  Pesquisa">
+          </div>
+          <table>
+            <thead>
+              <th>Doador</th>
+              <th>Estado</th>
+              <th>Pontos</th>
+              <th></th>
+            </thead>
+            <tbody>
+              <% donations.forEach(donation=> {%>
+                <tr>
+                  <td>
+                    <%=donation.donatorId%>
+                  </td>
+                  <td>
+                    <%=donation.approved%>
+                  </td>
+                  <td>
+                    <%=donation.points%>
+                  </td>
+                  <td style="display: flex; justify-content: center; gap: 1%;">
+                    <form action="/donations/delete/<%=donation._id%>" method="post">
+                      <button id="delete" type="submit">&#x2715;</button>
+                    </form>
+                    <form action="" method="post">
+                      <button type="submit">&#x270E;</button>
+                    </form>
+                    <form action="" method="post">
+                      <button type="submit">&#128462;</button>
+                    </form>
+                  </td>
+                </tr>
+                <% });%>
+            </tbody>
+          </table>
         </div>
-      </div>
-      <div class="midbar">
-        <p><strong>200</strong> no total</p>
-        <input type="text" placeholder="&#128269;  Pesquisa">
-      </div>
-      <table>
-        <thead>
-          <th>Doador</th>
-          <th>Estado</th>
-          <th>Pontos</th>
-          <th></th>
-        </thead>
-        <tbody>
-          <% donations.forEach(donation=> {%>
-            <tr>
-              <td>
-                <%=donation.name%>
-              </td>
-              <td>
-                <%=donation.name%>
-              </td>
-              <td>
-                <%=donation.name%>
-              </td>
-              <td style="display: flex; justify-content: center; gap: 1%;">
-                <form action="/donations/delete/<%=donation._id%>" method="post">
-                  <button id="delete" type="submit">&#x2715;</button>
-                </form>
-                <form action="" method="post">
-                  <button type="submit">&#x270E;</button>
-                </form>
-                <form action="" method="post">
-                  <button type="submit">&#128462;</button>
-                </form>
-              </td>
-            </tr>
-            <% });%>
-        </tbody>
-      </table>
-    </div>
-  </main>
+    </main>
 </body>
 
 </html>

@@ -11,9 +11,20 @@ mongoose
   .catch((err) => console.error(err));
 
 donationController.management = function (req, res) {
+  let num;
+  
+  (async () => {
+    try {
+     num = await Donation.countDocuments({});
+      console.log('Número total de documentos:', num);
+    } catch (error) {
+      console.error('Ocorreu um erro ao contar os documentos:', error);
+    }
+  })();
+
   Donation.find()
     .then((donation) => {
-      res.render("../views/donationManagement", { donations: donation });
+      res.render("../views/donationManagement", { donations: donation,number:num});
     })
     .catch((err) => {
       console.log("Error:", err);
