@@ -55,17 +55,40 @@ entityController.create = function (req, res) {
   res.render("../views/entities/create");
 };
 
-entityController.save = function (req, res) {
-  const entity = new Entity(req.body);
-  entity
-    .save()
-    .then(() => {
-      console.log("Successfully created an entity.");
-      res.redirect("/users/gerirInstituicoes" /*+ entity._id*/);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.render("../views/entities/create");
+entityController.save = function(req, res) {
+  /*
+  if (!isValidEmail(req.body.email)) {
+    console.log('Email inválido.');
+    return res.render('../views/entities/create', { error: 'Email inválido' });
+  }*/
+
+  var entity = new Entity(req.body);
+
+  entity.save()
+    .then(savedEntity => {
+      console.log('Successfully created an entity.');
+
+      var fileDestination = path.join(__dirname, "..", "images", savedEntity._id + ".jpg");
+
+      fs.readFile(req.file.path, function(err, data) {
+        if (err) {
+          console.error("Error reading file:", err);
+          return res.status(500).send("Error reading file");
+        }
+
+        fs.writeFile(fileDestination, data, function(err) {
+          if (err) {
+            console.error("Error writing file:", err);
+            return res.status(500).send("Error writing file");
+          }
+
+            res.redirect("show/" + savedEntity._id);
+          });
+        });
+      })
+    .catch(err => {
+      console.log(err);
+      res.render('../views/entities/create');
     });
 };
 
