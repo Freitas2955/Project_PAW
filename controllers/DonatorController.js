@@ -10,26 +10,28 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-  donatorController.management = function (req, res) {
-    let num;
-  
+donatorController.management = function (req, res) {
+  let num;
+
   (async () => {
     try {
-     num = await Donator.countDocuments({});
-      console.log('Número total de documentos:', num);
+      num = await Donator.countDocuments({});
+      console.log("Número total de documentos:", num);
+      Donator.find()
+        .then((donator) => {
+          res.render("../views/gestaoDoadores", {
+            donators: donator,
+            number: num,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
     } catch (error) {
-      console.error('Ocorreu um erro ao contar os documentos:', error);
+      console.error("Ocorreu um erro ao contar os documentos:", error);
     }
   })();
-
-    Donator.find()
-      .then((donator) => {
-        res.render("../views/gestaoDoadores", { donators: donator,number:num });
-      })
-      .catch((err) => {
-        console.log("Error:", err);
-      });
-  };
+};
 
 donatorController.list = function (req, res) {
   Donator.find()
@@ -89,7 +91,7 @@ donatorController.update = function (req, res) {
         email: req.body.email,
         address: req.body.address,
         postCode: req.body.postCode,
-        city: req.body.city
+        city: req.body.city,
       },
     },
     { new: true }

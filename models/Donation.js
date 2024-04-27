@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 
 var DonationSchema = new mongoose.Schema({
   donatorId:String,
-  camisolas:String,
-  casacos:String,
+  camisolas:Number,
+  casacos:Number,
   calcas:Number,
   sapatos:Number,
-  acessórios:Number,
+  acessorios:Number,
   interior:Number,
   dinheiro:Number,
   approved:Boolean,

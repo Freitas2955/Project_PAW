@@ -17,21 +17,20 @@ employeeController.management = function (req, res) {
     try {
       num = await Employee.countDocuments({});
       console.log("Número total de documentos:", num);
+      Employee.find()
+        .then((employee) => {
+          res.render("../views/gestaoFuncionarios", {
+            employees: employee,
+            number: num,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
     } catch (error) {
       console.error("Ocorreu um erro ao contar os documentos:", error);
     }
   })();
-
-  Employee.find()
-    .then((employee) => {
-      res.render("../views/gestaoFuncionarios", {
-        employees: employee,
-        number: num,
-      });
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
 };
 
 employeeController.list = function (req, res) {

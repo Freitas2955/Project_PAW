@@ -67,7 +67,8 @@ pointsController.update = function (req, res) {
 pointsController.simulate = function (req, res) {
   Points.findOne()
     .then((point) => {
-      res.render("../views/doar", { point: point });
+      let id=req.params.id
+      res.render("../views/doar", { point: point,id:id });
     })
     .catch((err) => {
       console.log("Error:", err);

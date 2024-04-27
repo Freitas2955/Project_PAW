@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var donator = require("../controllers/donatorController.js");
+var donator = require("../controllers/DonatorController.js");
 
 // Get all donators
 router.get("/", function (req, res) {

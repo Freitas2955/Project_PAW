@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestão de doações</title>
+  <title>Gestão de recolhas</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/management.css' />
 </head>
@@ -12,42 +12,37 @@
 <body>
   <%- include('general/header') -%>
     <main>
-      <%- include('general/sidebar', {activeItem: 'pagina2' }) -%>
+      <%- include('general/sidebar', { activeItem: 'pagina4' }) -%>
 
         <div class="content">
           <div class="contentHeader">
-            <h1>Doações</h1>
-            <div class="botoes">
-              <button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
-            </div>
-          </div>
-          <div class="midbar">
-            <p><strong>
-                <%=number%>
-              </strong> no total</p>
-            <input type="text" placeholder="&#128269;  Pesquisa">
+            <h1>Notificações</h1>
           </div>
           <table>
             <thead>
               <th>Doador</th>
-              <th>Aprovado</th>
-              <th>Pontos</th>
+              <th>Estado</th>
+              <th>Morada</th>
+              <th>Doação</th>
               <th></th>
             </thead>
             <tbody>
-              <% donations.forEach(donation=> {%>
+              <% requests.forEach(request=> {%>
                 <tr>
                   <td>
-                    <%=donation.donatorId%>
+                    <%=request.name%>
                   </td>
                   <td>
-                    <%= donation.approved ? 'sim' : 'não' %>
-                  </td>     
+                    <%=request.name%>
+                  </td>
                   <td>
-                    <%=donation.points%>
+                    <%=request.name%>
+                  </td>
+                  <td>
+                    <%=request.name%>
                   </td>
                   <td style="display: flex; justify-content: center; gap: 1%;">
-                    <form action="/donations/delete/<%=donation._id%>" method="post">
+                    <form action="/donations/delete/<%=request._id%>" method="post">
                       <button id="delete" type="submit">&#x2715;</button>
                     </form>
                     <form action="" method="post">

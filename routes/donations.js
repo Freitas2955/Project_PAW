@@ -18,7 +18,7 @@ router.get("/create", function (req, res) {
 });
 
 // Save donation
-router.post("/save", function (req, res) {
+router.post("/save/:id", function (req, res) {
   donation.save(req, res);
 });
 

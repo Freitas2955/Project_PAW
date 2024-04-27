@@ -19,7 +19,7 @@ router.get('/pontos', function(req, res, next) {
   res.render('pontos', { title: 'Express' });
 });
 
-router.get('/doar', function(req, res, next) {
+router.get('/doar/:id', function(req, res, next) {
   point.simulate(req,res);
 });
 

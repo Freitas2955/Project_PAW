@@ -12,23 +12,25 @@ mongoose
 
 partnerController.management = function (req, res) {
   let num;
-  
+
   (async () => {
     try {
-     num = await Partner.countDocuments({});
-      console.log('Número total de documentos:', num);
+      num = await Partner.countDocuments({});
+      console.log("Número total de documentos:", num);
+      Partner.find()
+        .then((partner) => {
+          res.render("../views/gestaoParceiros", {
+            partners: partner,
+            number: num,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
     } catch (error) {
-      console.error('Ocorreu um erro ao contar os documentos:', error);
+      console.error("Ocorreu um erro ao contar os documentos:", error);
     }
   })();
-
-  Partner.find()
-    .then((partner) => {
-      res.render("../views/gestaoParceiros", { partners: partner,number:num });
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
 };
 
 partnerController.list = function (req, res) {
@@ -90,7 +92,7 @@ partnerController.update = function (req, res) {
         description: req.body.description,
         postCode: req.body.postCode,
         email: req.body.email,
-        city: req.body.city
+        city: req.body.city,
       },
     },
     { new: true }

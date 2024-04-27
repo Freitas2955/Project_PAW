@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Donation = require("../models/Donation");
+var Points = require("../models/Points");
 
 var donationController = {};
 
@@ -12,23 +13,25 @@ mongoose
 
 donationController.management = function (req, res) {
   let num;
-  
+
   (async () => {
     try {
-     num = await Donation.countDocuments({});
-      console.log('Número total de documentos:', num);
+      num = await Donation.countDocuments({});
+      console.log("Número total de documentos:", num);
+      Donation.find()
+        .then((donation) => {
+          res.render("../views/donationManagement", {
+            donations: donation,
+            number: num,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
     } catch (error) {
-      console.error('Ocorreu um erro ao contar os documentos:', error);
+      console.error("Ocorreu um erro ao contar os documentos:", error);
     }
   })();
-
-  Donation.find()
-    .then((donation) => {
-      res.render("../views/donationManagement", { donations: donation,number:num});
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
 };
 
 donationController.list = function (req, res) {
@@ -56,16 +59,43 @@ donationController.create = function (req, res) {
 };
 
 donationController.save = function (req, res) {
-  const donation = new Donation(req.body);
-  donation
-    .save()
-    .then(() => {
-      console.log("Successfully created an donation.");
-      res.redirect("show/" + donation._id);
+  Points.findOne()
+    .then((point) => {
+      const totalPoints =
+        req.body.camisolas * point.camisola +
+        req.body.casacos * point.casaco +
+        req.body.calcas * point.calcas +
+        req.body.sapatos * point.sapatos +
+        req.body.acessorios * point.acessorios +
+        req.body.interior * point.roupainterior +
+        req.body.dinheiro * point.dinheiro;
+      let donatorId = req.params.id;
+      const donationParams = {
+        camisolas: req.body.camisolas,
+        casacos: req.body.casacos,
+        calcas: req.body.calcas,
+        sapatos: req.body.sapatos,
+        acessorios: req.body.acessorios,
+        interior: req.body.interior,
+        dinheiro: req.body.dinheiro,
+        donatorId: donatorId,
+        points: totalPoints,
+        approved:false
+      };
+      const donation = new Donation(donationParams);
+      donation
+        .save()
+        .then(() => {
+          console.log("Successfully created an donation.");
+          res.redirect("/users/gerirDoacoes" /*+ donation._id*/);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.render("../views/donations/create");
+        });
     })
     .catch((err) => {
-      console.error(err);
-      res.render("../views/donations/create");
+      console.log("Error:", err);
     });
 };
 
@@ -104,7 +134,7 @@ donationController.delete = function (req, res) {
   Donation.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Donation detected!");
-      res.redirect("/donations");
+      res.redirect("/users/gerirDoacoes");
     })
     .catch((err) => {
       console.log(err);
