@@ -1,0 +1,8 @@
+.frame {
+  height: 95%;
+  width: 100%;
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

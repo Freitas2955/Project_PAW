@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel='stylesheet' href='/stylesheets/dashboard.css' />
+</head>
+
+<body>
+    <%- include('general/header') -%>
+        <main>
+            <%- include('general/sidebar', { activeItem: 'pagina1' }) -%>
+
+                <div class="content">
+                    <h1>Dashboard</h1>
+                    <div class="frame">
+                        <iframe
+                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                            width="43%" height="43%"
+                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e24cb-ba8a-4cc8-82be-46c8ce226588&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+                        <iframe
+                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                            width="43%" height="43%"
+                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e2b55-a821-4231-8f41-a10232a0a346&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+                        <iframe
+                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                            width="43%" height="43%"
+                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e335d-ffaf-4372-8866-dff47558bc78&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+                        <iframe
+                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                            width="43%" height="43%"
+                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e3a89-a821-48a5-8e3a-a10232e2d966&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+                    </div>
+
+                </div>
+        </main>
+</body>
+
+</html>

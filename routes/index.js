@@ -55,4 +55,8 @@ router.get('/editarparceiro', function(req, res, next) {
   res.render('utilizadores/editarparceiro', { title: 'Express' });
 });
 
+router.get('/dashboard', function(req, res, next) {
+  res.render('dashboard');
+});
+
 module.exports = router;
