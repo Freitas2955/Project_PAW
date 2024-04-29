@@ -45,14 +45,14 @@ loginController.verifyLoginUser = function(req, res, next) {
     if (loginToken){
         jwt.verify(loginToken, config.secret, function(err, decoded) {
             if (err) {
-                return res.redirect('/login');
+                return res.redirect('/');
             }
             req.userEmail = decoded
             next()
         })
     } else {
         //res.render('error', {message:"not authenticated!", error: {status:"",stack:""}})
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
