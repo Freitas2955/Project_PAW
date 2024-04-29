@@ -30,7 +30,6 @@ router.get('/gerirParceiros',loginController.verifyLoginUser,  function(req, res
 
 router.get('/gerirDoacoes',loginController.verifyLoginUser,  function(req, res, next) {
   donation.management(req,res);
-  
 });
 
 

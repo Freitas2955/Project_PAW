@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
-
+var path = require("path");
+var fs = require("fs");
 var donatorController = {};
 
 mongoose
@@ -61,13 +62,38 @@ donatorController.save = function (req, res) {
   const donator = new Donator(req.body);
   donator
     .save()
-    .then(() => {
-      console.log("Successfully created an donator.");
-      res.redirect("/users/gerirdoadores" /*+ donator._id*/);
+    .then((savedDonator) => {
+      console.log("Successfully created an Donator.");
+
+      var fileDestination = path.join(
+        __dirname,
+        "..",
+        "images","donators",
+        savedDonator._id.toString() + ".jpg"
+      );
+      fs.readFile(req.file.path, function (err, data) {
+        if (err) {
+          console.error("Error reading file:", err);
+          return res.status(500).send("Error reading file");
+        }
+
+        fs.writeFile(fileDestination, data, function (err) {
+          if (err) {
+            console.error("Error writing file:", err);
+            return res.status(500).send("Error writing file");
+          }
+          fs.unlink(req.file.path, function (err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.redirect("/users/gerirDoadores");
+        });
+      });
     })
     .catch((err) => {
-      console.error(err);
-      res.render("../views/donators/create");
+      console.log(err);
+      res.redirect("/users/gerirDoadores");
     });
 };
 

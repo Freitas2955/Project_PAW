@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Partner = require("../models/Partner");
-
+var path = require("path");
+var fs = require("fs");
 var partnerController = {};
 
 mongoose
@@ -61,13 +62,39 @@ partnerController.save = function (req, res) {
   const partner = new Partner(req.body);
   partner
     .save()
-    .then(() => {
-      console.log("Successfully created an partner.");
-      res.redirect("/users/gerirparceiros" /*+ partner._id*/);
+    .then((savedPartner) => {
+      console.log("Successfully created an Partner.");
+
+      var fileDestination = path.join(
+        __dirname,
+        "..",
+        "images",
+        "partners",
+        savedPartner._id.toString() + ".jpg"
+      );
+      fs.readFile(req.file.path, function (err, data) {
+        if (err) {
+          console.error("Error reading file:", err);
+          return res.status(500).send("Error reading file");
+        }
+
+        fs.writeFile(fileDestination, data, function (err) {
+          if (err) {
+            console.error("Error writing file:", err);
+            return res.status(500).send("Error writing file");
+          }
+          fs.unlink(req.file.path, function (err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.redirect("/users/gerirParceiros");
+        });
+      });
     })
     .catch((err) => {
-      console.error(err);
-      res.render("../views/partners/create");
+      console.log(err);
+      res.redirect("/users/gerirParceiros");
     });
 };
 

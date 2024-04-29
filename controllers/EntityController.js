@@ -76,7 +76,7 @@ entityController.save = function (req, res) {
       var fileDestination = path.join(
         __dirname,
         "..",
-        "images",
+        "images","entities",
         savedEntity._id.toString() + ".jpg"
       );
       fs.readFile(req.file.path, function (err, data) {
@@ -95,14 +95,13 @@ entityController.save = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          //posso apagar esta linha certo?
-          res.redirect("show/" + savedEntity._id);
+          res.redirect("/users/gerirInstituicoes");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/entities/create");
+      res.redirect("/users/gerirInstituicoes");
     });
 };
 

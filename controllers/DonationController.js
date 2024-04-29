@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
 var Donation = require("../models/Donation");
 var Points = require("../models/Points");
-
+var path = require("path");
+var fs = require("fs");
 var donationController = {};
 
 mongoose
@@ -59,44 +60,66 @@ donationController.create = function (req, res) {
 };
 
 donationController.save = function (req, res) {
-  Points.findOne()
-    .then((point) => {
-      const totalPoints =
-        req.body.camisolas * point.camisola +
-        req.body.casacos * point.casaco +
-        req.body.calcas * point.calcas +
-        req.body.sapatos * point.sapatos +
-        req.body.acessorios * point.acessorios +
-        req.body.interior * point.roupainterior +
-        req.body.dinheiro * point.dinheiro;
-      let donatorId = req.params.id;
-      const donationParams = {
-        camisolas: req.body.camisolas,
-        casacos: req.body.casacos,
-        calcas: req.body.calcas,
-        sapatos: req.body.sapatos,
-        acessorios: req.body.acessorios,
-        interior: req.body.interior,
-        dinheiro: req.body.dinheiro,
-        donatorId: donatorId,
-        points: totalPoints,
-        approved:false
-      };
-      const donation = new Donation(donationParams);
-      donation
-        .save()
-        .then(() => {
-          console.log("Successfully created an donation.");
-          res.redirect("/users/gerirDoacoes" /*+ donation._id*/);
-        })
-        .catch((err) => {
-          console.error(err);
-          res.render("../views/donations/create");
+  Points.findOne().then((point) => {
+    const totalPoints =
+      req.body.camisolas * point.camisola +
+      req.body.casacos * point.casaco +
+      req.body.calcas * point.calcas +
+      req.body.sapatos * point.sapatos +
+      req.body.acessorios * point.acessorios +
+      req.body.interior * point.roupainterior +
+      req.body.dinheiro * point.dinheiro;
+    let donatorId = req.params.id;
+    const donationParams = {
+      camisolas: req.body.camisolas,
+      casacos: req.body.casacos,
+      calcas: req.body.calcas,
+      sapatos: req.body.sapatos,
+      acessorios: req.body.acessorios,
+      interior: req.body.interior,
+      dinheiro: req.body.dinheiro,
+      donatorId: donatorId,
+      points: totalPoints,
+      approved: false,
+    };
+    const donation = new Donation(donationParams);
+    donation
+      .save()
+      .then((savedDonation) => {
+        console.log("Successfully created an donation.");
+
+        var fileDestination = path.join(
+          __dirname,
+          "..",
+          "images",
+          "donations",
+          savedDonation._id.toString() + ".jpg"
+        );
+        fs.readFile(req.file.path, function (err, data) {
+          if (err) {
+            console.error("Error reading file:", err);
+            return res.status(500).send("Error reading file");
+          }
+
+          fs.writeFile(fileDestination, data, function (err) {
+            if (err) {
+              console.error("Error writing file:", err);
+              return res.status(500).send("Error writing file");
+            }
+            fs.unlink(req.file.path, function (err) {
+              if (err) {
+                console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+              }
+            });
+            res.redirect("/users/gerirDoacoes");
+          });
         });
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.redirect("/users/gerirDoacoes");
+      });
+  });
 };
 
 donationController.edit = function (req, res) {

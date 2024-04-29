@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
 var Employee = require("../models/Employee");
-const bcrypt = require('bcryptjs')
-
+const bcrypt = require("bcryptjs");
+var path = require("path");
+var fs = require("fs");
 var employeeController = {};
 
 mongoose
@@ -61,25 +62,52 @@ employeeController.create = function (req, res) {
 
 employeeController.save = function (req, res) {
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
-  const data={
-    name:req.body.name,
-    phone:req.body.phone,
+  const data = {
+    name: req.body.name,
+    phone: req.body.phone,
     email: req.body.email,
-    address:req.body.address,
-    postCode:req.body.postCode,
-    city:req.body.city,
-    password:hashedPassword
-  }
+    address: req.body.address,
+    postCode: req.body.postCode,
+    city: req.body.city,
+    password: hashedPassword,
+  };
   const employee = new Employee(data);
+
   employee
     .save()
-    .then(() => {
-      console.log("Successfully created an employee.");
-      res.redirect("/users/gerirFuncionarios" /*+ employee._id*/);
+    .then((savedEmployee) => {
+      console.log("Successfully created an Employee.");
+
+      var fileDestination = path.join(
+        __dirname,
+        "..",
+        "images",
+        "employees",
+        savedEmployee._id.toString() + ".jpg"
+      );
+      fs.readFile(req.file.path, function (err, data) {
+        if (err) {
+          console.error("Error reading file:", err);
+          return res.status(500).send("Error reading file");
+        }
+
+        fs.writeFile(fileDestination, data, function (err) {
+          if (err) {
+            console.error("Error writing file:", err);
+            return res.status(500).send("Error writing file");
+          }
+          fs.unlink(req.file.path, function (err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.redirect("/users/gerirFuncionarios");
+        });
+      });
     })
     .catch((err) => {
-      console.error(err);
-      res.render("../views/employees/create");
+      console.log(err);
+      res.redirect("/users/gerirFuncionarios");
     });
 };
 
