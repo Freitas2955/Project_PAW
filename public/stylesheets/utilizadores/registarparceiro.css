@@ -64,8 +64,12 @@
   }
   
   button {
-    padding: 1%;
+    border: none;
     border-radius: 5px;
-    margin-left: 2%;
+    padding: 1% 2%;
+    background-color: #0698d4;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px; 
   }
   
