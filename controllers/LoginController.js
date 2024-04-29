@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const mongoUser = require('../models/Admin')
+const mongoUser = require('../models/Employee')
 const jwt = require('jsonwebtoken')
 const config = require('../jwt_secret/config')
 const bcrypt = require('bcryptjs')
@@ -13,16 +13,16 @@ loginController.submittedLogin = function(req, res, next) {
     mongoUser.findOne({email:emailInput})
         .then(function(admin){
             if(!admin) {
-                return res.redirect('/login'); // e-mail não encontrado
+                return res.redirect('/'); // e-mail não encontrado
             }
             bcrypt.compare(passwordInput, admin.password)
                 .then(function(result){
                     if (result ===true){
                         const loginToken = jwt.sign({ email: admin.email }, config.secret, { expiresIn: 86400 });
                         res.cookie('login-token', loginToken, {maxAge: 82000})
-                        res.redirect('/menuAdmin')
+                        res.redirect('/users/gerirDoacoes')
                     } else {
-                        res.redirect('/login')
+                        res.redirect('/')
                     }
                 })
         })

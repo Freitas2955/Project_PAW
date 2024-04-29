@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Employee = require("../models/Employee");
+const bcrypt = require('bcryptjs')
 
 var employeeController = {};
 
@@ -58,7 +59,17 @@ employeeController.create = function (req, res) {
 };
 
 employeeController.save = function (req, res) {
-  const employee = new Employee(req.body);
+  const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  const data={
+    name:req.body.name,
+    phone:req.body.phone,
+    email: req.body.email,
+    address:req.body.address,
+    postCode:req.body.postCode,
+    city:req.body.city,
+    password:hashedPassword
+  }
+  const employee = new Employee(data);
   employee
     .save()
     .then(() => {

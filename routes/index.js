@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var point= require("../controllers/PointsController.js")
 const authController = require('../controllers/LoginController')
-
+/*
 router.get('/',  authController.verifyLoginUser, function(req, res, next) {
   res.render('index', );
 });
