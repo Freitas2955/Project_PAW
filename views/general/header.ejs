@@ -14,17 +14,46 @@
         <div id="imagensNav">
             <img src="../images/Image 207.png" alt="Logo" width="50" height="50">
             <label for="Nome">RECICLA TÊXTIL</label>
-           <!-- <img src="../images/Image 207 (1).png" alt="Logo" height="50"> -->
         </div>
         <div id="opcoesNav">
-            <a href="">
+            <a href="#" onclick="notificacao()">
                 <img src="../images/icone-de-cloche-et-d-alerte-gris.png" alt="Notifications" width="30" height="30"></a>
+
+
             <div class="user">
                 <img src="../images/cara.png" alt="profile" width="40" height="40" id="profile">
-                <p>Nome nome</p>
             </div>
-            <a href="" id="">
+            <a href="#" id="">
                 <img src="../images/arrow_down_icon_242220.png" alt="More options" width="30" height="30"></a>
         </div>
     </header>
+
+
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="fecharModal()">&times;</span>
+          <p id="notificacoesText">Notificações: <span id="notificacoes"></span> </p>
+        </div>
+    </div>
+
+    
+    <script>
+        function notificacao() {
+          // Atualiza o texto dentro do modal com o total de notificações
+          document.getElementById('notificacoes').textContent = "0";
+    
+          // Exibe o modal
+          const modal = document.getElementById('modal');
+          modal.style.display = 'block';
+        }
+        function fecharModal() {
+          // Fecha o modal ao clicar no botão de fechar
+          const modal = document.getElementById('modal');
+          modal.style.display = 'none';
+        }
+    </script>
+    
+
+
 </body>

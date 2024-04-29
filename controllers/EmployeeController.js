@@ -23,6 +23,7 @@ employeeController.management = function (req, res) {
           res.render("../views/gestaoFuncionarios", {
             employees: employee,
             number: num,
+            nomeDaPessoa: nomeDaPessoa
           });
         })
         .catch((err) => {
