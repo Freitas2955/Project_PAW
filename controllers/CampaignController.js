@@ -62,19 +62,19 @@ campaignController.show = function (req, res) {
 };
 
 campaignController.create = function (req, res) {
-  res.render("../views/campaigns/create", {
+  res.render("../views/registarCampanha", {
     username: req.session.username,
     userId: req.session.userId,
   });
 };
 
 campaignController.save = function (req, res) {
-  const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   const data = {
     name: req.body.name,
     description: req.body.description,
     cost: req.body.cost,
-    partnerId: req.params.partnerId,
+    partnerId: req.body.partner._id,
+    partnerName: req.body.partner.name,
   };
   const campaign = new Campaign(data);
 
