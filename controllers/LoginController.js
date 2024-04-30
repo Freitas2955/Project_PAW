@@ -22,7 +22,7 @@ loginController.submittedLogin = function(req, res, next) {
                          req.session.username=admin.name;
                          req.session.userId=admin._id.toString();
                         res.cookie('login-token', loginToken, {maxAge: 82000})
-                        res.redirect('/users/gerirDoacoes')
+                        res.redirect('/dashboard')
                     } else {
                         res.redirect('/')
                     }
