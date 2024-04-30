@@ -24,6 +24,8 @@ donationController.management = function (req, res) {
           res.render("../views/donationManagement", {
             donations: donation,
             number: num,
+            username: req.session.username,
+            userId: req.session.userId,
           });
         })
         .catch((err) => {
@@ -38,7 +40,7 @@ donationController.management = function (req, res) {
 donationController.list = function (req, res) {
   Donation.find()
     .then((donation) => {
-      res.render("../views/donations/showAll", { donations: donation });
+      res.redirect("/users/gerirDoacoes");
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -125,7 +127,8 @@ donationController.save = function (req, res) {
 donationController.edit = function (req, res) {
   Donation.findOne({ _id: req.params.id })
     .then((donation) => {
-      res.render("../views/donations/edit", { donation: donation });
+      res.render("../views/donations/edit", { donation: donation ,username: req.session.username,
+        userId: req.session.userId,});
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -149,7 +152,8 @@ donationController.update = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/donations/edit", { donation: req.body });
+      res.render("../views/donations/edit", { donation: req.body ,username: req.session.username,
+        userId: req.session.userId,});
     });
 };
 

@@ -24,6 +24,8 @@ employeeController.management = function (req, res) {
           res.render("../views/gestaoFuncionarios", {
             employees: employee,
             number: num,
+            username: req.session.username,
+            userId: req.session.userId,
           });
         })
         .catch((err) => {
@@ -56,7 +58,8 @@ employeeController.show = function (req, res) {
 };
 
 employeeController.create = function (req, res) {
-  res.render("../views/employees/create");
+  res.render("../views/employees/create",{username: req.session.username,
+    userId: req.session.userId,});
 };
 
 employeeController.save = function (req, res) {
@@ -115,6 +118,8 @@ employeeController.edit = function (req, res) {
     .then((employee) => {
       res.render("../views/utilizadores/editarfuncionario", {
         employee: employee,
+        username: req.session.username,
+            userId: req.session.userId,
       });
     })
     .catch((err) => {

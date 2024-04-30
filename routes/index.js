@@ -1,7 +1,7 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var point= require("../controllers/PointsController.js")
-const authController = require('../controllers/LoginController')
+var point = require("../controllers/PointsController.js");
+const authController = require("../controllers/LoginController");
 /*
 router.get('/',  authController.verifyLoginUser, function(req, res, next) {
   res.render('index', );
@@ -9,60 +9,90 @@ router.get('/',  authController.verifyLoginUser, function(req, res, next) {
 ////Nao sei se o anterior esta bem 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('login/login', { title: 'Express' });
+router.get("/", function (req, res, next) {
+  res.render("login/login");
 });
 
-router.get('/recuperar', function(req, res, next) {
-  res.render('login/recuperar', { title: 'Express' });
+router.get("/recuperar", function (req, res, next) {
+  res.render("login/recuperar");
 });
 
-router.get('/pass', function(req, res, next) {
-  res.render('login/pass', { title: 'Express' });
+router.get("/pass", function (req, res, next) {
+  res.render("login/pass");
 });
 
-router.get('/pontos', function(req, res, next) {
-  res.render('pontos', { title: 'Express' });
+router.get("/pontos", function (req, res, next) {
+  res.render("pontos", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/doar/:id', function(req, res, next) {
-  point.simulate(req,res);
+router.get("/doar/:id", function (req, res, next) {
+  point.simulate(req, res);
 });
 
-router.get('/registardoador', function(req, res, next) {
-  res.render('utilizadores/registardoador', { title: 'Express' });
+router.get("/registardoador", function (req, res, next) {
+  res.render("utilizadores/registardoador", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/registarfuncionario', function(req, res, next) {
-  res.render('utilizadores/registarfuncionario', { title: 'Express' });
+router.get("/registarfuncionario", function (req, res, next) {
+  res.render("utilizadores/registarfuncionario", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/registarinstituicao', function(req, res, next) {
-  res.render('utilizadores/registarinstituicao', { title: 'Express' });
+router.get("/registarinstituicao", function (req, res, next) {
+  res.render("utilizadores/registarinstituicao", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/registarparceiro', function(req, res, next) {
-  res.render('utilizadores/registarparceiro', { title: 'Express' });
+router.get("/registarparceiro", function (req, res, next) {
+  res.render("utilizadores/registarparceiro", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/editarutilizador', function(req, res, next) {
-  res.render('utilizadores/editarutilizador', { title: 'Express' });
+router.get("/editarutilizador", function (req, res, next) {
+  res.render("utilizadores/editarutilizador", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/editarfuncionario', function(req, res, next) {
-  res.render('utilizadores/editarfuncionario', { title: 'Express' });
+router.get("/editarfuncionario", function (req, res, next) {
+  res.render("utilizadores/editarfuncionario", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/editarinstituicao', function(req, res, next) {
-  res.render('utilizadores/editarinstituicao', { title: 'Express' });
+router.get("/editarinstituicao", function (req, res, next) {
+  res.render("utilizadores/editarinstituicao", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/editarparceiro', function(req, res, next) {
-  res.render('utilizadores/editarparceiro', { title: 'Express' });
+router.get("/editarparceiro", function (req, res, next) {
+  res.render("utilizadores/editarparceiro", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
-router.get('/dashboard', function(req, res, next) {
-  res.render('dashboard');
+router.get("/dashboard", function (req, res, next) {
+  res.render("dashboard", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 });
 
 module.exports = router;

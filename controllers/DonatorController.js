@@ -23,6 +23,8 @@ donatorController.management = function (req, res) {
           res.render("../views/gestaoDoadores", {
             donators: donator,
             number: num,
+            username: req.session.username,
+            userId: req.session.userId,
           });
         })
         .catch((err) => {
@@ -55,7 +57,8 @@ donatorController.show = function (req, res) {
 };
 
 donatorController.create = function (req, res) {
-  res.render("../views/donators/create");
+  res.render("../views/donators/create",{username: req.session.username,
+    userId: req.session.userId,});
 };
 
 donatorController.save = function (req, res) {
@@ -111,7 +114,8 @@ donatorController.save = function (req, res) {
 donatorController.edit = function (req, res) {
   Donator.findOne({ _id: req.params.id })
     .then((donator) => {
-      res.render("../views/utilizadores/editarDoador", { donator: donator });
+      res.render("../views/utilizadores/editarDoador", { donator: donator ,username: req.session.username,
+        userId: req.session.userId,});
     })
     .catch((err) => {
       console.log("Error:", err);

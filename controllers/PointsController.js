@@ -11,26 +11,37 @@ mongoose
   .catch((err) => console.error(err));
 
 pointsController.create = function (req, res) {
-  res.render("../views/pontos");
+  res.render("../views/pontos",{username: req.session.username,
+    userId: req.session.userId,});
 };
 
 pointsController.save = function (req, res) {
   const point = new Points(req.body);
-  point.save()
+  point
+    .save()
     .then(() => {
       console.log("Successfully created points.");
-      res.redirect("show/" + point._id);
+      res.render("../views/pontos", {
+        point: req.body,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.error(err);
-      res.render("../pontos");
+      res.render("../pontos",{username: req.session.username,
+        userId: req.session.userId,});
     });
 };
 
 pointsController.edit = function (req, res) {
   Points.findOne()
     .then((point) => {
-      res.render("../views/pontos", { point: point });
+      res.render("../views/pontos", {
+        point: point,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -53,22 +64,33 @@ pointsController.update = function (req, res) {
     },
     { new: true }
   )
-  //tirar isto ne?
     .then((point) => {
-      res.redirect("/point/show/" + point._id);
+      res.render("../views/pontos", {
+        point: req.body,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
-    //tirar isto?
     .catch((err) => {
       console.log(err);
-      res.render("../views/points/edit", { point: req.body });
+      res.render("../views/pontos", {
+        point: req.body,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     });
 };
 
 pointsController.simulate = function (req, res) {
   Points.findOne()
     .then((point) => {
-      let id=req.params.id
-      res.render("../views/doar", { point: point,id:id });
+      let id = req.params.id;
+      res.render("../views/doar", {
+        point: point,
+        id: id,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);

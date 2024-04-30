@@ -10,9 +10,9 @@
 </head>
 
 <body>
-  <%- include('general/header') -%>
+  <%- include('general/header',{username:username, userId:userId}) -%>
     <main>
-      <%- include('general/sidebar', { activeItem: 'pagina4' }) -%>
+      <%- include('general/sidebar', { activeItem: 'pagina4'}) -%>
 
         <div class="content">
           <div class="contentHeader">

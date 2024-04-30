@@ -23,6 +23,8 @@ partnerController.management = function (req, res) {
           res.render("../views/gestaoParceiros", {
             partners: partner,
             number: num,
+            username: req.session.username,
+            userId: req.session.userId,
           });
         })
         .catch((err) => {
@@ -55,7 +57,8 @@ partnerController.show = function (req, res) {
 };
 
 partnerController.create = function (req, res) {
-  res.render("../views/partners/create");
+  res.render("../views/partners/create",{username: req.session.username,
+    userId: req.session.userId,});
 };
 
 partnerController.save = function (req, res) {
@@ -113,7 +116,8 @@ partnerController.save = function (req, res) {
 partnerController.edit = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.render("../views/utilizadores/editarparceiro", { partner: partner });
+      res.render("../views/utilizadores/editarparceiro", { partner: partner,username: req.session.username,
+        userId: req.session.userId, });
     })
     .catch((err) => {
       console.log("Error:", err);

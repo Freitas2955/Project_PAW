@@ -21,9 +21,12 @@ requestController.management = function (req, res) {
       console.log("Número total de documentos:", num);
       Request.find()
         .then((request) => {
+          console.log(req.session.userId);
           res.render("../views/gestaoPedidos", {
             requests: request,
             number: num,
+            username: req.session.username,
+            userId: req.session.userId,
           });
         })
         .catch((err) => {
@@ -56,7 +59,8 @@ requestController.show = function (req, res) {
 };
 
 requestController.create = function (req, res) {
-  res.render("../views/requests/create");
+  res.render("../views/requests/create",{username: req.session.username,
+  userId: req.session.userId,});
 };
 
 requestController.save = function (req, res) {
@@ -115,6 +119,8 @@ requestController.edit = function (req, res) {
     .then((request) => {
       res.render("../views/utilizadores/editarpedido", {
         request: request,
+        username: req.session.username,
+            userId: req.session.userId,
       });
     })
     .catch((err) => {

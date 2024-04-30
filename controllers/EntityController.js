@@ -24,6 +24,8 @@ entityController.management = function (req, res) {
           res.render("../views/gestaoInstituicoes", {
             entities: entity,
             number: num,
+            username: req.session.username,
+            userId: req.session.userId,
           });
         })
         .catch((err) => {
@@ -56,7 +58,8 @@ entityController.show = function (req, res) {
 };
 
 entityController.create = function (req, res) {
-  res.render("../views/entities/create");
+  res.render("../views/entities/create",{username: req.session.username,
+    userId: req.session.userId,});
 };
 
 entityController.save = function (req, res) {
@@ -120,7 +123,8 @@ entityController.save = function (req, res) {
 entityController.edit = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.render("../views/utilizadores/editarinstituicao", { entity: entity });
+      res.render("../views/utilizadores/editarinstituicao", { entity: entity ,username: req.session.username,
+        userId: req.session.userId,});
     })
     .catch((err) => {
       console.log("Error:", err);

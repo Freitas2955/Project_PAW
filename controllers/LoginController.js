@@ -19,6 +19,8 @@ loginController.submittedLogin = function(req, res, next) {
                 .then(function(result){
                     if (result ===true){
                         const loginToken = jwt.sign({ email: admin.email }, config.secret, { expiresIn: 86400 });
+                         req.session.username=admin.name;
+                         req.session.userId=admin._id.toString();
                         res.cookie('login-token', loginToken, {maxAge: 82000})
                         res.redirect('/users/gerirDoacoes')
                     } else {
