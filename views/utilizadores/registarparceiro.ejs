@@ -16,7 +16,7 @@
 
                 <div class="content">
                     <h2>Informação Parceiro</h2>
-                    <form class="informacaogeral" action="/partners/save" method="post" enctype="multipart/form-data">
+                    <form class="informacaogeral" action="/partners/save" method="post" enctype="multipart/form-data" onsubmit="return validarSenha()">
                         <div id="formContent">
                             <div id="leftside">
                                 <div id="upload-box">
@@ -28,6 +28,16 @@
                                     <label for="description">Descrição:</label>
                                     <textarea id="description" name="description" rows="4" placeholder="Descrição"
                                         required></textarea>
+                                </div>
+                                <div id="pass">
+                                    <div class="inputContainer">
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                    <div class="inputContainer">
+                                        <label for="confirmarpassword">Confirmar Password:</label>
+                                        <input type="password" id="confirmarpassword" name="confirmarpassword" placeholder="Password" required>
+                                    </div>
                                 </div>
                             </div>
                             <div id="rightside">
@@ -82,6 +92,18 @@
         
             reader.readAsDataURL(input.files[0]);
         }
+
+
+        function validarSenha() {
+        var senha = document.getElementById("password").value;
+        var confirmarSenha = document.getElementById("confirmarpassword").value;
+
+        if (senha != confirmarSenha) {
+            alert("As senhas não coincidem. Por favor, digite novamente.");
+            return false; // Impede o envio do formulário se as senhas não coincidirem
+        }
+        return true; // Permite o envio do formulário se as senhas coincidirem
+    }
         </script>
 </body>
 

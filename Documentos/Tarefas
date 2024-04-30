@@ -14,9 +14,6 @@ no login funcao de ver pass
 
 nao deixar registar utilizadores repetidos
 
-pass igual a confirmar pass(ja esta feito no resgistar funcionario)
-add pass nos utilizadores todos esta so nos funcionarios so é preciso o html e o css
-
 login lembrar me / recuperar pass 
 
 cena de registar e editar e ver utilizadores 
@@ -30,6 +27,9 @@ scrol nas tabelas
 
 api de mapas para morada(pensar na logica)
 api de pagamentos(pensar na logica)
+
+
+
 
 
 Temos de entregar relatorio no 1º milestone 
