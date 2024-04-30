@@ -128,6 +128,10 @@ button#delete {
   color: white;
 }
 
+button#aprovar {
+  background-color: #1ed872;
+  color: white;
+}
 form {
   display: inline;
 }

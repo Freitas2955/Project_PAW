@@ -1,9 +1,10 @@
 var mongoose = require("mongoose");
-var Donator = require("../models/Donator");
+var Campaign = require("../models/Campaign");
+const bcrypt = require("bcryptjs");
 var path = require("path");
 var fs = require("fs");
-var donatorController = {};
-const bcrypt = require("bcryptjs");
+var campaignController = {};
+
 mongoose
   .connect(
     "mongodb+srv://user:user@basepaw.e8ypv1l.mongodb.net/trabalhoPaw?retryWrites=true&w=majority&appName=BASEPAW"
@@ -11,17 +12,17 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-donatorController.management = function (req, res) {
+campaignController.management = function (req, res) {
   let num;
 
   (async () => {
     try {
-      num = await Donator.countDocuments({});
+      num = await Campaign.countDocuments({});
       console.log("Número total de documentos:", num);
-      Donator.find()
-        .then((donator) => {
-          res.render("../views/gestaoDoadores", {
-            donators: donator,
+      Campaign.find()
+        .then((campaign) => {
+          res.render("../views/gestaoCampanhas", {
+            campaigns: campaign,
             number: num,
             username: req.session.username,
             userId: req.session.userId,
@@ -36,56 +37,58 @@ donatorController.management = function (req, res) {
   })();
 };
 
-donatorController.list = function (req, res) {
-  Donator.find()
-    .then((donator) => {
-      res.render("../views/donators/showAll", { donators: donator });
+campaignController.list = function (req, res) {
+  Campaign.find()
+    .then((campaign) => {
+      res.render("../views/campaigns/showAll", { campaigns: campaign });
     })
     .catch((err) => {
       console.log("Error:", err);
     });
 };
 
-donatorController.show = function (req, res) {
-  Donator.findOne({ _id: req.params.id })
-    .then((donator) => {
-      res.render("../views/utilizadores/verdoador", { donator: donator,username: req.session.username,
-        userId: req.session.userId, });
+campaignController.show = function (req, res) {
+  Campaign.findOne({ _id: req.params.id })
+    .then((campaign) => {
+      res.render("../views/utilizadores/vercampanha", {
+        campaign: campaign,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.error("Error:", err);
     });
 };
 
-donatorController.create = function (req, res) {
-  res.render("../views/donators/create",{username: req.session.username,
-    userId: req.session.userId,});
+campaignController.create = function (req, res) {
+  res.render("../views/campaigns/create", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 };
 
-donatorController.save = function (req, res) {
+campaignController.save = function (req, res) {
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   const data = {
     name: req.body.name,
-    phone: req.body.phone,
-    email: req.body.email,
-    address: req.body.address,
-    postCode: req.body.postCode,
-    city: req.body.city,
-    password: hashedPassword,
-    points:0,
+    description: req.body.description,
+    cost: req.body.cost,
+    partnerId: req.params.partnerId,
   };
-  const donator = new Donator(data);
-  donator
+  const campaign = new Campaign(data);
+
+  campaign
     .save()
-    .then((savedDonator) => {
-      console.log("Successfully created an Donator.");
+    .then((savedCampaign) => {
+      console.log("Successfully created an Campaign.");
 
       var fileDestination = path.join(
         __dirname,
         "..",
         "images",
-        "donators",
-        savedDonator._id.toString() + ".jpg"
+        "campaigns",
+        savedCampaign._id.toString() + ".jpg"
       );
       fs.readFile(req.file.path, function (err, data) {
         if (err) {
@@ -103,29 +106,32 @@ donatorController.save = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirDoadores");
+          res.redirect("/users/gerirCampanhas");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirDoadores");
+      res.redirect("/users/gerirCampanhas");
     });
 };
 
-donatorController.edit = function (req, res) {
-  Donator.findOne({ _id: req.params.id })
-    .then((donator) => {
-      res.render("../views/utilizadores/editarDoador", { donator: donator ,username: req.session.username,
-        userId: req.session.userId,});
+campaignController.edit = function (req, res) {
+  Campaign.findOne({ _id: req.params.id })
+    .then((campaign) => {
+      res.render("../views/utilizadores/editarcampanha", {
+        campaign: campaign,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);
     });
 };
 
-donatorController.update = function (req, res) {
-  Donator.findByIdAndUpdate(
+campaignController.update = function (req, res) {
+  Campaign.findByIdAndUpdate(
     req.params.id,
     {
       $set: {
@@ -139,15 +145,15 @@ donatorController.update = function (req, res) {
     },
     { new: true }
   )
-    .then((savedDonator) => {
-      console.log("Successfully created an Donator.");
+    .then((savedCampaign) => {
+      console.log("Successfully created an Campaign.");
 
       var fileDestination = path.join(
         __dirname,
         "..",
         "images",
-        "donators",
-        savedDonator._id.toString() + ".jpg"
+        "campaigns",
+        savedCampaign._id.toString() + ".jpg"
       );
       fs.readFile(req.file.path, function (err, data) {
         if (err) {
@@ -165,26 +171,26 @@ donatorController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirDoadores");
+          res.redirect("/users/gerirCampanhas");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirDoadores");
+      res.redirect("/users/gerirCampanhas");
     });
 };
 
-donatorController.delete = function (req, res) {
-  Donator.deleteOne({ _id: req.params.id })
+campaignController.delete = function (req, res) {
+  Campaign.deleteOne({ _id: req.params.id })
     .then(() => {
-      console.log("Donator detected!");
+      console.log("Campaign detected!");
 
       var fileDestination = path.join(
         __dirname,
         "..",
         "images",
-        "donators",
+        "campaigns",
         req.params.id + ".jpg"
       );
 
@@ -202,11 +208,11 @@ donatorController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/users/gerirDoadores");
+      res.redirect("/users/gerirCampanhas");
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-module.exports = donatorController;
+module.exports = campaignController;

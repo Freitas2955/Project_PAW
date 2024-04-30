@@ -47,13 +47,24 @@
                   <td>
                     <%=donation.points%>
                   </td>
-                  <td><%=donation.updated_at%></td>
+                  <td>
+                    <%=donation.updated_at%>
+                  </td>
                   <td>
                   </td>
                   <td style="display: flex; justify-content: center; gap: 1%;">
+                    <% if (!donation.approved) { %>
+                      <form action="/donations/approve/<%= donation._id %>" method="post">
+                        <button id="aprovar" type="submit">&#10003;</button>
+                      </form>
+                      <% } %>
+                  </td>
+                  <td>
                     <form action="/donations/delete/<%=donation._id%>" method="post">
                       <button id="delete" type="submit">&#x2715;</button>
                     </form>
+                  </td>
+                  <td>
                     <form action="/donations/show/<%=donation._id%>">
                       <button id="ver" type="submit">&#128462;</button>
                     </form>

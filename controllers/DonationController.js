@@ -21,7 +21,6 @@ donationController.management = function (req, res) {
       console.log("Número total de documentos:", num);
       Donation.find()
         .then((donation) => {
-          
           donation.forEach(function (donation) {
             var dataOriginal = new Date(donation.updated_at);
 
@@ -38,7 +37,7 @@ donationController.management = function (req, res) {
 
             donation.updated_at = dataFormatada;
 
-            console.log(dataFormatada);
+            console.log(donation.updated_at);
           });
 
           res.render("../views/donationManagement", {
@@ -203,5 +202,42 @@ donationController.delete = function (req, res) {
       console.log(err);
     });
 };
+
+donationController.approve = function (req, res) {
+  Donation.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: {
+        approved: true,
+      },
+    },
+    { new: true }
+  )
+    .then((donation) => {
+      console.log(donation);
+      Donator.findByIdAndUpdate(
+        donation.donatorId,
+        {
+          $inc: {
+            points: donation.points,
+          },
+        },
+        { new: true }
+      )
+        .then((updatedDonator) => {
+          console.log(updatedDonator);
+          res.redirect("/users/gerirDoacoes");
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send("Erro interno do servidor");
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Erro interno do servidor");
+    });
+};
+
 
 module.exports = donationController;

@@ -37,4 +37,8 @@ router.post("/delete/:id", function (req, res, next) {
   donation.delete(req, res);
 });
 
+router.post("/approve/:id", function (req, res, next) {
+  donation.approve(req, res);
+});
+
 module.exports = router;
