@@ -15,7 +15,7 @@
             <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
                 <div class="content">
                     <h2>Registar Funcionário</h2>
-                    <form class="informacaogeral" action="/employees/save" method="post" enctype="multipart/form-data">
+                    <form class="informacaogeral" action="/employees/save" method="post" enctype="multipart/form-data" onsubmit="return validarSenha()">
                         <div id="formContent">
                             <div id="leftside">
                                 <div id="upload-box">
@@ -91,6 +91,17 @@
         
             reader.readAsDataURL(input.files[0]);
         }
+
+        function validarSenha() {
+        var senha = document.getElementById("password").value;
+        var confirmarSenha = document.getElementById("confirmarpassword").value;
+
+        if (senha != confirmarSenha) {
+            alert("As senhas não coincidem. Por favor, digite novamente.");
+            return false; // Impede o envio do formulário se as senhas não coincidirem
+        }
+        return true; // Permite o envio do formulário se as senhas coincidirem
+    }
         </script>
 </body>
 

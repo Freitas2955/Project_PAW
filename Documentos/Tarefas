@@ -10,13 +10,12 @@ notificacoes
 
 falta as imagens nos perfils
 
-setinha de perfil(Log out editar perfil)
-
 no login funcao de ver pass
 
 nao deixar registar utilizadores repetidos
 
-pass igual a confirmar pass
+pass igual a confirmar pass(ja esta feito no resgistar funcionario)
+add pass nos utilizadores todos esta so nos funcionarios so é preciso o html e o css
 
 login lembrar me / recuperar pass 
 
@@ -25,7 +24,7 @@ cena de registar e editar e ver utilizadores
 
 imagens em algumas interfaces nao dao
 
-botao de pesquisa e de export
+botao de pesquisa e de export       
 
 scrol nas tabelas
 

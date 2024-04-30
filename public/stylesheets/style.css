@@ -22,7 +22,7 @@ header {
   margin: auto;
   position: relative;
 }
-
+  
 #imagensNav {
   display: flex;
   align-items: center; /* Centraliza verticalmente os itens */
@@ -190,3 +190,39 @@ button#exportar {
     cursor: pointer;
   }
   
+  /*----------------------------------------------*/
+
+.drop-content {
+    display: none;
+    position: absolute;
+    background-color: #0698d4;
+    padding: 10px;
+    top: 40px;
+    right: 0;
+    z-index: 1; 
+    border-radius: 5px;
+}
+
+.drop-content a {
+    color: #fff;
+    display: block;
+    padding: 5px 0;
+    text-decoration: none;
+}
+
+.drop-content a:hover {
+    background-color: #38b8ea;
+}
+
+.drop:hover .drop-content {
+    display: block;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user p {
+    margin: 0 10px;
+}

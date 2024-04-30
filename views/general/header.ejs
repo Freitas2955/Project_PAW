@@ -22,8 +22,13 @@
                 <img src="../../images/employees/<%=userId%>.jpg" alt="profile" width="40" height="40" id="profile">
                 <p><%=username%></p>
             </div>
-            <a href="#" id="">
-                <img src="../images/arrow_down_icon_242220.png" alt="More options" width="30" height="30"></a>
+            <div class="drop">
+                <img src="../images/arrow_down_icon_242220.png" alt="More options" width="30" height="30">
+                <div class="drop-content">
+                    <a href="/employees/edit/<%=userId%>">Editar Perfil</a>
+                    <a href="/auth/logout">Logout</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -49,6 +54,11 @@
           const modal = document.getElementById('caixa');
           modal.style.display = 'none';
         }
+
+        function toggleDrop() {
+    const dropContent = document.getElementById('dropContent');
+    dropContent.classList.toggle('show');
+}
     </script>
     
 

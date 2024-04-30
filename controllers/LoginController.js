@@ -39,7 +39,7 @@ loginController.login = function(req, res, next) {
 
 loginController.logout = function(req, res, next) {
     res.clearCookie('login-token')
-    res.redirect('/login')
+    res.redirect('/')
 };
 
 loginController.verifyLoginUser = function(req, res, next) {
