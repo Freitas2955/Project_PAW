@@ -5,6 +5,7 @@ var donation = require("../controllers/DonationController.js");
 var donator = require("../controllers/DonatorController.js");
 var entity = require("../controllers/EntityController.js");
 var partner = require("../controllers/PartnerController.js");
+var request = require("../controllers/RequestController.js");
 var loginController = require("../controllers/LoginController.js");
 
 /* GET users listing. */
@@ -30,6 +31,10 @@ router.get('/gerirParceiros',loginController.verifyLoginUser,  function(req, res
 
 router.get('/gerirDoacoes',loginController.verifyLoginUser,  function(req, res, next) {
   donation.management(req,res);
+});
+
+router.get('/gerirPedidos',loginController.verifyLoginUser,  function(req, res, next) {
+  request.management(req,res);
 });
 
 

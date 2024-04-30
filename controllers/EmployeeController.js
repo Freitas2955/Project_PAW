@@ -24,7 +24,6 @@ employeeController.management = function (req, res) {
           res.render("../views/gestaoFuncionarios", {
             employees: employee,
             number: num,
-            nomeDaPessoa: nomeDaPessoa
           });
         })
         .catch((err) => {
@@ -138,14 +137,39 @@ employeeController.update = function (req, res) {
     },
     { new: true }
   )
-    .then((employee) => {
-      res.redirect("/users/gerirFuncionarios" /*+ employee._id*/);
+    .then((savedEmployee) => {
+      console.log("Successfully created an Employee.");
+
+      var fileDestination = path.join(
+        __dirname,
+        "..",
+        "images",
+        "employees",
+        savedEmployee._id.toString() + ".jpg"
+      );
+      fs.readFile(req.file.path, function (err, data) {
+        if (err) {
+          console.error("Error reading file:", err);
+          return res.status(500).send("Error reading file");
+        }
+
+        fs.writeFile(fileDestination, data, function (err) {
+          if (err) {
+            console.error("Error writing file:", err);
+            return res.status(500).send("Error writing file");
+          }
+          fs.unlink(req.file.path, function (err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.redirect("/users/gerirFuncionarios");
+        });
+      });
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/utilizadores/editarfuncionario", {
-        employee: req.body,
-      });
+      res.redirect("/users/gerirFuncionarios");
     });
 };
 
@@ -153,6 +177,29 @@ employeeController.delete = function (req, res) {
   Employee.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Employee detected!");
+      
+      var fileDestination = path.join(
+        __dirname,
+        "..",
+        "images",
+        "employees",
+        req.params.id + ".jpg"
+      );
+
+      fs.access(fileDestination, fs.constants.F_OK, (err) => {
+        if (err) {
+          console.error("O arquivo não existe:", err);
+          return;
+        }
+
+        fs.unlink(fileDestination, (err) => {
+          if (err) {
+            console.error("Erro ao apagar o arquivo:", err);
+            return;
+          }
+          console.log("A imagem foi apagada com sucesso!");
+        });
+      });
       res.redirect("/users/gerirFuncionarios");
     })
     .catch((err) => {

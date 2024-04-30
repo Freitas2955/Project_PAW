@@ -17,11 +17,11 @@
 
                 <div class="content">
                     <h2>Informação Parceiro</h2>
-                    <form action="/partners/update/<%=partner._id%>" method="post">
+                    <form action="/partners/update/<%=partner._id%>" method="post" enctype="multipart/form-data">
                         <div id="formContent">
                             <div id="leftside">
                                 <div id="upload-box">
-                                    <input type="file" id="upload-input" accept="image/*"
+                                    <input type="file" name="file" id="upload-input" accept="image/*" 
                                         onchange="previewImage(event)" />
                                     <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
                                 </div>

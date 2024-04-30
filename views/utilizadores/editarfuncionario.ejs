@@ -15,11 +15,11 @@
             <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
                 <div class="content">
                     <h2>Informação Funcionário</h2>
-                    <form action="/employees/update/<%=employee._id %>" method="post">
+                    <form action="/employees/update/<%=employee._id %>" method="post" enctype="multipart/form-data">
                         <div id="formContent">
                             <div id="leftside">
                                 <div id="upload-box">
-                                    <input type="file" id="upload-input" accept="image/*"
+                                    <input type="file" id="upload-input" name="file" accept="image/*"
                                         onchange="previewImage(event)" />
                                     <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
                                 </div>

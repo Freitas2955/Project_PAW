@@ -1,11 +1,13 @@
 var mongoose = require("mongoose");
 
-var DonationSchema = new mongoose.Schema({
+var Requestchema = new mongoose.Schema({
+  donatorName: String,
   donationId: String,
   address: String,
   postCode: String,
-  status: String,
+  done: Boolean,
+  city: String,
   updated_at: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Donation", DonationSchema);
+module.exports = mongoose.model("Request", Requestchema);

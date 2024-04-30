@@ -18,11 +18,11 @@
 
                     <div class="informacaogeral">
                         <h2>Informação Doador</h2>
-                        <form action="/donators/update/<%=donator._id %>" method="post">
+                        <form action="/donators/update/<%=donator._id %>" method="post" enctype="multipart/form-data">
                             <div id="formContent">
                                 <div id="leftside">
                                     <div id="upload-box">
-                                        <input type="file" id="upload-input" accept="image/*"
+                                        <input type="file" id="upload-input" name="file" accept="image/*"
                                             onchange="previewImage(event)" />
                                         <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
                                     </div>

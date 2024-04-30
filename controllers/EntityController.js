@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Entity = require("../models/Entity");
 var path = require("path");
 var fs = require("fs");
-
+const bcrypt = require("bcryptjs");
 var entityController = {};
 
 mongoose
@@ -65,8 +65,19 @@ entityController.save = function (req, res) {
     console.log('Email inválido.');
     return res.render('../views/entities/create', { error: 'Email inválido' });
   }*/
-
-  var entity = new Entity(req.body);
+  const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  const data = {
+    name: req.body.name,
+    description: req.body.description,
+    address: req.body.address,
+    city: req.body.city,
+    postCode: req.body.postCode,
+    email: req.body.email,
+    password: hashedPassword,
+    phone: req.body.phone,
+    approved: true,
+  };
+  var entity = new Entity(data);
 
   entity
     .save()
@@ -76,7 +87,8 @@ entityController.save = function (req, res) {
       var fileDestination = path.join(
         __dirname,
         "..",
-        "images","entities",
+        "images",
+        "entities",
         savedEntity._id.toString() + ".jpg"
       );
       fs.readFile(req.file.path, function (err, data) {
@@ -114,14 +126,14 @@ entityController.edit = function (req, res) {
       console.log("Error:", err);
     });
 };
-/*
+
 entityController.update = function (req, res) {
   Entity.findByIdAndUpdate(
     req.params.id,
     {
       $set: {
         name: req.body.name,
-        phone:req.body.phone,
+        phone: req.body.phone,
         address: req.body.address,
         description: req.body.description,
         email: req.body.email,
@@ -131,17 +143,44 @@ entityController.update = function (req, res) {
     },
     { new: true }
   )
-    .then((entity) => {
-      res.redirect("/users/gerirInstituicoes" /*+ entity._id*/ /*);
+    .then((savedEntity) => {
+      console.log("Successfully created an entity.");
+
+      var fileDestination = path.join(
+        __dirname,
+        "..",
+        "images",
+        "entities",
+        savedEntity._id.toString() + ".jpg"
+      );
+      fs.readFile(req.file.path, function (err, data) {
+        if (err) {
+          console.error("Error reading file:", err);
+          return res.status(500).send("Error reading file");
+        }
+
+        fs.writeFile(fileDestination, data, function (err) {
+          if (err) {
+            console.error("Error writing file:", err);
+            return res.status(500).send("Error writing file");
+          }
+          fs.unlink(req.file.path, function (err) {
+            if (err) {
+              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+            }
+          });
+          res.redirect("/users/gerirInstituicoes");
+        });
+      });
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/utilizadores/editarinstituicao", { entity: req.body });
+      res.redirect("/users/gerirInstituicoes");
     });
 };
-*/
-//////////////////////////////////////------Nao esta a dar nao sei porque-------------
 
+//////////////////////////////////////------Nao esta a dar nao sei porque-------------
+/*
 entityController.update = function (req, res) {
   // Primeiro, verifique se uma nova imagem foi fornecida na solicitação
   if (req.file) {
@@ -175,9 +214,9 @@ entityController.update = function (req, res) {
     // Se nenhuma nova imagem foi fornecida, apenas atualize os outros campos da entidade
     updateEntity(req, res);
   }
-};
+};*/
 
-function updateEntity(req, res) {
+/*function updateEntity(req, res) {
   Entity.findByIdAndUpdate(
     req.params.id,
     {
@@ -198,7 +237,7 @@ function updateEntity(req, res) {
 
       // Aqui você pode adicionar lógica adicional, se necessário, após a atualização do objeto
 
-      res.redirect("/users/gerirInstituicoes" /*+ updatedEntity._id*/);
+      res.redirect("/users/gerirInstituicoes" /*+ updatedEntity._id);
     })
     .catch((err) => {
       console.error(err);
@@ -206,7 +245,7 @@ function updateEntity(req, res) {
         entity: req.body,
       });
     });
-}
+}*/
 
 ///////////////////////////////////
 
@@ -214,6 +253,29 @@ entityController.delete = function (req, res) {
   Entity.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Entity detected!");
+      
+      var fileDestination = path.join(
+        __dirname,
+        "..",
+        "images",
+        "entities",
+        req.params.id + ".jpg"
+      );
+
+      fs.access(fileDestination, fs.constants.F_OK, (err) => {
+        if (err) {
+          console.error("O arquivo não existe:", err);
+          return;
+        }
+
+        fs.unlink(fileDestination, (err) => {
+          if (err) {
+            console.error("Erro ao apagar o arquivo:", err);
+            return;
+          }
+          console.log("A imagem foi apagada com sucesso!");
+        });
+      });
       res.redirect("/users/gerirInstituicoes");
     })
     .catch((err) => {

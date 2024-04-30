@@ -15,41 +15,52 @@
       <%- include('general/sidebar', { activeItem: 'pagina5' }) -%>
 
         <div class="content">
-          <div class="contentHeader">
-            <h1>Informação Geral</h1>
-            <br /><br />
 
-            <h2>Roupa</h2>
-            <br />
+          <h1>Informação Geral</h1>
 
-            <form action="/points/update/<%=point._id%>" method="post" id="pontosForm">
+          <h2>Roupa</h2>
+
+          <form action="/points/update/<%=point._id%>" method="post" id="pontosForm">
+            <div class="inputContainer">
               <label for="camisola">Pontos por Camisola:</label>
-              <input type="number" id="pontosCamisola" name="camisola" min="0" value="<%= point.camisola %>"/><br /><br />
+              <input type="number" id="pontosCamisola" name="camisola" min="0" value="<%= point.camisola %>" />
+            </div>
 
+            <div class="inputContainer">
               <label for="acessorios">Pontos por Acessorios:</label>
-              <input type="number" id="pontosAcessorios" name="acessorios" min="0" value="<%= point.acessorios %>"/><br /><br />
+              <input type="number" id="pontosAcessorios" name="acessorios" min="0" value="<%= point.acessorios %>" />
+            </div>
 
+            <div class="inputContainer">
               <label for="casaco">Pontos por Casaco:</label>
-              <input type="number" id="pontosCasaco" name="casaco" min="0" value="<%= point.casaco %>"/><br /><br />
+              <input type="number" id="pontosCasaco" name="casaco" min="0" value="<%= point.casaco %>" />
+            </div>
 
+            <div class="inputContainer">
               <label for="calcas">Pontos por Calças:</label>
-              <input type="number" id="pontosCalcas" name="calcas" min="0" value="<%= point.calcas %>"/><br /><br />
+              <input type="number" id="pontosCalcas" name="calcas" min="0" value="<%= point.calcas %>" />
+            </div>
 
+            <div class="inputContainer">
               <label for="sapatos">Pontos por par de Sapatos:</label>
-              <input type="number" id="pontosSapatos" name="sapatos" min="0" value="<%= point.sapatos %>"/><br /><br />
+              <input type="number" id="pontosSapatos" name="sapatos" min="0" value="<%= point.sapatos %>" />
+            </div>
 
+            <div class="inputContainer">
               <label for="roupainterior">Pontos por peça Roupa Interior:</label>
-              <input type="number" id="pontosRoupaInterior" name="roupainterior" min="0" value="<%= point.roupainterior %>"/><br /><br />
+              <input type="number" id="pontosRoupaInterior" name="roupainterior" min="0"
+                value="<%= point.roupainterior %>" />
+            </div>
 
-              <br /><br />
+            <h2>Dinheiro</h2>
 
-              <h2>Dinheiro</h2>
-              <br />
+            <div class="inputContainer">
               <label for="dinheiro">Pontos por cada 5€:</label>
-              <input type="number" id="pontosDinheiro" name="dinheiro" min="0" value="<%= point.dinheiro %>"/><br /><br />
-              <button type="submit">Guardar</button>
-            </form>
-          </div>
+              <input type="number" id="pontosDinheiro" name="dinheiro" min="0" value="<%= point.dinheiro %>" />
+            </div>
+            <button type="submit">Guardar</button>
+          </form>
+
         </div>
     </main>
 </body>
