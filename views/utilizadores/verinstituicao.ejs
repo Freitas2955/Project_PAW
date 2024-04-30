@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Instituição</title>
+    <link rel='stylesheet' href='/stylesheets/utilizadores/registarinstituicao.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <%- include('../general/header') -%>
+        <main>
+            <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
+                <div class="content">
+                    <h2>Informação Instituição</h2>
+                    <form class="informacaogeral" action="/entities/update/<%=entity._id %>" method="post" enctype="multipart/form-data">
+                        <div id="formContent">
+
+                            <div id="leftside">
+                                <div id="upload-box">
+                                    <img src="../imagens/entities/<%=entity.id %>.jpg" alt="Imagem existente">
+                                </div>
+
+                                <div class="inputContainer">
+                                    <label for="description">Descrição:</label>
+                                    <textarea id="description" name="description" rows="4"
+                                    readonly><%=entity.description %></textarea>
+                                </div>
+                            </div>
+
+                            <div id="rightside">
+                                <div class="inputContainer">
+                                    <label for="name">Nome:</label>
+                                    <input type="text" id="name" name="name" value="<%=entity.name %>" readonly>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="phone">Telemóvel:</label>
+                                    <input type="tel" id="phone" name="phone" value="<%=entity.phone %>" readonly>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" value="<%=entity.email %>" readonly>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="address">Morada:</label>
+                                    <input type="text" id="address" name="address" value="<%=entity.address %>"
+                                    readonly>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="postCode">Código-Postal:</label>
+                                    <input type="text" id="postCode" name="postCode" value="<%=entity.postCode %>"
+                                    readonly>
+                                </div>
+                                <div class="inputContainer">
+                                    <label for="city">Cidade:</label>
+                                    <input type="text" id="city" name="city" value="<%=entity.city %>" readonly>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </main>
+
+        <script>
+            function previewImage(event) {
+            const input = event.target;
+            const reader = new FileReader();
+        
+            reader.onload = function() {
+                const imgElement = document.createElement('img');
+                imgElement.src = reader.result;
+                imgElement.style.maxWidth = '100%';
+                imgElement.style.maxHeight = '100%';
+        
+                const previewContainer = document.querySelector('#preview-container');
+                previewContainer.innerHTML = ''; // Limpa qualquer prévia existente
+                previewContainer.appendChild(imgElement);
+            };
+        
+            reader.readAsDataURL(input.files[0]);
+        }
+        </script>
+</body>
+
+</html>
