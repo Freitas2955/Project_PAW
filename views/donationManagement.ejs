@@ -32,28 +32,29 @@
               <th>Doador</th>
               <th>Aprovado</th>
               <th>Pontos</th>
+              <th>Data de Doação</th>
               <th></th>
             </thead>
             <tbody>
               <% donations.forEach(donation=> {%>
                 <tr>
                   <td>
-                    <%=donation.donatorId%>
+                    <%=donation.donatorName%>
                   </td>
                   <td>
-                    <%= donation.approved ? 'sim' : 'não' %>
-                  </td>     
+                    <%=donation.approved ? 'sim' : 'não' %>
+                  </td>
                   <td>
                     <%=donation.points%>
+                  </td>
+                  <td><%=donation.updated_at%></td>
+                  <td>
                   </td>
                   <td style="display: flex; justify-content: center; gap: 1%;">
                     <form action="/donations/delete/<%=donation._id%>" method="post">
                       <button id="delete" type="submit">&#x2715;</button>
                     </form>
-                    <form action="" method="post">
-                      <button id="edit" type="submit">&#x270E;</button>
-                    </form>
-                    <form action="" method="post">
+                    <form action="/donations/show/<%=donation._id%>">
                       <button id="ver" type="submit">&#128462;</button>
                     </form>
                   </td>

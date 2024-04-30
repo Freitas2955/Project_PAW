@@ -50,7 +50,8 @@ employeeController.list = function (req, res) {
 employeeController.show = function (req, res) {
   Employee.findOne({ _id: req.params.id })
     .then((employee) => {
-      res.render("../views/employees/show", { employee: employee });
+      res.render("../views/utilizadores/verfuncionario", { employee: employee ,username: req.session.username,
+        userId: req.session.userId,});
     })
     .catch((err) => {
       console.error("Error:", err);

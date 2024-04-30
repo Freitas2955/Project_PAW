@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <%- include('../general/header') -%>
+    <%- include('../general/header',{username:username, userId:userId}) -%>
         <main>
             <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
 
@@ -22,7 +22,7 @@
                             <div id="leftside">
 
                                 <div id="upload-box">
-                                    <img src="../imagens/entities/<%=entity.id %>.jpg" alt="Imagem existente">
+                                    <img src="../imagens/partners/<%=partner.id %>.jpg" alt="Imagem existente">
                                 </div>
                                 <div class="inputContainer">
                                     <label for="description">Descrição:</label>

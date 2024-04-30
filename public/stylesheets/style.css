@@ -152,7 +152,7 @@ button#exportar {
 
 /*-------------------------------------------*/
   /* Estilos para o modal */
-  .modal {
+  .caixa {
     display: none; /* Por padrão, o modal está oculto */
     position: fixed;
     z-index: 1;
@@ -165,7 +165,7 @@ button#exportar {
   }
   
   /* Estilos para o conteúdo do modal */
-  .modal-content {
+  .caixa-content {
     background-color: #fff;
     margin: 15% auto;
     padding: 20px;

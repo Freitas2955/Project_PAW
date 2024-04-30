@@ -49,7 +49,11 @@ partnerController.list = function (req, res) {
 partnerController.show = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.render("../views/partners/show", { partner: partner });
+      res.render("../views/utilizadores/verparceiro", {
+        partner: partner,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.error("Error:", err);
@@ -57,12 +61,14 @@ partnerController.show = function (req, res) {
 };
 
 partnerController.create = function (req, res) {
-  res.render("../views/partners/create",{username: req.session.username,
-    userId: req.session.userId,});
+  res.render("../views/partners/create", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 };
 
 partnerController.save = function (req, res) {
- // const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  // const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   const data = {
     name: req.body.name,
     address: req.body.address,
@@ -87,7 +93,7 @@ partnerController.save = function (req, res) {
         savedPartner._id.toString() + ".jpg"
       );
       fs.readFile(req.file.path, function (err, data) {
-        console.log(req.file.path)
+        console.log(req.file.path);
         if (err) {
           console.error("Error reading file:", err);
           return res.status(500).send("Error reading file");
@@ -116,8 +122,11 @@ partnerController.save = function (req, res) {
 partnerController.edit = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.render("../views/utilizadores/editarparceiro", { partner: partner,username: req.session.username,
-        userId: req.session.userId, });
+      res.render("../views/utilizadores/editarparceiro", {
+        partner: partner,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -151,7 +160,6 @@ partnerController.update = function (req, res) {
         savedPartner._id.toString() + ".jpg"
       );
       fs.readFile(req.file.path, function (err, data) {
-        
         if (err) {
           console.error("Error reading file:", err);
           return res.status(500).send("Error reading file");
@@ -181,7 +189,7 @@ partnerController.delete = function (req, res) {
   Partner.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Partner detected!");
-      
+
       var fileDestination = path.join(
         __dirname,
         "..",

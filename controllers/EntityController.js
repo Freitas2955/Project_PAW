@@ -50,7 +50,8 @@ entityController.list = function (req, res) {
 entityController.show = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.render("../views/entities/show", { entity: entity });
+      res.render("../views/utilizadores/verinstituicao", { entity: entity,username: req.session.username,
+        userId: req.session.userId, });
     })
     .catch((err) => {
       console.error("Error:", err);

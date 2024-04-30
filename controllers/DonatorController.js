@@ -49,7 +49,8 @@ donatorController.list = function (req, res) {
 donatorController.show = function (req, res) {
   Donator.findOne({ _id: req.params.id })
     .then((donator) => {
-      res.render("../views/donators/show", { donator: donator });
+      res.render("../views/utilizadores/verdoador", { donator: donator,username: req.session.username,
+        userId: req.session.userId, });
     })
     .catch((err) => {
       console.error("Error:", err);
