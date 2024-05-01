@@ -78,7 +78,10 @@
             // Adiciona um evento de escuta para o input da cidade
     document.getElementById('city').addEventListener('input', function() {
         // Converte o valor da cidade para minúsculas
-        this.value = this.value.toLowerCase();
+        var city = this.value.toLowerCase();
+        
+        // Converte a primeira letra para maiúscula e concatena com o restante da string em minúsculas
+        this.value = city.charAt(0).toUpperCase() + city.slice(1);
     });
     
             function previewImage(event) {

@@ -5,12 +5,8 @@ analise das entidades q se registaram
 criar loja dos pontos/vales   
 ver a logica dos parceiros   +/-
 
-Ver inputs por causa dos graficos
-
 css responsivo
-
 relatorio
-
 organizar pastas
 
 botao de pesquisa e de export 
@@ -32,3 +28,9 @@ PROCUPARA NA LUPA
       <input type="number" name="phone" id="phone" placeholder="Procurar por Nº de Telefone"/>
       <button type="submit"><i class="fas fa-search" id="search"></i></button>
     </form>
+
+
+    // Obter uma entidade através do telefone
+router.get('/searchByPhone', function(req, res) {
+  entity.searchByPhone(req, res);
+});
