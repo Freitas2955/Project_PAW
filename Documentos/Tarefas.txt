@@ -14,15 +14,13 @@ imagem da campanha nao da
 
 imagens em algumas interfaces nao dao
 
-no login funcao de ver pass
-
+no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
+ 
 login lembrar me / recuperar pass 
 
 botao de pesquisa e de export 
 
 notificacoes 
-
-scrol nas tabelas
 
 api de mapas para morada(pensar na logica)
 api de pagamentos(pensar na logica)

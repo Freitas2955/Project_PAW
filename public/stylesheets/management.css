@@ -89,3 +89,8 @@ button#novo {
 .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
+
+.tabela-scroll {
+  overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
+  max-height: 500px; /* Define uma altura máxima para a div */
+}
