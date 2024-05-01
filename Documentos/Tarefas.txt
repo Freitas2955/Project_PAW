@@ -9,10 +9,6 @@ falta as imagens nos perfils (editar, criar-responsivo, ver) ---css html-label e
 ver o porque do doadores nao estar a dar as imagens 
 No que tem a descricao tipo intituicao e parceiros nao fica como o suposto
 
-imagem da campanha nao da
-
-imagens em algumas interfaces nao dao
-
 no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
  
 login lembrar me / recuperar pass 
@@ -21,7 +17,19 @@ botao de pesquisa e de export
 
 notificacoes 
 
+Ver inputs por causa dos graficos
+
 api de mapas para morada(pensar na logica)
 api de pagamentos(pensar na logica)
 
 css responsivo
+relatorio
+
+
+
+PROCUPARA NA LUPA
+
+<form action="/entities/searchByPhone" method="get">
+      <input type="number" name="phone" id="phone" placeholder="Procurar por Nº de Telefone"/>
+      <button type="submit"><i class="fas fa-search" id="search"></i></button>
+    </form>

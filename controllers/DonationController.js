@@ -36,8 +36,6 @@ donationController.management = function (req, res) {
               ano;
 
             donation.updated_at = dataFormatada;
-
-            console.log(donation.updated_at);
           });
 
           res.render("../views/donationManagement", {

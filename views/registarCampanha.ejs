@@ -17,6 +17,14 @@
           <h1>Campanha</h1>
           <form id="Form" action="/campaigns/save/<%=partner._id%>/<%=partner.name%>" method="post"> 
             <div class="clothes">
+
+                                <div id="preview-container"></div>
+                                <div id="upload-box">
+                                    <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
+                                    <label for="upload-input" id="upload-label">Escolher imagem</label>
+                                </div>
+
+
                 <div id="upload-box">
                     <input type="file" id="upload-input" name="file" accept="image/*"
                         onchange="previewImage(event)" />

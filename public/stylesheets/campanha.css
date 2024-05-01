@@ -51,7 +51,7 @@
     cursor: pointer;
   }
   
-  /* Estilo do upload-box */
+  /* Estilo do upload-box *//*
   #upload-box {
     border: 2px dashed #ccc;
     border-radius: 5px;
@@ -62,9 +62,57 @@
   
   #upload-input {
     display: none;
+  }*/
+  
+   /*Imagem-------------------------------------------------------*/
+/*
+  #upload-box > input {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    cursor: pointer;
   }
   
-  /* Estilo do preview-container */
+  #upload-box {
+    height: 50%;
+  }*/
+  #upload-container {
+    margin-bottom: 20px;
+}
+
+#upload-input {
+    display: none;
+}
+
+#upload-label {
+    padding: 10px 10px;
+    background-color: #888888;
+    color: white;
+    cursor: pointer;
+}
+
+#preview-container {
+    background-color: #f3f4f6e8;
+    width: 300px;
+    height: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 20%; /* Define o raio das bordas para 50%, transformando a div em um círculo */
+    overflow: hidden; /* Garante que a imagem, quando exibida, seja recortada para o formato do círculo */
+}
+
+#preview-image {
+  width: 100%; /* Certifica-se de que a imagem preencha todo o círculo */
+  height: auto; /* Mantém a proporção da imagem */
+  display: block; /* Garante que a imagem não tenha espaços em branco em torno dela */
+}
+
+
+
+  /*--------------------------------------------------------------------*/
+
+  /* Estilo do preview-container *//*
   #preview-container {
     max-width: 100%;
     max-height: 300px;
@@ -75,4 +123,4 @@
   #preview-container img {
     width: 100%;
     height: auto;
-  }
+  }*/

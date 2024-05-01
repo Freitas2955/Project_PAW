@@ -49,8 +49,19 @@
                     <%=donation.points%>
                   </td>
                   <td>
-                    <%=donation.updated_at%>
-                  </td>
+                    <script>
+                        var originalDate = "<%= donation.updated_at %>";
+                        var formattedDate = new Date(originalDate).toLocaleString('pt-PT', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        document.write(formattedDate);
+                    </script>
+                </td>
+                
                   <td>
                   </td>
                   <td style="display: flex; justify-content: center; gap: 1%;">
