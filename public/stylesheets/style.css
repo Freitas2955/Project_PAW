@@ -5,6 +5,11 @@
   font-family: "Lexend", sans-serif;
 }
 
+table{
+  max-height: 80%;
+  overflow-y: scroll;
+}
+
 body {
   height: 92.5vh;
 }

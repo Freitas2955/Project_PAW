@@ -95,4 +95,13 @@ router.get("/dashboard", function (req, res, next) {
   });
 });
 
+var campaign = require("../controllers/CampaignController.js");
+router.get("/gerirCampanhas", function (req, res, next) {
+  campaign.management(req,res);
+});
+
+router.get("/shop/:donatorId", function (req, res, next) {
+  campaign.shop(req,res);
+});
+
 module.exports = router;

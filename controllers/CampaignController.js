@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Campaign = require("../models/Campaign");
+var Partner = require("../models/Partner");
 const bcrypt = require("bcryptjs");
 var path = require("path");
 var fs = require("fs");
@@ -50,7 +51,7 @@ campaignController.list = function (req, res) {
 campaignController.show = function (req, res) {
   Campaign.findOne({ _id: req.params.id })
     .then((campaign) => {
-      res.render("../views/utilizadores/vercampanha", {
+      res.render("../views/vercampanha", {
         campaign: campaign,
         username: req.session.username,
         userId: req.session.userId,
@@ -62,10 +63,18 @@ campaignController.show = function (req, res) {
 };
 
 campaignController.create = function (req, res) {
-  res.render("../views/registarCampanha", {
-    username: req.session.username,
-    userId: req.session.userId,
-  });
+  Partner.findOne({ _id: req.params.partnerId })
+    .then((partner) => {
+      console.log(partner)
+      res.render("../views/registarCampanha", {
+        username: req.session.username,
+        userId: req.session.userId,
+        partner: partner,
+      });
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+    });
 };
 
 campaignController.save = function (req, res) {
@@ -73,8 +82,8 @@ campaignController.save = function (req, res) {
     name: req.body.name,
     description: req.body.description,
     cost: req.body.cost,
-    partnerId: req.body.partner._id,
-    partnerName: req.body.partner.name,
+    partnerId: req.params.partnerId,
+    partnerName: req.params.partnerName,
   };
   const campaign = new Campaign(data);
 
@@ -112,7 +121,7 @@ campaignController.save = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirCampanhas");
+      res.redirect("/gerirCampanhas");
     });
 };
 

@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var PartnerSchema = new mongoose.Schema({
+var CampaignSchema = new mongoose.Schema({
   name: String,
   description: String,
   cost: Number,

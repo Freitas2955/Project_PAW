@@ -50,8 +50,11 @@ employeeController.list = function (req, res) {
 employeeController.show = function (req, res) {
   Employee.findOne({ _id: req.params.id })
     .then((employee) => {
-      res.render("../views/utilizadores/verfuncionario", { employee: employee ,username: req.session.username,
-        userId: req.session.userId,});
+      res.render("../views/utilizadores/verfuncionario", {
+        employee: employee,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.error("Error:", err);
@@ -59,8 +62,10 @@ employeeController.show = function (req, res) {
 };
 
 employeeController.create = function (req, res) {
-  res.render("../views/employees/create",{username: req.session.username,
-    userId: req.session.userId,});
+  res.render("../views/employees/create", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 };
 
 employeeController.save = function (req, res) {
@@ -74,44 +79,59 @@ employeeController.save = function (req, res) {
     city: req.body.city,
     password: hashedPassword,
   };
-  const employee = new Employee(data);
-
-  employee
-    .save()
-    .then((savedEmployee) => {
-      console.log("Successfully created an Employee.");
-
-      var fileDestination = path.join(
-        __dirname,
-        "..",
-        "images",
-        "employees",
-        savedEmployee._id.toString() + ".jpg"
-      );
-      fs.readFile(req.file.path, function (err, data) {
-        if (err) {
-          console.error("Error reading file:", err);
-          return res.status(500).send("Error reading file");
-        }
-
-        fs.writeFile(fileDestination, data, function (err) {
-          if (err) {
-            console.error("Error writing file:", err);
-            return res.status(500).send("Error writing file");
-          }
-          fs.unlink(req.file.path, function (err) {
+  const employeeSave = new Employee(data);
+  Employee.findOne({ email: req.body.email })
+    .then((employee) => {
+      if (employee) {
+        console.log("funcionario ja existe");
+        res.render("../views/utilizadores/verfuncionario", {
+          employee: employee,
+          username: req.session.username,
+          userId: req.session.userId,
+        });
+      } else {
+        employeeSave
+        .save()
+        .then((savedEmployee) => {
+          console.log("Successfully created an Employee.");
+    
+          var fileDestination = path.join(
+            __dirname,
+            "..",
+            "images",
+            "employees",
+            savedEmployee._id.toString() + ".jpg"
+          );
+          fs.readFile(req.file.path, function (err, data) {
             if (err) {
-              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+              console.error("Error reading file:", err);
+              return res.status(500).send("Error reading file");
             }
+    
+            fs.writeFile(fileDestination, data, function (err) {
+              if (err) {
+                console.error("Error writing file:", err);
+                return res.status(500).send("Error writing file");
+              }
+              fs.unlink(req.file.path, function (err) {
+                if (err) {
+                  console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+                }
+              });
+              res.redirect("/users/gerirFuncionarios");
+            });
           });
+        })
+        .catch((err) => {
+          console.log(err);
           res.redirect("/users/gerirFuncionarios");
         });
-      });
+      }
     })
     .catch((err) => {
-      console.log(err);
-      res.redirect("/users/gerirFuncionarios");
+      console.error("Error:", err);
     });
+ 
 };
 
 employeeController.edit = function (req, res) {
@@ -120,7 +140,7 @@ employeeController.edit = function (req, res) {
       res.render("../views/utilizadores/editarfuncionario", {
         employee: employee,
         username: req.session.username,
-            userId: req.session.userId,
+        userId: req.session.userId,
       });
     })
     .catch((err) => {
@@ -183,7 +203,7 @@ employeeController.delete = function (req, res) {
   Employee.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Employee detected!");
-      
+
       var fileDestination = path.join(
         __dirname,
         "..",

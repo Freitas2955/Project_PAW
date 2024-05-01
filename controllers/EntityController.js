@@ -50,8 +50,11 @@ entityController.list = function (req, res) {
 entityController.show = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.render("../views/utilizadores/verinstituicao", { entity: entity,username: req.session.username,
-        userId: req.session.userId, });
+      res.render("../views/utilizadores/verinstituicao", {
+        entity: entity,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.error("Error:", err);
@@ -59,16 +62,13 @@ entityController.show = function (req, res) {
 };
 
 entityController.create = function (req, res) {
-  res.render("../views/entities/create",{username: req.session.username,
-    userId: req.session.userId,});
+  res.render("../views/entities/create", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 };
 
 entityController.save = function (req, res) {
-  /*
-  if (!isValidEmail(req.body.email)) {
-    console.log('Email inválido.');
-    return res.render('../views/entities/create', { error: 'Email inválido' });
-  }*/
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   const data = {
     name: req.body.name,
@@ -81,51 +81,71 @@ entityController.save = function (req, res) {
     phone: req.body.phone,
     approved: true,
   };
-  var entity = new Entity(data);
-
-  entity
-    .save()
-    .then((savedEntity) => {
-      console.log("Successfully created an entity.");
-
-      var fileDestination = path.join(
-        __dirname,
-        "..",
-        "images",
-        "entities",
-        savedEntity._id.toString() + ".jpg"
-      );
-      fs.readFile(req.file.path, function (err, data) {
-        if (err) {
-          console.error("Error reading file:", err);
-          return res.status(500).send("Error reading file");
-        }
-
-        fs.writeFile(fileDestination, data, function (err) {
-          if (err) {
-            console.error("Error writing file:", err);
-            return res.status(500).send("Error writing file");
-          }
-          fs.unlink(req.file.path, function (err) {
-            if (err) {
-              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
-            }
-          });
-          res.redirect("/users/gerirInstituicoes");
+  var entitySave = new Entity(data);
+  Entity.findOne({ email: req.body.email })
+    .then((entity) => {
+      if (entity) {
+        console.log("Instituicao ja existe");
+        res.render("../views/utilizadores/verinstituicao", {
+          entity: entity,
+          username: req.session.username,
+          userId: req.session.userId,
         });
-      });
+      } else {
+        entitySave
+          .save()
+          .then((savedEntity) => {
+            console.log("Successfully created an entity.");
+
+            var fileDestination = path.join(
+              __dirname,
+              "..",
+              "images",
+              "entities",
+              savedEntity._id.toString() + ".jpg"
+            );
+            fs.readFile(req.file.path, function (err, data) {
+              if (err) {
+                console.error("Error reading file:", err);
+                return res.status(500).send("Error reading file");
+              }
+
+              fs.writeFile(fileDestination, data, function (err) {
+                if (err) {
+                  console.error("Error writing file:", err);
+                  return res.status(500).send("Error writing file");
+                }
+                fs.unlink(req.file.path, function (err) {
+                  if (err) {
+                    console.error(
+                      "Erro ao remover o arquivo da pasta 'tmp':",
+                      err
+                    );
+                  }
+                });
+                res.redirect("/users/gerirInstituicoes");
+              });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.redirect("/users/gerirInstituicoes");
+          });
+      }
     })
     .catch((err) => {
-      console.log(err);
-      res.redirect("/users/gerirInstituicoes");
+      console.error("Error:", err);
     });
 };
 
 entityController.edit = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.render("../views/utilizadores/editarinstituicao", { entity: entity ,username: req.session.username,
-        userId: req.session.userId,});
+      res.render("../views/utilizadores/editarinstituicao", {
+        entity: entity,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);
@@ -258,7 +278,7 @@ entityController.delete = function (req, res) {
   Entity.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Entity detected!");
-      
+
       var fileDestination = path.join(
         __dirname,
         "..",

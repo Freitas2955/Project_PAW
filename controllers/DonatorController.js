@@ -49,8 +49,11 @@ donatorController.list = function (req, res) {
 donatorController.show = function (req, res) {
   Donator.findOne({ _id: req.params.id })
     .then((donator) => {
-      res.render("../views/utilizadores/verdoador", { donator: donator,username: req.session.username,
-        userId: req.session.userId, });
+      res.render("../views/utilizadores/verdoador", {
+        donator: donator,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.error("Error:", err);
@@ -58,8 +61,10 @@ donatorController.show = function (req, res) {
 };
 
 donatorController.create = function (req, res) {
-  res.render("../views/donators/create",{username: req.session.username,
-    userId: req.session.userId,});
+  res.render("../views/donators/create", {
+    username: req.session.username,
+    userId: req.session.userId,
+  });
 };
 
 donatorController.save = function (req, res) {
@@ -72,52 +77,72 @@ donatorController.save = function (req, res) {
     postCode: req.body.postCode,
     city: req.body.city,
     password: hashedPassword,
-    points:0,
+    points: 0,
   };
-  const donator = new Donator(data);
-  donator
-    .save()
-    .then((savedDonator) => {
-      console.log("Successfully created an Donator.");
-
-      var fileDestination = path.join(
-        __dirname,
-        "..",
-        "images",
-        "donators",
-        savedDonator._id.toString() + ".jpg"
-      );
-      fs.readFile(req.file.path, function (err, data) {
-        if (err) {
-          console.error("Error reading file:", err);
-          return res.status(500).send("Error reading file");
-        }
-
-        fs.writeFile(fileDestination, data, function (err) {
-          if (err) {
-            console.error("Error writing file:", err);
-            return res.status(500).send("Error writing file");
-          }
-          fs.unlink(req.file.path, function (err) {
-            if (err) {
-              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
-            }
-          });
-          res.redirect("/users/gerirDoadores");
+  const donatorSave = new Donator(data);
+  Donator.findOne({ email: req.body.email })
+    .then((donator) => {
+      if (donator) {
+        res.render("../views/utilizadores/verdoador", {
+          donator: donator,
+          username: req.session.username,
+          userId: req.session.userId,
         });
-      });
+      } else {
+        donatorSave
+          .save()
+          .then((savedDonator) => {
+            console.log("Successfully created an Donator.");
+
+            var fileDestination = path.join(
+              __dirname,
+              "..",
+              "images",
+              "donators",
+              savedDonator._id.toString() + ".jpg"
+            );
+            fs.readFile(req.file.path, function (err, data) {
+              if (err) {
+                console.error("Error reading file:", err);
+                return res.status(500).send("Error reading file");
+              }
+
+              fs.writeFile(fileDestination, data, function (err) {
+                if (err) {
+                  console.error("Error writing file:", err);
+                  return res.status(500).send("Error writing file");
+                }
+                fs.unlink(req.file.path, function (err) {
+                  if (err) {
+                    console.error(
+                      "Erro ao remover o arquivo da pasta 'tmp':",
+                      err
+                    );
+                  }
+                });
+                res.redirect("/users/gerirDoadores");
+              });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.redirect("/users/gerirDoadores");
+          });
+      }
     })
     .catch((err) => {
-      console.log(err);
-      res.redirect("/users/gerirDoadores");
+      console.error("Error:", err);
     });
 };
 
 donatorController.edit = function (req, res) {
   Donator.findOne({ _id: req.params.id })
     .then((donator) => {
-      res.render("../views/utilizadores/editarDoador", { donator: donator ,username: req.session.username,
-        userId: req.session.userId,});
+      res.render("../views/utilizadores/editarDoador", {
+        donator: donator,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.log("Error:", err);

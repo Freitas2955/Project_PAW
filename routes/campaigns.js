@@ -13,12 +13,12 @@ router.get("/show/:id", function (req, res) {
 });
 
 // Create campaign
-router.get("/create", function (req, res) {
+router.get("/create/:partnerId", function (req, res) {
   campaign.create(req, res);
 });
 
 // Save campaign
-router.post("/save/:id", function (req, res) {
+router.post("/save/:partnerId/:partnerName", function (req, res) {
   campaign.save(req, res);
 });
 

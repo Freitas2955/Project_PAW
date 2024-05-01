@@ -79,43 +79,60 @@ partnerController.save = function (req, res) {
     city: req.body.city,
     //password: hashedPassword,
   };
-  const partner = new Partner(data);
-  partner
-    .save()
-    .then((savedPartner) => {
-      console.log("Successfully created an Partner.");
-
-      var fileDestination = path.join(
-        __dirname,
-        "..",
-        "images",
-        "partners",
-        savedPartner._id.toString() + ".jpg"
-      );
-      fs.readFile(req.file.path, function (err, data) {
-        console.log(req.file.path);
-        if (err) {
-          console.error("Error reading file:", err);
-          return res.status(500).send("Error reading file");
-        }
-
-        fs.writeFile(fileDestination, data, function (err) {
-          if (err) {
-            console.error("Error writing file:", err);
-            return res.status(500).send("Error writing file");
-          }
-          fs.unlink(req.file.path, function (err) {
-            if (err) {
-              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
-            }
-          });
-          res.redirect("/users/gerirParceiros");
+  const partnerSave = new Partner(data);
+  Partner.findOne({ email: req.body.email})
+    .then((partner) => {
+      if (partner) {
+        res.render("../views/utilizadores/verparceiro", {
+          partner: partner,
+          username: req.session.username,
+          userId: req.session.userId,
         });
-      });
+      } else {
+        partnerSave
+          .save()
+          .then((savedPartner) => {
+            console.log("Successfully created an Partner.");
+
+            var fileDestination = path.join(
+              __dirname,
+              "..",
+              "images",
+              "partners",
+              savedPartner._id.toString() + ".jpg"
+            );
+            fs.readFile(req.file.path, function (err, data) {
+              console.log(req.file.path);
+              if (err) {
+                console.error("Error reading file:", err);
+                return res.status(500).send("Error reading file");
+              }
+
+              fs.writeFile(fileDestination, data, function (err) {
+                if (err) {
+                  console.error("Error writing file:", err);
+                  return res.status(500).send("Error writing file");
+                }
+                fs.unlink(req.file.path, function (err) {
+                  if (err) {
+                    console.error(
+                      "Erro ao remover o arquivo da pasta 'tmp':",
+                      err
+                    );
+                  }
+                });
+                res.redirect("/users/gerirParceiros");
+              });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.redirect("/users/gerirParceiros");
+          });
+      }
     })
     .catch((err) => {
-      console.log(err);
-      res.redirect("/users/gerirParceiros");
+      console.error("Error:", err);
     });
 };
 
