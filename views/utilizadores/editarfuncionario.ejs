@@ -18,12 +18,17 @@
                     <form action="/employees/update/<%=employee._id %>" method="post" enctype="multipart/form-data">
                         <div id="formContent">
                             <div id="leftside">
+
+                                <div id="preview-container">
+                                    <img id="preview-image" src="../../images/employees/<%=employee.id %>.jpg" alt="Imagem existente">
+                                </div>
+
                                 <div id="upload-box">
-                                    <input type="file" id="upload-input" name="file" accept="image/*"
-                                        onchange="previewImage(event)" />
-                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
+                                    <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
+                                    <label for="upload-input" id="upload-label">Escolher imagem</label>
                                 </div>
                             </div>
+
                             <div id="rightside">
                                 <div class="inputContainer">
                                     <label for="name">Nome:</label>

@@ -18,12 +18,13 @@
                     <form class="informacaogeral" action="/donators/save" method="post" enctype="multipart/form-data" onsubmit="return validarSenha()">
                         <div id="formContent">
                             <div id="leftside">
-                                <div id="upload-box">
-                                    <input type="file" id="upload-input" name="file" accept="image/*"
-                                        onchange="previewImage(event)" />
-                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
-                                </div>
+
                                 <div id="preview-container"></div>
+                                <div id="upload-box">
+                                    <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
+                                    <label for="upload-input" id="upload-label">Escolher imagem</label>
+                                </div>
+                                
                                 <div id="pass">
                                     <div class="inputContainer">
                                         <label for="password">Password:</label>
@@ -82,22 +83,22 @@
 
         <script>
             function previewImage(event) {
-                const input = event.target;
-                const reader = new FileReader();
-
-                reader.onload = function () {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = reader.result;
-                    imgElement.style.maxWidth = '100%';
-                    imgElement.style.maxHeight = '100%';
-
-                    const previewContainer = document.querySelector('#preview-container');
-                    previewContainer.innerHTML = ''; // Limpa qualquer prévia existente
-                    previewContainer.appendChild(imgElement);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
+            const input = event.target;
+            const reader = new FileReader();
+        
+            reader.onload = function() {
+                const imgElement = document.createElement('img');
+                imgElement.src = reader.result;
+                imgElement.style.maxWidth = '100%';
+                imgElement.style.maxHeight = '100%';
+        
+                const previewContainer = document.querySelector('#preview-container');
+                previewContainer.innerHTML = ''; // Limpa qualquer prévia existente
+                previewContainer.appendChild(imgElement);
+            };
+        
+            reader.readAsDataURL(input.files[0]);
+        }
 
             function validarSenha() {
         var senha = document.getElementById("password").value;

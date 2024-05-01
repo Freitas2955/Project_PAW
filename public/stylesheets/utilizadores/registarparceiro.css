@@ -4,9 +4,10 @@
     height: 80%;
     margin-left: 2%;
   }
-  
+  /*Imagem-------------------------------------------------------*/
+/*
   #upload-box > input {
-    height: 90%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: end;
@@ -15,8 +16,41 @@
   
   #upload-box {
     height: 50%;
-  }
-  
+  }*/
+  #upload-container {
+    margin-bottom: 20px;
+}
+
+#upload-input {
+    display: none;
+}
+
+#upload-label {
+    padding: 10px 10px;
+    background-color: #888888;
+    color: white;
+    cursor: pointer;
+}
+
+#preview-container {
+    background-color: #f3f4f6e8;
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 50%; /* Define o raio das bordas para 50%, transformando a div em um círculo */
+    overflow: hidden; /* Garante que a imagem, quando exibida, seja recortada para o formato do círculo */
+}
+
+#preview-image {
+  width: 100%; /* Certifica-se de que a imagem preencha todo o círculo */
+  height: auto; /* Mantém a proporção da imagem */
+  display: block; /* Garante que a imagem não tenha espaços em branco em torno dela */
+}
+
+
+
+  /*--------------------------------------------------------------------*/
   #leftside {
     display: flex;
     flex-direction: column;

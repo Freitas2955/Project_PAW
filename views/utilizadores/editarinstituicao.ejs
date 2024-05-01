@@ -18,10 +18,14 @@
                     <form class="informacaogeral" action="/entities/update/<%=entity._id %>" method="post" enctype="multipart/form-data">
                         <div id="formContent">
                             <div id="leftside">
+
+                                <div id="preview-container">
+                                    <img id="preview-image" src="../../images/entities/<%=entity.id %>.jpg" alt="Imagem existente">
+                                </div>
+
                                 <div id="upload-box">
-                                    <input type="file" id="upload-input" name="file" accept="image/*"
-                                        onchange="previewImage(event)" />
-                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
+                                    <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
+                                    <label for="upload-input" id="upload-label">Escolher imagem</label>
                                 </div>
                                 <div class="inputContainer">
                                     <label for="description">Descrição:</label>

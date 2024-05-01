@@ -20,11 +20,16 @@
                     <form action="/partners/update/<%=partner._id%>" method="post" enctype="multipart/form-data">
                         <div id="formContent">
                             <div id="leftside">
-                                <div id="upload-box">
-                                    <input type="file" name="file" id="upload-input" accept="image/*" 
-                                        onchange="previewImage(event)" />
-                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
+
+                                <div id="preview-container">
+                                    <img id="preview-image" src="../../images/partners/<%=partner.id %>.jpg" alt="Imagem existente">
                                 </div>
+
+                                <div id="upload-box">
+                                    <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
+                                    <label for="upload-input" id="upload-label">Escolher imagem</label>
+                                </div>
+
                                 <div class="inputContainer">
                                     <label for="description">Descrição:</label>
                                     <textarea id="description" name="description" rows="4"

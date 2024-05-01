@@ -18,10 +18,10 @@
                     <form class="informacaogeral" action="/entities/save" method="post" enctype="multipart/form-data" onsubmit="return validarSenha()">
                         <div id="formContent">
                             <div id="leftside">
+                                <div id="preview-container"></div>
                                 <div id="upload-box">
-                                    <input type="file" id="upload-input" name="file" accept="image/*"
-                                        onchange="previewImage(event)" />
-                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
+                                    <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
+                                    <label for="upload-input" id="upload-label">Escolher imagem</label>
                                 </div>
                                 <div class="inputContainer">
                                     <label for="description">Descrição:</label>

@@ -20,21 +20,12 @@
                             <div id="leftside">
 
 
-
-                                
-
-                                <div id="upload-box">
-                                    <input type="file" id="upload-input" name="file" accept="image/*"
-                                        onchange="previewImage(event)" />
-                                    <p>Clique para fazer upload ou arraste e solte uma imagem aqui</p>
-                                </div>
                                 <div id="preview-container"></div>
-
-
-
-
-
-
+                                <div id="upload-box">
+                                    <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
+                                    <label for="upload-input" id="upload-label">Escolher imagem</label>
+                                </div>
+                                
 
                                 <div id="pass">
                                     <div class="inputContainer">
@@ -93,8 +84,8 @@
             reader.onload = function() {
                 const imgElement = document.createElement('img');
                 imgElement.src = reader.result;
-                imgElement.style.maxWidth = '30%';
-                imgElement.style.maxHeight = '30%';
+                imgElement.style.maxWidth = '100%';
+                imgElement.style.maxHeight = '100%';
         
                 const previewContainer = document.querySelector('#preview-container');
                 previewContainer.innerHTML = ''; // Limpa qualquer prévia existente
