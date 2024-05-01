@@ -12,6 +12,10 @@ router.get("/show/:id", function (req, res) {
   campaign.show(req, res);
 });
 
+router.get("/show/:id/:donatorId", function (req, res) {
+  campaign.buyMenu(req, res);
+});
+
 // Create campaign
 router.get("/create/:partnerId", function (req, res) {
   campaign.create(req, res);

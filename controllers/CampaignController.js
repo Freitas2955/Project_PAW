@@ -13,6 +13,33 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
+  campaignController.shop = function (req, res) {
+    let num;
+  
+    (async () => {
+      try {
+        num = await Campaign.countDocuments({});
+        console.log("Número total de documentos:", num);
+        Campaign.find()
+          .then((campaign) => {
+            res.render("../views/selecionarCampanha", {
+              campaigns: campaign,
+              number: num,
+              username: req.session.username,
+              userId: req.session.userId,
+              donatorId:req.params.donatorId,
+            });
+          })
+          .catch((err) => {
+            console.log("Error:", err);
+          });
+      } catch (error) {
+        console.error("Ocorreu um erro ao contar os documentos:", error);
+      }
+    })();
+  };
+
+
 campaignController.management = function (req, res) {
   let num;
 
@@ -55,6 +82,21 @@ campaignController.show = function (req, res) {
         campaign: campaign,
         username: req.session.username,
         userId: req.session.userId,
+      });
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+    });
+};
+
+campaignController.buyMenu = function (req, res) {
+  Campaign.findOne({ _id: req.params.id })
+    .then((campaign) => {
+      res.render("../views/comprarcampanha", {
+        campaign: campaign,
+        username: req.session.username,
+        userId: req.session.userId,
+        donatorId:DonatorId
       });
     })
     .catch((err) => {
