@@ -5,25 +5,24 @@ analise das entidades q se registaram
 criar loja dos pontos/vales   
 ver a logica dos parceiros   +/-
 
-falta as imagens nos perfils (editar, criar-responsivo, ver) ---css html-label e funcao
-ver o porque do doadores nao estar a dar as imagens 
-No que tem a descricao tipo intituicao e parceiros nao fica como o suposto
+Ver inputs por causa dos graficos
 
-no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
- 
-login lembrar me / recuperar pass 
+css responsivo
+
+relatorio
+
+organizar pastas
 
 botao de pesquisa e de export 
 
+no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
+login lembrar me / recuperar pass 
 notificacoes 
-
-Ver inputs por causa dos graficos
 
 api de mapas para morada(pensar na logica)
 api de pagamentos(pensar na logica)
 
-css responsivo
-relatorio
+
 
 
 
