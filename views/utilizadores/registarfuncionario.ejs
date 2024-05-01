@@ -18,15 +18,11 @@
                     <form class="informacaogeral" action="/employees/save" method="post" enctype="multipart/form-data" onsubmit="return validarSenha()">
                         <div id="formContent">
                             <div id="leftside">
-
-
                                 <div id="preview-container"></div>
                                 <div id="upload-box">
                                     <input type="file" id="upload-input" name="file" accept="image/*" onchange="previewImage(event)" />
                                     <label for="upload-input" id="upload-label">Escolher imagem</label>
                                 </div>
-                                
-
                                 <div id="pass">
                                     <div class="inputContainer">
                                         <label for="password">Password:</label>
@@ -77,6 +73,12 @@
         </main>
 
         <script>
+             // Adiciona um evento de escuta para o input da cidade
+    document.getElementById('city').addEventListener('input', function() {
+        // Converte o valor da cidade para minúsculas
+        this.value = this.value.toLowerCase();
+    });
+
             function previewImage(event) {
             const input = event.target;
             const reader = new FileReader();

@@ -73,6 +73,12 @@
         </main>
 
         <script>
+            // Adiciona um evento de escuta para o input da cidade
+    document.getElementById('city').addEventListener('input', function() {
+        // Converte o valor da cidade para minúsculas
+        this.value = this.value.toLowerCase();
+    });
+    
             function previewImage(event) {
             const input = event.target;
             const reader = new FileReader();
