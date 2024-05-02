@@ -43,6 +43,7 @@
               <th>Doador</th>
               <th>Cidade</th>
               <th>Morada</th>
+              <th>Data</th>
               <th></th>
             </thead>
             <tbody>
@@ -55,10 +56,10 @@
                     <%=request.city%>
                   </td>
                   <td>
-                    <%=request.city%>
+                    <%=request.address%>
                   </td>
                   <td>
-                    <%=request.address%>
+                    <%=request.updated_at%>
                   </td>
                   <td>
                     <form action="/requests/approve/<%= request._id %>" method="post">
