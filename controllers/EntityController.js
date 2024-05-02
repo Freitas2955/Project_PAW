@@ -12,16 +12,41 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-entityController.management = function (req, res) {
+entityController.management1 = function (req, res) {
   let num;
 
   (async () => {
     try {
-      num = await Entity.countDocuments({});
+      num = await Entity.countDocuments({approved:true});
       console.log("Número total de documentos:", num);
-      Entity.find()
+      Entity.find({approved:true})
         .then((entity) => {
-          res.render("../views/gestaoInstituicoes", {
+          res.render("../views/gestaoInstituicoesAprovadas", {
+            entities: entity,
+            number: num,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+entityController.management2 = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      num = await Entity.countDocuments({approved:false});
+      console.log("Número total de documentos:", num);
+      Entity.find({approved:false})
+        .then((entity) => {
+          res.render("../views/gestaoInstituicoesNaoAprovadas", {
             entities: entity,
             number: num,
             username: req.session.username,
@@ -61,6 +86,29 @@ entityController.show = function (req, res) {
     });
 };
 
+entityController.approve = function (req, res) {
+  Entity.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: {
+        approved:true
+      },
+    },
+    { new: true }
+  )
+    .then((entity) => {
+      res.render("../views/utilizadores/verinstituicao", {
+        entity: entity,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect("/users/gerirInstituicoes");
+    });
+};
+
 entityController.create = function (req, res) {
   res.render("../views/entities/create", {
     username: req.session.username,
@@ -79,7 +127,7 @@ entityController.save = function (req, res) {
     email: req.body.email,
     password: hashedPassword,
     phone: req.body.phone,
-    approved: true,
+    approved: false,
   };
   var entitySave = new Entity(data);
   Entity.findOne({ email: req.body.email })

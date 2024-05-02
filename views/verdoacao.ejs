@@ -18,46 +18,63 @@
           <h1>Doação</h1>
 
 
-          <form id="Form" action="" method="post">
-            <h2>Roupa</h2>
-            <div class="clothes">
-              <div class="leftside">
-                <div class="inputContainer">
-                  <label for="Camisola">Camisolas:</label>
-                  <input type="number" id="Camisola" name="camisolas" min="0" value="<%=donation.camisolas %>" readonly><br><br>
-                </div>
-                <div class="inputContainer">
-                  <label for="Casaco">Casacos:</label>
-                  <input type="number" id="Casaco" name="casacos" min="0"value="<%=donation.casacos %>" readonly><br><br>
-                </div>
-                <div class="inputContainer">
-                  <label for="Calcas">Calças:</label>
-                  <input type="number" id="Calcas" name="calcas" min="0"value="<%=donation.calcas %>" readonly><br><br>
-                </div>
+          <h2>Roupa</h2>
+          <div class="clothes">
+            <div class="leftside">
+              <div class="inputContainer">
+                <label for="Camisola">Camisolas:</label>
+                <input type="number" id="Camisola" name="camisolas" min="0" value="<%=donation.camisolas %>"
+                  readonly><br><br>
               </div>
-              <div class="rightside">
-                <div class="inputContainer">
-                  <label for="Sapatos">Par de Sapatos:</label>
-                  <input type="number" id="Sapatos" name="sapatos" min="0"value="<%=donation.sapatos %>" readonly><br><br>
-                </div>
-                <div class="inputContainer">
-                  <label for="Acessorios">Acessorios:</label>
-                  <input type="number" id="Acessorios" name="acessorios" min="0"value="<%=donation.acessorios %>" readonly><br><br>
-                </div>
-                <div class="inputContainer">
-                  <label for="RoupaInterior">Roupa Interior:</label>
-                  <input type="number" id="RoupaInterior" name="interior" min="0"value="<%=donation.interior %>" readonly><br><br>
-                </div>
+              <div class="inputContainer">
+                <label for="Casaco">Casacos:</label>
+                <input type="number" id="Casaco" name="casacos" min="0" value="<%=donation.casacos %>" readonly><br><br>
+              </div>
+              <div class="inputContainer">
+                <label for="Calcas">Calças:</label>
+                <input type="number" id="Calcas" name="calcas" min="0" value="<%=donation.calcas %>" readonly><br><br>
               </div>
             </div>
-            <h2>Dinheiro</h2>
-            <div class="inputContainer" id="money">
-              <label for="Dinheiro">Valor:</label>
-              <input type="number" id="Dinheiro" name="dinheiro" min="0"value="<%=donation.dinheiro %>" readonly><br><br>
+            <div class="rightside">
+              <div class="inputContainer">
+                <label for="Sapatos">Par de Sapatos:</label>
+                <input type="number" id="Sapatos" name="sapatos" min="0" value="<%=donation.sapatos %>"
+                  readonly><br><br>
+              </div>
+              <div class="inputContainer">
+                <label for="Acessorios">Acessorios:</label>
+                <input type="number" id="Acessorios" name="acessorios" min="0" value="<%=donation.acessorios %>"
+                  readonly><br><br>
+              </div>
+              <div class="inputContainer">
+                <label for="RoupaInterior">Roupa Interior:</label>
+                <input type="number" id="RoupaInterior" name="interior" min="0" value="<%=donation.interior %>"
+                  readonly><br><br>
+              </div>
             </div>
-            <form action="">
-              <button type="submit">Criar Pedido de recolha</button>
-            </form>
+          </div>
+          <h2>Dinheiro</h2>
+          <div class="inputContainer" id="money">
+            <label for="Dinheiro">Valor:</label>
+            <input type="number" id="Dinheiro" name="dinheiro" min="0" value="<%=donation.dinheiro %>" readonly><br><br>
+          </div>
+
+          <div class="buttonContainer">
+            <% if (!donation.approved) { %>
+              <form id="Form" action="/requests/save/<%=donation._id%>" method="post">
+                <input type="hidden" name="donatorId" value="<%=donation.donatorId %>">
+                <button type="submit">Criar Pedido de Recolha</button>
+              </form>
+              <form id="Form" action="/donations/approve/<%=donation._id%>" method="post">
+                <input type="hidden" name="donatorId" value="<%=donation.donatorId %>">
+                <button type="submit">Finalizar Doação</button>
+              </form>
+              <% } else { %>
+                
+                <% } %>
+          </div>
+
+
 </body>
 
 </html>

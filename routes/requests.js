@@ -1,44 +1,44 @@
 var express = require("express");
 var router = express.Router();
-var entity = require("../controllers/EntityController.js");
+var request = require("../controllers/RequestController.js");
 
 // Get all entitys
 router.get("/", function (req, res) {
-  entity.list(req, res);
+  request.list(req, res);
 });
 
-// Get single entity by id
+// Get single request by id
 router.get("/show/:id", function (req, res) {
-  entity.show(req, res);
+  request.show(req, res);
 });
 
-// Create entity
+// Create request
 router.get("/create", function (req, res) {
-  entity.create(req, res);
+  request.create(req, res);
 });
 
-// Save entity
-router.post("/save", function (req, res) {
-  entity.save(req, res);
+// Save request
+router.post("/save/:id", function (req, res) {
+  request.save(req, res);
 });
 
-// Edit entity
+// Edit request
 router.get("/edit/:id", function (req, res) {
-  entity.edit(req, res);
+  request.edit(req, res);
 });
 
 // Edit update
 router.post("/update/:id", function (req, res) {
-  entity.update(req, res);
+  request.update(req, res);
 });
 
 // Edit update
 router.post("/delete/:id", function (req, res, next) {
-  entity.delete(req, res);
+  request.delete(req, res);
 });
 
 router.post("/approve/:id", function (req, res, next) {
-  entity.approve(req, res);
+  request.approve(req, res);
 });
 
 module.exports = router;

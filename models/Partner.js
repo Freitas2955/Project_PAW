@@ -9,6 +9,7 @@ var PartnerSchema = new mongoose.Schema({
   description:String,
   email: String,
   password: String,
+  approved: Boolean,
   updated_at: { type: Date, default: Date.now }
 });
 

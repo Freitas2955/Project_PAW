@@ -22,7 +22,11 @@ router.get('/gerirDoadores',loginController.verifyLoginUser,  function(req, res,
 });
 
 router.get('/gerirInstituicoes',loginController.verifyLoginUser,  function(req, res, next) {
-  entity.management(req,res);
+  entity.management1(req,res);
+});
+
+router.get('/gerirInstituicoesN',loginController.verifyLoginUser,  function(req, res, next) {
+  entity.management2(req,res);
 });
 
 router.get('/gerirParceiros',loginController.verifyLoginUser,  function(req, res, next) {
@@ -34,7 +38,11 @@ router.get('/gerirDoacoes',loginController.verifyLoginUser,  function(req, res, 
 });
 
 router.get('/gerirPedidos',loginController.verifyLoginUser,  function(req, res, next) {
-  request.management(req,res);
+  request.management1(req,res);
+});
+
+router.get('/gerirPedidosN',loginController.verifyLoginUser,  function(req, res, next) {
+  request.management2(req,res);
 });
 
 

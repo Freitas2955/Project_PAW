@@ -14,6 +14,10 @@
   align-items: center;
 }
 
+.midbar>#filtros{
+  width: 20%;
+}
+
 nav#filtros {
   padding-bottom: 0.7%;
   border-bottom: 3px solid #f3f4f6;
@@ -94,3 +98,4 @@ button#novo {
   overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
   max-height: 500px; /* Define uma altura máxima para a div */
 }
+

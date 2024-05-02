@@ -96,7 +96,7 @@ campaignController.buyMenu = function (req, res) {
         campaign: campaign,
         username: req.session.username,
         userId: req.session.userId,
-        donatorId:DonatorId
+        donatorId:req.params.donatorId
       });
     })
     .catch((err) => {
@@ -259,7 +259,7 @@ campaignController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/users/gerirCampanhas");
+      res.redirect("/gerirCampanhas");
     })
     .catch((err) => {
       console.log(err);

@@ -78,6 +78,7 @@ partnerController.save = function (req, res) {
     email: req.body.email,
     city: req.body.city,
     //password: hashedPassword,
+    approved:false,
   };
   const partnerSave = new Partner(data);
   Partner.findOne({ email: req.body.email})

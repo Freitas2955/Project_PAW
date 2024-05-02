@@ -12,7 +12,7 @@
 <body>
   <%- include('general/header',{username:username, userId:userId}) -%>
     <main>
-      <%- include('general/sidebar', { activeItem: 'pagina5' }) -%>
+      <%- include('general/sidebar', { activeItem: 'pagina6' }) -%>
 
         <div class="content">
           <div class="contentHeader">
@@ -52,11 +52,6 @@
                   <td>
                     <form action="/campaigns/delete/<%=campaign._id%>" method="post">
                       <button id="delete" type="submit">&#x2715;</button>
-                    </form>
-                    <!--Por o botao de editar-->
-                    <!-- <button style="background-color: green;">&#x2713;</button>-->
-                    <form action="/campaigns/edit/<%=campaign._id%>">
-                      <button type="submit">&#x270E;</button>
                     </form>
                     <form action="/campaigns/show/<%=campaign._id%>/<%=donatorId%>" >
                       <button id="ver" type="submit">&#128462;</button>

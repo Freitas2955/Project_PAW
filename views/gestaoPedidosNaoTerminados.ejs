@@ -24,15 +24,11 @@
                 <img src="../images/download.webp" alt="" height="10" width="10"> Exportar
               </button>
 
-              <div class="dropdown">
-                <button onclick="toggleDropdown()" id="novo">&#x2b; Novo utilizador</button>
-                
-              </div>
             </div>
           </div>
           <nav id="filtros">
-            <a href="/users/gerirFuncionarios" id="current">Aprovados</a>
-            <a href="/users/gerirDoadores">Não Aprovados</a>
+            <a href="/users/gerirPedidos">Terminados</a>
+            <a href="/users/gerirPedidosN" id="current">Não Terminados</a>
           </nav>
 
           <div class="midbar">
@@ -65,13 +61,11 @@
                     <%=request.address%>
                   </td>
                   <td>
+                    <form action="/requests/approve/<%= request._id %>" method="post">
+                      <button id="aprovar" type="submit">&#10003;</button>
+                    </form>
                     <form action="/requests/delete/<%=request._id%>" method="post">
                       <button id="delete" type="submit">&#x2715;</button>
-                    </form>
-                    <!--Por o botao de editar-->
-                    <!-- <button style="background-color: green;">&#x2713;</button>-->
-                    <form action="/requests/edit/<%=request._id%>">
-                      <button type="submit">&#x270E;</button>
                     </form>
                     <form action="/requests/show/<%=request._id%>" >
                       <button id="ver" type="submit">&#128462;</button>

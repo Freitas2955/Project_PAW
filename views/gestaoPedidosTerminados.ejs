@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestão de Doadores</title>
+  <title>Gestão de Pedidos</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/management.css' />
 </head>
@@ -12,11 +12,11 @@
 <body>
   <%- include('general/header',{username:username, userId:userId}) -%>
     <main>
-      <%- include('general/sidebar', { activeItem: 'pagina6' }) -%>
+      <%- include('general/sidebar', { activeItem: 'pagina4'}) -%>
 
         <div class="content">
           <div class="contentHeader">
-            <h1>Campanhas</h1>
+            <h1>Pedidos</h1>
             <div class="botoes">
               <!--<button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button> -->
 
@@ -26,37 +26,45 @@
 
             </div>
           </div>
+          <nav id="filtros">
+            <a href="/users/gerirPedidos" id="current">Terminados</a>
+            <a href="/users/gerirPedidosN">Não Terminados</a>
+          </nav>
+
           <div class="midbar">
-            <p><strong><%=number%></strong> no total</p>
+            <p><strong>
+                <%=number%>
+              </strong> no total</p>
             <input type="text" placeholder="&#128269;  Pesquisa">
           </div>
           <div class="tabela-scroll">
           <table>
             <thead>
-              <th>Nome</th>
-              <th>Custo</th>
-              <th>Nome do parceiro</th>
+              <th>Doador</th>
+              <th>Cidade</th>
+              <th>Morada</th>
               <th></th>
             </thead>
             <tbody>
-              <% campaigns.forEach(campaign=> {%>
+              <% requests.forEach(request=> {%>
                 <tr>
                   <td>
-                    <%=campaign.name%>
+                    <%=request.donatorName%>
                   </td>
                   <td>
-                    <%=campaign.cost%>
+                    <%=request.city%>
                   </td>
                   <td>
-                    <%=campaign.partnerName%>
+                    <%=request.city%>
                   </td>
                   <td>
-                    <form action="/campaigns/delete/<%=campaign._id%>" method="post">
+                    <%=request.address%>
+                  </td>
+                  <td>
+                    <form action="/requests/delete/<%=request._id%>" method="post">
                       <button id="delete" type="submit">&#x2715;</button>
                     </form>
-                    <!--Por o botao de editar-->
-                    <!-- <button style="background-color: green;">&#x2713;</button>-->
-                    <form action="/campaigns/show/<%=campaign._id%>" >
+                    <form action="/requests/show/<%=request._id%>" >
                       <button id="ver" type="submit">&#128462;</button>
                     </form>
                   </td>
@@ -77,6 +85,14 @@
             }
           }
         </script>
+
+        <script>
+          function exportarUtilizadores() {
+
+          }
+        </script>
+
+
     </main>
 </body>
 

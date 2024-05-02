@@ -46,6 +46,7 @@ var donationsRouter = require("./routes/donations");
 var pointsRouter = require("./routes/points");
 var partnersRouter = require("./routes/partners");
 var campaignsRouter = require("./routes/campaigns");
+var requestsRouter = require("./routes/requests");
 const authRouter = require('./routes/auth');
 
 var app = express();
@@ -101,6 +102,7 @@ app.use("/donations", donationsRouter);
 app.use("/points", pointsRouter);
 app.use("/partners", partnersRouter);
 app.use("/campaigns", campaignsRouter);
+app.use("/requests", requestsRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler

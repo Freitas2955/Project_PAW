@@ -43,48 +43,54 @@
           </nav>
 
           <div class="midbar">
-            <p><strong><%=number%> </strong> no total</p>
+            <p><strong>
+                <%=number%>
+              </strong> no total</p>
+            <nav id="filtros">
+              <a href="/users/gerirInstituicoes" id="current">Aprovadas</a>
+              <a href="/users/gerirInstituicoesN">Não Aprovadas</a>
+            </nav>
             <input type="text" placeholder="&#128269;  Pesquisa">
           </div>
           <div class="tabela-scroll">
-          <table>
-            <thead>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Cidade</th>
-              <th>Telemóvel</th>
-              <th></th>
-            </thead>
-            <tbody>
-              <% entities.forEach(entity=> {%>
-                <tr>
-                  <td>
-                    <%=entity.name%>
-                  </td>
-                  <td>
-                    <%=entity.email%>
-                  </td>
-                  <td>
-                    <%=entity.city%>
-                  </td>
-                  <td>
-                    <%=entity.phone%>
-                  </td>
-                  <td>
-                    <form action="/entities/delete/<%=entity._id%>" method="post">
-                      <button id="delete" type="submit">&#x2715;</button>
-                    </form>
-                    <form action="/entities/edit/<%=entity._id%>">
-                      <button type="submit">&#x270E;</button>
-                    </form>
-                    <form action="/entities/show/<%=entity._id%>" >
-                      <button id="ver" type="submit">&#128462;</button>
-                    </form>
-                  </td>
-                </tr>
-                <% });%>
-            </tbody>
-          </table>
+            <table>
+              <thead>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Cidade</th>
+                <th>Telemóvel</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <% entities.forEach(entity=> { %>
+                  <tr>
+                    <td>
+                      <%= entity.name %>
+                    </td>
+                    <td>
+                      <%= entity.email %>
+                    </td>
+                    <td>
+                      <%= entity.city %>
+                    </td>
+                    <td>
+                      <%= entity.phone %>
+                    </td>
+                    <td>
+                      <form action="/entities/delete/<%= entity._id %>" method="post">
+                        <button id="delete" type="submit">&#x2715;</button>
+                      </form>
+                      <form action="/entities/edit/<%= entity._id %>">
+                        <button type="submit">&#x270E;</button>
+                      </form>
+                      <form action="/entities/show/<%= entity._id %>">
+                        <button id="ver" type="submit">&#128462;</button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+            </table>
           </div>
         </div>
 

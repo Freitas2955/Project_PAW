@@ -1,9 +1,19 @@
 Falta gerir pedidos de recolha
 
-analise das entidades q se registaram
+analise das entidades q se registaram acho q esta 
 
-criar loja dos pontos/vales   
-ver a logica dos parceiros   +/-
+criar loja dos pontos/vales   acho q esta   
+ver a logica dos parceiros    acho q esta
+
+css de ver campanha e comprarCampanha e criar campanha
+
+criar html para ver pedido
+
+nao deixar criar pedidos de recolha repetidos (verificar se ja existe na base pedido com aquela doacao)
+
+Ver inputs por causa dos graficos
+
+verificar se o doador tem pontos para comprar
 
 css responsivo
 relatorio
@@ -17,10 +27,6 @@ notificacoes
 
 api de mapas para morada(pensar na logica)
 api de pagamentos(pensar na logica)
-
-
-
-
 
 PROCUPARA NA LUPA
 

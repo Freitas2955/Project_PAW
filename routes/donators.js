@@ -37,4 +37,8 @@ router.post("/delete/:id", function (req, res, next) {
   donator.delete(req, res);
 });
 
+router.get("/buy/:campaignId/:donatorId", function (req, res, next) {
+  donator.buy(req, res);
+});
+
 module.exports = router;

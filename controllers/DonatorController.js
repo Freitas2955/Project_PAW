@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
+var Campaign = require("../models/Campaign");
 var path = require("path");
 var fs = require("fs");
 var donatorController = {};
@@ -54,6 +55,34 @@ donatorController.show = function (req, res) {
         username: req.session.username,
         userId: req.session.userId,
       });
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+    });
+};
+
+donatorController.buy = function (req, res) {
+  Donator.findOne({ _id: req.params.donatorId })
+    .then((donator) => {
+      
+      Campaign.findOne({ _id: req.params.campaignId })
+      .then((campaign) => {
+        Donator.findByIdAndUpdate(
+          req.params.donatorId,
+          {
+            $inc: {
+              points:-campaign.cost
+            },
+          },
+          { new: true }
+        ).then((donator)=>{
+          res.render("../views/utilizadores/verdoador", {
+            donator: donator,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+        })
+      })
     })
     .catch((err) => {
       console.error("Error:", err);

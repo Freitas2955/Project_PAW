@@ -80,7 +80,9 @@
   #upload-container {
     margin-bottom: 20px;
 }
-
+#upload-box{
+  margin-bottom: 2%;
+}
 #upload-input {
     display: none;
 }
