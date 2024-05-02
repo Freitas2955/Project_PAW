@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campanha</title>
+  <link rel='stylesheet' href='/stylesheets/campanha.css' />
+</head>
+
+<body>
+  <%- include('../general/header',{username:username, userId:userId}) -%>
+    <main>
+      <%- include('../general/sidebar', { activeItem: 'pagina6' }) -%>
+
+        <div class="content">
+          <h1>Campanha</h1>
+
+
+          <div class="clothes">
+            <div id="leftside">
+              <div id="preview-container">
+                <img id="preview-image" src="../../images/campaigns/<%=campaign.id %>.jpg" alt="Imagem existente">
+              </div>
+            </div>
+            <div class="leftside">
+              <div class="inputContainer">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="name" value="<%=campaign.name %>" readonly>
+              </div>
+              <div class="inputContainer">
+                <label for="description">Descrição:</label>
+                <p>
+                  <%=campaign.description %>
+                </p>
+              </div>
+            </div>
+            <div class="rightside">
+              <div class="inputContainer">
+                <label for="custo">Custos:</label>
+                <input type="number" id="custo" name="cost" min="0" value="<%=campaign.cost %>" readonly><br><br>
+              </div>
+            </div>
+          </div>
+          <div class="buttonContainer">
+            <form id="Form" action="/campaigns/delete/<%=campaign._id%>" method="post">
+              <button id="delete" type="submit">Apagar</button>
+            </form>
+          </div>
+
+
+          <script>
+            function previewImage(event) {
+              const input = event.target;
+              const reader = new FileReader();
+
+              reader.onload = function () {
+                const imgElement = document.createElement('img');
+                imgElement.src = reader.result;
+                imgElement.style.maxWidth = '100%';
+                imgElement.style.maxHeight = '100%';
+
+                const previewContainer = document.querySelector('#preview-container');
+                previewContainer.innerHTML = ''; // Limpa qualquer prévia existente
+                previewContainer.appendChild(imgElement);
+              };
+
+              reader.readAsDataURL(input.files[0]);
+            }
+          </script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var point = require("../controllers/PointsController.js");
-const authController = require("../controllers/LoginController");
+const loginController = require("../controllers/LoginController");
 /*
 router.get('/',  authController.verifyLoginUser, function(req, res, next) {
   res.render('index', );
@@ -21,17 +21,17 @@ router.get("/pass", function (req, res, next) {
   res.render("login/pass");
 });
 
-router.get("/pontos", function (req, res, next) {
+router.get("/pontos",loginController.verifyLoginUser, function (req, res, next) {
   res.render("pontos", {
     username: req.session.username,
     userId: req.session.userId,
   });
 });
 
-router.get("/doar/:id", function (req, res, next) {
+router.get("/doar/:id",loginController.verifyLoginUser, function (req, res, next) {
   point.simulate(req, res);
 });
-
+/*
 router.get("/registardoador", function (req, res, next) {
   res.render("utilizadores/registardoador", {
     username: req.session.username,
@@ -88,19 +88,21 @@ router.get("/editarparceiro", function (req, res, next) {
   });
 });
 
-router.get("/dashboard", function (req, res, next) {
+var campaign = require("../controllers/CampaignController.js");
+router.get("/gerirCampanhas", function (req, res, next) {
+  campaign.management(req,res);
+});
+*/
+router.get("/dashboard",loginController.verifyLoginUser, function (req, res, next) {
   res.render("dashboard", {
     username: req.session.username,
     userId: req.session.userId,
   });
 });
 
-var campaign = require("../controllers/CampaignController.js");
-router.get("/gerirCampanhas", function (req, res, next) {
-  campaign.management(req,res);
-});
 
-router.get("/shop/:donatorId", function (req, res, next) {
+
+router.get("/shop/:donatorId",loginController.verifyLoginUser, function (req, res, next) {
   campaign.shop(req,res);
 });
 

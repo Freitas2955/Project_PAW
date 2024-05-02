@@ -29,7 +29,7 @@ pointsController.save = function (req, res) {
     })
     .catch((err) => {
       console.error(err);
-      res.render("../pontos",{username: req.session.username,
+      res.render("/pontos",{username: req.session.username,
         userId: req.session.userId,});
     });
 };
@@ -85,7 +85,7 @@ pointsController.simulate = function (req, res) {
   Points.findOne()
     .then((point) => {
       let id = req.params.id;
-      res.render("../views/doar", {
+      res.render("../views/donations/doar", {
         point: point,
         id: id,
         username: req.session.username,

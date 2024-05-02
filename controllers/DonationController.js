@@ -22,7 +22,7 @@ donationController.management = function (req, res) {
       console.log("Número total de documentos:", num);
       Donation.find()
         .then((donation) => {
-          res.render("../views/donationManagement", {
+          res.render("../views/donations/gestaoDoacoes", {
             donations: donation,
             number: num,
             username: req.session.username,
@@ -37,16 +37,16 @@ donationController.management = function (req, res) {
     }
   })();
 };
-
+/*
 donationController.list = function (req, res) {
   Donation.find()
     .then((donation) => {
-      res.redirect("/users/gerirDoacoes");
+      res.redirect("/donations/gerirDoacoes");
     })
     .catch((err) => {
       console.log("Error:", err);
     });
-};
+};*/
 
 donationController.show = function (req, res) {
   Request.findOne({ donationId: req.params.id })
@@ -54,7 +54,7 @@ donationController.show = function (req, res) {
       if (!request) {
         Donation.findOne({ _id: req.params.id })
           .then((donation) => {
-            res.render("../views/verdoacao", {
+            res.render("../views/donations/verdoacao", {
               donation: donation,
               username: req.session.username,
               userId: req.session.userId,
@@ -67,7 +67,7 @@ donationController.show = function (req, res) {
       } else {
         Donation.findOne({ _id: req.params.id })
           .then((donation) => {
-            res.render("../views/verdoacao", {
+            res.render("../views/donations/verdoacao", {
               donation: donation,
               username: req.session.username,
               userId: req.session.userId,
@@ -81,13 +81,13 @@ donationController.show = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirPedidos");
+      res.redirect("/donations/");
     });
 };
-
+/*
 donationController.create = function (req, res) {
-  res.render("../views/donations/create");
-};
+  res.render("../views/donations/reg");
+};*/
 
 donationController.save = function (req, res) {
   Points.findOne().then((point) => {
@@ -146,62 +146,23 @@ donationController.save = function (req, res) {
                   );
                 }
               });
-              res.redirect("/users/gerirDoacoes");
+              res.redirect("/donators/");
             });
           });
         })
         .catch((err) => {
           console.log(err);
-          res.redirect("/users/gerirDoacoes");
+          res.redirect("/donators/");
         });
     });
   });
-};
-
-donationController.edit = function (req, res) {
-  Donation.findOne({ _id: req.params.id })
-    .then((donation) => {
-      res.render("../views/donations/edit", {
-        donation: donation,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
-};
-
-donationController.update = function (req, res) {
-  Donation.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: {
-        name: req.body.name,
-        address: req.body.address,
-        position: req.body.position,
-      },
-    },
-    { new: true }
-  )
-    .then((donation) => {
-      res.redirect("/donations/show/" + donation._id);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.render("../views/donations/edit", {
-        donation: req.body,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
-    });
 };
 
 donationController.delete = function (req, res) {
   Donation.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Donation detected!");
-      res.redirect("/users/gerirDoacoes");
+      res.redirect("/donations/");
     })
     .catch((err) => {
       console.log(err);
@@ -231,16 +192,16 @@ donationController.approve = function (req, res) {
       )
         .then((updatedDonator) => {
           console.log(updatedDonator);
-          res.redirect("/users/gerirDoacoes");
+          res.redirect("/donations");
         })
         .catch((err) => {
           console.log(err);
-          res.status(500).send("Erro interno do servidor");
+          res.redirect("/donations");
         });
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).send("Erro interno do servidor");
+      res.redirect("/donations");
     });
 };
 

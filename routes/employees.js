@@ -1,44 +1,44 @@
 var express = require('express');
 var router = express.Router();
 var employee = require("../controllers/EmployeeController.js");
-
+const loginController = require("../controllers/LoginController");
 // Get all employees
-router.get('/', function(req, res) {
-  employee.list(req, res);
+router.get('/',loginController.verifyLoginUser, function(req, res) {
+  employee.management(req, res);
 });
 
 // Get single employee by id
-router.get('/show/:id', function(req, res) {
+router.get('/show/:id',loginController.verifyLoginUser, function(req, res) {
   employee.show(req, res);
 });
 
 // Create employee
-router.get('/create', function(req, res) {
+router.get('/create',loginController.verifyLoginUser, function(req, res) {
   employee.create(req, res);
 });
 
 // Save employee
-router.post('/save', function(req, res) {
+router.post('/save',loginController.verifyLoginUser, function(req, res) {
   employee.save(req, res);
 });
 
 // Edit employee
-router.get('/edit/:id', function(req, res) {
+router.get('/edit/:id',loginController.verifyLoginUser, function(req, res) {
   employee.edit(req, res);
 });
 
 // Edit update
-router.post('/update/:id', function(req, res) {
+router.post('/update/:id',loginController.verifyLoginUser, function(req, res) {
   employee.update(req, res);
 });
 
 // Edit update
-router.post('/delete/:id', function(req, res, next) {
+router.post('/delete/:id',loginController.verifyLoginUser, function(req, res, next) {
   employee.delete(req, res);
 });
 
 // Obter uma entidade através do telefone
-router.get('/searchByemail', function(req, res) {
+router.get('/searchByemail',loginController.verifyLoginUser, function(req, res) {
   employee.searchByemail(req, res);
 });
 

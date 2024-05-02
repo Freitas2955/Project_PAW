@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Doadores</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/management.css' />
+</head>
+
+<body>
+  <%- include('../general/header',{username:username, userId:userId}) -%>
+    <main>
+      <%- include('../general/sidebar', { activeItem: 'pagina6' }) -%>
+
+        <div class="content">
+          <div class="contentHeader">
+            <h1>Campanhas</h1>
+            <div class="botoes">
+              <!--<button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button> -->
+
+              <button id="exportar" onclick="exportarUtilizadores()">
+                <img src="../../public/images/download.webp" alt="" height="10" width="10"> Exportar
+              </button>
+
+            </div>
+          </div>
+          <div class="midbar">
+            <p><strong><%=number%></strong> no total</p>
+            <input type="text" placeholder="&#128269;  Pesquisa">
+          </div>
+          <table>
+            <thead>
+              <th>Nome</th>
+              <th>Custo</th>
+              <th>Nome do parceiro</th>
+              <th></th>
+            </thead>
+            <tbody>
+              <% campaigns.forEach(campaign=> {%>
+                <tr>
+                  <td>
+                    <%=campaign.name%>
+                  </td>
+                  <td>
+                    <%=campaign.cost%>
+                  </td>
+                  <td>
+                    <%=campaign.partnerName%>
+                  </td>
+                  <td>
+                    <form action="/campaigns/delete/<%=campaign._id%>" method="post">
+                      <button id="delete" type="submit">&#x2715;</button>
+                    </form>
+                    <form action="/campaigns/show/<%=campaign._id%>/<%=donatorId%>" >
+                      <button id="ver" type="submit">&#128462;</button>
+                    </form>
+                  </td>
+                </tr>
+                <% });%>
+            </tbody>
+          </table>
+        </div>
+
+        <script>
+          function toggleDropdown() {
+            var dropdownContent = document.getElementById("dropdownContent");
+            if (dropdownContent.style.display === "none") {
+              dropdownContent.style.display = "block";
+            } else {
+              dropdownContent.style.display = "none";
+            }
+          }
+        </script>
+    </main>
+</body>
+
+</html>

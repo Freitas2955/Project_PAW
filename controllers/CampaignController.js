@@ -22,7 +22,7 @@ mongoose
         console.log("Número total de documentos:", num);
         Campaign.find()
           .then((campaign) => {
-            res.render("../views/selecionarCampanha", {
+            res.render("../views/campaigns/selecionarCampanha", {
               campaigns: campaign,
               number: num,
               username: req.session.username,
@@ -49,7 +49,7 @@ campaignController.management = function (req, res) {
       console.log("Número total de documentos:", num);
       Campaign.find()
         .then((campaign) => {
-          res.render("../views/gestaoCampanhas", {
+          res.render("../views/campaigns/gestaoCampanhas", {
             campaigns: campaign,
             number: num,
             username: req.session.username,
@@ -65,6 +65,7 @@ campaignController.management = function (req, res) {
   })();
 };
 
+/*
 campaignController.list = function (req, res) {
   Campaign.find()
     .then((campaign) => {
@@ -74,11 +75,12 @@ campaignController.list = function (req, res) {
       console.log("Error:", err);
     });
 };
+*/
 
 campaignController.show = function (req, res) {
   Campaign.findOne({ _id: req.params.id })
     .then((campaign) => {
-      res.render("../views/vercampanha", {
+      res.render("../views/campaigns/vercampanha", {
         campaign: campaign,
         username: req.session.username,
         userId: req.session.userId,
@@ -92,7 +94,7 @@ campaignController.show = function (req, res) {
 campaignController.buyMenu = function (req, res) {
   Campaign.findOne({ _id: req.params.id })
     .then((campaign) => {
-      res.render("../views/comprarcampanha", {
+      res.render("../views/campaigns/comprarcampanha", {
         campaign: campaign,
         username: req.session.username,
         userId: req.session.userId,
@@ -108,7 +110,7 @@ campaignController.create = function (req, res) {
   Partner.findOne({ _id: req.params.partnerId })
     .then((partner) => {
       console.log(partner)
-      res.render("../views/registarCampanha", {
+      res.render("../views/campaigns/registarCampanha", {
         username: req.session.username,
         userId: req.session.userId,
         partner: partner,
@@ -157,20 +159,21 @@ campaignController.save = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirCampanhas");
+          res.redirect("/campaigns/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/gerirCampanhas");
+      res.redirect("/campaigns/");
     });
 };
 
+/*
 campaignController.edit = function (req, res) {
   Campaign.findOne({ _id: req.params.id })
     .then((campaign) => {
-      res.render("../views/utilizadores/editarcampanha", {
+      res.render("../views/campaigns/editarcampanha", {
         campaign: campaign,
         username: req.session.username,
         userId: req.session.userId,
@@ -179,7 +182,7 @@ campaignController.edit = function (req, res) {
     .catch((err) => {
       console.log("Error:", err);
     });
-};
+};*/
 
 campaignController.update = function (req, res) {
   Campaign.findByIdAndUpdate(
@@ -222,13 +225,13 @@ campaignController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirCampanhas");
+          res.redirect("/campaigns/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirCampanhas");
+      res.redirect("/campaigns");
     });
 };
 

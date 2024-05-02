@@ -17,11 +17,11 @@ entityController.management1 = function (req, res) {
 
   (async () => {
     try {
-      num = await Entity.countDocuments({approved:true});
+      num = await Entity.countDocuments({ approved: true });
       console.log("Número total de documentos:", num);
-      Entity.find({approved:true})
+      Entity.find({ approved: true })
         .then((entity) => {
-          res.render("../views/gestaoInstituicoesAprovadas", {
+          res.render("../views/entities/gestaoInstituicoesAprovadas", {
             entities: entity,
             number: num,
             username: req.session.username,
@@ -42,11 +42,11 @@ entityController.management2 = function (req, res) {
 
   (async () => {
     try {
-      num = await Entity.countDocuments({approved:false});
+      num = await Entity.countDocuments({ approved: false });
       console.log("Número total de documentos:", num);
-      Entity.find({approved:false})
+      Entity.find({ approved: false })
         .then((entity) => {
-          res.render("../views/gestaoInstituicoesNaoAprovadas", {
+          res.render("../views/entities/gestaoInstituicoesNaoAprovadas", {
             entities: entity,
             number: num,
             username: req.session.username,
@@ -62,6 +62,7 @@ entityController.management2 = function (req, res) {
   })();
 };
 
+/*
 entityController.list = function (req, res) {
   Entity.find()
     .then((entity) => {
@@ -71,11 +72,12 @@ entityController.list = function (req, res) {
       console.log("Error:", err);
     });
 };
+*/
 
 entityController.show = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.render("../views/utilizadores/verinstituicao", {
+      res.render("../views/entities/verinstituicao", {
         entity: entity,
         username: req.session.username,
         userId: req.session.userId,
@@ -91,13 +93,13 @@ entityController.approve = function (req, res) {
     req.params.id,
     {
       $set: {
-        approved:true
+        approved: true,
       },
     },
     { new: true }
   )
     .then((entity) => {
-      res.render("../views/utilizadores/verinstituicao", {
+      res.render("../views/entities/verinstituicao", {
         entity: entity,
         username: req.session.username,
         userId: req.session.userId,
@@ -105,12 +107,12 @@ entityController.approve = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirInstituicoes");
+      res.redirect("/entities/");
     });
 };
 
 entityController.create = function (req, res) {
-  res.render("../views/entities/create", {
+  res.render("../views/entities/registarInstituicao", {
     username: req.session.username,
     userId: req.session.userId,
   });
@@ -134,7 +136,7 @@ entityController.save = function (req, res) {
     .then((entity) => {
       if (entity) {
         console.log("Instituicao ja existe");
-        res.render("../views/utilizadores/verinstituicao", {
+        res.render("../views/entities/verinstituicao", {
           entity: entity,
           username: req.session.username,
           userId: req.session.userId,
@@ -171,13 +173,13 @@ entityController.save = function (req, res) {
                     );
                   }
                 });
-                res.redirect("/users/gerirInstituicoes");
+                res.redirect("/entities/notApproved");
               });
             });
           })
           .catch((err) => {
             console.log(err);
-            res.redirect("/users/gerirInstituicoes");
+            res.redirect("/entities/");
           });
       }
     })
@@ -189,7 +191,7 @@ entityController.save = function (req, res) {
 entityController.edit = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.render("../views/utilizadores/editarinstituicao", {
+      res.render("../views/entities/editarinstituicao", {
         entity: entity,
         username: req.session.username,
         userId: req.session.userId,
@@ -242,85 +244,15 @@ entityController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirInstituicoes");
+          res.redirect("/entities/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirInstituicoes");
+      res.redirect("/entities/");
     });
 };
-
-//////////////////////////////////////------Nao esta a dar nao sei porque-------------
-/*
-entityController.update = function (req, res) {
-  // Primeiro, verifique se uma nova imagem foi fornecida na solicitação
-  if (req.file) {
-    // Se sim, leia o arquivo da nova imagem
-    fs.readFile(req.file.path, function (err, data) {
-      if (err) {
-        console.error("Error reading file:", err);
-        return res.status(500).send("Error reading file");
-      }
-
-      // Determine o caminho para salvar a nova imagem
-      var fileDestination = path.join(
-        __dirname,
-        "..",
-        "images",
-        req.params.id + ".jpg"
-      );
-
-      // Escreva o arquivo da nova imagem
-      fs.writeFile(fileDestination, data, function (err) {
-        if (err) {
-          console.error("Error writing file:", err);
-          return res.status(500).send("Error writing file");
-        }
-
-        // Se a escrita do arquivo for bem-sucedida, atualize os outros campos da entidade
-        updateEntity(req, res);
-      });
-    });
-  } else {
-    // Se nenhuma nova imagem foi fornecida, apenas atualize os outros campos da entidade
-    updateEntity(req, res);
-  }
-};*/
-
-/*function updateEntity(req, res) {
-  Entity.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: {
-        name: req.body.name,
-        phone: req.body.phone,
-        address: req.body.address,
-        description: req.body.description,
-        email: req.body.email,
-        city: req.body.city,
-        postCode: req.body.postCode,
-      },
-    },
-    { new: true }
-  )
-    .then((updatedEntity) => {
-      console.log("Successfully updated an entity.");
-
-      // Aqui você pode adicionar lógica adicional, se necessário, após a atualização do objeto
-
-      res.redirect("/users/gerirInstituicoes" /*+ updatedEntity._id);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.render("../views/utilizadores/editarinstituicao", {
-        entity: req.body,
-      });
-    });
-}*/
-
-///////////////////////////////////
 
 entityController.delete = function (req, res) {
   Entity.deleteOne({ _id: req.params.id })
@@ -349,29 +281,30 @@ entityController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/users/gerirInstituicoes");
+      res.redirect("/entities/");
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-entityController.searchByemail = function(req, res) {
-  (Entity.findOne({email: req.query.email}))
-      .then(entity => {
-          if (!entity) {
-              console.log('Instituicao não encontrada');
-          }
-          res.render("../views/utilizadores/verinstituicao", {
-            entity: entity,
-            username: req.session.username,
-            userId: req.session.userId,
-          });
-      })
-      .catch(err => {
-          console.log("Error:", err);
-          res.status(500).send('Internal Server Error');
-      });
+entityController.searchByemail = function (req, res) {
+  Entity.findOne({ email: req.query.email })
+    .then((entity) => {
+      if (!entity) {
+        console.log("Instituicao não encontrada");
+      } else {
+        res.render("../views/entities/verinstituicao", {
+          entity: entity,
+          username: req.session.username,
+          userId: req.session.userId,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+      res.status(500).send("Internal Server Error");
+    });
 };
 
 module.exports = entityController;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido</title>
+  <link rel='stylesheet' href='/stylesheets/doar.css' />
+</head>
+
+<body>
+  <%- include('../general/header',{username:username, userId:userId}) -%>
+    <main>
+      <%- include('../general/sidebar', { activeItem: 'pagina4' }) -%>
+
+        <div class="content">
+
+          <h1>Pedido</h1>
+          <div class="pedido">
+
+            <div class="leftside">
+              <div class="inputContainer">
+                <label for="name">Nome doador:</label>
+                <input type="name" id="name" name="name" min="0" value="<%=request.donatorName %>"
+                  readonly><br><br>
+              </div>
+              <div class="inputContainer">
+                <label for="address">Morada:</label>
+                <input type="text" id="address" name="address" value="<%=request.address %>"
+                readonly>
+            </div>
+            <div class="rightside">
+                <div class="inputContainer">
+                    <label for="postCode">Código-Postal:</label>
+                    <input type="text" id="postCode" name="postCode" value="<%=request.postCode %>"
+                    readonly>
+                </div>
+                <div class="inputContainer">
+                    <label for="city">Cidade:</label>
+                    <input type="text" id="city" name="city" value="<%=request.city %>" readonly>
+                </div>
+            </div>
+
+          </div>
+        </div>
+</body>
+
+</html>

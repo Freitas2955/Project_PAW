@@ -14,14 +14,13 @@ mongoose
 
 employeeController.management = function (req, res) {
   let num;
-
   (async () => {
     try {
       num = await Employee.countDocuments({});
       console.log("Número total de documentos:", num);
       Employee.find()
         .then((employee) => {
-          res.render("../views/gestaoFuncionarios", {
+          res.render("../views/employees/gestaoFuncionarios", {
             employees: employee,
             number: num,
             username: req.session.username,
@@ -37,6 +36,7 @@ employeeController.management = function (req, res) {
   })();
 };
 
+/*
 employeeController.list = function (req, res) {
   Employee.find()
     .then((employee) => {
@@ -46,11 +46,12 @@ employeeController.list = function (req, res) {
       console.log("Error:", err);
     });
 };
+*/
 
 employeeController.show = function (req, res) {
   Employee.findOne({ _id: req.params.id })
     .then((employee) => {
-      res.render("../views/utilizadores/verfuncionario", {
+      res.render("../views/employees/verfuncionario", {
         employee: employee,
         username: req.session.username,
         userId: req.session.userId,
@@ -62,7 +63,7 @@ employeeController.show = function (req, res) {
 };
 
 employeeController.create = function (req, res) {
-  res.render("../views/employees/create", {
+  res.render("employees/registarfuncionario", {
     username: req.session.username,
     userId: req.session.userId,
   });
@@ -84,60 +85,62 @@ employeeController.save = function (req, res) {
     .then((employee) => {
       if (employee) {
         console.log("funcionario ja existe");
-        res.render("../views/utilizadores/verfuncionario", {
+        res.render("../views/employees/verfuncionario", {
           employee: employee,
           username: req.session.username,
           userId: req.session.userId,
         });
       } else {
         employeeSave
-        .save()
-        .then((savedEmployee) => {
-          console.log("Successfully created an Employee.");
-    
-          var fileDestination = path.join(
-            __dirname,
-            "..",
-            "images",
-            "employees",
-            savedEmployee._id.toString() + ".jpg"
-          );
-          fs.readFile(req.file.path, function (err, data) {
-            if (err) {
-              console.error("Error reading file:", err);
-              return res.status(500).send("Error reading file");
-            }
-    
-            fs.writeFile(fileDestination, data, function (err) {
+          .save()
+          .then((savedEmployee) => {
+            console.log("Successfully created an Employee.");
+
+            var fileDestination = path.join(
+              __dirname,
+              "..",
+              "images",
+              "employees",
+              savedEmployee._id.toString() + ".jpg"
+            );
+            fs.readFile(req.file.path, function (err, data) {
               if (err) {
-                console.error("Error writing file:", err);
-                return res.status(500).send("Error writing file");
+                console.error("Error reading file:", err);
+                return res.status(500).send("Error reading file");
               }
-              fs.unlink(req.file.path, function (err) {
+
+              fs.writeFile(fileDestination, data, function (err) {
                 if (err) {
-                  console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+                  console.error("Error writing file:", err);
+                  return res.status(500).send("Error writing file");
                 }
+                fs.unlink(req.file.path, function (err) {
+                  if (err) {
+                    console.error(
+                      "Erro ao remover o arquivo da pasta 'tmp':",
+                      err
+                    );
+                  }
+                });
+                res.redirect("/employees/");
               });
-              res.redirect("/users/gerirFuncionarios");
             });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.redirect("/employees/");
           });
-        })
-        .catch((err) => {
-          console.log(err);
-          res.redirect("/users/gerirFuncionarios");
-        });
       }
     })
     .catch((err) => {
       console.error("Error:", err);
     });
- 
 };
 
 employeeController.edit = function (req, res) {
   Employee.findOne({ _id: req.params.id })
     .then((employee) => {
-      res.render("../views/utilizadores/editarfuncionario", {
+      res.render("../views/employees/editarfuncionario", {
         employee: employee,
         username: req.session.username,
         userId: req.session.userId,
@@ -189,13 +192,13 @@ employeeController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirFuncionarios");
+          res.redirect("/employees/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirFuncionarios");
+      res.redirect("/employees/");
     });
 };
 
@@ -226,30 +229,28 @@ employeeController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/users/gerirFuncionarios");
+      res.redirect("/employees/");
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-employeeController.searchByemail = function(req, res) {
-  (Employee.findOne({email: req.query.email}))
-      .then(employee => {
-          if (!employee) {
-              console.log('Funcionario não encontrado');
-          }
-          res.render("../views/utilizadores/verfuncionario", {
-            employee: employee,
-            username: req.session.username,
-            userId: req.session.userId,
-          });
-      })
-      .catch(err => {
-          console.log("Error:", err);
-          res.status(500).send('Internal Server Error');
+employeeController.searchByemail = function (req, res) {
+  Employee.findOne({ email: req.query.email })
+    .then((employee) => {
+      if (!employee) {
+        console.log("Funcionario não encontrado");
+      }
+      res.render("../views/employees/verfuncionario", {
+        employee: employee,
+        username: req.session.username,
+        userId: req.session.userId,
       });
+    })
+    .catch((err) => {
+      res.redirect("/employees/");
+    });
 };
-
 
 module.exports = employeeController;

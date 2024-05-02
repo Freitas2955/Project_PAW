@@ -13,14 +13,13 @@ mongoose
 
 partnerController.management = function (req, res) {
   let num;
-
   (async () => {
     try {
       num = await Partner.countDocuments({});
       console.log("Número total de documentos:", num);
       Partner.find()
         .then((partner) => {
-          res.render("../views/gestaoParceiros", {
+          res.render("../views/partners/gestaoParceiros", {
             partners: partner,
             number: num,
             username: req.session.username,
@@ -36,6 +35,7 @@ partnerController.management = function (req, res) {
   })();
 };
 
+/*
 partnerController.list = function (req, res) {
   Partner.find()
     .then((partner) => {
@@ -44,12 +44,12 @@ partnerController.list = function (req, res) {
     .catch((err) => {
       console.log("Error:", err);
     });
-};
+};*/
 
 partnerController.show = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.render("../views/utilizadores/verparceiro", {
+      res.render("../views/partners/verparceiro", {
         partner: partner,
         username: req.session.username,
         userId: req.session.userId,
@@ -61,7 +61,7 @@ partnerController.show = function (req, res) {
 };
 
 partnerController.create = function (req, res) {
-  res.render("../views/partners/create", {
+  res.render("../views/partners/registarparceiro", {
     username: req.session.username,
     userId: req.session.userId,
   });
@@ -78,13 +78,13 @@ partnerController.save = function (req, res) {
     email: req.body.email,
     city: req.body.city,
     //password: hashedPassword,
-    approved:false,
+    approved: false,
   };
   const partnerSave = new Partner(data);
-  Partner.findOne({ email: req.body.email})
+  Partner.findOne({ email: req.body.email })
     .then((partner) => {
       if (partner) {
-        res.render("../views/utilizadores/verparceiro", {
+        res.render("../views/partners/verparceiro", {
           partner: partner,
           username: req.session.username,
           userId: req.session.userId,
@@ -122,13 +122,13 @@ partnerController.save = function (req, res) {
                     );
                   }
                 });
-                res.redirect("/users/gerirParceiros");
+                res.redirect("/partners/");
               });
             });
           })
           .catch((err) => {
             console.log(err);
-            res.redirect("/users/gerirParceiros");
+            res.redirect("/partners/");
           });
       }
     })
@@ -140,7 +140,7 @@ partnerController.save = function (req, res) {
 partnerController.edit = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.render("../views/utilizadores/editarparceiro", {
+      res.render("../views/partners/editarparceiro", {
         partner: partner,
         username: req.session.username,
         userId: req.session.userId,
@@ -193,13 +193,13 @@ partnerController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirParceiros");
+          res.redirect("/partners/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirParceiros");
+      res.redirect("/partners/");
     });
 };
 
@@ -230,29 +230,30 @@ partnerController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/users/gerirParceiros");
+      res.redirect("/partners/");
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-partnerController.searchByemail = function(req, res) {
-  (Partner.findOne({email: req.query.email}))
-      .then(partner => {
-          if (!partner) {
-              console.log('Parceiro não encontrado');
-          }
-          res.render("../views/utilizadores/verparceiro", {
-            partner: partner,
-            username: req.session.username,
-            userId: req.session.userId,
-          });
-      })
-      .catch(err => {
-          console.log("Error:", err);
-          res.status(500).send('Internal Server Error');
-      });
+partnerController.searchByemail = function (req, res) {
+  Partner.findOne({ email: req.query.email })
+    .then((partner) => {
+      if (!partner) {
+        console.log("Parceiro não encontrado");
+      } else {
+        res.render("../views/partners/verparceiro", {
+          partner: partner,
+          username: req.session.username,
+          userId: req.session.userId,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+      res.status(500).send("Internal Server Error");
+    });
 };
 
 module.exports = partnerController;

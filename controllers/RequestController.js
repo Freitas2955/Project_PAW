@@ -23,7 +23,7 @@ requestController.management1 = function (req, res) {
       Request.find({ done: true })
         .then((request) => {
           console.log(req.session.userId);
-          res.render("../views/gestaoPedidosTerminados", {
+          res.render("../views/requests/gestaoPedidosTerminados", {
             requests: request,
             number: num,
             username: req.session.username,
@@ -49,7 +49,7 @@ requestController.management2 = function (req, res) {
       Request.find({ done: false })
         .then((request) => {
           console.log(req.session.userId);
-          res.render("../views/gestaoPedidosNaoTerminados", {
+          res.render("../views/requests/gestaoPedidosNaoTerminados", {
             requests: request,
             number: num,
             username: req.session.username,
@@ -80,7 +80,7 @@ requestController.list = function (req, res) {
 requestController.show = function (req, res) {
   Request.findOne({ _id: req.params.id })
     .then((request) => {
-      res.render("../views/verpedido", {
+      res.render("../views/requests/verpedido", {
         request: request,
         username: req.session.username,
         userId: req.session.userId,
@@ -120,12 +120,12 @@ requestController.save = function (req, res) {
         });
       } else {
         console.log("Ja existe!");
-        res.redirect("/users/gerirPedidos");
+        res.redirect("/requests/naoTerminados");
       }
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirPedidos");
+      res.redirect("/requests/");
     });
 };
 /*
@@ -174,7 +174,7 @@ requestController.delete = function (req, res) {
   Request.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Request detected!");
-      res.redirect("/users/gerirPedidos");
+      res.redirect("/requests/");
     })
     .catch((err) => {
       console.log(err);
@@ -196,7 +196,7 @@ requestController.approve = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirPedidos");
+      res.redirect("/requests/");
     });
 };
 

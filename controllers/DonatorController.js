@@ -21,7 +21,7 @@ donatorController.management = function (req, res) {
       console.log("Número total de documentos:", num);
       Donator.find()
         .then((donator) => {
-          res.render("../views/gestaoDoadores", {
+          res.render("../views/donators/gestaoDoadores", {
             donators: donator,
             number: num,
             username: req.session.username,
@@ -37,6 +37,7 @@ donatorController.management = function (req, res) {
   })();
 };
 
+/*
 donatorController.list = function (req, res) {
   Donator.find()
     .then((donator) => {
@@ -45,12 +46,12 @@ donatorController.list = function (req, res) {
     .catch((err) => {
       console.log("Error:", err);
     });
-};
+};*/
 
 donatorController.show = function (req, res) {
   Donator.findOne({ _id: req.params.id })
     .then((donator) => {
-      res.render("../views/utilizadores/verdoador", {
+      res.render("../views/donators/verdoador", {
         donator: donator,
         username: req.session.username,
         userId: req.session.userId,
@@ -75,7 +76,7 @@ donatorController.buy = function (req, res) {
             },
             { new: true }
           ).then((donator) => {
-            res.render("../views/utilizadores/verdoador", {
+            res.render("../views/donators/verdoador", {
               donator: donator,
               username: req.session.username,
               userId: req.session.userId,
@@ -96,7 +97,7 @@ donatorController.buy = function (req, res) {
 };
 
 donatorController.create = function (req, res) {
-  res.render("../views/donators/create", {
+  res.render("../views/donators/registarDoador", {
     username: req.session.username,
     userId: req.session.userId,
   });
@@ -118,7 +119,7 @@ donatorController.save = function (req, res) {
   Donator.findOne({ email: req.body.email })
     .then((donator) => {
       if (donator) {
-        res.render("../views/utilizadores/verdoador", {
+        res.render("../views/donators/verdoador", {
           donator: donator,
           username: req.session.username,
           userId: req.session.userId,
@@ -155,13 +156,13 @@ donatorController.save = function (req, res) {
                     );
                   }
                 });
-                res.redirect("/users/gerirDoadores");
+                res.redirect("/donators/");
               });
             });
           })
           .catch((err) => {
             console.log(err);
-            res.redirect("/users/gerirDoadores");
+            res.redirect("/donators/");
           });
       }
     })
@@ -173,7 +174,7 @@ donatorController.save = function (req, res) {
 donatorController.edit = function (req, res) {
   Donator.findOne({ _id: req.params.id })
     .then((donator) => {
-      res.render("../views/utilizadores/editarDoador", {
+      res.render("../views/donators/editarDoador", {
         donator: donator,
         username: req.session.username,
         userId: req.session.userId,
@@ -225,13 +226,13 @@ donatorController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/users/gerirDoadores");
+          res.redirect("/donators/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/users/gerirDoadores");
+      res.redirect("/donators/");
     });
 };
 
@@ -262,7 +263,7 @@ donatorController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/users/gerirDoadores");
+      res.redirect("/donators/");
     })
     .catch((err) => {
       console.log(err);
@@ -274,12 +275,13 @@ donatorController.searchByemail = function (req, res) {
     .then((donator) => {
       if (!donator) {
         console.log("Doador não encontrado");
+      } else {
+        res.render("../views/donators/verdoador", {
+          donator: donator,
+          username: req.session.username,
+          userId: req.session.userId,
+        });
       }
-      res.render("../views/utilizadores/verdoador", {
-        donator: donator,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
     })
     .catch((err) => {
       console.log("Error:", err);
