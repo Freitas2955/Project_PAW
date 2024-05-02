@@ -18,10 +18,26 @@ requestController.management1 = function (req, res) {
 
   (async () => {
     try {
-      num = await Request.countDocuments({done:true});
+      num = await Request.countDocuments({ done: true });
       console.log("Número total de documentos:", num);
-      Request.find({done:true})
+      Request.find({ done: true })
         .then((request) => {
+          request.forEach(function (request) {
+            var dataOriginal = new Date(request.updated_at);
+
+            var dia = dataOriginal.getDate();
+            var mes = dataOriginal.getMonth() + 1; // Os meses são baseados em zero, então adicionamos 1
+            var ano = dataOriginal.getFullYear();
+
+            var dataFormatada =
+              dia.toString().padStart(2, "0") +
+              "/" +
+              mes.toString().padStart(2, "0") +
+              "/" +
+              ano;
+
+            request.updated_at = dataFormatada;
+          });
           console.log(req.session.userId);
           res.render("../views/gestaoPedidosTerminados", {
             requests: request,
@@ -39,16 +55,31 @@ requestController.management1 = function (req, res) {
   })();
 };
 
-
 requestController.management2 = function (req, res) {
   let num;
 
   (async () => {
     try {
-      num = await Request.countDocuments({done:false});
+      num = await Request.countDocuments({ done: false });
       console.log("Número total de documentos:", num);
-      Request.find({done:false})
+      Request.find({ done: false })
         .then((request) => {
+          request.forEach(function (request) {
+            var dataOriginal = new Date(request.updated_at);
+
+            var dia = dataOriginal.getDate();
+            var mes = dataOriginal.getMonth() + 1; // Os meses são baseados em zero, então adicionamos 1
+            var ano = dataOriginal.getFullYear();
+
+            var dataFormatada =
+              dia.toString().padStart(2, "0") +
+              "/" +
+              mes.toString().padStart(2, "0") +
+              "/" +
+              ano;
+
+            request.updated_at = dataFormatada;
+          });
           console.log(req.session.userId);
           res.render("../views/gestaoPedidosNaoTerminados", {
             requests: request,
@@ -65,7 +96,6 @@ requestController.management2 = function (req, res) {
     }
   })();
 };
-
 
 /*
 requestController.list = function (req, res) {
@@ -179,13 +209,13 @@ requestController.approve = function (req, res) {
     req.params.id,
     {
       $set: {
-        done:true
+        done: true,
       },
     },
     { new: true }
   )
     .then((request) => {
-      res.redirect("/donations/show/"+request.donationId);
+      res.redirect("/donations/show/" + request.donationId);
     })
     .catch((err) => {
       console.log(err);
