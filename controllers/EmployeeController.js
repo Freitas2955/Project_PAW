@@ -233,4 +233,24 @@ employeeController.delete = function (req, res) {
     });
 };
 
+employeeController.searchByPhone = function(req, res) {
+  (Employee.findOne({phone: req.query.phone}))
+      .then(employee => {
+          if (!employee) {
+              console.log('Funcionario não encontrado');
+          }
+          console.log(employee);
+          res.render("../views/utilizadores/verfuncionario", {
+            employee: employee,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+      })
+      .catch(err => {
+          console.log("Error:", err);
+          res.status(500).send('Internal Server Error');
+      });
+};
+
+
 module.exports = employeeController;

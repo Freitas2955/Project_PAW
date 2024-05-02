@@ -37,4 +37,9 @@ router.post('/delete/:id', function(req, res, next) {
   employee.delete(req, res);
 });
 
+// Obter uma entidade através do telefone
+router.get('/searchByPhone', function(req, res) {
+  employee.searchByPhone(req, res);
+});
+
 module.exports = router;
