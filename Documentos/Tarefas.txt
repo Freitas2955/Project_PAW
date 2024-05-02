@@ -1,14 +1,13 @@
-css de ver campanha e comprarCampanha e criar campanha
-
-criar html para ver pedido
-
-nao deixar criar pedidos de recolha repetidos (verificar se ja existe na base pedido com aquela doacao)
+css verpedido
 
 verificar se o doador tem pontos para comprar
 
 css responsivo
 relatorio
 organizar pastas
+
+
+
 
 botao de export 
 botao de pesquisa falta(Doacoes, pedidos, campanhas)
