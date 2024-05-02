@@ -8,6 +8,9 @@ organizar pastas
 
 botao de export 
 botao de pesquisa falta(Doacoes, pedidos, campanhas)
+PARA ISSO criar no controller uma nova funcao managemnte onde ele procuro na base de dados apenas os funcionarios por exemplo com dado 
+numero de telemovel 
+
 
 no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
 login lembrar me / recuperar pass 
