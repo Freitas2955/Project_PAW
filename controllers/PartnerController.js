@@ -237,4 +237,22 @@ partnerController.delete = function (req, res) {
     });
 };
 
+partnerController.searchByemail = function(req, res) {
+  (Partner.findOne({email: req.query.email}))
+      .then(partner => {
+          if (!partner) {
+              console.log('Parceiro não encontrado');
+          }
+          res.render("../views/utilizadores/verparceiro", {
+            partner: partner,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+      })
+      .catch(err => {
+          console.log("Error:", err);
+          res.status(500).send('Internal Server Error');
+      });
+};
+
 module.exports = partnerController;

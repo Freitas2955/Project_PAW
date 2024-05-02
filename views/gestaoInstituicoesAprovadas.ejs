@@ -50,7 +50,13 @@
               <a href="/users/gerirInstituicoes" id="current">Aprovadas</a>
               <a href="/users/gerirInstituicoesN">Não Aprovadas</a>
             </nav>
-            <input type="text" placeholder="&#128269;  Pesquisa">
+
+            <form action="/entities/searchByemail" method="get">
+              <input type="text" name="email" placeholder="&#128269; Pesquisa email">
+              <button type="submit">
+                  <i class="fas fa-search" id="search"></i>
+              </button>
+          </form>
           </div>
           <div class="tabela-scroll">
             <table>

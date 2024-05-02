@@ -1,17 +1,10 @@
-Falta gerir pedidos de recolha
-
-analise das entidades q se registaram acho q esta 
-
-criar loja dos pontos/vales   acho q esta   
-ver a logica dos parceiros    acho q esta
-
 css de ver campanha e comprarCampanha e criar campanha
 
 criar html para ver pedido
 
 nao deixar criar pedidos de recolha repetidos (verificar se ja existe na base pedido com aquela doacao)
 
-Ver inputs por causa dos graficos
+data nos pedidos
 
 verificar se o doador tem pontos para comprar
 
@@ -19,7 +12,8 @@ css responsivo
 relatorio
 organizar pastas
 
-botao de pesquisa e de export 
+botao de export 
+botao de pesquisa falta(Doacoes, pedidos, campanhas)
 
 no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
 login lembrar me / recuperar pass 
@@ -27,20 +21,3 @@ notificacoes
 
 api de mapas para morada(pensar na logica)
 api de pagamentos(pensar na logica)
-
-
-
-
-
-PROCUPARA NA LUPA
-
-<form action="/entities/searchByPhone" method="get">
-      <input type="number" name="phone" id="phone" placeholder="Procurar por Nº de Telefone"/>
-      <button type="submit"><i class="fas fa-search" id="search"></i></button>
-    </form>
-
-
-    // Obter uma entidade através do telefone
-router.get('/searchByPhone', function(req, res) {
-  entity.searchByPhone(req, res);
-});

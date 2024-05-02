@@ -37,4 +37,9 @@ router.post("/delete/:id", function (req, res, next) {
   partner.delete(req, res);
 });
 
+// Obter uma entidade através do telefone
+router.get('/searchByemail', function(req, res) {
+  partner.searchByemail(req, res);
+});
+
 module.exports = router;

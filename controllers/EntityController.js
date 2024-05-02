@@ -356,4 +356,22 @@ entityController.delete = function (req, res) {
     });
 };
 
+entityController.searchByemail = function(req, res) {
+  (Entity.findOne({email: req.query.email}))
+      .then(entity => {
+          if (!entity) {
+              console.log('Instituicao não encontrada');
+          }
+          res.render("../views/utilizadores/verinstituicao", {
+            entity: entity,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+      })
+      .catch(err => {
+          console.log("Error:", err);
+          res.status(500).send('Internal Server Error');
+      });
+};
+
 module.exports = entityController;

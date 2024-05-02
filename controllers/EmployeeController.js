@@ -233,13 +233,12 @@ employeeController.delete = function (req, res) {
     });
 };
 
-employeeController.searchByPhone = function(req, res) {
-  (Employee.findOne({phone: req.query.phone}))
+employeeController.searchByemail = function(req, res) {
+  (Employee.findOne({email: req.query.email}))
       .then(employee => {
           if (!employee) {
               console.log('Funcionario não encontrado');
           }
-          console.log(employee);
           res.render("../views/utilizadores/verfuncionario", {
             employee: employee,
             username: req.session.username,

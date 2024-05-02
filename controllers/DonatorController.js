@@ -263,4 +263,22 @@ donatorController.delete = function (req, res) {
     });
 };
 
+donatorController.searchByemail = function(req, res) {
+  (Donator.findOne({email: req.query.email}))
+      .then(donator => {
+          if (!donator) {
+              console.log('Doador não encontrado');
+          }
+          res.render("../views/utilizadores/verdoador", {
+            donator: donator,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+      })
+      .catch(err => {
+          console.log("Error:", err);
+          res.status(500).send('Internal Server Error');
+      });
+};
+
 module.exports = donatorController;

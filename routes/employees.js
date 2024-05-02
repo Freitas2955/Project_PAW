@@ -38,8 +38,8 @@ router.post('/delete/:id', function(req, res, next) {
 });
 
 // Obter uma entidade através do telefone
-router.get('/searchByPhone', function(req, res) {
-  employee.searchByPhone(req, res);
+router.get('/searchByemail', function(req, res) {
+  employee.searchByemail(req, res);
 });
 
 module.exports = router;

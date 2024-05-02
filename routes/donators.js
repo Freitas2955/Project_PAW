@@ -41,4 +41,9 @@ router.get("/buy/:campaignId/:donatorId", function (req, res, next) {
   donator.buy(req, res);
 });
 
+// Obter uma entidade através do telefone
+router.get('/searchByemail', function(req, res) {
+  donator.searchByemail(req, res);
+});
+
 module.exports = router;

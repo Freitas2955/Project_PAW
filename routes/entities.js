@@ -41,4 +41,9 @@ router.post("/approve/:id", function (req, res, next) {
   entity.approve(req, res);
 });
 
+// Obter uma entidade através do telefone
+router.get('/searchByemail', function(req, res) {
+  entity.searchByemail(req, res);
+});
+
 module.exports = router;
