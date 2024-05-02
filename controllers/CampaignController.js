@@ -262,7 +262,7 @@ campaignController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/gerirCampanhas");
+      res.redirect("/campaigns/");
     })
     .catch((err) => {
       console.log(err);

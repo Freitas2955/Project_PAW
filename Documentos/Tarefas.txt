@@ -9,7 +9,7 @@ Nos pedidos nao terminados ter opcao de aprovar e elimnar dentro do verpedido e 
 
 css responsivo
 relatorio
-organizar pastas
+organizar pastas feito
 
 botao de export 
 botao de pesquisa falta(Doacoes, pedidos, campanhas)
