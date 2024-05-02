@@ -37,7 +37,7 @@ router.post('/delete/:id',loginController.verifyLoginUser, function(req, res, ne
   employee.delete(req, res);
 });
 
-// Obter uma entidade através do telefone
+// Obter uma entidade através do email
 router.get('/searchByemail',loginController.verifyLoginUser, function(req, res) {
   employee.searchByemail(req, res);
 });

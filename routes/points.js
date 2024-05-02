@@ -6,16 +6,18 @@ const loginController = require("../controllers/LoginController");
 router.get("/",loginController.verifyLoginUser, function (req, res) {
     point.edit(req, res);
 });
-
+/*
 // Save donation
 router.post("/save",loginController.verifyLoginUser, function (req, res) {
     point.save(req, res);
 });
 
+
 // Edit donation
 router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
     point.edit(req, res);
 });
+*/
 
 // Edit update
 router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {

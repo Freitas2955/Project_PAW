@@ -1,3 +1,5 @@
+por models no relatorio
+
 css ver pedido
 
 verificar se o doador tem pontos para comprar- ja n deixa n sei q mensagem mostrar

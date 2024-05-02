@@ -32,6 +32,7 @@ router.get("/pontos",loginController.verifyLoginUser, function (req, res, next) 
 router.get("/doar/:id",loginController.verifyLoginUser, function (req, res, next) {
   point.simulate(req, res);
 });
+
 /*
 router.get("/registardoador", function (req, res, next) {
   res.render("utilizadores/registardoador", {

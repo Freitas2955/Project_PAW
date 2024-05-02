@@ -1,13 +1,14 @@
+/*
 var express = require('express');
 const fileUploaderController = require('../controller/fileUploadController')
 var router = express.Router();
 
-/* GET home page. */
+//GET home page. 
 router.get('/file', function(req, res) {
   res.render('fileForm');
 });
 
-/* GET home page. */
+// GET home page. 
 router.get('/file_and_data', function(req, res) {
   res.render('fileAndDataForm');
 });
@@ -21,3 +22,4 @@ router.post('/file_and_data_upload', function(req, res) {
 });
 
 module.exports = router;
+*/

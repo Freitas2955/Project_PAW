@@ -16,16 +16,19 @@ router.get("/show/:id",loginController.verifyLoginUser, function (req, res) {
   request.show(req, res);
 });
 
+/*
 // Create request
 router.get("/create",loginController.verifyLoginUser, function (req, res) {
   request.create(req, res);
 });
+*/
 
 // Save request
 router.post("/save/:id",loginController.verifyLoginUser, function (req, res) {
   request.save(req, res);
 });
 
+/*
 // Edit request
 router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
   request.edit(req, res);
@@ -34,9 +37,9 @@ router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
 // Edit update
 router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
   request.update(req, res);
-});
+});*/
 
-// Edit update
+
 router.post("/delete/:id",loginController.verifyLoginUser, function (req, res, next) {
   request.delete(req, res);
 });

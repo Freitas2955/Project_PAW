@@ -21,7 +21,7 @@ router.get("/create/:id",loginController.verifyLoginUser, function (req, res) {
 router.post("/save/:id",loginController.verifyLoginUser, function (req, res) {
   donation.save(req, res);
 });
-
+/*
 // Edit donation
 router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
   donation.edit(req, res);
@@ -30,9 +30,9 @@ router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
 // Edit update
 router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
   donation.update(req, res);
-});
+});*/
 
-// Edit update
+
 router.post("/delete/:id",loginController.verifyLoginUser, function (req, res, next) {
   donation.delete(req, res);
 });
