@@ -82,6 +82,10 @@ donatorController.buy = function (req, res) {
             });
           });
         } else {
+          /*
+          // Redireciona para a página de detalhes do doador com a mensagem de erro na URL
+          const errorMessage = encodeURIComponent('Pontos insuficientes para comprar esta campanha.');
+          res.redirect("/buy/"+campaign._id+"/" + donator._id + errorMessage);*/
           res.redirect("/donators/show/" + donator._id);
         }
       });
