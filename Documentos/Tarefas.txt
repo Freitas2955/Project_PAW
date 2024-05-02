@@ -4,9 +4,6 @@ criar html para ver pedido
 
 nao deixar criar pedidos de recolha repetidos (verificar se ja existe na base pedido com aquela doacao)
 
-data nos pedidos
-falta por o management igual ao do donationcontroler no requestController.
-
 verificar se o doador tem pontos para comprar
 
 css responsivo
