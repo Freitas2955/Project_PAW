@@ -7,6 +7,10 @@ aprovar pedido ao aprovar doacao
 
 Nos pedidos nao terminados ter opcao de aprovar e elimnar dentro do verpedido e por tambem a apaercer a doacao do utilizador
 
+terminar pedido nao funciona
+
+ver pedido por opcao de o terminar no show
+
 css responsivo
 relatorio
 organizar pastas feito
