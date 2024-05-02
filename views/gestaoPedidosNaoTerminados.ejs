@@ -60,7 +60,7 @@
                   </td>
                   <td>
                     <script>
-                        var originalDate = "<%= donation.updated_at %>";
+                        var originalDate = "<%= request.updated_at %>";
                         var formattedDate = new Date(originalDate).toLocaleString('pt-PT', {
                             day: '2-digit',
                             month: '2-digit',
