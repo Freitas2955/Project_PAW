@@ -1,13 +1,10 @@
-css verpedido
+css ver pedido
 
-verificar se o doador tem pontos para comprar
+verificar se o doador tem pontos para comprar- ja n deixa n sei q mensagem mostrar
 
 css responsivo
 relatorio
 organizar pastas
-
-
-
 
 botao de export 
 botao de pesquisa falta(Doacoes, pedidos, campanhas)

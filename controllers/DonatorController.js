@@ -64,25 +64,27 @@ donatorController.show = function (req, res) {
 donatorController.buy = function (req, res) {
   Donator.findOne({ _id: req.params.donatorId })
     .then((donator) => {
-      
-      Campaign.findOne({ _id: req.params.campaignId })
-      .then((campaign) => {
-        Donator.findByIdAndUpdate(
-          req.params.donatorId,
-          {
-            $inc: {
-              points:-campaign.cost
+      Campaign.findOne({ _id: req.params.campaignId }).then((campaign) => {
+        if (donator.points > campaign.cost) {
+          Donator.findByIdAndUpdate(
+            req.params.donatorId,
+            {
+              $inc: {
+                points: -campaign.cost,
+              },
             },
-          },
-          { new: true }
-        ).then((donator)=>{
-          res.render("../views/utilizadores/verdoador", {
-            donator: donator,
-            username: req.session.username,
-            userId: req.session.userId,
+            { new: true }
+          ).then((donator) => {
+            res.render("../views/utilizadores/verdoador", {
+              donator: donator,
+              username: req.session.username,
+              userId: req.session.userId,
+            });
           });
-        })
-      })
+        } else {
+          res.redirect("/donators/show/" + donator._id);
+        }
+      });
     })
     .catch((err) => {
       console.error("Error:", err);
@@ -263,22 +265,22 @@ donatorController.delete = function (req, res) {
     });
 };
 
-donatorController.searchByemail = function(req, res) {
-  (Donator.findOne({email: req.query.email}))
-      .then(donator => {
-          if (!donator) {
-              console.log('Doador não encontrado');
-          }
-          res.render("../views/utilizadores/verdoador", {
-            donator: donator,
-            username: req.session.username,
-            userId: req.session.userId,
-          });
-      })
-      .catch(err => {
-          console.log("Error:", err);
-          res.status(500).send('Internal Server Error');
+donatorController.searchByemail = function (req, res) {
+  Donator.findOne({ email: req.query.email })
+    .then((donator) => {
+      if (!donator) {
+        console.log("Doador não encontrado");
+      }
+      res.render("../views/utilizadores/verdoador", {
+        donator: donator,
+        username: req.session.username,
+        userId: req.session.userId,
       });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+      res.status(500).send("Internal Server Error");
+    });
 };
 
 module.exports = donatorController;

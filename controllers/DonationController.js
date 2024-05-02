@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Donation = require("../models/Donation");
 var Points = require("../models/Points");
+var Request = require("../models/Request");
 var path = require("path");
 var fs = require("fs");
 var donationController = {};
@@ -21,23 +22,6 @@ donationController.management = function (req, res) {
       console.log("Número total de documentos:", num);
       Donation.find()
         .then((donation) => {
-          donation.forEach(function (donation) {
-            var dataOriginal = new Date(donation.updated_at);
-
-            var dia = dataOriginal.getDate();
-            var mes = dataOriginal.getMonth() + 1; // Os meses são baseados em zero, então adicionamos 1
-            var ano = dataOriginal.getFullYear();
-
-            var dataFormatada =
-              dia.toString().padStart(2, "0") +
-              "/" +
-              mes.toString().padStart(2, "0") +
-              "/" +
-              ano;
-
-            donation.updated_at = dataFormatada;
-          });
-
           res.render("../views/donationManagement", {
             donations: donation,
             number: num,
@@ -65,16 +49,39 @@ donationController.list = function (req, res) {
 };
 
 donationController.show = function (req, res) {
-  Donation.findOne({ _id: req.params.id })
-    .then((donation) => {
-      res.render("../views/verdoacao", {
-        donation: donation,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
+  Request.findOne({ donationId: req.params.id })
+    .then((request) => {
+      if (!request) {
+        Donation.findOne({ _id: req.params.id })
+          .then((donation) => {
+            res.render("../views/verdoacao", {
+              donation: donation,
+              username: req.session.username,
+              userId: req.session.userId,
+              requested:false,
+            });
+          })
+          .catch((err) => {
+            console.error("Error:", err);
+          });
+      } else {
+        Donation.findOne({ _id: req.params.id })
+          .then((donation) => {
+            res.render("../views/verdoacao", {
+              donation: donation,
+              username: req.session.username,
+              userId: req.session.userId,
+              requested:true,
+            });
+          })
+          .catch((err) => {
+            console.error("Error:", err);
+          });
+      }
     })
     .catch((err) => {
-      console.error("Error:", err);
+      console.log(err);
+      res.redirect("/users/gerirPedidos");
     });
 };
 
@@ -236,6 +243,5 @@ donationController.approve = function (req, res) {
       res.status(500).send("Erro interno do servidor");
     });
 };
-
 
 module.exports = donationController;

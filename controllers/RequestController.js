@@ -22,22 +22,6 @@ requestController.management1 = function (req, res) {
       console.log("Número total de documentos:", num);
       Request.find({ done: true })
         .then((request) => {
-          request.forEach(function (request) {
-            var dataOriginal = new Date(request.updated_at);
-
-            var dia = dataOriginal.getDate();
-            var mes = dataOriginal.getMonth() + 1; // Os meses são baseados em zero, então adicionamos 1
-            var ano = dataOriginal.getFullYear();
-
-            var dataFormatada =
-              dia.toString().padStart(2, "0") +
-              "/" +
-              mes.toString().padStart(2, "0") +
-              "/" +
-              ano;
-
-            request.updated_at = dataFormatada;
-          });
           console.log(req.session.userId);
           res.render("../views/gestaoPedidosTerminados", {
             requests: request,
@@ -64,22 +48,6 @@ requestController.management2 = function (req, res) {
       console.log("Número total de documentos:", num);
       Request.find({ done: false })
         .then((request) => {
-          request.forEach(function (request) {
-            var dataOriginal = new Date(request.updated_at);
-
-            var dia = dataOriginal.getDate();
-            var mes = dataOriginal.getMonth() + 1; // Os meses são baseados em zero, então adicionamos 1
-            var ano = dataOriginal.getFullYear();
-
-            var dataFormatada =
-              dia.toString().padStart(2, "0") +
-              "/" +
-              mes.toString().padStart(2, "0") +
-              "/" +
-              ano;
-
-            request.updated_at = dataFormatada;
-          });
           console.log(req.session.userId);
           res.render("../views/gestaoPedidosNaoTerminados", {
             requests: request,
@@ -109,17 +77,19 @@ requestController.list = function (req, res) {
 };
 */
 
-/*
 requestController.show = function (req, res) {
   Request.findOne({ _id: req.params.id })
     .then((request) => {
-      res.render("../views/requests/show", { request: request });
+      res.render("../views/verpedido", {
+        request: request,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
     })
     .catch((err) => {
       console.error("Error:", err);
     });
 };
-*/
 
 /*
 requestController.create = function (req, res) {
@@ -130,21 +100,28 @@ requestController.create = function (req, res) {
 };*/
 
 requestController.save = function (req, res) {
-  Donator.findById({ _id: req.body.donatorId })
-    .then((donator) => {
-      const data = {
-        donatorName: donator.name,
-        donationId: req.params.id,
-        address: donator.address,
-        postCode: donator.postCode,
-        city: donator.city,
-        done: false,
-      };
-      const request = new Request(data);
-      request.save().then((savedRequest) => {
-        console.log("Successfully created an Request.");
+  Request.findOne({ donationId: req.params.id })
+    .then((request) => {
+      if (!request) {
+        Donator.findById({ _id: req.body.donatorId }).then((donator) => {
+          const data = {
+            donatorName: donator.name,
+            donationId: req.params.id,
+            address: donator.address,
+            postCode: donator.postCode,
+            city: donator.city,
+            done: false,
+          };
+          const request = new Request(data);
+          request.save().then((savedRequest) => {
+            console.log("Successfully created an Request.");
+            res.redirect("/users/gerirPedidos");
+          });
+        });
+      } else {
+        console.log("Ja existe!");
         res.redirect("/users/gerirPedidos");
-      });
+      }
     })
     .catch((err) => {
       console.log(err);
