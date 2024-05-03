@@ -21,28 +21,37 @@
             <div class="leftside">
               <div class="inputContainer">
                 <label for="name">Nome doador:</label>
-                <input type="name" id="name" name="name" min="0" value="<%=request.donatorName %>"
-                  readonly><br><br>
+                <input type="name" id="name" name="name" min="0" value="<%=request.donatorName %>" readonly><br><br>
               </div>
               <div class="inputContainer">
                 <label for="address">Morada:</label>
-                <input type="text" id="address" name="address" value="<%=request.address %>"
-                readonly>
-            </div>
-            <div class="rightside">
-                <div class="inputContainer">
-                    <label for="postCode">Código-Postal:</label>
-                    <input type="text" id="postCode" name="postCode" value="<%=request.postCode %>"
-                    readonly>
+                <input type="text" id="address" name="address" value="<%=request.address %>" readonly>
+              </div>
+              <div class="rightside">
+                <div class="inputContainer" style="margin-top: 1%;">
+                  <label for="postCode">Código-Postal:</label>
+                  <input type="text" id="postCode" name="postCode" value="<%=request.postCode %>" readonly>
                 </div>
-                <div class="inputContainer">
-                    <label for="city">Cidade:</label>
-                    <input type="text" id="city" name="city" value="<%=request.city %>" readonly>
+                <div class="inputContainer" style="margin-top: 1%;">
+                  <label for="city">Cidade:</label>
+                  <input type="text" id="city" name="city" value="<%=request.city %>" readonly>
                 </div>
+              </div>
+              <div class="buttonContainer" style="margin-top: 1%;">
+                <form id="Form" action="/donations/show/<%=request.donationId%>">
+                  <button type="submit" style="background-color:#0698d4;">Ver doação</button>
+                </form>
+                <form id="Form" action="/requests/delete/<%=request._id%>" method="post">
+                  <button id="delete" type="submit">Apagar</button>
+                </form>
+                <% if (!request.done) { %>
+                  <form id="Form" action="/requests/approve/<%=request._id%>" method="post">
+                    <button type="submit">Conluído</button>
+                  </form>
+                  <% } %>
+              </div>
             </div>
-
           </div>
-        </div>
 </body>
 
 </html>

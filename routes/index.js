@@ -102,10 +102,16 @@ router.get("/dashboard",loginController.verifyLoginUser, function (req, res, nex
   });
 });
 
-
-
 router.get("/shop/:donatorId",loginController.verifyLoginUser, function (req, res, next) {
   campaign.shop(req,res);
 });
+
+router.get(
+  "/searchByPartner2/:donatorId",
+  loginController.verifyLoginUser,
+  function (req, res) {
+    campaign.shop1(req, res);
+  }
+);
 
 module.exports = router;

@@ -39,6 +39,31 @@ mongoose
     })();
   };
 
+  campaignController.shop1 = function (req, res) {
+    let num;
+  
+    (async () => {
+      try {
+        num = await Campaign.countDocuments({partnerName:req.query.partnerName});
+        console.log("Número total de documentos:", num);
+        Campaign.find({partnerName:req.query.partnerName})
+          .then((campaign) => {
+            res.render("../views/campaigns/selecionarCampanha", {
+              campaigns: campaign,
+              number: num,
+              username: req.session.username,
+              userId: req.session.userId,
+              donatorId:req.params.donatorId,
+            });
+          })
+          .catch((err) => {
+            console.log("Error:", err);
+          });
+      } catch (error) {
+        console.error("Ocorreu um erro ao contar os documentos:", error);
+      }
+    })();
+  };
 
 campaignController.management = function (req, res) {
   let num;
@@ -48,6 +73,31 @@ campaignController.management = function (req, res) {
       num = await Campaign.countDocuments({});
       console.log("Número total de documentos:", num);
       Campaign.find()
+        .then((campaign) => {
+          res.render("../views/campaigns/gestaoCampanhas", {
+            campaigns: campaign,
+            number: num,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+campaignController.management1 = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      num = await Campaign.countDocuments({partnerName:req.query.partnerName});
+      console.log("Número total de documentos:", num);
+      Campaign.find({partnerName:req.query.partnerName})
         .then((campaign) => {
           res.render("../views/campaigns/gestaoCampanhas", {
             campaigns: campaign,

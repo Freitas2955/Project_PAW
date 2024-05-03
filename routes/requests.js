@@ -52,4 +52,21 @@ router.get("/approve/:id",loginController.verifyLoginUser, function (req, res, n
   request.approve(req, res);
 });
 
+router.get(
+  "/searchByCity1",
+  loginController.verifyLoginUser,
+  function (req, res) {
+    request.management1Find(req, res);
+  }
+);
+
+router.get(
+  "/searchByCity2",
+  loginController.verifyLoginUser,
+  function (req, res) {
+    request.management2Find(req, res);
+  }
+);
+
+
 module.exports = router;

@@ -37,6 +37,31 @@ donationController.management = function (req, res) {
     }
   })();
 };
+
+donationController.management2 = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      num = await Donation.countDocuments({donatorName:req.query.donatorName});
+      console.log("Número total de documentos:", num);
+      Donation.find({donatorName:req.query.donatorName})
+        .then((donation) => {
+          res.render("../views/donations/gestaoDoacoes", {
+            donations: donation,
+            number: num,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
 /*
 donationController.list = function (req, res) {
   Donation.find()
@@ -162,6 +187,15 @@ donationController.delete = function (req, res) {
   Donation.deleteOne({ _id: req.params.id })
     .then(() => {
       console.log("Donation detected!");
+      Request.find({ donationId: req.params.id })
+        .then((requests)=>{
+          requests.forEach(function(request){
+            console.log(request._id.toString())
+            Request.deleteOne({_id:request._id.toString()}).then(()=>{
+              console.log("apagado");
+            })
+          })
+        })
       res.redirect("/donations/");
     })
     .catch((err) => {

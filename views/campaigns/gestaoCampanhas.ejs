@@ -25,7 +25,12 @@
           </div>
           <div class="midbar">
             <p><strong><%=number%></strong> no total</p>
-            <input type="text" placeholder="&#128269;  Pesquisa">
+            <form action="/campaigns/searchByPartner1" method="get">
+              <input type="text" name="partnerName" placeholder="&#128269; Pesquisa Parceiro">
+              <button type="submit" style="display: none;">
+                  <i class="fas fa-search" id="search"></i>
+              </button>
+          </form>
           </div>
           <div class="tabela-scroll">
           <table>

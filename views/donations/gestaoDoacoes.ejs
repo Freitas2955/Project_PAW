@@ -25,7 +25,12 @@
             <p><strong>
                 <%=number%>
               </strong> no total</p>
-            <input type="text" placeholder="&#128269;  Pesquisa">
+              <form action="/donations/searchByDonatorName" method="get">
+                <input type="text" name="donatorName" placeholder="&#128269; Pesquisa Nome">
+                <button type="submit" style="display: none;">
+                    <i class="fas fa-search" id="search"></i>
+                </button>
+            </form>
           </div>
           <div class="tabela-scroll">
           <table>

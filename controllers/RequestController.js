@@ -65,6 +65,58 @@ requestController.management2 = function (req, res) {
   })();
 };
 
+requestController.management1Find = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      num = await Request.countDocuments({ done: true,city:req.query.city });
+      console.log("Número total de documentos:", num);
+      Request.find({ done: true,city:req.query.city })
+        .then((request) => {
+          console.log(req.session.userId);
+          res.render("../views/requests/gestaoPedidosTerminados", {
+            requests: request,
+            number: num,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+requestController.management2Find = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      num = await Request.countDocuments({ done: false,city:req.query.city });
+      console.log("Número total de documentos:", num);
+      Request.find({ done: false,city:req.query.city })
+        .then((request) => {
+          console.log(req.session.userId);
+          res.render("../views/requests/gestaoPedidosNaoTerminados", {
+            requests: request,
+            number: num,
+            username: req.session.username,
+            userId: req.session.userId,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
 /*
 requestController.list = function (req, res) {
   Request.find()

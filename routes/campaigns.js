@@ -41,5 +41,12 @@ router.post("/delete/:id",loginController.verifyLoginUser, function (req, res, n
   campaign.delete(req, res);
 });
 
+router.get(
+  "/searchByPartner1",
+  loginController.verifyLoginUser,
+  function (req, res) {
+    campaign.management1(req, res);
+  }
+);
 
 module.exports = router;

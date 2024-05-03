@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
 var Campaign = require("../models/Campaign");
+var Donation= require("../models/Donation");
+var Request= require("../models/Request");
 var path = require("path");
 var fs = require("fs");
 var donatorController = {};
@@ -265,6 +267,32 @@ donatorController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
+
+      Donation.find({ donatorId: req.params.id })
+        .then((donations) => {
+          donations.forEach(function (donation) {
+            Donation.deleteOne({ _id: donation._id.toString() }).then(
+              () => {
+                console.log("Doação apagada");
+              }
+            );
+            Request.find({ donationId: donation._id.toString() }).then(
+              (requests) => {
+                requests.forEach(function (request) {
+                  Request.deleteOne({ _id: request._id.toString() }).then(
+                    () => {
+                      console.log("Pedido apagado");
+                    }
+                  );
+                });
+              }
+            );
+          });
+          res.redirect("/donations/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       res.redirect("/donators/");
     })
     .catch((err) => {

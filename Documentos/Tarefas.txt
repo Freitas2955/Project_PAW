@@ -1,29 +1,8 @@
-css ver pedido
-
-Nos pedidos nao terminados ter opcao de aprovar e elimnar dentro do verpedido e por tambem a apaercer a doacao do utilizador
-
-ver pedido por opcao de o terminar no show
-
 verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
-
-apagar campanhas de instituições apagadas
-
-apagar pedidos quando apagas doacao
-
-apagar doacoes quando apagas doadores
-
-css responsivo feito
-relatorio feito
-organizar pastas feito
 
 botao de export 
 
-
-botao de pesquisa falta(Doacoes, pedidos, campanhas)
-PARA ISSO criar no controller uma nova funcao managemnte onde ele procuro na base de dados apenas os funcionarios por exemplo com dado 
-numero de telemovel 
-
-
+ver inputs de nomes(Maiuscula)
 
 no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
 login lembrar me / recuperar pass 
