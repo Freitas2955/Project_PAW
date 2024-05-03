@@ -1,20 +1,19 @@
 css ver pedido
 
-verificar se o doador tem pontos para comprar- ja n deixa n sei q mensagem mostrar
-
-aprovar doacao automaticamente ao aprovar pedido
-aprovar pedido ao aprovar doacao
-
 Nos pedidos nao terminados ter opcao de aprovar e elimnar dentro do verpedido e por tambem a apaercer a doacao do utilizador
-
-terminar pedido nao funciona
 
 ver pedido por opcao de o terminar no show
 
+verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
+
 apagar campanhas de instituições apagadas
 
+apagar pedidos quando apagas doacao
+
+apagar doacoes quando apagas doadores
+
 css responsivo feito
-relatorio
+relatorio feito
 organizar pastas feito
 
 botao de export 

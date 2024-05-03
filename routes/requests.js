@@ -48,4 +48,8 @@ router.post("/approve/:id",loginController.verifyLoginUser, function (req, res, 
   request.approve(req, res);
 });
 
+router.get("/approve/:id",loginController.verifyLoginUser, function (req, res, next) {
+  request.approve(req, res);
+});
+
 module.exports = router;

@@ -58,7 +58,7 @@ donationController.show = function (req, res) {
               donation: donation,
               username: req.session.username,
               userId: req.session.userId,
-              requested:false,
+              requested: false,
             });
           })
           .catch((err) => {
@@ -71,7 +71,7 @@ donationController.show = function (req, res) {
               donation: donation,
               username: req.session.username,
               userId: req.session.userId,
-              requested:true,
+              requested: true,
             });
           })
           .catch((err) => {
@@ -191,8 +191,14 @@ donationController.approve = function (req, res) {
         { new: true }
       )
         .then((updatedDonator) => {
-          console.log(updatedDonator);
-          res.redirect("/donations");
+          Request.findOne({ donationId: donation._id })
+            .then((request) => {
+              res.redirect("/requests/approve/" + request._id);
+            })
+            .catch((err) => {
+              console.log(err);
+              res.redirect("/donations");
+            });
         })
         .catch((err) => {
           console.log(err);

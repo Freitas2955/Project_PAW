@@ -71,13 +71,15 @@ employeeController.create = function (req, res) {
 
 employeeController.save = function (req, res) {
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  var city = req.body.city;
+  regCity = city.charAt(0).toUpperCase() + city.slice(1);
   const data = {
     name: req.body.name,
     phone: req.body.phone,
     email: req.body.email,
     address: req.body.address,
     postCode: req.body.postCode,
-    city: req.body.city,
+    city: regCity,
     password: hashedPassword,
   };
   const employeeSave = new Employee(data);

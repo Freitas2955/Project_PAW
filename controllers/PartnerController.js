@@ -4,6 +4,7 @@ var path = require("path");
 var fs = require("fs");
 var partnerController = {};
 const bcrypt = require("bcryptjs");
+const Campaign = require("../models/Campaign");
 mongoose
   .connect(
     "mongodb+srv://user:user@basepaw.e8ypv1l.mongodb.net/trabalhoPaw?retryWrites=true&w=majority&appName=BASEPAW"
@@ -69,6 +70,8 @@ partnerController.create = function (req, res) {
 
 partnerController.save = function (req, res) {
   // const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  var city = req.body.city;
+  regCity = city.charAt(0).toUpperCase() + city.slice(1);
   const data = {
     name: req.body.name,
     address: req.body.address,
@@ -76,7 +79,7 @@ partnerController.save = function (req, res) {
     description: req.body.description,
     postCode: req.body.postCode,
     email: req.body.email,
-    city: req.body.city,
+    city: regCity,
     //password: hashedPassword,
     approved: false,
   };
@@ -205,7 +208,7 @@ partnerController.update = function (req, res) {
 
 partnerController.delete = function (req, res) {
   Partner.deleteOne({ _id: req.params.id })
-    .then(() => {
+    .then((partner) => {
       console.log("Partner detected!");
 
       var fileDestination = path.join(
@@ -230,6 +233,19 @@ partnerController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
+     
+      Campaign.find({ partnerId: req.params.id })
+        .then((campaigns)=>{
+          campaigns.forEach(function(campaign){
+            console.log(campaign._id.toString())
+            Campaign.deleteOne({_id:campaign._id.toString()}).then(()=>{
+              console.log("apagado");
+            })
+          })
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       res.redirect("/partners/");
     })
     .catch((err) => {

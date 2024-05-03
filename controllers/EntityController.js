@@ -120,11 +120,13 @@ entityController.create = function (req, res) {
 
 entityController.save = function (req, res) {
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  var city = req.body.city;
+  regCity = city.charAt(0).toUpperCase() + city.slice(1);
   const data = {
     name: req.body.name,
     description: req.body.description,
     address: req.body.address,
-    city: req.body.city,
+    city: regCity,
     postCode: req.body.postCode,
     email: req.body.email,
     password: hashedPassword,

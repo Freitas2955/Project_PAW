@@ -115,7 +115,7 @@ requestController.save = function (req, res) {
           const request = new Request(data);
           request.save().then((savedRequest) => {
             console.log("Successfully created an Request.");
-            res.redirect("/users/gerirPedidos");
+            res.redirect("/requests/naoTerminados");
           });
         });
       } else {
