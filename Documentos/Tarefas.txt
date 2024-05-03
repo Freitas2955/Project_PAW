@@ -13,7 +13,9 @@ terminar pedido nao funciona
 
 ver pedido por opcao de o terminar no show
 
-css responsivo
+apagar campanhas de instituições apagadas
+
+css responsivo feito
 relatorio
 organizar pastas feito
 
