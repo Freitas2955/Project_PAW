@@ -65,19 +65,11 @@ pointsController.update = function (req, res) {
     { new: true }
   )
     .then((point) => {
-      res.render("../views/pontos", {
-        point: req.body,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
+      res.redirect("/points");
     })
     .catch((err) => {
       console.log(err);
-      res.render("../views/pontos", {
-        point: req.body,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
+      res.redirect("/points");
     });
 };
 

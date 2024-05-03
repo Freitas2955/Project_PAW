@@ -130,7 +130,35 @@ partnerController.save = function (req, res) {
             });
           })
           .catch((err) => {
-            console.log(err);
+            Partner.findOne({ email: req.body.email }).then((savedPartner)=>{
+
+              var fileDestination = path.join(
+                __dirname,
+                "..",
+                "images",
+                "partners",
+                savedPartner._id.toString() + ".jpg"
+              );
+              
+              var fileOrigin = path.join(
+                __dirname,
+                "..",
+                "images",
+                "employees",
+                "default" + ".jpg"
+              );
+              fs.readFile(fileOrigin, function (err, data) {
+                if (err) {
+                  
+                }
+                fs.writeFile(fileDestination, data, function (err) {
+                  if (err) {
+                  
+                  }
+                });
+              });
+            })
+            
             res.redirect("/partners/");
           });
       }

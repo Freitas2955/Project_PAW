@@ -180,10 +180,11 @@ campaignController.save = function (req, res) {
     partnerName: req.params.partnerName,
   };
   const campaign = new Campaign(data);
-
+  var sc ;
   campaign
     .save()
     .then((savedCampaign) => {
+      sc=savedCampaign
       console.log("Successfully created an Campaign.");
 
       var fileDestination = path.join(
@@ -214,7 +215,35 @@ campaignController.save = function (req, res) {
       });
     })
     .catch((err) => {
-      console.log(err);
+      Campaign.findOne({ _id: sc._id }).then((savedCampaign)=>{
+
+        var fileDestination = path.join(
+          __dirname,
+          "..",
+          "images",
+          "campaigns",
+          savedCampaign._id.toString() + ".jpg"
+        );
+        
+        var fileOrigin = path.join(
+          __dirname,
+          "..",
+          "images",
+          "campaigns",
+          "default" + ".jpg"
+        );
+        fs.readFile(fileOrigin, function (err, data) {
+          if (err) {
+            
+          }
+          fs.writeFile(fileDestination, data, function (err) {
+            if (err) {
+            
+            }
+          });
+        });
+      })
+      
       res.redirect("/campaigns/");
     });
 };
