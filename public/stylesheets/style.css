@@ -25,6 +25,7 @@ header {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.336);
   height: 7vh;
   margin: auto;
+  width: 100%;
   position: relative;
 }
   
@@ -46,7 +47,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 15%;
+  /*width: 15%;*/
 }
 
 .user {
@@ -64,20 +65,73 @@ header {
   background-color: #fafafb;
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  
   align-items: center;
   padding-right: 3%;
 }
 
+@media (max-width: 750px) {
+  .sidebar {
+    display: flex;
+    flex-direction: row;
+    padding-right: 0%;
+    justify-content: start;
+    align-items: start;
+    width: 110vw;
+  }
+
+  ul{
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+  }
+
+  li {
+    margin-top: 0px;
+    margin-bottom: 0px; 
+    padding: 5px 5px 5px 5px;
+    border-radius: 0px;
+  }
+
+  main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1px;
+  }
+  
+  li > a {
+    text-decoration: none;
+    color: #565d6d;
+    font-size: 1px;
+  }
+
+  .content{
+    height: 100%;
+    width: 100%;
+  }
+
+}
+
+@media (min-width: 750px) {
+  ul {
+    list-style-type: none;
+    margin-top: 30%;
+  }
+  li {
+    margin-top: 2px;
+    margin-bottom: 25px; 
+    padding: 10px 30px 10px 10px;
+    border-radius: 10px;
+  }
+}
 ul {
   list-style-type: none;
-  margin-top: 30%;
 }
 
 li {
   margin-top: 2px;
   margin-bottom: 25px; 
-  padding: 10px 30px 10px 10px;
   border-radius: 10px;
 }
 
@@ -119,7 +173,7 @@ thead tr {
 }
 
 .content {
-  width: 80%;
+  width: 100%;
   margin: 2%;
 }
 
