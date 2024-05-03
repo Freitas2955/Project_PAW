@@ -2,9 +2,7 @@ verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem most
 
 botao de export 
 
-ver inputs de nomes(Maiuscula)
-
-no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
+no login funcao de ver pass
 login lembrar me / recuperar pass 
 notificacoes 
 api de mapas para morada(pensar na logica)
