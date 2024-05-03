@@ -78,6 +78,21 @@
         </main>
 
         <script>
+            document.getElementById('name').addEventListener('blur', function () {
+    var name = this.value.trim().toLowerCase();
+    var formattedName = '';
+    if (name.includes(' ')) {
+        formattedName = name.split(' ').map(function(word) {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(' ');
+    } else if (name.length > 0) {
+        formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+    }
+    this.value = formattedName;
+});
+
+
+
 
             document.getElementById('city').addEventListener('input', function () {
 
