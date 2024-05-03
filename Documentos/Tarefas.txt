@@ -23,9 +23,9 @@ PARA ISSO criar no controller uma nova funcao managemnte onde ele procuro na bas
 numero de telemovel 
 
 
+
 no login funcao de ver pass (porque no pc do choras aparece dois e no meu so aparece a nossa funcao)
 login lembrar me / recuperar pass 
 notificacoes 
-
 api de mapas para morada(pensar na logica)
 api de pagamentos(pensar na logica)
