@@ -1,5 +1,3 @@
-por models no relatorio
-
 css ver pedido
 
 verificar se o doador tem pontos para comprar- ja n deixa n sei q mensagem mostrar
@@ -20,6 +18,8 @@ relatorio
 organizar pastas feito
 
 botao de export 
+
+
 botao de pesquisa falta(Doacoes, pedidos, campanhas)
 PARA ISSO criar no controller uma nova funcao managemnte onde ele procuro na base de dados apenas os funcionarios por exemplo com dado 
 numero de telemovel 

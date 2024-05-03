@@ -65,7 +65,7 @@ header {
   background-color: #fafafb;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
   align-items: center;
   padding-right: 3%;
 }
@@ -113,15 +113,25 @@ header {
 
 }
 
+@media (min-width: 750px) {
+  ul {
+    list-style-type: none;
+    margin-top: 30%;
+  }
+  li {
+    margin-top: 2px;
+    margin-bottom: 25px; 
+    padding: 10px 30px 10px 10px;
+    border-radius: 10px;
+  }
+}
 ul {
   list-style-type: none;
-  /*margin-top: 30%;*/
 }
 
 li {
   margin-top: 2px;
   margin-bottom: 25px; 
- /* padding: 10px 30px 10px 10px;*/
   border-radius: 10px;
 }
 
