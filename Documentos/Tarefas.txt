@@ -1,0 +1,28 @@
+verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
+
+botao de export 
+
+no login funcao de ver pass
+login lembrar me / recuperar pass 
+notificacoes 
+api de mapas para morada(pensar na logica)
+api de pagamentos(pensar na logica)
+
+
+PAW
+Dashboard 
+Notificacoes 
+Exportar 
+Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
+Opcao de escolher a quem(instituicao) vamos doar
+
+
+dashboard para o proprio doador 
+
+Paypal
+
+------------------------------------------------------
+Interface frontoffice para doardor e instituicoes e parceiros 
+
+
+rever autenticacao pq é diferente no angular

@@ -1,9 +1,0 @@
-verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
-
-botao de export 
-
-no login funcao de ver pass
-login lembrar me / recuperar pass 
-notificacoes 
-api de mapas para morada(pensar na logica)
-api de pagamentos(pensar na logica)
