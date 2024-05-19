@@ -40,14 +40,21 @@ mongoose
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var employeesRouter = require("./routes/employees");
+var restemployeesRouter = require("./routes/RestEmployees");
 var entitiesRouter = require("./routes/entities");
+var restentitiesRouter = require("./routes/RestEntities");
 var donatorsRouter = require("./routes/donators");
+var restdonatorsRouter = require("./routes/RestDonators");
 var donationsRouter = require("./routes/donations");
+var restdonationsRouter = require("./routes/RestDonations");
 var pointsRouter = require("./routes/points");
+var restpointsRouter = require("./routes/RestPoints");
 var partnersRouter = require("./routes/partners");
+var restpartnersRouter = require("./routes/RestPartners");
 var campaignsRouter = require("./routes/campaigns");
-//var restCampaignsRouter = require("./routes/RestCampaigns");
+var restCampaignsRouter = require("./routes/RestCampaigns");
 var requestsRouter = require("./routes/requests");
+var restrequestsRouter = require("./routes/RestRequests");
 const authRouter = require('./routes/auth');
 
 var app = express();
@@ -97,14 +104,22 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/employees", employeesRouter);
+app.use("/RestEmployees", restemployeesRouter);
 app.use("/entities", entitiesRouter);
+app.use("/RestEntities", restentitiesRouter);
 app.use("/donators", donatorsRouter);
+app.use("/RestDonators", restdonatorsRouter);
 app.use("/donations", donationsRouter);
+app.use("/RestDonations", restdonationsRouter);
 app.use("/points", pointsRouter);
+app.use("/RestPoints", restpointsRouter);
 app.use("/partners", partnersRouter);
+app.use("/RestPartners", restpartnersRouter);
 app.use("/campaigns", campaignsRouter);
-//app.use("/RestCampaigns", restCampaignsRouter);
+app.use("/RestCampaigns", restCampaignsRouter);
 app.use("/requests", requestsRouter);
+app.use("/RestRequests", restrequestsRouter);
+
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
