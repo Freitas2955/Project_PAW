@@ -1,63 +1,108 @@
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
-
-* {
-  margin: 0px;
-  font-family: "Lexend", sans-serif;
+body {
+  height: 99vh;
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  overflow: hidden;
 }
 
-body {
-  height: 97vh;
-  width: 97vw;
+nav {
+  width: 100%;
+  max-width: 600px;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#imagemlogo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#imagemlogo img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+#blococentral {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.grupo {
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.password-input {
+  position: relative;
+  width: 100%; /* Defina a largura desejada */
+}
+
+.password-input .mudar {
+  position: absolute;
+  top: 50%; /* Alinhe verticalmente ao centro */
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+.checkbox {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  border: 0.5px solid rgb(156, 154, 154);
-  border-radius: 20px;
-  width: 30%;
-  height: 70%;
-  
+#botao {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0698d4;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-h2{
-    margin-top: 20%;
-    margin-bottom: 10%;
-    align-self: center;
+#botao:hover {
+  background-color: #0578ad;
 }
 
-.inputBox{
-    margin: 5% 10%;
-    display: flex;
-    flex-direction: column;
+.recuperarpass {
+  margin-top: 20px;
+  font-size: 14px;
 }
 
-label{
-    margin-bottom: 1%;
+.recuperarpass a {
+  color: #0698d4;
+  text-decoration: none;
 }
 
-input{
-    border-radius: 5px;
-    border: 0.5px solid gray;
-    padding: 1%;
-}
-
-button{
-    margin: 5% 35%;
-    border: none;
-    border-radius: 4px;
-    background-color: #0698d4;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    padding: 2%;
-}
-
-
-button:hover {
-    background-color: #0578ad;
+.recuperarpass a:hover {
+  text-decoration: underline;
 }
