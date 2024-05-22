@@ -1,3 +1,8 @@
+* {
+  margin: auto;
+  font-family: "Lexend", sans-serif;
+}
+
 body {
   height: 99vh;
   margin: 0;

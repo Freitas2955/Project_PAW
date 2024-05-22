@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<h1>Instituições</h1>
+<div class="tabela-scroll">
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cidade</th>
+            <th>Telemóvel</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <%= entity.name %>
+                </td>
+                <td>
+                    <%= entity.email %>
+                </td>
+                <td>
+                    <%= entity.city %>
+                </td>
+                <td>
+                    <%= entity.phone %>
+                </td>
+                <td>
+                    <form>
+                        <button id="delete" type="submit">&#x2715;</button>
+                    </form>
+                    <form>
+                        <button type="submit">&#x270E;</button>
+                    </form>
+                    <form>
+                        <button id="ver" type="submit">&#128462;</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%= entity.name %>
+                </td>
+                <td>
+                    <%= entity.email %>
+                </td>
+                <td>
+                    <%= entity.city %>
+                </td>
+                <td>
+                    <%= entity.phone %>
+                </td>
+                <td>
+                    <form>
+                        <button id="delete" type="submit">&#x2715;</button>
+                    </form>
+                    <form>
+                        <button type="submit">&#x270E;</button>
+                    </form>
+                    <form>
+                        <button id="ver" type="submit">&#128462;</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

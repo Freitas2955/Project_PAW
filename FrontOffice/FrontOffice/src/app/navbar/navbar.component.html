@@ -1,0 +1,54 @@
+<header>
+    <div id="imagensNav">
+        <img src="/assets/images/Image 207.png" alt="Logo" width="50" height="50">
+        <label for="Nome">RECICLA TÊXTIL</label>
+    </div>
+    <div id="opcoesNav">
+        <a href="#" onclick="notificacao()">
+            <img src="/assets/images/icone-de-cloche-et-d-alerte-gris.png" alt="Notifications" width="30"
+                height="30"></a>
+        <div class="user">
+            <img src="/assets/images/employees/.jpg" alt="profile" width="35" height="35" id="profile">
+            <p>
+                <%=username%>
+            </p>
+        </div>
+        <div class="drop">
+            <img src="/assets/images/arrow_down_icon_242220.png" alt="More options" width="30" height="30"
+                style="border-radius: 20px;">
+            <div class="drop-content">
+                <a href="/employees/edit/">Editar Perfil</a>
+                <a href="/auth/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="caixa" class="caixa">
+    <div class="caixa-content">
+        <span class="close" onclick="fecharCaixa()">&times;</span>
+        <p id="notificacoesText">Notificações: <span id="notificacoes"></span> </p>
+    </div>
+</div>
+
+
+<script>
+    function notificacao() {
+        // Atualiza o texto dentro do modal com o total de notificações
+        document.getElementById('notificacoes').textContent = "0";
+
+        // Exibe o modal
+        const modal = document.getElementById('caixa');
+        modal.style.display = 'block';
+    }
+    function fecharCaixa() {
+        // Fecha o modal ao clicar no botão de fechar
+        const modal = document.getElementById('caixa');
+        modal.style.display = 'none';
+    }
+
+    function toggleDrop() {
+        const dropContent = document.getElementById('dropContent');
+        dropContent.classList.toggle('show');
+    }
+</script>
