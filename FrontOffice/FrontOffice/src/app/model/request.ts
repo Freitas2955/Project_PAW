@@ -1,4 +1,5 @@
 export class Request {
+  _id?:String;
   donatorName?: String;
   donationId?: String;
   address?: String;

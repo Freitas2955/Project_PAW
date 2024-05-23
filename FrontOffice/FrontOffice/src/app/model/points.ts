@@ -1,4 +1,5 @@
 export class Points {
+  _id?:String;
   camisola?: Number;
   acessorios?: Number;
   casaco?: Number;

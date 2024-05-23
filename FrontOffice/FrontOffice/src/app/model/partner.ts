@@ -1,4 +1,5 @@
 export class Partner {
+  _id?:String;
   name?: String;
   phone?: Number;
   address?: String;

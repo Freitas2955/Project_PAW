@@ -1,4 +1,5 @@
 export class Donator {
+  _id?:String;
   name?: String;
   phone?: Number;
   email?: String;

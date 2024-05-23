@@ -1,4 +1,5 @@
 export class Employee {
+    _id?:String;
     name?: String;
     phone?: Number;
     email?: String;

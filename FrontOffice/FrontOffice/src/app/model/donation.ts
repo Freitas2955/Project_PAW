@@ -1,4 +1,5 @@
 export class Donation{
+  _id?:String;
     donatorId?:String;
   donatorName?:String;
   camisolas?:Number;
