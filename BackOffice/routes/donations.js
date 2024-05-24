@@ -12,13 +12,17 @@ router.get("/show/:id", loginController.verifyLoginUser, function (req, res) {
   donation.show(req, res);
 });
 
+router.get("/selecionarEntiade/:id", loginController.verifyLoginUser, function (req, res) {
+  donation.select(req, res);
+});
+
 // Create donation
-router.get("/create/:id", loginController.verifyLoginUser, function (req, res) {
-  res.redirect("/doar/" + req.params.id);
+router.get("/create/:id/:entityId", loginController.verifyLoginUser, function (req, res) {
+  res.redirect("/doar/" + req.params.id+);
 });
 
 // Save donation
-router.post("/save/:id", loginController.verifyLoginUser, function (req, res) {
+router.post("/save/:id/:entityId", loginController.verifyLoginUser, function (req, res) {
   donation.save(req, res);
 });
 /*

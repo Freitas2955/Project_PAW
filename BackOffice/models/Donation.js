@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var DonationSchema = new mongoose.Schema({
+  entityId:String,
   donatorId:String,
   donatorName:String,
   camisolas:Number,

@@ -126,6 +126,7 @@ donationController.save = function (req, res) {
         req.body.interior * point.roupainterior +
         req.body.dinheiro * point.dinheiro;
       let donatorId = req.params.id;
+      let entityId = req.params.entitiyId;
       const donationParams = {
         camisolas: req.body.camisolas,
         casacos: req.body.casacos,

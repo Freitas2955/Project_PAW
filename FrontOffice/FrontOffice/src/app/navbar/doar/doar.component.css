@@ -1,0 +1,94 @@
+main{
+    display: flex;
+    flex-direction: column;
+    margin: 0% 2%;
+    
+}
+h1{
+    margin: 2% 0% 0% 0%;
+}
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.inputBox>button{
+    width: 15%;  
+    margin-top: 0.5%;
+}
+
+label{
+    margin: 0.5% 0% 0.3% 0%;
+}
+
+input{
+    width: 20%;
+    border-radius: 10px;
+    padding: 0.5%;
+    border: solid gray 1px;
+}
+
+form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.buttons{
+    margin-top: 0.7%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons>button{
+    width: 11%;
+    margin:0% 0.3%;
+    padding: 0.5% 3%;
+    border-radius: 6px;
+    border: none;
+}
+
+#selecionarEntidade{
+    border-radius: 6px;
+    border: none;
+    padding: 0.5%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+#simular{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#selecionarEntidade:hover,#simular:hover{
+    background-color: #3e9f65;
+}
+
+#doar{
+    background-color: #0698d4;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+#doar:hover{
+    background-color: #0578ad;
+}
+
+button{
+    font-weight: bold;
+}
+

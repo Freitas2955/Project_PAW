@@ -1,66 +1,73 @@
 <app-navbar></app-navbar>
+<main>
+    <header><h1>Instituições</h1>
+        <button onclick="toggleDropdown()" id="filtro">Filtros </button>
+        <div id="dropdownContent" class="dropdown-content" style="display: none;">
+          <a href="/employees/create">Funcionário</a>
+          <a href="/donators/create">Doador</a>
+          <a href="/entities/create">Instituição</a>
+          <a href="/partners/create">Parceiro</a>
+        </div>
+      <script>
+        function toggleDropdown() {
+          var dropdownContent = document.getElementById("dropdownContent");
+          if (dropdownContent.style.display === "none") {
+            dropdownContent.style.display = "block";
+          } else {
+            dropdownContent.style.display = "none";
+          }
+        }
+      </script>
+    </header>
+    
+    
+    <div class="entidades">
+        <div class="card">
+            <div class="imagem"></div>
+            <div class="content">
+                <header><h3>Nome </h3><button>Detalhes</button></header>
+                <p>Email:</p>
+                <p>Cidade:</p>
+                <p>Telemóvel</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="imagem"></div>
+            <div class="content">
+                <header><h3>Nome </h3><button>Detalhes</button></header>
+                <p>Email:</p>
+                <p>Cidade:</p>
+                <p>Telemóvel</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="imagem"></div>
+            <div class="content">
+                <header><h3>Nome </h3><button>Detalhes</button></header>
+                <p>Email:</p>
+                <p>Cidade:</p>
+                <p>Telemóvel</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="imagem"></div>
+            <div class="content">
+                <header><h3>Nome </h3><button>Detalhes</button></header>
+                <p>Email:</p>
+                <p>Cidade:</p>
+                <p>Telemóvel</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="imagem"></div>
+            <div class="content">
+                <header><h3>Nome </h3><button>Detalhes</button></header>
+                <p>Email:</p>
+                <p>Cidade:</p>
+                <p>Telemóvel</p>
+            </div>
+        </div>
+    </div>
+    
+</main>
 
-<h1>Instituições</h1>
-<div class="tabela-scroll">
-    <table>
-        <thead>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Cidade</th>
-            <th>Telemóvel</th>
-            <th></th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <%= entity.name %>
-                </td>
-                <td>
-                    <%= entity.email %>
-                </td>
-                <td>
-                    <%= entity.city %>
-                </td>
-                <td>
-                    <%= entity.phone %>
-                </td>
-                <td>
-                    <form>
-                        <button id="delete" type="submit">&#x2715;</button>
-                    </form>
-                    <form>
-                        <button type="submit">&#x270E;</button>
-                    </form>
-                    <form>
-                        <button id="ver" type="submit">&#128462;</button>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <%= entity.name %>
-                </td>
-                <td>
-                    <%= entity.email %>
-                </td>
-                <td>
-                    <%= entity.city %>
-                </td>
-                <td>
-                    <%= entity.phone %>
-                </td>
-                <td>
-                    <form>
-                        <button id="delete" type="submit">&#x2715;</button>
-                    </form>
-                    <form>
-                        <button type="submit">&#x270E;</button>
-                    </form>
-                    <form>
-                        <button id="ver" type="submit">&#128462;</button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>

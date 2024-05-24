@@ -12,10 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './entidades.component.css'
 })
 
-export class EntidadesComponent implements OnInit{
+export class EntidadesComponent{
    entities?:Entity[];
 
-   constructor(public rest:RestService,private route:ActivatedRoute,private router:Router){
+   /*constructor(public rest:RestService,private route:ActivatedRoute,private router:Router){
 
    }
 
@@ -28,6 +28,6 @@ export class EntidadesComponent implements OnInit{
 
   seeListOfEntities(){
     this.router.navigate(['/entidades']);
-  }
+  }*/
 
 }
