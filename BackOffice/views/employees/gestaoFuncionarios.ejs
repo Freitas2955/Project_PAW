@@ -7,10 +7,12 @@
   <title>Gestão de Funcionários</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/management.css' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
-  <%- include('../general/header',{username:username, userId:userId}) -%> 
+  <%- include('../general/header',{username:username, userId:userId}) -%>
     <main>
       <%- include('../general/sidebar', { activeItem: 'pagina3' }) -%>
 
@@ -20,7 +22,7 @@
             <div class="botoes">
               <!--<button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button> -->
 
-              <button id="exportar" onclick="exportarUtilizadores()">
+              <button id="exportar" onclick="exportTableToPDF()">
                 <img src="../../public/images/download.webp" alt="" height="10" width="10"> Exportar
               </button>
 
@@ -43,60 +45,62 @@
           </nav>
 
           <div class="midbar">
-            <p><strong><%=number%></strong> no total</p>
+            <p><strong>
+                <%=number%>
+              </strong> no total</p>
 
 
 
             <form action="/employees/searchByemail" method="get">
               <input type="text" name="email" placeholder="&#128269; Pesquisa email">
               <button type="submit">
-                  <i class="fas fa-search" id="search"></i>
+                <i class="fas fa-search" id="search"></i>
               </button>
-          </form>
+            </form>
 
 
 
           </div>
 
           <div class="tabela-scroll">
-          <table> 
-            <thead>
-              <th>Nome</th>
-              <th>Telemóvel</th>
-              <th>Email</th>
-              <th>Cidade</th>
-              <th></th>
-            </thead>
-            <tbody>
-              <% employees.forEach(employee=> {%>
-                <tr>
-                  <td>
-                    <%=employee.name%>
-                  </td>
-                  <td>
-                    <%=employee.phone%>
-                  </td>
-                  <td>
-                    <%=employee.email%>
-                  </td>
-                  <td>
-                    <%=employee.city%>
-                  </td>
-                  <td>
-                    <form action="/employees/delete/<%=employee._id%>" method="post">
-                      <button id="delete" type="submit">&#x2715;</button>
-                    </form>
-                    <form action="/employees/edit/<%=employee._id%>">
-                      <button type="submit">&#x270E;</button>
-                    </form>
-                    <form action="/employees/show/<%=employee._id%>" >
-                      <button id="ver" type="submit">&#128462;</button>
-                    </form>
-                  </td>
-                </tr>
-                <% });%>
-            </tbody>
-          </table>
+            <table id="tabela">
+              <thead>
+                <th>Nome</th>
+                <th>Telemóvel</th>
+                <th>Email</th>
+                <th>Cidade</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <% employees.forEach(employee=> {%>
+                  <tr>
+                    <td>
+                      <%=employee.name%>
+                    </td>
+                    <td>
+                      <%=employee.phone%>
+                    </td>
+                    <td>
+                      <%=employee.email%>
+                    </td>
+                    <td>
+                      <%=employee.city%>
+                    </td>
+                    <td>
+                      <form action="/employees/delete/<%=employee._id%>" method="post">
+                        <button id="delete" type="submit">&#x2715;</button>
+                      </form>
+                      <form action="/employees/edit/<%=employee._id%>">
+                        <button type="submit">&#x270E;</button>
+                      </form>
+                      <form action="/employees/show/<%=employee._id%>">
+                        <button id="ver" type="submit">&#128462;</button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% });%>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -112,11 +116,25 @@
         </script>
 
         <script>
-          function exportarUtilizadores() {
+          async function exportTableToPDF() {
+            const { jsPDF } = window.jspdf;
 
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            const table = document.getElementById("tabela");
+
+
+            await html2canvas(table, {
+              onrendered: function (canvas) {
+                const imgData = canvas.toDataURL('../../public/images/download.webp');
+
+
+                pdf.addImage(imgData, 'webp', 15, 40, 560, 0);
+
+
+                pdf.save("tabela.pdf");
+              }
+            });
           }
-
-
         </script>
 
 

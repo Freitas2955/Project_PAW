@@ -7,6 +7,8 @@
   <title>Gestão de Doadores</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/management.css' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -18,52 +20,54 @@
           <div class="contentHeader">
             <h1>Campanhas</h1>
             <div class="botoes">
-              <button id="exportar" onclick="exportarUtilizadores()">
-                <img src="../../../public/images/download.webp" alt="" height="10" width="10"> Exportar
+              <button id="exportar" onclick="exportTableToPDF()">
+                <img src="../../../../public/images/arrow_down_icon_242220.png" alt="" height="10" width="10"> Exportar
               </button>
             </div>
           </div>
           <div class="midbar">
-            <p><strong><%=number%></strong> no total</p>
+            <p><strong>
+                <%=number%>
+              </strong> no total</p>
             <form action="/campaigns/searchByPartner1" method="get">
               <input type="text" name="partnerName" placeholder="&#128269; Pesquisa Parceiro">
               <button type="submit" style="display: none;">
-                  <i class="fas fa-search" id="search"></i>
+                <i class="fas fa-search" id="search"></i>
               </button>
-          </form>
+            </form>
           </div>
           <div class="tabela-scroll">
-          <table>
-            <thead>
-              <th>Nome</th>
-              <th>Custo</th>
-              <th>Nome do parceiro</th>
-              <th></th>
-            </thead>
-            <tbody>
-              <% campaigns.forEach(campaign=> {%>
-                <tr>
-                  <td>
-                    <%=campaign.name%>
-                  </td>
-                  <td>
-                    <%=campaign.cost%>
-                  </td>
-                  <td>
-                    <%=campaign.partnerName%>
-                  </td>
-                  <td>
-                    <form action="/campaigns/delete/<%=campaign._id%>" method="post">
-                      <button id="delete" type="submit">&#x2715;</button>
-                    </form>
-                    <form action="/campaigns/show/<%=campaign._id%>" >
-                      <button id="ver" type="submit">&#128462;</button>
-                    </form>
-                  </td>
-                </tr>
-                <% });%>
-            </tbody>
-          </table>
+            <table id="tabela">
+              <thead>
+                <th>Nome</th>
+                <th>Custo</th>
+                <th>Nome do parceiro</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <% campaigns.forEach(campaign=> {%>
+                  <tr>
+                    <td>
+                      <%=campaign.name%>
+                    </td>
+                    <td>
+                      <%=campaign.cost%>
+                    </td>
+                    <td>
+                      <%=campaign.partnerName%>
+                    </td>
+                    <td>
+                      <form action="/campaigns/delete/<%=campaign._id%>" method="post">
+                        <button id="delete" type="submit">&#x2715;</button>
+                      </form>
+                      <form action="/campaigns/show/<%=campaign._id%>">
+                        <button id="ver" type="submit">&#128462;</button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% });%>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -76,6 +80,27 @@
               dropdownContent.style.display = "none";
             }
           }
+
+          async function exportTableToPDF() {
+            const { jsPDF } = window.jspdf;
+
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            const table = document.getElementById("tabela");
+
+
+            await html2canvas(table, {
+              onrendered: function (canvas) {
+                const imgData = canvas.toDataURL('../../public/images/download.webp');
+
+                
+                pdf.addImage(imgData, 'webp', 15, 40, 560, 0);
+
+               
+                pdf.save("tabela.pdf");
+              }
+            });
+          }
+
         </script>
     </main>
 </body>

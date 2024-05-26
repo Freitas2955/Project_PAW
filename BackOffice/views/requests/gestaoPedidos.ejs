@@ -7,6 +7,8 @@
   <title>Gestão de recolhas</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/management.css' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -18,7 +20,7 @@
       <div class="contentHeader">
         <h1>Pedidos de Recolha</h1>
         <div class="botoes">
-          <button id="exportar"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
+          <button id="exportar" onclick="exportTableToPDF()"><img src="../images/download.webp" alt="" height="10" width="10"> Exportar</button>
           <div class="dropdown">
             <button id="novo">&#x2b; Nova doação</button>
           </div>
@@ -28,7 +30,7 @@
         <p><strong>200</strong> no total</p>
         <input type="text" placeholder="&#128269;  Pesquisa">
       </div>
-      <table>
+      <table id="tabela">
         <thead>
           <th>Doador</th>
           <th>Estado</th>
@@ -66,6 +68,27 @@
             <% });%>
         </tbody>
       </table>
+      <script>
+        async function exportTableToPDF() {
+            const { jsPDF } = window.jspdf;
+
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            const table = document.getElementById("tabela");
+
+
+            await html2canvas(table, {
+              onrendered: function (canvas) {
+                const imgData = canvas.toDataURL('../../public/images/download.webp');
+
+
+                pdf.addImage(imgData, 'webp', 15, 40, 560, 0);
+
+
+                pdf.save("tabela.pdf");
+              }
+            });
+          }
+      </script>
     </div>
   </main>
 </body>
