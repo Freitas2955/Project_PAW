@@ -1,8 +1,10 @@
 var express = require("express");
 var router = express.Router();
 var point = require("../controllers/PointsController.js");
+var Donation = require("../models/Donation.js");
 const loginController = require("../controllers/LoginController");
 const campaign= require("../controllers/CampaignController");
+
 /*
 router.get('/',  authController.verifyLoginUser, function(req, res, next) {
   res.render('index', );
@@ -29,7 +31,7 @@ router.get("/pontos",loginController.verifyLoginUser, function (req, res, next) 
   });
 });
 
-router.get("/doar/:id",loginController.verifyLoginUser, function (req, res, next) {
+router.get("/doar/:id/:entityId",loginController.verifyLoginUser, function (req, res, next) {
   point.simulate(req, res);
 });
 
@@ -95,11 +97,19 @@ router.get("/gerirCampanhas", function (req, res, next) {
   campaign.management(req,res);
 });
 */
-router.get("/dashboard",loginController.verifyLoginUser, function (req, res, next) {
-  res.render("dashboard", {
-    username: req.session.username,
-    userId: req.session.userId,
-  });
+router.get("/dashboard", loginController.verifyLoginUser,function (req, res, next) {
+  try {
+    var donations =  Donation.find();
+    const daysCount = Array(7).fill(0);
+    
+    res.render("dashboard", {
+      username: req.session.username,
+      userId: req.session.userId,
+      donations: donations,
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 router.get("/shop/:donatorId",loginController.verifyLoginUser, function (req, res, next) {

@@ -77,9 +77,11 @@ pointsController.simulate = function (req, res) {
   Points.findOne()
     .then((point) => {
       let id = req.params.id;
+      let entityId = req.params.entityId;
       res.render("../views/donations/doar", {
         point: point,
         id: id,
+        entityId:entityId,
         username: req.session.username,
         userId: req.session.userId,
       });

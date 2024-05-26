@@ -5,8 +5,10 @@ import { DoarComponent } from './navbar/doar/doar.component';
 import { LojaComponent } from './navbar/loja/loja.component';
 import { DoacoesComponent } from './navbar/doacoes/doacoes.component';
 import { RegistoEntidadesComponent } from './navbar/registo-entidades/registo-entidades.component';
+import { PagInicialComponent } from './pag-inicial/pag-inicial.component';
 
 export const routes: Routes = [
+  { path: '', component: PagInicialComponent },
   { path: 'login', component: LoginComponent },
   { path: 'entidades', component: EntidadesComponent },
   { path: 'doar', component: DoarComponent },

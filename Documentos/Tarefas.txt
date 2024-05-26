@@ -44,7 +44,7 @@ menu de registo, criar campanha, historico de compra,ver detalhes do parceiro
 do primerio milestone:
 refazer dashboard--plotly
 notificacoes por email
-registar na entidade a doacao-criar metodo select na doacao para selecionar entidade
+registar na entidade a doacao-criar metodo select na doacao para selecionar entidade   ---------feito
 dashboard de utilizador com kpis
 api de paypal
 fazer notificacoes e exportar

@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+
+* {
+  font-family: "Lexend", sans-serif;
+}
+main{
+    height: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.image {
+    width: 650px;
+    height: 550px; 
+    /*background-color: #eee; */
+    background-size: cover;
+    border-radius: 10px 10px 0px 0px;
+    background-image: url('/assets/images/2.jpg');
+}
+
+@media(max-width:750px){
+    main{
+        margin-top: 10vh;  
+    }
+    .image {
+        width: 100vw;
+        height: 50vh; 
+        background-position: center;
+    }
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-left: 10%;  
+}
+
+.text{
+    width: 80%;
+}
+
+
+
+.grid-box{
+    display: flex;
+    align-items: center;
+}

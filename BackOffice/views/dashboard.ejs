@@ -6,12 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel='stylesheet' href='/stylesheets/dashboard.css' />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
     <%- include('general/header',{username:username, userId:userId}) -%>
         <main>
             <%- include('general/sidebar', { activeItem: 'pagina1' }) -%>
+
+                <div id="chart" style="width: 90%; height: 500px;"></div>
+
+
+                <script>
+                    
+                    var donations =  JSON.stringify("<%=donations%>") ;
+        
+                    async function createChart() {
+                        const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+                        const data = daysCount1;
+
+                        const trace = {
+                            x: daysOfWeek,
+                            y: data,
+                            type: 'bar'
+                        };
+
+                        const layout = {
+                            title: 'Doações por Dia da Semana',
+                            xaxis: { title: 'Dia da Semana' },
+                            yaxis: { title: 'Número de Doações' }
+                        };
+
+                        Plotly.newPlot('chart', [trace], layout);
+                    }
+
+                    window.onload = createChart;
+                </script>
+
+
 
                 <div class="content">
                     <h1>Dashboard</h1>
@@ -35,6 +67,7 @@
                     </div>
 
                 </div>
+
         </main>
 </body>
 
