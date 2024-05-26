@@ -26,3 +26,26 @@ Interface frontoffice para doardor e instituicoes e parceiros
 
 
 rever autenticacao pq é diferente no angular
+
+PAW PAGINAS:
+
+pagina inicial
+
+doador:
+detalhes da doacao,escolha de entidade, menu de registo,dashboard,criar pedido de recolha, historico de compras
+
+Entidade:
+menu de registo,aceitar doacoes(aprovar), ver detalhes da entidade
+
+Parceiro
+menu de registo, criar campanha, historico de compra,ver detalhes do parceiro
+
+
+do primerio milestone:
+refazer dashboard--plotly
+notificacoes por email
+registar na entidade a doacao-criar metodo select na doacao para selecionar entidade
+dashboard de utilizador com kpis
+api de paypal
+fazer notificacoes e exportar
+estado da doação-recebido,entregue,estraviado
