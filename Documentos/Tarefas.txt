@@ -49,3 +49,10 @@ dashboard de utilizador com kpis
 api de paypal
 fazer notificacoes e exportar
 estado da doação-recebido,entregue,estraviado
+
+freitas:
+menu de registo para todos-doador,entodade,parceiro,
+detalhes de doador,entidade e parceiro,
+editar os 3
+criar e editar campanha
+detalhes de doacao
