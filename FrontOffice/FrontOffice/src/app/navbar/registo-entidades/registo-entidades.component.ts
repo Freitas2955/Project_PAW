@@ -10,4 +10,11 @@ import { NavbarComponent } from '../navbar.component';
 })
 export class RegistoEntidadesComponent {
 
+  constructor() { }
+
+  onSubmit(form: any): void {
+    console.log('Form data:', form);
+    // Aqui você pode adicionar a lógica para enviar os dados para um servidor
+  }
+
 }
