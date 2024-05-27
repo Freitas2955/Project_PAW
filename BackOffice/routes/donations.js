@@ -7,6 +7,10 @@ router.get("/", loginController.verifyLoginUser, function (req, res) {
   donation.management(req, res);
 });
 
+router.get("/get", loginController.verifyLoginUser, function (req, res) {
+  donation.getDonations(req, res);
+});
+
 // Get single donation by id
 router.get("/show/:id", loginController.verifyLoginUser, function (req, res) {
   donation.show(req, res);

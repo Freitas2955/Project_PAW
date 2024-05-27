@@ -65,6 +65,29 @@ donationController.management2 = function (req, res) {
     }
   })();
 };
+
+donationController.getDonations = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      num = await Donation.countDocuments();
+      console.log("Número total de documentos:", num);
+      Donation.find()
+        .then((donation) => {
+          res.json( {
+            donations: donation
+          })
+          //res.render("../views/donations/gestaoDoacoes");
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
 /*
 donationController.list = function (req, res) {
   Donation.find()

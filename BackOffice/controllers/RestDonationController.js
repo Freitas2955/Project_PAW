@@ -54,7 +54,7 @@ donationController.management2 = function (req, res) {
             username: req.session.username,
             userId: req.session.userId,
           })
-          res.render("../views/donations/gestaoDoacoes");
+          //res.render("../views/donations/gestaoDoacoes");
         })
         .catch((err) => {
           console.log("Error:", err);
