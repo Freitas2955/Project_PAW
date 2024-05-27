@@ -21,50 +21,14 @@
     </header>
     
     
-    <div class="entidades">
+    <div class="entidades" *ngFor="let entity of entities">
         <div class="card">
             <div class="imagem"></div>
             <div class="content">
-                <header><h3>Nome: {{entity?.name}} </h3><button>Detalhes</button></header>
-                <p>Email:</p>
-                <p>Cidade:</p>
-                <p>Telemóvel</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imagem"></div>
-            <div class="content">
-                <header><h3>Nome </h3><button>Detalhes</button></header>
-                <p>Email:</p>
-                <p>Cidade:</p>
-                <p>Telemóvel</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imagem"></div>
-            <div class="content">
-                <header><h3>Nome </h3><button>Detalhes</button></header>
-                <p>Email:</p>
-                <p>Cidade:</p>
-                <p>Telemóvel</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imagem"></div>
-            <div class="content">
-                <header><h3>Nome </h3><button>Detalhes</button></header>
-                <p>Email:</p>
-                <p>Cidade:</p>
-                <p>Telemóvel</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imagem"></div>
-            <div class="content">
-                <header><h3>Nome </h3><button>Detalhes</button></header>
-                <p>Email:</p>
-                <p>Cidade:</p>
-                <p>Telemóvel</p>
+                <header><h3>Nome: {{entity.name}} </h3><button>Detalhes</button></header>
+                <p>Email: {{entity.email}}</p>
+                <p>Cidade: {{entity.city}}</p>
+                <p>Telemóvel: {{entity.phone}}</p>
             </div>
         </div>
     </div>

@@ -18,6 +18,9 @@ export class RestService {
   constructor(private http: HttpClient) {}
 
   getEntities(): Observable<Entity[]> {
-    return this.http.get<Entity[]>(endpoint + 'entities');
+    return this.http.get<Entity[]>(endpoint + 'entities/get');
+  }
+  registerEntity(entity: Entity): Observable<any> {
+    return this.http.post<Entity>(endpoint + 'RestEntities/save', entity);
   }
 }

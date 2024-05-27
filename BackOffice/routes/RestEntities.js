@@ -22,7 +22,7 @@ router.get("/create",loginController.verifyLoginUser, function (req, res) {
 });
 
 // Save entity
-router.post("/save",loginController.verifyLoginUser, function (req, res) {
+router.post("/save", function (req, res) {
   entity.save(req, res);
 });
 

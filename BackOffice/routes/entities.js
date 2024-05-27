@@ -7,7 +7,7 @@ router.get("/",loginController.verifyLoginUser, function (req, res) {
   entity.management1(req, res);
 });
 
-router.get("/get", loginController.verifyLoginUser, function (req, res) {
+router.get("/get", function (req, res) {
   entity.getEntities(req, res);
 });
 
