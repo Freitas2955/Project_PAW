@@ -13,61 +13,193 @@
     <%- include('general/header',{username:username, userId:userId}) -%>
         <main>
             <%- include('general/sidebar', { activeItem: 'pagina1' }) -%>
-
-                <div id="chart" style="width: 90%; height: 500px;"></div>
-
-
-                <script>
-                    
-                    var donations =  JSON.stringify("<%=donations%>") ;
-        
-                    async function createChart() {
-                        const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-                        const data = daysCount1;
-
-                        const trace = {
-                            x: daysOfWeek,
-                            y: data,
-                            type: 'bar'
-                        };
-
-                        const layout = {
-                            title: 'Doações por Dia da Semana',
-                            xaxis: { title: 'Dia da Semana' },
-                            yaxis: { title: 'Número de Doações' }
-                        };
-
-                        Plotly.newPlot('chart', [trace], layout);
-                    }
-
-                    window.onload = createChart;
-                </script>
-
-
-
                 <div class="content">
                     <h1>Dashboard</h1>
-                    <div class="frame">
-                        <iframe
-                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
-                            width="43%" height="43%"
-                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e24cb-ba8a-4cc8-82be-46c8ce226588&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
-                        <iframe
-                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
-                            width="43%" height="43%"
-                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e2b55-a821-4231-8f41-a10232a0a346&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
-                        <iframe
-                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
-                            width="43%" height="43%"
-                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e335d-ffaf-4372-8866-dff47558bc78&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
-                        <iframe
-                            style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
-                            width="43%" height="43%"
-                            src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e3a89-a821-48a5-8e3a-a10232e2d966&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
+                    <div class="dash"
+                        style=" display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 500px));">
+                        <div id="chart1" style="width:500px; height: 300px; "></div>
+                        <div id="chart2" style="width:500px; height: 300px; "></div>
+                        <div id="chart3" style="width:500px; height: 300px; "></div>
+                        <div id="chart4" style="width:500px; height: 300px; "></div>
+                    </div>
+
+                    <script>
+
+                        async function createChart1(donations) {
+                            donations = Object.values(donations);
+                            const data = Array(7).fill(0);
+
+                            donations.forEach(donation => {
+                                console.log(donation.updated_at)
+                                console.log(donation)
+                                var day = new Date(donation.updated_at).getDay();
+                                console.log(day)
+                                data[day]++;
+                            });
+
+                            const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+
+                            const trace = {
+                                labels: daysOfWeek,
+                                values: data,
+                                type: 'pie',
+                                hole: 0.4
+                            };
+
+                            const layout = {
+                                title: 'Doações por Dia da Semana',
+                                xaxis: { title: 'Dia da Semana' },
+                                yaxis: { title: 'Número de Doações' }
+                            };
+
+                            Plotly.newPlot('chart1', [trace], layout);
+                        }
+
+                        async function createChart2(donations) {
+                            donations = Object.values(donations);
+                            const attributes = ['acessorios', 'camisolas', 'dinheiro', 'calcas', 'casacos', 'interior', 'sapatos'];
+                            const data = Array(7).fill(0);
+                            let count = 0;
+
+                            donations.forEach(donation => {
+                                count++;
+                                data[0] += donation.acessorios;
+                                data[1] += donation.camisolas;
+                                data[2] += donation.dinheiro;
+                                data[3] += donation.calcas;
+                                data[4] += donation.casacos;
+                                data[5] += donation.interior;
+                                data[6] += donation.sapatos;
+                            });
+
+                            data.forEach(dataAt => {
+                                dataAt = dataAt / count;
+                            });
+
+
+                            const trace = {
+                                x: attributes,
+                                y: data,
+                                type: 'bar'
+                            };
+
+                            const layout = {
+                                title: 'Tipo de doação em média',
+                                xaxis: { title: 'Tipo' },
+                                yaxis: { title: 'Número médio de Doações' }
+                            };
+
+                            Plotly.newPlot('chart2', [trace], layout);
+                        }
+
+
+                        async function createChart3(donations) {
+                            if (!Array.isArray(donations)) {
+                                donations = Object.values(donations);
+                            }
+
+                            const monthsCount = Array(12).fill(0);
+
+                            donations.forEach(donation => {
+                                const month = new Date(donation.updated_at).getMonth();
+                                monthsCount[month]++;
+                            });
+
+                            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+                            const trace = {
+                                y: months,
+                                x: monthsCount,
+                                type: 'bar',
+                                orientation: 'h'
+                            };
+
+                            const layout = {
+                                title: 'Doações por Mês',
+                                xaxis: { title: 'Número de Doações' },
+                                yaxis: { title: 'Mês' }
+                            };
+
+                            Plotly.newPlot('chart3', [trace], layout);
+                        }
+                        fetch('/donations/get')
+                            .then(response => response.json())
+                            .then(donations => {
+                                createChart1(donations);
+                                createChart2(donations);
+                                createChart3(donations);
+                            })
+                            .catch(err => {
+                                console.error('Erro ao buscar dados de doadores:', err);
+                            });
+
+                        async function createChart4(entities) {
+                            if (!Array.isArray(entities)) {
+                                entities = Object.values(entities);
+                            }
+
+                            const citiesCount = {};
+
+                            entities.forEach(entity => {
+                                const city = entity.city;
+                                citiesCount[city] = (citiesCount[city] || 0) + 1;
+                            });
+
+                            const cities = Object.keys(citiesCount);
+                            const counts = Object.values(citiesCount);
+
+                            const trace = {
+                                x: counts,
+                                y: cities,
+                                type: 'bar',
+                                orientation: 'h'
+                            };
+
+                            const layout = {
+                                title: 'Número de Instituições Registradas por Cidade',
+                                xaxis: { title: 'Número de Instituições' },
+                                yaxis: { title: 'Cidade' }
+                            };
+
+                            Plotly.newPlot('chart4', [trace], layout);
+                        }
+
+                        fetch('/entities/get')
+                            .then(response => response.json())
+                            .then(entities => {
+                                createChart4(entities);
+                            })
+                            .catch(err => {
+                                console.error('Erro ao buscar dados de doadores:', err);
+                            });
+                    </script>
+
+                    <!--
+                    <div class="content">
+
+                        <div class="frame">
+                            <iframe
+                                style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                                width="43%" height="43%"
+                                src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e24cb-ba8a-4cc8-82be-46c8ce226588&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
+                            <iframe
+                                style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                                width="43%" height="43%"
+                                src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e2b55-a821-4231-8f41-a10232a0a346&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
+                            <iframe
+                                style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                                width="43%" height="43%"
+                                src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e335d-ffaf-4372-8866-dff47558bc78&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
+                            <iframe
+                                style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                                width="43%" height="43%"
+                                src="https://charts.mongodb.com/charts-paw-alzbecq/embed/charts?id=662e3a89-a821-48a5-8e3a-a10232e2d966&maxDataAge=60&theme=light&autoRefresh=true"></iframe>
+                        </div>
+
                     </div>
 
                 </div>
-
+                -->
         </main>
 </body>
 
