@@ -57,3 +57,5 @@ detalhes de doador,entidade e parceiro,
 editar os 3
 criar e editar campanha
 detalhes de doacao
+
+nao deixar registar instituicoes com email igual a doadores

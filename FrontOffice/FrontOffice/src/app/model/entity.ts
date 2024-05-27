@@ -9,4 +9,6 @@ export class Entity{
     password?: String;
     phone?: Number;
     approved?: Boolean;
+
+    
 }

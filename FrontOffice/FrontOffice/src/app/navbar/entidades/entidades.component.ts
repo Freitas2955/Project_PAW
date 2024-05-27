@@ -4,6 +4,7 @@ import { Entity } from '../../model/entity';
 import { RestService } from '../../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-entidades',
   standalone: true,
@@ -15,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EntidadesComponent{
    entities?:Entity[];
 
-   /*constructor(public rest:RestService,private route:ActivatedRoute,private router:Router){
+   constructor(public rest:RestService,private route:ActivatedRoute,private router:Router){
 
    }
 
@@ -28,6 +29,6 @@ export class EntidadesComponent{
 
   seeListOfEntities(){
     this.router.navigate(['/entidades']);
-  }*/
+  }
 
 }
