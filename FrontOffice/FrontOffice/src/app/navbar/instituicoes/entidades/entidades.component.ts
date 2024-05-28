@@ -27,7 +27,7 @@ export class EntidadesComponent implements OnInit {
 
   getEntities(): void {
     console.log('getEntities chamado');
-    this.rest.getEntities().subscribe((response: any) => {  // Tipo `any` para acessar a propriedade correta
+    this.rest.getEntities().subscribe((response: any) => {  
       console.log('Resposta recebida:', response);
       this.entities = response.entities;  
     }, error => {
