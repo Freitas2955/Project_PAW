@@ -20,6 +20,11 @@ export class RestService {
   getEntities(): Observable<Entity[]> {
     return this.http.get<Entity[]>(endpoint + 'entities/get');
   }
+
+  getEntity(id:String|null): Observable<Entity> {
+    return this.http.get<Entity>(endpoint + 'RestEntities/show/'+id);
+  }
+
   registerEntity(entity: Entity): Observable<any> {
     return this.http.post<Entity>(endpoint + 'RestEntities/save', entity);
   }

@@ -12,7 +12,7 @@ router.get("/notApproved",loginController.verifyLoginUser, function (req, res) {
 });
 
 // Get single entity by id
-router.get("/show/:id",loginController.verifyLoginUser, function (req, res) {
+router.get("/show/:id", function (req, res) {
   entity.show(req, res);
 });
 

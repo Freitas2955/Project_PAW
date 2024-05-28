@@ -31,7 +31,7 @@ export class EntidadesComponent implements OnInit {
       console.log('Resposta recebida:', response);
       this.entities = response.entities;  
     }, error => {
-      console.error('Erro ao buscar entidades', error);
+      console.error('Erro ao procurar entidade', error);
     });
   }
 
