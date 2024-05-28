@@ -17,22 +17,26 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
-    margin-bottom: 15px;
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-.form-group label {
-    display: block;
+label {
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-.form-group input {
-    width: 100%;
+input, textarea, button {
+    margin-bottom: 15px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input, textarea {
+    width: 100%;
 }
 
 button {

@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { EntidadesComponent } from './navbar/entidades/entidades.component';
+import { EntidadesComponent } from './navbar/instituicoes/entidades/entidades.component';
 
 const appRoutes: Routes = [
     {

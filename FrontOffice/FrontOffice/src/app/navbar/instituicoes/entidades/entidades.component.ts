@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../navbar.component';
-import { Entity } from '../../model/entity';
-import { RestService } from '../../rest.service';
+import { NavbarComponent } from '../../navbar.component';
+import { Entity } from '../../../model/entity';
+import { RestService } from '../../../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 

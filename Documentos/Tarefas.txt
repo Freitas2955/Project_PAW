@@ -1,25 +1,14 @@
 verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
 
-botao de export 
-
 no login funcao de ver pass
 login lembrar me / recuperar pass 
-notificacoes 
 api de mapas para morada(pensar na logica)
-api de pagamentos(pensar na logica)
 
-
-PAW
 Dashboard 
-Notificacoes 
-Exportar 
 Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
 Opcao de escolher a quem(instituicao) vamos doar
 
-
 dashboard para o proprio doador 
-
-Paypal
 
 ------------------------------------------------------
 Interface frontoffice para doardor e instituicoes e parceiros 
@@ -43,11 +32,10 @@ menu de registo, criar campanha, historico de compra,ver detalhes do parceiro
 
 do primerio milestone:
 refazer dashboard--plotly
-notificacoes por email
 registar na entidade a doacao-criar metodo select na doacao para selecionar entidade   ---------feito
 dashboard de utilizador com kpis
 api de paypal
-fazer notificacoes e exportar
+fazer notificacoes(email) e exportar
 estado da doação-recebido,entregue,estraviado
 
 
