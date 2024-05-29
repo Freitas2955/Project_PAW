@@ -23,7 +23,8 @@ export class RegistoEntidadesComponent {
   }
 
   submitForm(): void {
-    if (/*this.entity.password === this.confpassword*/ true) {
+    if (this.entity.password === this.confpassword) {
+      console.log(this.entity);
       this.restService.registerEntity(this.entity).subscribe(
         (response) => {
           console.log('Instituição registada com sucesso:', response);

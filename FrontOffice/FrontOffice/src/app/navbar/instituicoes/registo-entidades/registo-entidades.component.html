@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 <main>
-    <h1>Registrar Entidade</h1>
+    <h1>Registar Instituição</h1>
     <div  class="form-container">
         <form (ngSubmit)="submitForm()"  #myForm="ngForm" >
-            <label for="name">Nome da Entidade:</label>
+            <label for="name">Nome da Instituição:</label>
             <input type="text" id="name" name="name" [(ngModel)]="entity.name" placeholder="Nome da Entidade"
                 #name="ngModel" required minlength="4">
             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
@@ -40,13 +40,13 @@
                 required>
 
             <label for="password">Password:</label>
-            <input type="text" id="password" name="password" [(ngModel)]="entity.password" placeholder="Senha" required>
+            <input type="password" id="password" name="password" [(ngModel)]="entity.password" placeholder="Senha" required>
 
             <label for="confpassword">Comfirmar Password:</label>
-            <input type="text" id="confpassword" name="confpassword" [(ngModel)]="confpassword"
+            <input type="password" id="confpassword" name="confpassword" [(ngModel)]="confpassword"
                 placeholder="Confirmar Senha" required>
 
-            <button type="submit" [disabled]="myForm.invalid">Registrar</button>
+            <button type="submit" [disabled]="myForm.invalid" >Registar</button>
         </form>
 
     </div>
