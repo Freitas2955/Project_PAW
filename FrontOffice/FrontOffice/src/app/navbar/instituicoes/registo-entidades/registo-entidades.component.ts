@@ -17,10 +17,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class RegistoEntidadesComponent {
   entity: Entity;
   confpassword?: String;
+  /////////////////////////////////
+  selectedFile: File | null = null;
+  ///////////////////////////////
+
   constructor(private restService: RestService,private builder: FormBuilder) {
     this.entity = new Entity();
     
   }
+  ///////////////////////////////
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+  ///////////////////////
 
   submitForm(): void {
     if (this.entity.password === this.confpassword) {

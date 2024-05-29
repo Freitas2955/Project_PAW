@@ -7,6 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { EntidadesComponent } from './navbar/instituicoes/entidades/entidades.component';
 import { NgModel } from '@angular/forms';
 
+///////////////////////////////////////////////////
+import { UploadfileComponent } from './navbar/uploadfile/uploadfile.component';
+/////////////////////////////////////////
+/*Adicionei tambem em declarations  UploadfileComponent*/
+
 const appRoutes: Routes = [
   {
     path: 'entidades',
@@ -15,7 +20,7 @@ const appRoutes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [AppComponent, EntidadesComponent],
+  declarations: [AppComponent, EntidadesComponent, UploadfileComponent],
   imports: [
     RouterModule.forRoot(appRoutes),
     FormsModule,

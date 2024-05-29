@@ -46,6 +46,10 @@
             <input type="password" id="confpassword" name="confpassword" [(ngModel)]="confpassword"
                 placeholder="Confirmar Senha" required>
 
+                <label for="image">Imagem:</label>
+                <input type="file" id="image" name="image" (change)="onFileSelected($event)" />
+
+                
             <button type="submit" [disabled]="myForm.invalid" >Registar</button>
         </form>
 
