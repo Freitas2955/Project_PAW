@@ -15,12 +15,11 @@
             <%- include('general/sidebar', { activeItem: 'pagina1' }) -%>
                 <div class="content">
                     <h1>Dashboard</h1>
-                    <div class="dash"
-                        style=" display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 500px));">
-                        <div id="chart1" style="width:500px; height: 300px; "></div>
-                        <div id="chart2" style="width:500px; height: 300px; "></div>
-                        <div id="chart3" style="width:500px; height: 300px; "></div>
-                        <div id="chart4" style="width:500px; height: 300px; "></div>
+                    <div class="dash">
+                        <div id="chart1" class="chart" style="width:500px; height: 300px; "></div>
+                        <div id="chart2" class="chart" style="width:500px; height: 300px; "></div>
+                        <div id="chart3" class="chart" style="width:500px; height: 300px; "></div>
+                        <div id="chart4" class="chart" style="width:500px; height: 300px; "></div>
                     </div>
 
                     <script>
@@ -32,24 +31,39 @@
                             donations.forEach(donation => {
                                 console.log(donation.updated_at)
                                 console.log(donation)
-                                var day = new Date(donation.updated_at).getDay();
-                                console.log(day)
-                                data[day]++;
+                                for (i = 0; i < donation.length; i++) {
+                                    var day = new Date(donation[i].updated_at).getDay();
+                                    console.log(day)
+                                    data[day]++;
+                                }
+
+
                             });
 
                             const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-
+                            const filteredData = data.filter(value => value > 0);
+                            const filteredDaysOfWeek = daysOfWeek.filter((day, index) => data[index] > 0);
+                            const totalDonations = filteredData.reduce((sum, value) => sum + value, 0);
                             const trace = {
-                                labels: daysOfWeek,
-                                values: data,
+                                labels: filteredDaysOfWeek,
+                                values: filteredData,
                                 type: 'pie',
-                                hole: 0.4
+                                hole: 0.6,
                             };
 
                             const layout = {
                                 title: 'Doações por Dia da Semana',
-                                xaxis: { title: 'Dia da Semana' },
-                                yaxis: { title: 'Número de Doações' }
+                                annotations: [
+                                    {
+                                        font: {
+                                            size: 15
+                                        },
+                                        showarrow: false,
+                                        text: `Total: ${totalDonations}`,
+                                        x: 0.5,
+                                        y: 0.5
+                                    }
+                                ]
                             };
 
                             Plotly.newPlot('chart1', [trace], layout);
@@ -62,14 +76,17 @@
                             let count = 0;
 
                             donations.forEach(donation => {
-                                count++;
-                                data[0] += donation.acessorios;
-                                data[1] += donation.camisolas;
-                                data[2] += donation.dinheiro;
-                                data[3] += donation.calcas;
-                                data[4] += donation.casacos;
-                                data[5] += donation.interior;
-                                data[6] += donation.sapatos;
+                                for (i = 0; i < donation.length; i++) {
+                                    count++;
+                                    data[0] += donation[i].acessorios;
+                                    data[1] += donation[i].camisolas;
+                                    data[2] += donation[i].dinheiro;
+                                    data[3] += donation[i].calcas;
+                                    data[4] += donation[i].casacos;
+                                    data[5] += donation[i].interior;
+                                    data[6] += donation[i].sapatos;
+                                }
+
                             });
 
                             data.forEach(dataAt => {
@@ -101,12 +118,16 @@
                             const monthsCount = Array(12).fill(0);
 
                             donations.forEach(donation => {
-                                const month = new Date(donation.updated_at).getMonth();
-                                monthsCount[month]++;
+                                for (i = 0; i < donation.length; i++) {
+                                    const month = new Date(donation[i].updated_at).getMonth();
+                                    monthsCount[month]++;
+                                }
+
                             });
 
-                            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
+                            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                            
                             const trace = {
                                 y: months,
                                 x: monthsCount,
@@ -141,9 +162,14 @@
                             const citiesCount = {};
 
                             entities.forEach(entity => {
-                                const city = entity.city;
-                                citiesCount[city] = (citiesCount[city] || 0) + 1;
+
+                                for (i = 0; i < entity.length; i++) {
+                                    const city = entity[i].city;
+                                    citiesCount[city] = (citiesCount[city] || 0) + 1;
+                                }
+
                             });
+
 
                             const cities = Object.keys(citiesCount);
                             const counts = Object.values(citiesCount);
@@ -156,13 +182,13 @@
                             };
 
                             const layout = {
-                                title: 'Número de Instituições Registradas por Cidade',
+                                title: 'Número de Instituições Registadas por Cidade',
                                 xaxis: { title: 'Número de Instituições' },
                                 yaxis: { title: 'Cidade' }
                             };
 
                             Plotly.newPlot('chart4', [trace], layout);
-                        }
+                        };
 
                         fetch('/entities/get')
                             .then(response => response.json())
