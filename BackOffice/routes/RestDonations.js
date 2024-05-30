@@ -3,12 +3,20 @@ var router = express.Router();
 var donation = require("../controllers/RestDonationController.js");
 const loginController = require("../controllers/LoginController.js");
 // Get all donations
-router.get("/", loginController.verifyLoginUser, function (req, res) {
+router.get("/", function (req, res) {
   donation.management(req, res);
 });
 
+router.get("/getEntityDonations/:id", function (req, res) {
+  donation.getEntityDonations(req, res);
+});
+
+router.get("/getDonatorDonations/:id", function (req, res) {
+  donation.getDonatorDonations(req, res);
+});
+
 // Get single donation by id
-router.get("/show/:id", loginController.verifyLoginUser, function (req, res) {
+router.get("/show/:id", function (req, res) {
   donation.show(req, res);
 });
 

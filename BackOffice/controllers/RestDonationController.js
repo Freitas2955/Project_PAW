@@ -39,6 +39,46 @@ donationController.management = function (req, res) {
   })();
 };
 
+donationController.getEntityDonations = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      Donation.find({entityId:req.params.id})
+        .then((donation) => {
+          res.json({
+            donations: donation
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+donationController.getDonatorDonations = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      Donation.find({donatorId:req.params.id})
+        .then((donation) => {
+          res.json({
+            donations: donation
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
 donationController.management2 = function (req, res) {
   let num;
 
@@ -87,7 +127,6 @@ donationController.show = function (req, res) {
               userId: req.session.userId,
               requested: false,
             })
-            res.render("../views/donations/verdoacao");
           })
           .catch((err) => {
             console.error("Error:", err);
@@ -95,7 +134,7 @@ donationController.show = function (req, res) {
       } else {
         Donation.findOne({ _id: req.params.id })
           .then((donation) => {
-            res.render("../views/donations/verdoacao", {
+            res.json( {
               donation: donation,
               username: req.session.username,
               userId: req.session.userId,

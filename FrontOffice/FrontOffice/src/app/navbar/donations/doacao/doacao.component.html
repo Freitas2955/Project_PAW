@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<main>
+    <h1>Doação</h1>
+    <form action="">
+        <div class="inputBox">
+            <label for="Camisolas">Camisolas:</label>
+            <input type="number" name="Camisolas" value="{{donation.camisolas}}" readonly>
+        </div>
+        <div class="inputBox">
+            <label for="Casacos">Casacos:</label>
+            <input type="number" name="Casacos" value="{{donation.casacos}}" readonly>
+        </div>
+        <div class="inputBox">
+            <label for="Calcas">Calças:</label>
+            <input type="number" name="Calcas" value="{{donation.calcas}}" readonly>
+        </div>
+        <div class="inputBox">
+            <label for="Pares de Sapatos">Pares de Sapatos:</label>
+            <input type="number" name="Pares de Sapatos" value="{{donation.sapatos}}" readonly>
+        </div>
+        <div class="inputBox">
+            <label for="Acessorios">Acessórios:</label>
+            <input type="number" name="Acessorios" value="{{donation.acessorios}}" readonly>
+        </div>
+        <div class="inputBox">
+            <label for="Roupa Interior">Roupa Interior:</label>
+            <input type="number" name="Roupa Interior" value="{{donation.interior}}" readonly>
+        </div>
+        <div class="inputBox">
+            <label for="Dinheiro">Dinheiro:</label>
+            <input type="number" name="Dinheiro" value="{{donation.dinheiro}}" readonly>
+        </div>
+        <div class="inputBox" id="Entidade">
+            <label for="Entidade">Instituição:</label>
+            <input type="text" name="Entidade" value="{{donation.entityName}}" readonly>
+        </div>
+        <div class="inputBox" id="Doador">
+            <label for="Entidade">Doador:</label>
+            <input type="text" name="Entidade" value="{{donation.donatorName}}" readonly>
+        </div>
+        <div class="buttons">
+            <button *ngIf="!requested" id="doar">Criar pedido</button>
+        </div>
+    </form>
+</main>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Entity } from './model/entity';
+import { Donation } from './model/donation';
 
 const endpoint = 'http://127.0.0.1:3000/';
 
@@ -49,6 +50,22 @@ export class RestService {
     return this.http.post<any>(endpoint + 'RestEntities/save', formData);
 }
 
+
+  getEntityDonations(id:String|null): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint + 'RestDonations/getEntityDonations/'+id);
+  }
+
+  getDonatorDonations(id:String|null): Observable<Donation[]> {
+    return this.http.get<Donation[]>(endpoint + 'RestDonations/getDonatorDonations/'+id);
+  }
+
+  getDonation(id:String|null): Observable<Donation> {
+    return this.http.get<Donation>(endpoint + 'RestDonations/show/'+id);
+  }
+
+  registerDonation(donation: Donation): Observable<any> {
+    return this.http.post<Donation>(endpoint + 'RestDonations/save', donation);
+  }
 
   /////////////////////////////////////////////////
   /*VER SE SAO PRECISOS OS DOIS*/

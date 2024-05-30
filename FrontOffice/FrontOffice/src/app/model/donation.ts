@@ -1,6 +1,8 @@
 export class Donation{
   _id?:String;
-    donatorId?:String;
+  entityId?:String;
+  entityName?: String;
+  donatorId?:String;
   donatorName?:String;
   camisolas?:Number;
   casacos?:Number;
@@ -11,4 +13,5 @@ export class Donation{
   dinheiro?:Number;
   approved?:Boolean;
   points?:Number;
+  updated_at:Date=new Date();
 }

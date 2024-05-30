@@ -16,8 +16,8 @@
 Interfaces: 
 -ver/criar doacao 
 -escolher entidade doacao 
--dashboard de cada um 
 -criar pedido de recolha doacao 
+-dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
 -historico de compras
 -ver/registar/editar doador
 -ver/registar/editar/ ver todos os parceiros parceiro
