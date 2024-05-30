@@ -18,11 +18,13 @@ export class RegistoEntidadesComponent {
   entity: Entity;
   confpassword?: String;
   /////////////////////////////////
-  selectedFile: File | null = null;
+  selectedFile: File;
   ///////////////////////////////
 
   constructor(private restService: RestService,private builder: FormBuilder) {
     this.entity = new Entity();
+    const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
+    this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
     
   }
   ///////////////////////////////
@@ -37,7 +39,7 @@ export class RegistoEntidadesComponent {
   submitForm(): void {
     if (this.entity.password === this.confpassword) {
       console.log(this.entity);
-      this.restService.registerEntity(this.entity).subscribe(
+      this.restService.registerEntity(this.entity, this.selectedFile).subscribe(
         (response) => {
           console.log('Instituição registada com sucesso:', response);
         },

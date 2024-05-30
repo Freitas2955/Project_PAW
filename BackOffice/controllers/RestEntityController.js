@@ -175,7 +175,7 @@ entityController.save = function (req, res) {
                     );
                   }
                 });
-                res.json(savedEntity);
+                /*res.json(savedEntity);*/
               });
              
             });
