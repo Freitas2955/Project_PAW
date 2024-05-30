@@ -1,49 +1,32 @@
-verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
+1º Milestone 
+-verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
+-login lembrar me / recuperar pass 
+-api de mapas para morada(pensar na logica)
+-fazer notificacoes(email) e exportar
 
-no login funcao de ver pass
-login lembrar me / recuperar pass 
-api de mapas para morada(pensar na logica)
-
-Dashboard 
-Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
-Opcao de escolher a quem(instituicao) vamos doar
-
-dashboard para o proprio doador 
-
-------------------------------------------------------
-Interface frontoffice para doardor e instituicoes e parceiros 
+-Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
 
 
-rever autenticacao pq é diferente no angular
+2º Milestone
+-rever autenticacao pq é diferente no angular
+-api paypal
 
-PAW PAGINAS:
+-Dashboard prorpio utilizador com kpis
 
-pagina inicial
+Interfaces: 
+-ver/criar doacao 
+-escolher entidade doacao 
+-dashboard de cada um 
+-criar pedido de recolha doacao 
+-historico de compras
+-ver/registar/editar doador
+-ver/registar/editar/ ver todos os parceiros parceiro
+-editar/ aceitar doacoes instituicao 
 
-doador:
-detalhes da doacao,escolha de entidade, menu de registo,dashboard,criar pedido de recolha, historico de compras
+-Compor a pagina inicial
 
-Entidade:
-menu de registo,aceitar doacoes(aprovar), ver detalhes da entidade
+-nao deixar registar instituicoes com email igual a doadores
 
-Parceiro
-menu de registo, criar campanha, historico de compra,ver detalhes do parceiro
+-acrescentar a lable e o input de imagens nos htmls
 
-
-do primerio milestone:
-refazer dashboard--plotly
-registar na entidade a doacao-criar metodo select na doacao para selecionar entidade   ---------feito
-dashboard de utilizador com kpis
-api de paypal
-fazer notificacoes(email) e exportar
-estado da doação-recebido,entregue,estraviado
-
-
-freitas:
-menu de registo para todos-doador,entodade,parceiro,
-detalhes de doador,entidade e parceiro,
-editar os 3
-criar e editar campanha
-detalhes de doacao
-
-nao deixar registar instituicoes com email igual a doadores
+-verificacao dos inputs (falta a mensagem)
