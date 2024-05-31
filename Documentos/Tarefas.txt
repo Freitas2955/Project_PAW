@@ -20,7 +20,7 @@ Interfaces:
 -historico de compras
 -ver/registar/editar doador
 -ver/registar/editar/ ver todos os parceiros parceiro
--editar/ aceitar doacoes instituicao 
+-aceitar doacoes instituicao 
 
 -Compor a pagina inicial
 
@@ -34,7 +34,20 @@ Interfaces:
 -login igual para todos
 
 
--urgente:
-Interface editar instituicao
-css de registar entidade
+
+
+
+
+
+Freitas:
+-ver/registar/editar/ ver todos os parceiros parceiro
+-ver/registar/editar doador
+-ver/criar doacao falta css
+
+
+
+Duarte:
+-nao deixar registar instituicoes com email igual a doadores
+-aceitar doacoes instituicao
+-escolher entidade doacao 
 funcao de ir buscar imagem ao servidor
