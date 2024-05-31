@@ -1,19 +1,19 @@
 import { Component, OnInit} from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { Partner } from '../../../model/partner';
+import { Donator } from '../../../model/donator';
 import { RestService } from '../../../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-parceiros',
+  selector: 'app-doadores',
   standalone: true,
   imports: [NavbarComponent,CommonModule],
-  templateUrl: './parceiros.component.html',
-  styleUrl: './parceiros.component.css'
+  templateUrl: './doadores.component.html',
+  styleUrl: './doadores.component.css'
 })
-export class ParceirosComponent implements OnInit{
-  partners?: Partner[];
+export class DoadoresComponent  implements OnInit{
+  donators?: Donator[];
 
   constructor(
     public rest: RestService,
@@ -22,20 +22,20 @@ export class ParceirosComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.getPartners();
+    this.getDonators();
   }
 
-  getPartners(): void {
-    console.log('getPartners chamado');
-    this.rest.getPartners().subscribe((response: any) => {  
+  getDonators(): void {
+    console.log('getDonators chamado');
+    this.rest.getDonators().subscribe((response: any) => {  
       console.log('Resposta recebida:', response);
-      this.partners = response.partners;  
+      this.donators = response.donators;  
     }, error => {
-      console.error('Erro ao procurar parceiro', error);
+      console.error('Erro ao procurar doador', error);
     });
   }
 
-  seeListOfPartners() {
-    this.router.navigate(['/parceiros']);
+  seeListOfDonators() {
+    this.router.navigate(['/doadores']);
   }
 }

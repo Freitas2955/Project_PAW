@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <main>
-    <header><h1>Parceiros</h1>
+    <header><h1>Doadores</h1>
         <button onclick="toggleDropdown()" id="filtro">Filtros </button>
         <div id="dropdownContent" class="dropdown-content" style="display: none;">     <!-- Ver este Drop para que serve? -->
           <a href="/employees/create">Funcionário</a>
@@ -19,15 +19,15 @@
         }
       </script>
     </header>
-    
-  <div class="parceiros">
-    <div class="card" *ngFor="let partner of partners">
+
+  <div class="doadores">
+    <div class="card" *ngFor="let donator of donators">
         <div class="content">
             <div class="info">
-                <header><h3>Nome: {{partner.name}}</h3></header>
-                <p>Email: {{partner.email}}</p>
-                <p>Cidade: {{partner.city}}</p>
-                <p>Telemóvel: {{partner.phone}}</p>
+                <header><h3>Nome: {{donator.name}}</h3></header>
+                <p>Email: {{donator.email}}</p>
+                <p>Cidade: {{donator.city}}</p>
+                <p>Telemóvel: {{donator.phone}}</p>
                 <div class="detalhes">
                     <button>Detalhes</button>
                 </div>

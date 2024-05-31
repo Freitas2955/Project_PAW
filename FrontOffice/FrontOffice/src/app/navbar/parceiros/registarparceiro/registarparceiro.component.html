@@ -1,1 +1,92 @@
-<p>registarparceiro works!</p>
+<app-navbar></app-navbar>
+<main>
+    <div class="content">
+        <form (ngSubmit)="submitForm()" #myForm="ngForm">
+            <div id="formContent">
+                <div id="leftside">
+                    <h2>Registar Parceiro</h2>
+
+                    <div id="preview-container">
+                        <div *ngIf="imagePreview">
+                            <img id="preview-image" [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                        </div>
+                    </div>
+                    <div id="upload-box">
+                        <input type="file" id="upload-input" name="file" accept="image/*" (change)="onFileSelected($event)" />
+                        <label for="upload-input" id="upload-label">Escolher imagem</label>
+                    </div>
+
+                    <div id="pass">
+                        <div class="inputContainer">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" [(ngModel)]="partner.password"
+                                placeholder="Senha" required>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="confpassword">Confirmar Password:</label>
+                            <input type="password" id="confpassword" name="confpassword" [(ngModel)]="confpassword"
+                                placeholder="Confirmar Senha" required>
+                        </div>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="description">Descrição:</label>
+                        <textarea id="description" name="description" [(ngModel)]="partner.description"
+                            placeholder="Descrição" required></textarea>
+                    </div>
+
+                </div>
+                <div id="rightside">
+                    <div class="nome">
+                        <div class="inputContainer">
+                            <label for="name">Nome:</label>
+                            <input type="text" id="name" name="name" [(ngModel)]="partner.name"
+                                placeholder="Nome da Entidade" #name="ngModel" required minlength="4">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                                <div *ngIf="name.hasError('required')">
+                                    Name is required.
+                                </div>
+                                <div *ngIf="name.hasError('minlength')">
+                                    Name must be at least 4 characters long.
+                                </div>
+                                <div *ngIf="name.hasError('forbiddenName')">
+                                    Name cannot be Bob.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grupo">
+                        <div class="inputContainer">
+                            <label for="phone">Telemóvel:</label>
+                            <input type="tel" id="phone" name="phone" [(ngModel)]="partner.phone" placeholder="Telefone"
+                                required>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" [(ngModel)]="partner.email" placeholder="Email"
+                                required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                        </div>
+                        <div class="inputContainer">
+                            <label for="address">Morada:</label>
+                            <input type="text" id="address" name="address" [(ngModel)]="partner.address"
+                                placeholder="Endereço" required>
+                        </div>
+                    </div>
+                    <div class="detalhesMorada">
+                        <div class="inputContainer">
+                            <label for="postCode">Código Postal:</label>
+                            <input type="text" id="postCode" name="postCode" [(ngModel)]="partner.postCode"
+                                placeholder="Código Postal" required>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="city">Cidade:</label>
+                            <input type="text" id="city" name="city" [(ngModel)]="partner.city" placeholder="Cidade"
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" [disabled]="myForm.invalid">Registar</button>
+        </form>
+
+    </div>
+</main>

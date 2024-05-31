@@ -4,7 +4,7 @@
         <form >
             <div id="formContent">
                 <div id="leftside">
-                    <h2> Parceiro</h2>
+                    <h2> Doador</h2>
 
                     <div id="preview-container">
                         <div *ngIf="imagePreview">
@@ -13,44 +13,37 @@
                     </div>
                     <!-- Aqui nao leva o de input falta é por a imagem a vir da api -->
 
-
-                   
-                    <div class="inputContainer">
-                        <label for="description">Descrição:</label>
-                        <p >{{partner.description}}</p>
-                    </div>
-
                 </div>
                 <div id="rightside">
                     <div class="nome">
                         <div class="inputContainer">
                             <label for="name">Nome:</label>
-                            <input type="text" id="name" name="name" value="{{partner.name}}" readonly>
+                            <input type="text" id="name" name="name" value="{{donator.name}}" readonly>
                         </div>
                     </div>
                     <div class="grupo">
                         <div class="inputContainer">
                             <label for="phone">Telemóvel:</label>
-                            <input type="tel" id="phone" name="phone" value="{{partner.phone}}" readonly>
+                            <input type="tel" id="phone" name="phone" value="{{donator.phone}}" readonly>
                         </div>
                         <div class="inputContainer">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="{{partner.email}}" readonly>
+                            <input type="email" id="email" name="email" value="{{donator.email}}" readonly>
                         </div>
                         <div class="inputContainer">
                             <label for="address">Morada:</label>
-                            <input type="text" id="address" name="address" value="{{partner.address}}" readonly>
+                            <input type="text" id="address" name="address" value="{{donator.address}}" readonly>
 
                         </div>
                     </div>
                     <div class="detalhesMorada">
                         <div class="inputContainer">
                             <label for="postCode">Código Postal:</label>
-                            <input type="text" id="postCode" name="postCode" value="{{partner.postCode}}" readonly>
+                            <input type="text" id="postCode" name="postCode" value="{{donator.postCode}}" readonly>
                         </div>
                         <div class="inputContainer">
                             <label for="city">Cidade:</label>
-                            <input type="text" id="city" name="city" value="{{partner.city}}" readonly>
+                            <input type="text" id="city" name="city" value="{{donator.city}}" readonly>
                         </div>
                     </div>
                 </div>

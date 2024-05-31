@@ -4,6 +4,7 @@
   import { RestService } from '../../../rest.service';
   import { ActivatedRoute, Router } from '@angular/router';
   import { CommonModule } from '@angular/common';
+  
   @Component({
     selector: 'app-entidade',
     standalone: true,

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Entity } from './model/entity';
 import { Donation } from './model/donation';
+import { Donator } from './model/donator';
+import { Partner } from './model/partner';
 
 const endpoint = 'http://127.0.0.1:3000/';
 
@@ -104,4 +106,99 @@ updateEntity(entity: Entity, file: File): Observable<any> {
   }
 
   //////////////////////////////////////////////
+
+  getDonators(): Observable<Donator[]> {
+    return this.http.get<Donator[]>(endpoint + 'donators/get');
+  }
+
+  getDonator(id:String|null): Observable<Donator> {
+    return this.http.get<Donator>(endpoint + 'RestDonators/show/'+id);
+  }
+
+  registerDonator(donator: Donator, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    // Converta 'doadores' para 'any' para evitar o erro de índice
+    const donatorAny: any = donator;
+
+    // Adiciona cada propriedade de 'doadores' ao formData
+    Object.keys(donatorAny).forEach(key => {
+        if (donatorAny[key] !== undefined) {
+            formData.append(key, donatorAny[key]);
+        }
+    });
+
+    return this.http.post<any>(endpoint + 'RestDonators/save', formData);
+  }
+
+  updateDonator(donator: Donator, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    // Converta 'entity' para 'any' para evitar o erro de índice
+    const donatorAny: any = Donator;
+
+    // Adiciona cada propriedade de 'entity' ao formData
+    Object.keys(donatorAny).forEach(key => {
+      if (donatorAny[key] !== undefined) {
+          formData.append(key, donatorAny[key]);
+      }
+    });
+
+    return this.http.post<any>(endpoint + 'RestDonators/update/'+donator._id, formData);
+  }
+
+
+
+
+
+
+
+
+
+
+  /////////////////////////////////////////////
+  getPartners(): Observable<Partner[]> {
+    return this.http.get<Partner[]>(endpoint + 'partners/get');
+  }
+
+  getPartner(id:String|null): Observable<Partner> {
+    return this.http.get<Partner>(endpoint + 'RestPartners/show/'+id);
+  }
+
+  registerPartner(partner: Partner, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    // Converta 'entity' para 'any' para evitar o erro de índice
+    const partnerAny: any = partner;
+
+    // Adiciona cada propriedade de 'entity' ao formData
+    Object.keys(partnerAny).forEach(key => {
+        if (partnerAny[key] !== undefined) {
+            formData.append(key, partnerAny[key]);
+        }
+    });
+
+    return this.http.post<any>(endpoint + 'RestPartners/save', formData);
+  }
+
+  updatePartner(partner: Partner, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    // Converta 'entity' para 'any' para evitar o erro de índice
+    const partnerAny: any = Partner;
+
+    // Adiciona cada propriedade de 'entity' ao formData
+    Object.keys(partnerAny).forEach(key => {
+      if (partnerAny[key] !== undefined) {
+          formData.append(key, partnerAny[key]);
+      }
+    });
+
+    return this.http.post<any>(endpoint + 'RestDonators/update/'+partner._id, formData);
+  }
+  
 }

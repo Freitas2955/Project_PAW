@@ -16,6 +16,8 @@ import { ParceiroComponent } from './navbar/parceiros/parceiro/parceiro.componen
 import { ParceirosComponent } from './navbar/parceiros/parceiros/parceiros.component';
 import { RegistarparceiroComponent } from './navbar/parceiros/registarparceiro/registarparceiro.component';
 import { DoacaoComponent } from './navbar/donations/doacao/doacao.component';
+import { DoadorComponent } from './navbar/doadores/doador/doador.component';
+import { DoadoresComponent } from './navbar/doadores/doadores/doadores.component';
 
 export const routes: Routes = [
   { path: '', component: PagInicialComponent },
@@ -37,4 +39,8 @@ export const routes: Routes = [
   { path: 'parceiros/show/:id', component: ParceiroComponent },
   { path: 'editarparceiro/:id', component: EditarparceiroComponent},
   { path: 'registarparceiro', component: RegistarparceiroComponent},
+
+  { path: 'doador', component: DoadorComponent },
+  { path: 'doadores', component: DoadoresComponent }, //Nao sei quais devo usar??
+  { path: 'doadores/show/id', component: DoadoresComponent},
 ];
