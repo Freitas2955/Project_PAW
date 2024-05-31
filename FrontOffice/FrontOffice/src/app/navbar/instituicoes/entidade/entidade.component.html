@@ -23,6 +23,12 @@
 
             <label for="postCode">Código Postal:</label>
             <input type="text" id="postCode" name="postCode" value="{{entity.postCode}}" readonly>
+
+            <div *ngIf="imagePreview">
+                <p>Pré-visualização da Imagem:</p>
+                <img [src]="imagePreview" alt="Pré-visualização da Imagem" style="max-width: 200px; max-height: 200px;" />
+            </div>
+
         </form>
     </div>
 </main>

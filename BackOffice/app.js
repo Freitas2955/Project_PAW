@@ -100,7 +100,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/employees", employeesRouter);

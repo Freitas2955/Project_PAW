@@ -1,8 +1,17 @@
+
 <app-navbar></app-navbar>
 <main>
     <h1>Registar Instituição</h1>
-    <div  class="form-container">
-        <form (ngSubmit)="submitForm()"  #myForm="ngForm" >
+    <div class="form-container">
+        <div class="image-container">
+            <label for="image" class="image-upload-label">Upload Imagem</label>
+            <input type="file" id="image" name="image" (change)="onFileSelected($event)" />
+            <div *ngIf="imagePreview">
+                <p>Pré-visualização da Imagem:</p>
+                <img [src]="imagePreview" alt="Pré-visualização da Imagem" />
+            </div>
+        </div>
+        <form (ngSubmit)="submitForm()" #myForm="ngForm">
             <label for="name">Nome da Instituição:</label>
             <input type="text" id="name" name="name" [(ngModel)]="entity.name" placeholder="Nome da Entidade"
                 #name="ngModel" required minlength="4">
@@ -10,7 +19,7 @@
                 <div *ngIf="name.hasError('required')">
                     Name is required.
                 </div>
-                <div *ngIf="name.hasError('minlength')">
+                <div *ngIf="name.hasError('minlength')">    
                     Name must be at least 4 characters long.
                 </div>
                 <div *ngIf="name.hasError('forbiddenName')">
@@ -45,13 +54,8 @@
             <label for="confpassword">Comfirmar Password:</label>
             <input type="password" id="confpassword" name="confpassword" [(ngModel)]="confpassword"
                 placeholder="Confirmar Senha" required>
-
-                <label for="image">Imagem:</label>
-                <input type="file" id="image" name="image" (change)="onFileSelected($event)" />
-
                 
-            <button type="submit" [disabled]="myForm.invalid" >Registar</button>
+            <button type="submit" [disabled]="myForm.invalid">Registar</button>
         </form>
-
     </div>
 </main>

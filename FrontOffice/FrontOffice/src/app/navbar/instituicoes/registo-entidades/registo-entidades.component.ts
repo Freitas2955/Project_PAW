@@ -19,6 +19,8 @@ export class RegistoEntidadesComponent {
   confpassword?: String;
   /////////////////////////////////
   selectedFile: File;
+
+  imagePreview: string | ArrayBuffer | null = null;
   ///////////////////////////////
 
   constructor(private restService: RestService,private builder: FormBuilder) {
@@ -28,13 +30,26 @@ export class RegistoEntidadesComponent {
     
   }
   ///////////////////////////////
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  /*
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
     }
-  }
+  }*/
   ///////////////////////
+
+
 
   submitForm(): void {
     if (this.entity.password === this.confpassword) {
