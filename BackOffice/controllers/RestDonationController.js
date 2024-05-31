@@ -148,7 +148,7 @@ donationController.show = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/RestDonations/");
+      res.json({err:true})
     });
 };
 /*

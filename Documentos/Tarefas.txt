@@ -16,7 +16,7 @@
 Interfaces: 
 -ver/criar doacao 
 -escolher entidade doacao 
--criar pedido de recolha doacao 
+-criar pedido de recolha doacao ----feito
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
 -historico de compras
 -ver/registar/editar doador
@@ -30,3 +30,6 @@ Interfaces:
 -acrescentar a lable e o input de imagens nos htmls
 
 -verificacao dos inputs (falta a mensagem)
+
+-angariador receber 10% de todos os pontos do doador que angariou
+-login igual para todos

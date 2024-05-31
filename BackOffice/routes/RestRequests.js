@@ -24,7 +24,7 @@ router.get("/create",loginController.verifyLoginUser, function (req, res) {
 */
 
 // Save request
-router.post("/save/:id",loginController.verifyLoginUser, function (req, res) {
+router.post("/save/:id", function (req, res) {
   request.save(req, res);
 });
 

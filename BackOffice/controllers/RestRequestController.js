@@ -172,18 +172,14 @@ requestController.save = function (req, res) {
           const request = new Request(data);
           request.save().then((savedRequest) => {
             console.log("Successfully created an Request.");
-            res.redirect("/RestRequests/naoTerminados");
+            res.json({savedRequest});
           });
         });
       } else {
         console.log("Ja existe!");
-        res.redirect("/RestRequests/naoTerminados");
+        res.json({exists:true})
       }
     })
-    .catch((err) => {
-      console.log(err);
-      res.redirect("/RestRequests/");
-    });
 };
 /*
 requestController.edit = function (req, res) {

@@ -67,6 +67,10 @@ export class RestService {
     return this.http.post<Donation>(endpoint + 'RestDonations/save', donation);
   }
 
+  registerRequest(donation:Donation):Observable<any>{
+    return this.http.post<Donation>(endpoint + 'RestRequests/save/'+donation._id,donation);
+  }
+
   /////////////////////////////////////////////////
   /*VER SE SAO PRECISOS OS DOIS*/
   uploadFile(file: File): Observable<any> {

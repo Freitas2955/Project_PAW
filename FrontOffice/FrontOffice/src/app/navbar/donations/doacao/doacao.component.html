@@ -40,7 +40,7 @@
             <input type="text" name="Entidade" value="{{donation.donatorName}}" readonly>
         </div>
         <div class="buttons">
-            <button *ngIf="!requested" id="doar">Criar pedido</button>
+            <button *ngIf="!requested" id="doar" (click)="createRequest($event)">Criar pedido</button>
         </div>
     </form>
 </main>
