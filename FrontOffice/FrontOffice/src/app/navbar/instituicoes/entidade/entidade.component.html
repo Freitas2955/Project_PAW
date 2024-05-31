@@ -5,15 +5,14 @@
             <div id="formContent">
                 <div id="leftside">
                     <h2> Instituição</h2>
-                    <div id="preview-container"></div>
-                    <div id="upload-box">
-                        <label for="image" class="image-upload-label">Upload Imagem</label>
-                        <input type="file" id="image" name="image" (change)="onFileSelected($event)" />
+
+                    <div id="preview-container">
                         <div *ngIf="imagePreview">
-                            <p>Pré-visualização da Imagem:</p>
-                            <img [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                            <img id="preview-image" [src]="imagePreview" alt="Pré-visualização da Imagem" />
                         </div>
                     </div>
+                    <!-- Aqui nao leva o de input falta é por a imagem a vir da api -->
+
 
                    
                     <div class="inputContainer">

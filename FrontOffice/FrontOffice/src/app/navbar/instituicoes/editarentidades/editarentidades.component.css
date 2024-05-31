@@ -28,21 +28,23 @@
   }
   
   #preview-container {
-      background-color: #f3f4f6e8;
-      width: 200px;
-      height: 200px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      border-radius: 50%; /* Define o raio das bordas para 50%, transformando a div em um círculo */
-      overflow: hidden; /* Garante que a imagem, quando exibida, seja recortada para o formato do círculo */
+    background-color: #f3f4f6e8;
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex; /* Alinha o conteúdo no centro */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
   }
   
   #preview-image {
-    width: 100%; /* Certifica-se de que a imagem preencha todo o círculo */
-    height: auto; /* Mantém a proporção da imagem */
-    display: block; /* Garante que a imagem não tenha espaços em branco em torno dela */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o contêiner sem distorção */
   }
-  
   
   
     /*--------------------------------------------------------------------*/

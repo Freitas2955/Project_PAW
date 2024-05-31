@@ -44,6 +44,8 @@ Freitas:
 -ver/registar/editar doador
 -ver/criar doacao falta css
 
+falta as cenas no rest.service
+
 
 
 Duarte:

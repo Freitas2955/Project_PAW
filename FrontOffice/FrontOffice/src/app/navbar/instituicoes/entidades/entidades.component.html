@@ -2,7 +2,7 @@
 <main>
     <header><h1>Instituições</h1>
         <button onclick="toggleDropdown()" id="filtro">Filtros </button>
-        <div id="dropdownContent" class="dropdown-content" style="display: none;">
+        <div id="dropdownContent" class="dropdown-content" style="display: none;">     <!-- Ver este Drop para que serve? -->
           <a href="/employees/create">Funcionário</a>
           <a href="/donators/create">Doador</a>
           <a href="/entities/create">Instituição</a>
@@ -20,7 +20,7 @@
       </script>
     </header>
     
-    
+    <!--
     <div class="entidades" >
         <div class="card" *ngFor="let entity of entities">
             <div class="imagem"></div>
@@ -32,6 +32,24 @@
             </div>
         </div>
     </div>
-    
+  -->
+
+  <div class="entidades">
+    <div class="card" *ngFor="let entity of entities">
+        <div class="content">
+            <div class="info">
+                <header><h3>Nome: {{entity.name}}</h3></header>
+                <p>Email: {{entity.email}}</p>
+                <p>Cidade: {{entity.city}}</p>
+                <p>Telemóvel: {{entity.phone}}</p>
+                <div class="detalhes">
+                    <button>Detalhes</button>
+                </div>
+            </div>
+            <div class="imagem"></div>
+        </div>
+    </div>
+</div> 
+
 </main>
 
