@@ -2,7 +2,7 @@
 -verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
 -login lembrar me / recuperar pass 
 -api de mapas para morada(pensar na logica)
--fazer notificacoes(email) e exportar
+-fazer notificacoes(email)
 
 -Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
 
@@ -14,9 +14,8 @@
 -Dashboard prorpio utilizador com kpis
 
 Interfaces: 
--ver/criar doacao 
+-ver/criar doacao falta css
 -escolher entidade doacao 
--criar pedido de recolha doacao ----feito
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
 -historico de compras
 -ver/registar/editar doador
@@ -33,3 +32,9 @@ Interfaces:
 
 -angariador receber 10% de todos os pontos do doador que angariou
 -login igual para todos
+
+
+-urgente:
+Interface editar instituicao
+css de registar entidade
+funcao de ir buscar imagem ao servidor
