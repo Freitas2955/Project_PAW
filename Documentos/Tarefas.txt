@@ -52,4 +52,4 @@ Duarte:
 -nao deixar registar instituicoes com email igual a doadores
 -aceitar doacoes instituicao
 -escolher entidade doacao 
-funcao de ir buscar imagem ao servidor
+-funcao de ir buscar imagem ao servidor

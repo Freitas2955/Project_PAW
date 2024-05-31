@@ -33,9 +33,9 @@
         </div>
         <div class="inputBox" id="Entidade">
             <label for="Entidade">Instituição:</label>
-            <input type="text" name="Entidade" id="" placeholder="Instituição" readonly>
-            <button type="button" id="selecionarEntidade">Selecionar Instituição</button>
-        </div>
+            <input type="text" name="Entidade" id="" placeholder="Instituição" [value]="instituicaoSelecionada" readonly>
+            <button type="button" id="simular" style="padding: 1%; border-radius: 10px;" (click)="abrirPopup()">Selecionar Instituição</button>
+          </div>
         <div class="buttons"> 
             <button type="button" id="simular">Simular</button>
             <button type="submit" id="doar">Doar</button>
