@@ -50,6 +50,23 @@ export class RestService {
     return this.http.post<any>(endpoint + 'RestEntities/save', formData);
 }
 
+updateEntity(entity: Entity, file: File): Observable<any> {
+  const formData: FormData = new FormData();
+  formData.append('file', file);
+
+  // Converta 'entity' para 'any' para evitar o erro de índice
+  const entityAny: any = entity;
+
+  // Adiciona cada propriedade de 'entity' ao formData
+  Object.keys(entityAny).forEach(key => {
+      if (entityAny[key] !== undefined) {
+          formData.append(key, entityAny[key]);
+      }
+  });
+
+  return this.http.post<any>(endpoint + 'RestEntities/update/'+entity._id, formData);
+}
+
 
   getEntityDonations(id:String|null): Observable<Donation[]> {
     return this.http.get<Donation[]>(endpoint + 'RestDonations/getEntityDonations/'+id);

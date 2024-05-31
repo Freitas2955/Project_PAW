@@ -32,7 +32,7 @@ router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
 });
 
 // Edit update
-router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
+router.post("/update/:id", function (req, res) {
   entity.update(req, res);
 });
 

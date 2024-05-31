@@ -38,6 +38,7 @@ export class RegistoEntidadesComponent {
         this.imagePreview = reader.result;
       };
       reader.readAsDataURL(file);
+      this.selectedFile=file;
     }
   }
   /*

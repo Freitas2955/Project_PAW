@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: 'doacoes/doador/:idDoador', component: DoacoesComponent },
   { path: 'doacao/:idDoacao', component: DoacaoComponent },
   { path: 'registoEntidades', component: RegistoEntidadesComponent },
-  { path: 'editarentidades/:id', component: EditarentidadesComponent },
+  { path: 'editarEntidade/:id', component: EditarentidadesComponent },
 
   { path: 'editardoador/:id', component: EditardoadorComponent },
   { path: 'registardoador', component: RegistardoadorComponent },

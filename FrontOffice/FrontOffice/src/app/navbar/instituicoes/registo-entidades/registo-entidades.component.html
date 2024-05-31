@@ -1,61 +1,91 @@
-
 <app-navbar></app-navbar>
 <main>
-    <h1>Registar Instituição</h1>
-    <div class="form-container">
-        <div class="image-container">
-            <label for="image" class="image-upload-label">Upload Imagem</label>
-            <input type="file" id="image" name="image" (change)="onFileSelected($event)" />
-            <div *ngIf="imagePreview">
-                <p>Pré-visualização da Imagem:</p>
-                <img [src]="imagePreview" alt="Pré-visualização da Imagem" />
-            </div>
-        </div>
+    <div class="content">
         <form (ngSubmit)="submitForm()" #myForm="ngForm">
-            <label for="name">Nome da Instituição:</label>
-            <input type="text" id="name" name="name" [(ngModel)]="entity.name" placeholder="Nome da Entidade"
-                #name="ngModel" required minlength="4">
-            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
-                <div *ngIf="name.hasError('required')">
-                    Name is required.
+            <div id="formContent">
+                <div id="leftside">
+                    <h2>Registar Instituição</h2>
+                    <div id="preview-container"></div>
+                    <div id="upload-box">
+                        <label for="image" class="image-upload-label">Upload Imagem</label>
+                        <input type="file" id="image" name="image" (change)="onFileSelected($event)" />
+                        <div *ngIf="imagePreview">
+                            <p>Pré-visualização da Imagem:</p>
+                            <img [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                        </div>
+                    </div>
+
+                    <div id="pass">
+                        <div class="inputContainer">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" [(ngModel)]="entity.password"
+                                placeholder="Senha" required>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="confpassword">Confirmar Password:</label>
+                            <input type="password" id="confpassword" name="confpassword" [(ngModel)]="confpassword"
+                                placeholder="Confirmar Senha" required>
+                        </div>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="description">Descrição:</label>
+                        <textarea id="description" name="description" [(ngModel)]="entity.description"
+                            placeholder="Descrição" required></textarea>
+                    </div>
+
                 </div>
-                <div *ngIf="name.hasError('minlength')">    
-                    Name must be at least 4 characters long.
-                </div>
-                <div *ngIf="name.hasError('forbiddenName')">
-                    Name cannot be Bob.
+                <div id="rightside">
+                    <div class="nome">
+                        <div class="inputContainer">
+                            <label for="name">Nome da Instituição:</label>
+                            <input type="text" id="name" name="name" [(ngModel)]="entity.name"
+                                placeholder="Nome da Entidade" #name="ngModel" required minlength="4">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                                <div *ngIf="name.hasError('required')">
+                                    Name is required.
+                                </div>
+                                <div *ngIf="name.hasError('minlength')">
+                                    Name must be at least 4 characters long.
+                                </div>
+                                <div *ngIf="name.hasError('forbiddenName')">
+                                    Name cannot be Bob.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grupo">
+                        <div class="inputContainer">
+                            <label for="phone">Telemóvel:</label>
+                            <input type="tel" id="phone" name="phone" [(ngModel)]="entity.phone" placeholder="Telefone"
+                                required>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" [(ngModel)]="entity.email" placeholder="Email"
+                                required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                        </div>
+                        <div class="inputContainer">
+                            <label for="address">Morada:</label>
+                            <input type="text" id="address" name="address" [(ngModel)]="entity.address"
+                                placeholder="Endereço" required>
+                        </div>
+                    </div>
+                    <div class="detalhesMorada">
+                        <div class="inputContainer">
+                            <label for="postCode">Código Postal:</label>
+                            <input type="text" id="postCode" name="postCode" [(ngModel)]="entity.postCode"
+                                placeholder="Código Postal" required>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="city">Cidade:</label>
+                            <input type="text" id="city" name="city" [(ngModel)]="entity.city" placeholder="Cidade"
+                                required>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <label for="description">Descrição:</label>
-            <textarea id="description" name="description" [(ngModel)]="entity.description" placeholder="Descrição"
-                required></textarea>
-
-            <label for="address">Morada:</label>
-            <input type="text" id="address" name="address" [(ngModel)]="entity.address" placeholder="Endereço" required>
-
-            <label for="city">Cidade:</label>
-            <input type="text" id="city" name="city" [(ngModel)]="entity.city" placeholder="Cidade" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" [(ngModel)]="entity.email" placeholder="Email" required
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-
-            <label for="phone">Telefone:</label>
-            <input type="tel" id="phone" name="phone" [(ngModel)]="entity.phone" placeholder="Telefone" required>
-
-            <label for="postCode">Código Postal:</label>
-            <input type="text" id="postCode" name="postCode" [(ngModel)]="entity.postCode" placeholder="Código Postal"
-                required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" [(ngModel)]="entity.password" placeholder="Senha" required>
-
-            <label for="confpassword">Comfirmar Password:</label>
-            <input type="password" id="confpassword" name="confpassword" [(ngModel)]="confpassword"
-                placeholder="Confirmar Senha" required>
-                
             <button type="submit" [disabled]="myForm.invalid">Registar</button>
         </form>
+
     </div>
 </main>

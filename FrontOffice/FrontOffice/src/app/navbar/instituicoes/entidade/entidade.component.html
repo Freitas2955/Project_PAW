@@ -1,34 +1,62 @@
 <app-navbar></app-navbar>
 <main>
-    <h1>Entidade</h1>
-    <div class="form-container">
-        <form>
-            <label for="name">Nome da Instituição:</label>
-            <input type="text" id="name" name="name" value="{{entity.name}}" readonly>
+    <div class="content">
+        <form >
+            <div id="formContent">
+                <div id="leftside">
+                    <h2> Instituição</h2>
+                    <div id="preview-container"></div>
+                    <div id="upload-box">
+                        <label for="image" class="image-upload-label">Upload Imagem</label>
+                        <input type="file" id="image" name="image" (change)="onFileSelected($event)" />
+                        <div *ngIf="imagePreview">
+                            <p>Pré-visualização da Imagem:</p>
+                            <img [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                        </div>
+                    </div>
 
-            <label for="description">Descrição:</label>
-            <p>{{entity.description}}</p>
+                   
+                    <div class="inputContainer">
+                        <label for="description">Descrição:</label>
+                        <p >{{entity.description}}</p>
+                    </div>
 
-            <label for="address">Morada:</label>
-            <input type="text" id="address" name="address" value="{{entity.address}}" readonly>
+                </div>
+                <div id="rightside">
+                    <div class="nome">
+                        <div class="inputContainer">
+                            <label for="name">Nome da Instituição:</label>
+                            <input type="text" id="name" name="name" value="{{entity.name}}" readonly>
+                        </div>
+                    </div>
+                    <div class="grupo">
+                        <div class="inputContainer">
+                            <label for="phone">Telemóvel:</label>
+                            <input type="tel" id="phone" name="phone" value="{{entity.phone}}" readonly>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="{{entity.email}}" readonly>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="address">Morada:</label>
+                            <input type="text" id="address" name="address" value="{{entity.address}}" readonly>
 
-            <label for="city">Cidade:</label>
-            <input type="text" id="city" name="city" value="{{entity.city}}" readonly>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{entity.email}}" readonly>
-
-            <label for="phone">Telefone:</label>
-            <input type="tel" id="phone" name="phone" value="{{entity.phone}}" readonly>
-
-            <label for="postCode">Código Postal:</label>
-            <input type="text" id="postCode" name="postCode" value="{{entity.postCode}}" readonly>
-
-            <div *ngIf="imagePreview">
-                <p>Pré-visualização da Imagem:</p>
-                <img [src]="imagePreview" alt="Pré-visualização da Imagem" style="max-width: 200px; max-height: 200px;" />
+                        </div>
+                    </div>
+                    <div class="detalhesMorada">
+                        <div class="inputContainer">
+                            <label for="postCode">Código Postal:</label>
+                            <input type="text" id="postCode" name="postCode" value="{{entity.postCode}}" readonly>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="city">Cidade:</label>
+                            <input type="text" id="city" name="city" value="{{entity.city}}" readonly>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </form>
+
     </div>
 </main>
