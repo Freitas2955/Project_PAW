@@ -41,10 +41,10 @@ Interfaces:
 
 Freitas:
 -ver/registar/editar/ ver todos os parceiros parceiro
--ver/registar/editar doador
+-ver/doador
 -ver/criar doacao falta css
 
-falta as cenas no rest.service
+falta as cenas no rest.service registardoador / editar doador
 
 
 
