@@ -43,7 +43,7 @@
                 <p>Cidade: {{entity.city}}</p>
                 <p>Telemóvel: {{entity.phone}}</p>
                 <div class="detalhes">
-                    <button>Detalhes</button>
+                    <button [routerLink]="['/entidades/show', entity._id]">Detalhes</button>
                 </div>
             </div>
             <div class="imagem"></div>

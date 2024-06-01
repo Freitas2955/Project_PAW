@@ -3,12 +3,15 @@ var router = express.Router();
 var donator = require("../controllers/RestDonatorController.js");
 const loginController = require("../controllers/LoginController.js");
 // Get all donators
+router.get("/get", function (req, res) {
+  donator.getDonators(req, res);
+});
 router.get("/",loginController.verifyLoginUser, function (req, res) {
   donator.management(req, res);
 });
 
 // Get single donator by id
-router.get("/show/:id",loginController.verifyLoginUser, function (req, res) {
+router.get("/show/:id", function (req, res) {
   donator.show(req, res);
 });
 
@@ -18,7 +21,7 @@ router.get("/create",loginController.verifyLoginUser, function (req, res) {
 });
 
 // Save donator
-router.post("/save",loginController.verifyLoginUser, function (req, res) {
+router.post("/save", function (req, res) {
   donator.save(req, res);
 });
 
@@ -28,7 +31,7 @@ router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
 });
 
 // Edit update
-router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
+router.post("/update/:id", function (req, res) {
   donator.update(req, res);
 });
 

@@ -52,7 +52,7 @@ export class EditarparceiroComponent {
     this.rest.getPartner(this.partnerId).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
-        this.partner = response.entity;
+        this.partner = response.partner;
       },
       (error) => {
         console.error('Erro ao procurar entidade', error);

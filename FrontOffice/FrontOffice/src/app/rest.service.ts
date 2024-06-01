@@ -108,7 +108,7 @@ updateEntity(entity: Entity, file: File): Observable<any> {
   //////////////////////////////////////////////
 
   getDonators(): Observable<Donator[]> {
-    return this.http.get<Donator[]>(endpoint + 'donators/get');
+    return this.http.get<Donator[]>(endpoint + 'RestDonators/get');
   }
 
   getDonator(id:String|null): Observable<Donator> {
@@ -137,7 +137,7 @@ updateEntity(entity: Entity, file: File): Observable<any> {
     formData.append('file', file);
 
     // Converta 'entity' para 'any' para evitar o erro de índice
-    const donatorAny: any = Donator;
+    const donatorAny: any = donator;
 
     // Adiciona cada propriedade de 'entity' ao formData
     Object.keys(donatorAny).forEach(key => {
@@ -160,7 +160,7 @@ updateEntity(entity: Entity, file: File): Observable<any> {
 
   /////////////////////////////////////////////
   getPartners(): Observable<Partner[]> {
-    return this.http.get<Partner[]>(endpoint + 'partners/get');
+    return this.http.get<Partner[]>(endpoint + 'RestPartners/get');
   }
 
   getPartner(id:String|null): Observable<Partner> {
@@ -188,17 +188,16 @@ updateEntity(entity: Entity, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);
 
-    // Converta 'entity' para 'any' para evitar o erro de índice
-    const partnerAny: any = Partner;
+    
+    const partnerAny: any = partner;
 
-    // Adiciona cada propriedade de 'entity' ao formData
     Object.keys(partnerAny).forEach(key => {
       if (partnerAny[key] !== undefined) {
           formData.append(key, partnerAny[key]);
       }
     });
 
-    return this.http.post<any>(endpoint + 'RestDonators/update/'+partner._id, formData);
+    return this.http.post<any>(endpoint + 'RestPartners/update/'+partner._id, formData);
   }
   
 }

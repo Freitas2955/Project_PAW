@@ -13,7 +13,25 @@ mongoose
   )
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
+  donatorController.getDonators = function (req, res) {
+  let num;
 
+  (async () => {
+    try {
+      Donator.find()
+        .then((donator) => {
+          res.json({
+            donators: donator,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
 donatorController.management = function (req, res) {
   let num;
 
@@ -196,12 +214,12 @@ donatorController.save = function (req, res) {
               });
             });
 
-            res.redirect("/RestDonators/");
+            //res.redirect("/RestDonators/");
           });
       }
     })
     .catch((err) => {
-      res.redirect("/RestDonators/");
+      //res.redirect("/RestDonators/");
     });
 };
 
@@ -234,8 +252,7 @@ donatorController.update = function (req, res) {
       },
     },
     { new: true }
-  )
-    .then((savedDonator) => {
+  ).then((savedDonator) => {
       console.log("Successfully created an Donator.");
 
       var fileDestination = path.join(
@@ -261,13 +278,13 @@ donatorController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/RestDonators/");
+          //res.redirect("/RestDonators/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/RestDonators/");
+      //res.redirect("/RestDonators/");
     });
 };
 

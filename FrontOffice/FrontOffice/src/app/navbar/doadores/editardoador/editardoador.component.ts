@@ -32,7 +32,7 @@ export class EditardoadorComponent {
 
   ngOnInit(): void {
     this.entidadeId = this.route.snapshot.paramMap.get('id');
-    this.getEntity();
+    this.getDonator();
   }
 
   onFileSelected(event: Event) {
@@ -47,11 +47,11 @@ export class EditardoadorComponent {
     }
   }
 
-  getEntity(): void {
-    this.rest.getEntity(this.entidadeId).subscribe(
+  getDonator(): void {
+    this.rest.getDonator(this.entidadeId).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
-        this.donator = response.entity;
+        this.donator = response.donator;
       },
       (error) => {
         console.error('Erro ao procurar entidade', error);
@@ -62,7 +62,7 @@ export class EditardoadorComponent {
 
   submitForm(): void {
       console.log(this.donator);
-      this.rest.updateEntity(this.donator, this.selectedFile).subscribe(
+      this.rest.updateDonator(this.donator, this.selectedFile).subscribe(
         (response) => {
           console.log('Instituição registada com sucesso:', response);
         },

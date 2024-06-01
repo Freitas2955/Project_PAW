@@ -29,7 +29,7 @@
                 <p>Cidade: {{donator.city}}</p>
                 <p>Telemóvel: {{donator.phone}}</p>
                 <div class="detalhes">
-                    <button>Detalhes</button>
+                    <button  [routerLink]="['/doadores/show', donator._id]">Detalhes</button>
                 </div>
             </div>
             <div class="imagem"></div>

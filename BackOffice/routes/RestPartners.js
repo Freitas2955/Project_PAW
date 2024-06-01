@@ -2,13 +2,18 @@ var express = require("express");
 var router = express.Router();
 var partner = require("../controllers/RestPartnerController.js");
 const loginController = require("../controllers/LoginController.js");
+
+router.get("/get", function (req, res) {
+  partner.getPartners(req, res);
+});
+
 // Get all partners
 router.get("/",loginController.verifyLoginUser, function (req, res) {
   partner.management(req, res);
 });
 
 // Get single partner by id
-router.get("/show/:id",loginController.verifyLoginUser, function (req, res) {
+router.get("/show/:id", function (req, res) {
   partner.show(req, res);
 });
 
@@ -18,17 +23,17 @@ router.get("/create",loginController.verifyLoginUser, function (req, res) {
 });
 
 // Save partner
-router.post("/save",loginController.verifyLoginUser, function (req, res) {
+router.post("/save", function (req, res) {
   partner.save(req, res);
 });
 
 // Edit partner
-router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
+router.get("/edit/:id", function (req, res) {
   partner.edit(req, res);
 });
 
 // Edit update
-router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
+router.post("/update/:id", function (req, res) {
   partner.update(req, res);
 });
 

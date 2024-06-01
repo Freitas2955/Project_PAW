@@ -2,13 +2,13 @@ import { Component, OnInit} from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
 import { Donator } from '../../../model/donator';
 import { RestService } from '../../../rest.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-doadores',
   standalone: true,
-  imports: [NavbarComponent,CommonModule],
+  imports: [NavbarComponent,CommonModule,RouterModule ],
   templateUrl: './doadores.component.html',
   styleUrl: './doadores.component.css'
 })

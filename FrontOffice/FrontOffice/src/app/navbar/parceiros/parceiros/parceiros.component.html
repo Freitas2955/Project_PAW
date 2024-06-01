@@ -29,7 +29,7 @@
                 <p>Cidade: {{partner.city}}</p>
                 <p>Telemóvel: {{partner.phone}}</p>
                 <div class="detalhes">
-                    <button>Detalhes</button>
+                    <button [routerLink]="['/parceiros/show', partner._id]">Detalhes</button>
                 </div>
             </div>
             <div class="imagem"></div>

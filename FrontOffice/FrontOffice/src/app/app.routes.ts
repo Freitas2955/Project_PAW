@@ -32,15 +32,15 @@ export const routes: Routes = [
   { path: 'registoEntidades', component: RegistoEntidadesComponent },
   { path: 'editarEntidade/:id', component: EditarentidadesComponent },
 
-  { path: 'editardoador/:id', component: EditardoadorComponent },
-  { path: 'registardoador', component: RegistardoadorComponent },
 
   { path: 'parceiros', component: ParceirosComponent },
   { path: 'parceiros/show/:id', component: ParceiroComponent },
   { path: 'editarparceiro/:id', component: EditarparceiroComponent},
   { path: 'registarparceiro', component: RegistarparceiroComponent},
 
-  { path: 'doador', component: DoadorComponent },
   { path: 'doadores', component: DoadoresComponent }, //Nao sei quais devo usar??
-  { path: 'doadores/show/id', component: DoadoresComponent},
+  { path: 'doadores/show/:id', component: DoadorComponent},
+  { path: 'editardoador/:id', component: EditardoadorComponent },
+  { path: 'registardoador', component: RegistardoadorComponent },
+
 ];

@@ -41,4 +41,31 @@
             <button type="submit" id="doar">Doar</button>
         </div>
     </form>
+
+    <div class="popup" *ngIf="popupVisible">
+        <div class="popup-content">
+          <header>
+            <h1>Instituições</h1>
+            <button (click)="fecharPopup()">Fechar</button>
+          </header>
+          <div class="entidades">
+            <div class="card" *ngFor="let entity of entities">
+              <div class="content">
+                <div class="info">
+                  <header>
+                    <h3>Nome: {{entity.name}}</h3>
+                  </header>
+                  <p>Email: {{entity.email}}</p>
+                  <p>Cidade: {{entity.city}}</p>
+                  <p>Telemóvel: {{entity.phone}}</p>
+                  <div class="detalhes">
+                    <button (click)="selecionarInstituicao(entity.name)">Selecionar</button>
+                  </div>
+                </div>
+                <div class="imagem"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </main>

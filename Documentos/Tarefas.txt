@@ -18,15 +18,11 @@ Interfaces:
 -escolher entidade doacao 
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
 -historico de compras
--ver/registar/editar doador
--ver/registar/editar/ ver todos os parceiros parceiro
 -aceitar doacoes instituicao 
 
 -Compor a pagina inicial
 
 -nao deixar registar instituicoes com email igual a doadores
-
--acrescentar a lable e o input de imagens nos htmls
 
 -verificacao dos inputs (falta a mensagem)
 
@@ -35,18 +31,14 @@ Interfaces:
 
 
 
-
-
-
-
 Freitas:
 -ver/criar doacao falta css
-registardoador/editardoador/verdoador/verdoadores e todos dos parceiros--------------Ja fiz alguns pedidos rest.service (duarte disse tirar autenticadores nas rotas do backend)
-
-
+-verificacao dos inputs (falta a mensagem)
+-verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
+-dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar) - plotly
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores
 -aceitar doacoes instituicao
 -escolher entidade doacao 
--funcao de ir buscar imagem ao servidor
+-funcao de ir buscar imagem ao servidor e por nos htmls

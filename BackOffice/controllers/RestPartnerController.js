@@ -12,19 +12,16 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-partnerController.management = function (req, res) {
+  
+partnerController.getPartners = function (req, res) {
   let num;
   (async () => {
     try {
-      num = await Partner.countDocuments({});
       console.log("Número total de documentos:", num);
       Partner.find()
         .then((partner) => {
           res.json({
             partners: partner,
-            number: num,
-            username: req.session.username,
-            userId: req.session.userId,
           });
           //res.render("../views/partners/gestaoParceiros");
         })

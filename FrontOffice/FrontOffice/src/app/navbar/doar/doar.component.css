@@ -92,3 +92,54 @@ button{
     font-weight: bold;
 }
 
+
+
+/* Estilos para o popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .popup-content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .entidades {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .card .content .info {
+    margin-bottom: 10px;
+  }
+  
+  .card .content .info header h3 {
+    margin: 0;
+  }
