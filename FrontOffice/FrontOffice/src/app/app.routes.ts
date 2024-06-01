@@ -24,11 +24,11 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'entidades', component: EntidadesComponent },
   { path: 'entidades/show/:id', component: EntidadeComponent },
-  { path: 'doar', component: DoarComponent },
+  { path: 'doar/:donatorId', component: DoarComponent },
   { path: 'loja', component: LojaComponent },
   { path: 'doacoes/entidade/:idEntidade', component: DoacoesComponent },
   { path: 'doacoes/doador/:idDoador', component: DoacoesComponent },
-  { path: 'doacao/:idDoacao', component: DoacaoComponent },
+  { path: 'doacoes/show/:idDoacao', component: DoacaoComponent },
   { path: 'registoEntidades', component: RegistoEntidadesComponent },
   { path: 'editarEntidade/:id', component: EditarentidadesComponent },
 

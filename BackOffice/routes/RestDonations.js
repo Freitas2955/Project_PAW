@@ -26,7 +26,7 @@ router.get("/create/:id", loginController.verifyLoginUser, function (req, res) {
 });
 
 // Save donation
-router.post("/save/:id", loginController.verifyLoginUser, function (req, res) {
+router.post("/save/:id", function (req, res) {
   donation.save(req, res);
 });
 /*
@@ -50,7 +50,6 @@ router.post(
 
 router.post(
   "/approve/:id",
-  loginController.verifyLoginUser,
   function (req, res, next) {
     donation.approve(req, res);
   }

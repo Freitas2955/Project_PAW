@@ -61,4 +61,16 @@ export class DoacaoComponent {
       }
     );
   }
+
+  aprovarDoacao(idDoacao:String|undefined){
+    this.rest.approveDonation(idDoacao).subscribe(
+      (response: any) => {
+        console.log('Resposta recebida:', response);
+      },
+      (error) => {
+        console.error('Erro ao procurar doacoes', error);
+      }
+    )
+    location.reload();
+  }
 }

@@ -2,7 +2,7 @@ export class Donation{
   _id?:String;
   entityId?:String;
   entityName?: String;
-  donatorId?:String;
+  donatorId?:string|null;
   donatorName?:String;
   camisolas?:Number;
   casacos?:Number;

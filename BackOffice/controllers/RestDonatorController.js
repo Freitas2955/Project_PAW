@@ -1,5 +1,7 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
+var Partner=require("../models/Partner");
+var Entity=require("../models/Entity");
 var Campaign = require("../models/Campaign");
 var Donation = require("../models/Donation");
 var Request = require("../models/Request");
@@ -13,7 +15,7 @@ mongoose
   )
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
-  donatorController.getDonators = function (req, res) {
+donatorController.getDonators = function (req, res) {
   let num;
 
   (async () => {
@@ -146,76 +148,84 @@ donatorController.save = function (req, res) {
     .then((donator) => {
       if (donator) {
         res.json({
-          donator: donator,
-          username: req.session.username,
-          userId: req.session.userId,
+          exists: true
         });
         //res.render("../views/donators/verdoador");
       } else {
-        donatorSave
-          .save()
-          .then((savedDonator) => {
-            console.log("Successfully created an Donator.");
-
-            var fileDestination = path.join(
-              __dirname,
-              "..",
-              "images",
-              "donators",
-              savedDonator._id.toString() + ".jpg"
-            );
-            fs.readFile(req.file.path, function (err, data) {
-              if (err) {
-                console.error("Error reading file:", err);
-                return res.status(500).send("Error reading file");
-              }
-
-              fs.writeFile(fileDestination, data, function (err) {
-                if (err) {
-                  console.error("Error writing file:", err);
-                  return res.status(500).send("Error writing file");
-                }
-                fs.unlink(req.file.path, function (err) {
-                  if (err) {
-                    console.error(
-                      "Erro ao remover o arquivo da pasta 'tmp':",
-                      err
+        Entity.findOne({ email: req.body.email }).then((entity) => {
+          if (entity) {
+            res.json({exists: true});
+          }else{
+            Partner.findOne({ email: req.body.email }).then((partner) => {
+              if(partner){
+                res.json({exists: true});
+              }else{
+                donatorSave
+                .save()
+                .then((savedDonator) => {
+                  console.log("Successfully created an Donator.");
+              
+                  var fileDestination = path.join(
+                    __dirname,
+                    "..",
+                    "images",
+                    "donators",
+                    savedDonator._id.toString() + ".jpg"
+                  );
+                  fs.readFile(req.file.path, function (err, data) {
+                    if (err) {
+                      console.error("Error reading file:", err);
+                      return res.status(500).send("Error reading file");
+                    }
+              
+                    fs.writeFile(fileDestination, data, function (err) {
+                      if (err) {
+                        console.error("Error writing file:", err);
+                        return res.status(500).send("Error writing file");
+                      }
+                      fs.unlink(req.file.path, function (err) {
+                        if (err) {
+                          console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+                        }
+                      });
+                      res.redirect("/donators/");
+                    });
+                  });
+                })
+                .catch((err) => {
+                  Donator.findOne({ email: req.body.email }).then((savedDonator) => {
+                    var fileDestination = path.join(
+                      __dirname,
+                      "..",
+                      "images",
+                      "donators",
+                      savedDonator._id.toString() + ".jpg"
                     );
-                  }
+              
+                    var fileOrigin = path.join(
+                      __dirname,
+                      "..",
+                      "images",
+                      "employees",
+                      "default" + ".jpg"
+                    );
+                    fs.readFile(fileOrigin, function (err, data) {
+                      if (err) {
+                      }
+                      fs.writeFile(fileDestination, data, function (err) {
+                        if (err) {
+                        }
+                      });
+                    });
+                  });
+              
+                  //res.redirect("/RestDonators/");
                 });
-                res.redirect("/donators/");
-              });
+              }
             });
-          })
-          .catch((err) => {
-            Donator.findOne({ email: req.body.email }).then((savedDonator) => {
-              var fileDestination = path.join(
-                __dirname,
-                "..",
-                "images",
-                "donators",
-                savedDonator._id.toString() + ".jpg"
-              );
-
-              var fileOrigin = path.join(
-                __dirname,
-                "..",
-                "images",
-                "employees",
-                "default" + ".jpg"
-              );
-              fs.readFile(fileOrigin, function (err, data) {
-                if (err) {
-                }
-                fs.writeFile(fileDestination, data, function (err) {
-                  if (err) {
-                  }
-                });
-              });
-            });
-
-            //res.redirect("/RestDonators/");
-          });
+          }
+          
+        });
       }
     })
     .catch((err) => {
@@ -252,7 +262,8 @@ donatorController.update = function (req, res) {
       },
     },
     { new: true }
-  ).then((savedDonator) => {
+  )
+    .then((savedDonator) => {
       console.log("Successfully created an Donator.");
 
       var fileDestination = path.join(

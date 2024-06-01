@@ -168,26 +168,30 @@ donationController.save = function (req, res) {
         req.body.interior * point.roupainterior +
         req.body.dinheiro * point.dinheiro;
       let donatorId = req.params.id;
-      const donationParams = {
-        camisolas: req.body.camisolas,
-        casacos: req.body.casacos,
-        calcas: req.body.calcas,
-        sapatos: req.body.sapatos,
-        acessorios: req.body.acessorios,
-        interior: req.body.interior,
-        dinheiro: req.body.dinheiro,
-        donatorId: donatorId,
-        donatorName: donator.name,
-        points: totalPoints,
-        approved: false,
-      };
+      let entityId = req.body.entityId;
+      let entityName = req.body.entityName;
+        const donationParams = {
+          camisolas: req.body.camisolas,
+          casacos: req.body.casacos,
+          calcas: req.body.calcas,
+          sapatos: req.body.sapatos,
+          acessorios: req.body.acessorios,
+          interior: req.body.interior,
+          dinheiro: req.body.dinheiro,
+          donatorId: donatorId,
+          donatorName: donator.name,
+          entityId: entityId,
+          entityName: entityName,
+          points: totalPoints,
+          approved: false,
+        };
       const donation = new Donation(donationParams);
       donation
         .save()
         .then((savedDonation) => {
           console.log("Successfully created an donation.");
 
-          var fileDestination = path.join(
+          /*var fileDestination = path.join(
             __dirname,
             "..",
             "images",
@@ -215,7 +219,7 @@ donationController.save = function (req, res) {
               });
               res.redirect("/RestDonators/");
             });
-          });
+          });*/
         })
         .catch((err) => {
           console.log(err);
@@ -269,21 +273,21 @@ donationController.approve = function (req, res) {
         .then((updatedDonator) => {
           Request.findOne({ donationId: donation._id })
             .then((request) => {
-              res.redirect("/requests/approve/" + request._id);  ////////////REVER
+             // res.redirect("/requests/approve/" + request._id);  ////////////REVER
             })
             .catch((err) => {
               console.log(err);
-              res.redirect("/RestDonations");
+              //res.redirect("/RestDonations");
             });
         })
         .catch((err) => {
           console.log(err);
-          res.redirect("/RestDonations");
+          //res.redirect("/RestDonations");
         });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/RestDonations");
+      //res.redirect("/RestDonations");
     });
 };
 

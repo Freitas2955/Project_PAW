@@ -1,10 +1,13 @@
 var mongoose = require("mongoose");
-var Partner = require("../models/Partner");
+var Donator = require("../models/Donator");
+var Partner=require("../models/Partner");
+var Entity=require("../models/Entity");
 var path = require("path");
 var fs = require("fs");
 var partnerController = {};
 const bcrypt = require("bcryptjs");
 const Campaign = require("../models/Campaign");
+const { exists } = require("../models/Donation");
 mongoose
   .connect(
     "mongodb+srv://user:user@basepaw.e8ypv1l.mongodb.net/trabalhoPaw?retryWrites=true&w=majority&appName=BASEPAW"
@@ -68,7 +71,7 @@ partnerController.create = function (req, res) {
 };
 
 partnerController.save = function (req, res) {
-  // const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   var city = req.body.city;
   regCity = city.charAt(0).toUpperCase() + city.slice(1);
   const data = {
@@ -79,7 +82,7 @@ partnerController.save = function (req, res) {
     postCode: req.body.postCode,
     email: req.body.email,
     city: regCity,
-    //password: hashedPassword,
+    password: hashedPassword,
     approved: false,
   };
   const partnerSave = new Partner(data);
@@ -87,77 +90,93 @@ partnerController.save = function (req, res) {
     .then((partner) => {
       if (partner) {
         res.json({
-          partner: partner,
-          username: req.session.username,
-          userId: req.session.userId,
+         exists:true
         })
         //res.render("../views/partners/verparceiro");
       } else {
-        partnerSave
-          .save()
-          .then((savedPartner) => {
-            console.log("Successfully created an Partner.");
-
-            var fileDestination = path.join(
-              __dirname,
-              "..",
-              "images",
-              "partners",
-              savedPartner._id.toString() + ".jpg"
-            );
-            fs.readFile(req.file.path, function (err, data) {
-              console.log(req.file.path);
-              if (err) {
-                console.error("Error reading file:", err);
-                return res.status(500).send("Error reading file");
-              }
-
-              fs.writeFile(fileDestination, data, function (err) {
-                if (err) {
-                  console.error("Error writing file:", err);
-                  return res.status(500).send("Error writing file");
-                }
-                fs.unlink(req.file.path, function (err) {
-                  if (err) {
-                    console.error(
-                      "Erro ao remover o arquivo da pasta 'tmp':",
-                      err
+        Donator.findOne({ email: req.body.email })
+        .then((donator) => {
+          if (donator) {
+            res.json({
+              exists:true
+            })
+          }else{
+            Entity.findOne({ email: req.body.email })
+            .then((entity) => {
+              if (entity) {
+                res.json({
+                  exists:true
+                })
+              }else{
+                partnerSave
+                .save()
+                .then((savedPartner) => {
+                  console.log("Successfully created an Partner.");
+      
+                  var fileDestination = path.join(
+                    __dirname,
+                    "..",
+                    "images",
+                    "partners",
+                    savedPartner._id.toString() + ".jpg"
+                  );
+                  fs.readFile(req.file.path, function (err, data) {
+                    console.log(req.file.path);
+                    if (err) {
+                      console.error("Error reading file:", err);
+                      return res.status(500).send("Error reading file");
+                    }
+      
+                    fs.writeFile(fileDestination, data, function (err) {
+                      if (err) {
+                        console.error("Error writing file:", err);
+                        return res.status(500).send("Error writing file");
+                      }
+                      fs.unlink(req.file.path, function (err) {
+                        if (err) {
+                          console.error(
+                            "Erro ao remover o arquivo da pasta 'tmp':",
+                            err
+                          );
+                        }
+                      });
+                      res.redirect("/RestPartners/");
+                    });
+                  });
+                })
+                .catch((err) => {
+                  Partner.findOne({ email: req.body.email }).then((savedPartner) => {
+                    var fileDestination = path.join(
+                      __dirname,
+                      "..",
+                      "images",
+                      "partners",
+                      savedPartner._id.toString() + ".jpg"
                     );
-                  }
+      
+                    var fileOrigin = path.join(
+                      __dirname,
+                      "..",
+                      "images",
+                      "employees",
+                      "default" + ".jpg"
+                    );
+                    fs.readFile(fileOrigin, function (err, data) {
+                      if (err) {
+                      }
+                      fs.writeFile(fileDestination, data, function (err) {
+                        if (err) {
+                        }
+                      });
+                    });
+                  });
+      
+                  //res.redirect("/RestPartners/");
                 });
-                res.redirect("/RestPartners/");
-              });
-            });
-          })
-          .catch((err) => {
-            Partner.findOne({ email: req.body.email }).then((savedPartner) => {
-              var fileDestination = path.join(
-                __dirname,
-                "..",
-                "images",
-                "partners",
-                savedPartner._id.toString() + ".jpg"
-              );
-
-              var fileOrigin = path.join(
-                __dirname,
-                "..",
-                "images",
-                "employees",
-                "default" + ".jpg"
-              );
-              fs.readFile(fileOrigin, function (err, data) {
-                if (err) {
-                }
-                fs.writeFile(fileDestination, data, function (err) {
-                  if (err) {
-                  }
-                });
-              });
-            });
-
-            res.redirect("/RestPartners/");
-          });
+              }
+            })
+          }
+        })
       }
     })
     .catch((err) => {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Supondo que você esteja usando HttpClient para fazer pedidos HTTP
 import { RestService } from '../../../rest.service';
 import { Donation } from '../../../model/donation';
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-doacao',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule,RouterModule],
   templateUrl: './doacoes.component.html',
   styleUrl: './doacoes.component.css',
 })
@@ -65,6 +65,18 @@ export class DoacoesComponent {
         console.error('Erro ao procurar doacoes', error);
       }
     );
+  }
+
+  aprovarDoacao(idDoacao:String|undefined){
+    this.rest.approveDonation(idDoacao).subscribe(
+      (response: any) => {
+        console.log('Resposta recebida:', response);
+      },
+      (error) => {
+        console.error('Erro ao procurar doacoes', error);
+      }
+    )
+    location.reload();
   }
 
   fazerPedidoPorDoador(idDoador: string) {

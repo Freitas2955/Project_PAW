@@ -24,10 +24,10 @@ export class RestService {
     return this.http.get<Entity[]>(endpoint + 'entities/get');
   }
 
-  getEntity(id:String|null): Observable<Entity> {
-    return this.http.get<Entity>(endpoint + 'RestEntities/show/'+id);
+  getEntity(id: String | null): Observable<Entity> {
+    return this.http.get<Entity>(endpoint + 'RestEntities/show/' + id);
   }
-/*
+  /*
   registerEntity(entity: Entity, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);
@@ -43,65 +43,83 @@ export class RestService {
     const entityAny: any = entity;
 
     // Adiciona cada propriedade de 'entity' ao formData
-    Object.keys(entityAny).forEach(key => {
-        if (entityAny[key] !== undefined) {
-            formData.append(key, entityAny[key]);
-        }
+    Object.keys(entityAny).forEach((key) => {
+      if (entityAny[key] !== undefined) {
+        formData.append(key, entityAny[key]);
+      }
     });
 
     return this.http.post<any>(endpoint + 'RestEntities/save', formData);
-}
+  }
 
-updateEntity(entity: Entity, file: File): Observable<any> {
-  const formData: FormData = new FormData();
-  formData.append('file', file);
+  updateEntity(entity: Entity, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
 
-  // Converta 'entity' para 'any' para evitar o erro de índice
-  const entityAny: any = entity;
+    // Converta 'entity' para 'any' para evitar o erro de índice
+    const entityAny: any = entity;
 
-  // Adiciona cada propriedade de 'entity' ao formData
-  Object.keys(entityAny).forEach(key => {
+    // Adiciona cada propriedade de 'entity' ao formData
+    Object.keys(entityAny).forEach((key) => {
       if (entityAny[key] !== undefined) {
-          formData.append(key, entityAny[key]);
+        formData.append(key, entityAny[key]);
       }
-  });
+    });
 
-  return this.http.post<any>(endpoint + 'RestEntities/update/'+entity._id, formData);
-}
-
-
-  getEntityDonations(id:String|null): Observable<Donation[]> {
-    return this.http.get<Donation[]>(endpoint + 'RestDonations/getEntityDonations/'+id);
+    return this.http.post<any>(
+      endpoint + 'RestEntities/update/' + entity._id,
+      formData
+    );
   }
 
-  getDonatorDonations(id:String|null): Observable<Donation[]> {
-    return this.http.get<Donation[]>(endpoint + 'RestDonations/getDonatorDonations/'+id);
+  approveDonation(id: String | undefined): Observable<any> {
+    return this.http.post<Donation[]>(
+      endpoint + 'RestDonations/approve/' + id,id
+    );
   }
 
-  getDonation(id:String|null): Observable<Donation> {
-    return this.http.get<Donation>(endpoint + 'RestDonations/show/'+id);
+  getEntityDonations(id: String | null): Observable<Donation[]> {
+    return this.http.get<Donation[]>(
+      endpoint + 'RestDonations/getEntityDonations/' + id
+    );
+  }
+
+  getDonatorDonations(id: String | null): Observable<Donation[]> {
+    return this.http.get<Donation[]>(
+      endpoint + 'RestDonations/getDonatorDonations/' + id
+    );
+  }
+
+  getDonation(id: String | null): Observable<Donation> {
+    return this.http.get<Donation>(endpoint + 'RestDonations/show/' + id);
   }
 
   registerDonation(donation: Donation): Observable<any> {
-    return this.http.post<Donation>(endpoint + 'RestDonations/save', donation);
+    return this.http.post<Donation>(
+      endpoint + 'RestDonations/save/' + donation.donatorId,
+      donation
+    );
   }
 
-  registerRequest(donation:Donation):Observable<any>{
-    return this.http.post<Donation>(endpoint + 'RestRequests/save/'+donation._id,donation);
+  registerRequest(donation: Donation): Observable<any> {
+    return this.http.post<Donation>(
+      endpoint + 'RestRequests/save/' + donation._id,
+      donation
+    );
   }
 
   /////////////////////////////////////////////////
   /*VER SE SAO PRECISOS OS DOIS*/
   uploadFile(file: File): Observable<any> {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
     return this.http.post<any>(endpoint + 'file_upload', formData);
   }
 
-  uploadFileWithData(file: File, title:string): Observable<any> {
+  uploadFileWithData(file: File, title: string): Observable<any> {
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("title", title);
+    formData.append('file', file);
+    formData.append('title', title);
     return this.http.post<any>(endpoint + 'file_and_data_upload', formData);
   }
 
@@ -111,8 +129,8 @@ updateEntity(entity: Entity, file: File): Observable<any> {
     return this.http.get<Donator[]>(endpoint + 'RestDonators/get');
   }
 
-  getDonator(id:String|null): Observable<Donator> {
-    return this.http.get<Donator>(endpoint + 'RestDonators/show/'+id);
+  getDonator(id: String | null): Observable<Donator> {
+    return this.http.get<Donator>(endpoint + 'RestDonators/show/' + id);
   }
 
   registerDonator(donator: Donator, file: File): Observable<any> {
@@ -123,10 +141,10 @@ updateEntity(entity: Entity, file: File): Observable<any> {
     const donatorAny: any = donator;
 
     // Adiciona cada propriedade de 'doadores' ao formData
-    Object.keys(donatorAny).forEach(key => {
-        if (donatorAny[key] !== undefined) {
-            formData.append(key, donatorAny[key]);
-        }
+    Object.keys(donatorAny).forEach((key) => {
+      if (donatorAny[key] !== undefined) {
+        formData.append(key, donatorAny[key]);
+      }
     });
 
     return this.http.post<any>(endpoint + 'RestDonators/save', formData);
@@ -140,31 +158,25 @@ updateEntity(entity: Entity, file: File): Observable<any> {
     const donatorAny: any = donator;
 
     // Adiciona cada propriedade de 'entity' ao formData
-    Object.keys(donatorAny).forEach(key => {
+    Object.keys(donatorAny).forEach((key) => {
       if (donatorAny[key] !== undefined) {
-          formData.append(key, donatorAny[key]);
+        formData.append(key, donatorAny[key]);
       }
     });
 
-    return this.http.post<any>(endpoint + 'RestDonators/update/'+donator._id, formData);
+    return this.http.post<any>(
+      endpoint + 'RestDonators/update/' + donator._id,
+      formData
+    );
   }
-
-
-
-
-
-
-
-
-
 
   /////////////////////////////////////////////
   getPartners(): Observable<Partner[]> {
     return this.http.get<Partner[]>(endpoint + 'RestPartners/get');
   }
 
-  getPartner(id:String|null): Observable<Partner> {
-    return this.http.get<Partner>(endpoint + 'RestPartners/show/'+id);
+  getPartner(id: String | null): Observable<Partner> {
+    return this.http.get<Partner>(endpoint + 'RestPartners/show/' + id);
   }
 
   registerPartner(partner: Partner, file: File): Observable<any> {
@@ -175,10 +187,10 @@ updateEntity(entity: Entity, file: File): Observable<any> {
     const partnerAny: any = partner;
 
     // Adiciona cada propriedade de 'entity' ao formData
-    Object.keys(partnerAny).forEach(key => {
-        if (partnerAny[key] !== undefined) {
-            formData.append(key, partnerAny[key]);
-        }
+    Object.keys(partnerAny).forEach((key) => {
+      if (partnerAny[key] !== undefined) {
+        formData.append(key, partnerAny[key]);
+      }
     });
 
     return this.http.post<any>(endpoint + 'RestPartners/save', formData);
@@ -188,16 +200,17 @@ updateEntity(entity: Entity, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);
 
-    
     const partnerAny: any = partner;
 
-    Object.keys(partnerAny).forEach(key => {
+    Object.keys(partnerAny).forEach((key) => {
       if (partnerAny[key] !== undefined) {
-          formData.append(key, partnerAny[key]);
+        formData.append(key, partnerAny[key]);
       }
     });
 
-    return this.http.post<any>(endpoint + 'RestPartners/update/'+partner._id, formData);
+    return this.http.post<any>(
+      endpoint + 'RestPartners/update/' + partner._id,
+      formData
+    );
   }
-  
 }

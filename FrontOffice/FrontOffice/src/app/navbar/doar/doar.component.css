@@ -143,3 +143,47 @@ button{
   .card .content .info header h3 {
     margin: 0;
   }
+  
+  
+  .imagem {
+    height: 150px;
+    width: 150px;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px 10px;
+    margin-bottom: 1em;
+  }
+
+  .detalhes>button {
+    width: 100%;
+    padding: 7%;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .detalhes>button:hover {
+    background-color: #3e9f65;
+  }
+
+  .card>.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #fechar{
+    padding: 2%;
+    border-radius: 10px;
+    background-color: rgb(241, 42, 42);
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  #fechar:hover {
+    background-color: rgb(208, 33, 33);
+  }
