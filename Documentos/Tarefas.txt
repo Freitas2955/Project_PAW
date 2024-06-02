@@ -3,31 +3,22 @@
 -login lembrar me / recuperar pass 
 -api de mapas para morada(pensar na logica)
 -fazer notificacoes(email)
-
 -Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
-
 
 2º Milestone
 -rever autenticacao pq é diferente no angular
 -api paypal
-
 -Dashboard prorpio utilizador com kpis
-
 Interfaces: 
 -ver/criar doacao falta css
--escolher entidade doacao 
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
 -historico de compras
--aceitar doacoes instituicao 
-
 -Compor a pagina inicial
-
 -nao deixar registar instituicoes com email igual a doadores
-
 -verificacao dos inputs (falta a mensagem)
-
 -angariador receber 10% de todos os pontos do doador que angariou
 -login igual para todos
+
 
 Freitas:
 -ver/criar doacao falta css
@@ -37,9 +28,6 @@ Freitas:
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
--aceitar doacoes instituicao -----feito
--escolher entidade doacao -----feito
 -funcao de ir buscar imagem ao servidor e por nos htmls
-
-
+-Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
 -simular doacao
