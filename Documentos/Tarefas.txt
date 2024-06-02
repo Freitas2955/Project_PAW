@@ -9,8 +9,6 @@
 -rever autenticacao pq é diferente no angular
 -api paypal
 -Dashboard prorpio utilizador com kpis
-Interfaces: 
--ver/criar doacao falta css
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
 -historico de compras
 -Compor a pagina inicial
@@ -21,7 +19,6 @@ Interfaces:
 
 
 Freitas:
--ver/criar doacao falta css
 -verificacao dos inputs (falta a mensagem)
 -verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar) - plotly

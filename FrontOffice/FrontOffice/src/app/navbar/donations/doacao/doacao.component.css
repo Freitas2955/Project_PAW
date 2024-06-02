@@ -1,94 +1,115 @@
-main{
+  main {
     display: flex;
     flex-direction: column;
-    margin: 0% 2%;
-    
+    margin: 2%;
+    font-family: Arial, sans-serif;
+  }
+
+
+  .section {
+    margin-bottom: 20px;
+   width: 100%; /* Definindo a largura para ocupar toda a largura da tela */
 }
-h1{
-    margin: 2% 0% 0% 0%;
-}
-.inputBox{
+  
+  h1, h2 {
+    margin: 1% 0;
+    text-align: left;
+  }
+  
+  .inputRow {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
     width: 100%;
-}
-
-.inputBox>button{
-    width: 15%;  
-    margin-top: 0.5%;
-}
-
-label{
-    margin: 0.5% 0% 0.3% 0%;
-}
-
-input{
-    width: 20%;
-    border-radius: 10px;
-    padding: 0.5%;
-    border: solid gray 1px;
-}
-
-form{
+    margin-bottom: 1%;
+  }
+  
+  .inputBox {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    margin-right: 10%;
+  }
+
+  .inputBox label {
+    margin-bottom: 3px; /* Altere este valor para ajustar o espaçamento desejado */
+    font-weight: bold;
+}
+  
+  label {
+    margin-bottom: 7%;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 2.5%;
+    border: solid gray 1px;
+    background-color: #f5f5f5;
+    font-size: 1em; /* Aumentado o tamanho da fonte */
+  }
+  
+
+  .inputBox.instituicao,
+.inputBox.doador,
+.inputBox.dinheiro {
+  width: 35%; /* Define a largura dos campos de instituição e doador */
 }
 
-.buttons{
-    margin-top: 0.7%;
+.inputBox.instituicao label,
+.inputBox.doador label,
+.inputBox.dinheiro label {
+  margin-bottom: 7%; /* Ajusta o espaçamento abaixo das etiquetas */
+}
+
+.inputBox.instituicao input,
+.inputBox.doador input, 
+.inputBox.dinheiro input{
+  padding: 2.5%; /* Ajusta o preenchimento dos campos */
+  font-size: 1em; /* Aumenta o tamanho da fonte */
+}
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .buttons {
+    margin-top: 3%;
     width: 100%;
     display: flex;
     justify-content: center;
-}
-
-.buttons>button{
-    width: 11%;
-    margin:0% 0.3%;
-    padding: 0.5% 3%;
+  }
+  
+  .buttons > button {
+    width: 25%;
+    margin: 0 0.5%;
+    padding: 1% 0;
     border-radius: 6px;
     border: none;
-}
-
-#selecionarEntidade{
-    border-radius: 6px;
-    border: none;
-    padding: 0.5%;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-
-
-#simular{
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#selecionarEntidade:hover,#simular:hover{
-    background-color: #3e9f65;
-}
-
-#doar{
+    font-size: 1.1em; /* Aumentado o tamanho da fonte */
     background-color: #0698d4;
-    padding: 10px 20px;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-
-#doar:hover{
-    background-color: #0578ad;
-}
-
-button{
+  }
+  
+  button {
     font-weight: bold;
+  }
+
+  .buttons > button#criarPedido {
+    background-color: #0698d4; /* Cor azul */
 }
 
+.buttons > button#criarPedido:hover {
+    background-color: #0578ad; /* Cor azul mais escura quando passar o mouse */
+}
+
+.buttons > button#aprovarDoacao {
+    background-color: #4CAF50; /* Cor verde */
+}
+
+.buttons > button#aprovarDoacao:hover {
+    background-color: #3e9f65; /* Cor verde mais escura quando passar o mouse */
+}
