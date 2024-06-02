@@ -5,10 +5,9 @@
             <div id="formContent">
                 <div id="leftside">
                     <h2> Doador</h2>
-
                     <div id="preview-container">
-                        <div *ngIf="imagePreview">
-                            <img id="preview-image" [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                        <div *ngIf="imageUrl">
+                            <img id="preview-image" [src]="imageUrl" alt="Pré-visualização da Imagem" />
                         </div>
                     </div>
                     <!-- Aqui nao leva o de input falta é por a imagem a vir da api -->

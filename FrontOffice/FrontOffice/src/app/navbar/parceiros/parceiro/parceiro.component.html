@@ -7,13 +7,10 @@
                     <h2> Parceiro</h2>
 
                     <div id="preview-container">
-                        <div *ngIf="imagePreview">
-                            <img id="preview-image" [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                        <div *ngIf="partner.imageUrl">
+                            <img id="preview-image" [src]="partner.imageUrl" alt="Pré-visualização da Imagem" />
                         </div>
                     </div>
-                    <!-- Aqui nao leva o de input falta é por a imagem a vir da api -->
-
-
                    
                     <div class="inputContainer">
                         <label for="description">Descrição:</label>

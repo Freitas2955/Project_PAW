@@ -5,6 +5,7 @@ import { Entity } from './model/entity';
 import { Donation } from './model/donation';
 import { Donator } from './model/donator';
 import { Partner } from './model/partner';
+import { Points } from './model/points';
 
 const endpoint = 'http://127.0.0.1:3000/';
 
@@ -19,6 +20,10 @@ const httpOptions = {
 })
 export class RestService {
   constructor(private http: HttpClient) {}
+
+  getPoints(): Observable<Points> {
+    return this.http.get<Points>(endpoint + 'RestPoints/get');
+  }
 
   getEntities(): Observable<Entity[]> {
     return this.http.get<Entity[]>(endpoint + 'entities/get');
@@ -74,7 +79,8 @@ export class RestService {
 
   approveDonation(id: String | undefined): Observable<any> {
     return this.http.post<Donation[]>(
-      endpoint + 'RestDonations/approve/' + id,id
+      endpoint + 'RestDonations/approve/' + id,
+      id
     );
   }
 
@@ -212,5 +218,21 @@ export class RestService {
       endpoint + 'RestPartners/update/' + partner._id,
       formData
     );
+  }
+
+  getCampaignImage(id: String|undefined): Observable<Blob> {
+    return this.http.get(endpoint + 'images/campaigns/' + id + '.jpg', { responseType: 'blob' });
+  }
+
+  getDonatorImage(id: String|undefined): Observable<Blob> {
+    return this.http.get(endpoint + 'images/donators/' + id + '.jpg', { responseType: 'blob' });
+  }
+
+  getEntityImage(id: String|undefined): Observable<Blob> {
+    return this.http.get(endpoint + 'images/entities/' + id + '.jpg', { responseType: 'blob' });
+  }
+
+  getPartnerImage(id: String|undefined): Observable<Blob> {
+    return this.http.get(endpoint + 'images/partners/' + id + '.jpg', { responseType: 'blob' });
   }
 }

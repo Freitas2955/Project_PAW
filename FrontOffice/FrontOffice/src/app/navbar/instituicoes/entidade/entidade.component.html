@@ -5,15 +5,11 @@
             <div id="formContent">
                 <div id="leftside">
                     <h2> Instituição</h2>
-
                     <div id="preview-container">
-                        <div *ngIf="imagePreview">
-                            <img id="preview-image" [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                        <div *ngIf="entity.imageUrl">
+                            <img id="preview-image" [src]="entity.imageUrl" alt="Pré-visualização da Imagem" />
                         </div>
                     </div>
-                    <!-- Aqui nao leva o de input falta é por a imagem a vir da api -->
-
-
                    
                     <div class="inputContainer">
                         <label for="description">Descrição:</label>

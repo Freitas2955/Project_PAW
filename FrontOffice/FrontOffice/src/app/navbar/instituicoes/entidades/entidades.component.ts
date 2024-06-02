@@ -4,6 +4,7 @@ import { Entity } from '../../../model/entity';
 import { RestService } from '../../../rest.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-entidades',
@@ -13,12 +14,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './entidades.component.css',
 })
 export class EntidadesComponent implements OnInit {
-  entities?: Entity[];
+  entities: Entity[]=[new Entity()];
 
   constructor(
     public rest: RestService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +31,14 @@ export class EntidadesComponent implements OnInit {
     this.rest.getEntities().subscribe((response: any) => {  
       console.log('Resposta recebida:', response);
       this.entities = response.entities;  
+      this.entities.forEach(entity=>{
+        let imageObservable;
+        imageObservable = this.rest.getEntityImage(entity._id);
+        imageObservable.subscribe((imageBlob) => {
+          const objectURL = URL.createObjectURL(imageBlob);
+          entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        });
+      })
     }, error => {
       console.error('Erro ao procurar entidade', error);
     });

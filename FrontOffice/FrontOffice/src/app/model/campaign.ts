@@ -1,3 +1,5 @@
+import { SafeUrl } from "@angular/platform-browser";
+
 export class Campaign{
     _id?:String;
     name?: String;
@@ -5,4 +7,5 @@ export class Campaign{
     cost?: Number;
     partnerId?: String;
     partnerName?: String;
+    imageUrl?: SafeUrl;
 }

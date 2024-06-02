@@ -9,10 +9,12 @@
 -rever autenticacao pq é diferente no angular
 -api paypal
 -Dashboard prorpio utilizador com kpis
+Interfaces: 
+-ver/criar doacao falta css-----feito
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
 -historico de compras
 -Compor a pagina inicial
--nao deixar registar instituicoes com email igual a doadores
+-nao deixar registar instituicoes com email igual a doadores-------feito
 -verificacao dos inputs (falta a mensagem)
 -angariador receber 10% de todos os pontos do doador que angariou
 -login igual para todos
@@ -25,6 +27,6 @@ Freitas:
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
--funcao de ir buscar imagem ao servidor e por nos htmls
+-funcao de ir buscar imagem ao servidor e por nos htmls -----feito
 -Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
--simular doacao
+-simular doacao  -------feito

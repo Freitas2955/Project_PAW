@@ -1,41 +1,47 @@
 <app-navbar></app-navbar>
 <main>
-    <header><h1>Parceiros</h1>
-        <button onclick="toggleDropdown()" id="filtro">Filtros </button>
-        <div id="dropdownContent" class="dropdown-content" style="display: none;">     <!-- Ver este Drop para que serve? -->
-          <a href="/employees/create">Funcionário</a>
-          <a href="/donators/create">Doador</a>
-          <a href="/entities/create">Instituição</a>
-          <a href="/partners/create">Parceiro</a>
-        </div>
-      <script>
-        function toggleDropdown() {
-          var dropdownContent = document.getElementById("dropdownContent");
-          if (dropdownContent.style.display === "none") {
-            dropdownContent.style.display = "block";
-          } else {
-            dropdownContent.style.display = "none";
-          }
+  <header>
+    <h1>Parceiros</h1>
+    <button onclick="toggleDropdown()" id="filtro">Filtros </button>
+    <div id="dropdownContent" class="dropdown-content" style="display: none;"> <!-- Ver este Drop para que serve? -->
+      <a href="/employees/create">Funcionário</a>
+      <a href="/donators/create">Doador</a>
+      <a href="/entities/create">Instituição</a>
+      <a href="/partners/create">Parceiro</a>
+    </div>
+    <script>
+      function toggleDropdown() {
+        var dropdownContent = document.getElementById("dropdownContent");
+        if (dropdownContent.style.display === "none") {
+          dropdownContent.style.display = "block";
+        } else {
+          dropdownContent.style.display = "none";
         }
-      </script>
-    </header>
-    
+      }
+    </script>
+  </header>
+
   <div class="parceiros">
     <div class="card" *ngFor="let partner of partners">
-        <div class="content">
-            <div class="info">
-                <header><h3>Nome: {{partner.name}}</h3></header>
-                <p>Email: {{partner.email}}</p>
-                <p>Cidade: {{partner.city}}</p>
-                <p>Telemóvel: {{partner.phone}}</p>
-                <div class="detalhes">
-                    <button [routerLink]="['/parceiros/show', partner._id]">Detalhes</button>
-                </div>
-            </div>
-            <div class="imagem"></div>
+      <div class="content">
+        <div class="info">
+          <header>
+            <h3>Nome: {{partner.name}}</h3>
+          </header>
+          <p>Email: {{partner.email}}</p>
+          <p>Cidade: {{partner.city}}</p>
+          <p>Telemóvel: {{partner.phone}}</p>
+          <div class="detalhes">
+            <button [routerLink]="['/parceiros/show', partner._id]">Detalhes</button>
+          </div>
         </div>
+        <div id="preview-container">
+          <div *ngIf="partner.imageUrl">
+            <img id="preview-image" [src]="partner.imageUrl" alt="Pré-visualização da Imagem" />
+          </div>
+        </div>
+      </div>
     </div>
-</div> 
+  </div>
 
 </main>
-

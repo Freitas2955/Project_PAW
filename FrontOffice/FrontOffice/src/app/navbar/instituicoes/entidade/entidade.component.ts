@@ -4,6 +4,7 @@
   import { RestService } from '../../../rest.service';
   import { ActivatedRoute, Router } from '@angular/router';
   import { CommonModule } from '@angular/common';
+  import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   
   @Component({
     selector: 'app-entidade',
@@ -24,7 +25,7 @@
     constructor(
       public rest: RestService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,private sanitizer: DomSanitizer
     ) {
       this.entity = new Entity();
       const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
@@ -52,6 +53,13 @@
         (response: any) => {
           console.log('Resposta recebida:', response);
           this.entity = response.entity;
+          let imageObservable;
+          imageObservable = this.rest.getEntityImage(this.entity._id);
+          imageObservable.subscribe((imageBlob) => {
+            const objectURL = URL.createObjectURL(imageBlob);
+            this.entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          });
+
         },
         (error) => {
           console.error('Erro ao procurar entidade', error);

@@ -19,6 +19,10 @@ router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
 });
 */
 
+router.get("/get", function (req, res) {
+    point.get(req, res);
+});
+
 // Edit update
 router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
     point.update(req, res);

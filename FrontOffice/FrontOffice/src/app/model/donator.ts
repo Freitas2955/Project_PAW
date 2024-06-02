@@ -1,3 +1,5 @@
+import { SafeUrl } from "@angular/platform-browser";
+
 export class Donator {
   _id?:String;
   name?: String;
@@ -8,4 +10,5 @@ export class Donator {
   city?: String;
   password?: String;
   points?: Number;
+  imageUrl?: SafeUrl;
 }

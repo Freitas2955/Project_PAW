@@ -50,6 +50,18 @@ pointsController.edit = function (req, res) {
     });
 };
 
+pointsController.get = function (req, res) {
+  Points.findOne()
+    .then((points) => {
+      res.json({
+        points: points,
+      });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
+
 pointsController.update = function (req, res) {
   Points.findByIdAndUpdate(
     req.params.id,

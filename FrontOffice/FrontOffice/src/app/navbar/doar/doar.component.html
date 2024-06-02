@@ -41,22 +41,15 @@
             <input type="number" name="Dinheiro" placeholder="Valor" [(ngModel)]="donation.dinheiro" id="">
         </div>
         <div class="inputBox" id="Entidade">
-          <label for="Entidade">Instituição:</label>
-          <input type="text" name="Entidade" id="" placeholder="Instituição" [value]="instituicaoSelecionada" [(ngModel)]="donation.entityName" readonly>
-          <button type="button" id="selecionarEntidade" (click)="abrirPopup()">Selecionar Instituição</button>
-      </div>
-    </div>
-      <div class="buttons">
-          <button type="button" id="simular">Simular</button>
-          <button type="submit" id="doar">Doar</button>
-      </div>
-  </form>
-
-
-
-
-
-
+            <label for="Entidade">Instituição:</label>
+            <input type="text" name="Entidade" id="" placeholder="Instituição" [value]="instituicaoSelecionada" [(ngModel)]="donation.entityName" readonly>
+            <button type="button" id="selecionarEntidade" (click)="abrirPopup()">Selecionar Instituição</button>
+          </div>
+        <div class="buttons"> 
+            <button type="button" id="simular" (click)="abrirSimulacao()">Simular</button>
+            <button type="submit" id="doar">Doar</button>
+        </div>
+    </form>
 
   
 
@@ -85,9 +78,13 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
+      <div class="popup" *ngIf="simularVisible">
+        <div class="popup-content">
+          <header style="display: flex; align-items: center;">
+            <p><strong>Total de pontos: {{totalPontos}}</strong></p>
+            <button (click)="fecharSimulacao()" id="fechar">Fechar</button>
+          </header>
+        </div>
+      </div>
 </main>
-
-

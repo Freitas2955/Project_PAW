@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Donation } from '../../model/donation';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Points } from '../../model/points';
 
 @Component({
   selector: 'app-doar',
@@ -17,7 +18,10 @@ import { ActivatedRoute } from '@angular/router';
 
 export class DoarComponent {
   instituicaoSelecionada: String | undefined;
+  totalPontos:number=0;
+  points:Points=new Points();
   popupVisible = false;
+  simularVisible = false;
   entityId: String | undefined;
   entities?: Entity[];
   donation: Donation=new Donation();
@@ -26,6 +30,19 @@ export class DoarComponent {
   ngOnInit(): void {
     this.donation.donatorId = this.route.snapshot.paramMap.get('donatorId');
     this.getEntities();
+    this.getPoints();
+  }
+
+  getPoints(): void {
+    this.rest.getPoints().subscribe(
+      (response: any) => {
+        console.log('Resposta recebida:', response);
+        this.points = response.points;
+      },
+      (error) => {
+        console.error('Erro ao procurar pontos', error);
+      }
+    );
   }
 
   getEntities(): void {
@@ -47,6 +64,15 @@ export class DoarComponent {
 
   fecharPopup() {
     this.popupVisible = false;
+  }
+
+  abrirSimulacao() {
+    this.simularVisible = true;
+    this.totalPontos=this.points.camisola * this.donation.camisolas + this.points.casaco * this.donation.casacos + this.points.calcas * this.donation.calcas + this.points.sapatos * this.donation.sapatos + this.points.acessorios * this.donation.acessorios + this.points.roupainterior * this.donation.interior + this.points.dinheiro * this.donation.dinheiro;
+  }
+
+  fecharSimulacao() {
+    this.simularVisible = false;
   }
 
   selecionarInstituicao(
