@@ -42,5 +42,4 @@ export const routes: Routes = [
   { path: 'doadores/show/:id', component: DoadorComponent},
   { path: 'editardoador/:id', component: EditardoadorComponent },
   { path: 'registardoador', component: RegistardoadorComponent },
-
 ];

@@ -40,16 +40,10 @@
                         <div class="inputContainer">
                             <label for="name">Nome da Instituição:</label>
                             <input type="text" id="name" name="name" [(ngModel)]="entity.name"
-                                placeholder="Nome da Entidade" #name="ngModel" required minlength="4">
+                                placeholder="Nome da Entidade" #name="ngModel" required minlength="3">
                             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
                                 <div *ngIf="name.hasError('required')">
                                     Name is required.
-                                </div>
-                                <div *ngIf="name.hasError('minlength')">
-                                    Name must be at least 4 characters long.
-                                </div>
-                                <div *ngIf="name.hasError('forbiddenName')">
-                                    Name cannot be Bob.
                                 </div>
                             </div>
                         </div>
