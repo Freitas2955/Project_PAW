@@ -7,6 +7,7 @@ import { Donation } from '../../model/donation';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Points } from '../../model/points';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-doar',
@@ -23,9 +24,9 @@ export class DoarComponent {
   popupVisible = false;
   simularVisible = false;
   entityId: String | undefined;
-  entities?: Entity[];
+  entities: Entity[]=[new Entity()];
   donation: Donation=new Donation();
-  constructor(public rest: RestService,private restService: RestService,private route: ActivatedRoute) {}
+  constructor(public rest: RestService,private restService: RestService,private route: ActivatedRoute,private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.donation.donatorId = this.route.snapshot.paramMap.get('donatorId');
@@ -47,15 +48,20 @@ export class DoarComponent {
 
   getEntities(): void {
     console.log('getEntities chamado');
-    this.rest.getEntities().subscribe(
-      (response: any) => {
-        console.log('Resposta recebida:', response);
-        this.entities = response.entities;
-      },
-      (error) => {
-        console.error('Erro ao procurar entidade', error);
-      }
-    );
+    this.rest.getEntities().subscribe((response: any) => {  
+      console.log('Resposta recebida:', response);
+      this.entities = response.entities;  
+      this.entities.forEach(entity=>{
+        let imageObservable;
+        imageObservable = this.rest.getEntityImage(entity._id);
+        imageObservable.subscribe((imageBlob) => {
+          const objectURL = URL.createObjectURL(imageBlob);
+          entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        });
+      })
+    }, error => {
+      console.error('Erro ao procurar entidade', error);
+    });
   }
 
   abrirPopup() {
