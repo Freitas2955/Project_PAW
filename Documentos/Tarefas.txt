@@ -21,7 +21,7 @@ Interfaces:
 
 
 Freitas:
--verificacao dos inputs (falta a mensagem)
+-verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
 -dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar) - plotly
 

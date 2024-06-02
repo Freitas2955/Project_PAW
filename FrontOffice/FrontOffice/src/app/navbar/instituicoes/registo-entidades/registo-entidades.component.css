@@ -105,3 +105,13 @@ button:disabled {
   height: 100%;
   object-fit: cover; /* Garante que a imagem preencha o contêiner sem distorção */
 }
+
+.alert {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.alert div {
+  margin-bottom: 5px;
+}

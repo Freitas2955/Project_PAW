@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
 import { RestService } from '../../../rest.service';
 import { Entity } from '../../../model/entity';
-import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 
@@ -17,18 +17,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class RegistoEntidadesComponent {
   entity: Entity;
   confpassword?: String;
-  /////////////////////////////////
   selectedFile: File;
-
   imagePreview: string | ArrayBuffer | null = null;
-  ///////////////////////////////
 
-  constructor(private restService: RestService,private builder: FormBuilder) {
+
+  constructor(private restService: RestService,private builder: FormBuilder, private formBuilder: FormBuilder) {
     this.entity = new Entity();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
-    
   }
+
+
+
   ///////////////////////////////
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
