@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var employee = require("../controllers/RestEmployeeController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 // Get all employees
 router.get('/',loginController.verifyLoginUser, function(req, res) {
   employee.management(req, res);

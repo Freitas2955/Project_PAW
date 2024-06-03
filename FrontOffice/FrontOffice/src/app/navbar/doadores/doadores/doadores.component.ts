@@ -1,10 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
 import { Donator } from '../../../model/donator';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DonatorsService } from '../../../services/donators.service';
 
 @Component({
   selector: 'app-doadores',
@@ -17,9 +18,9 @@ export class DoadoresComponent  implements OnInit{
   donators: Donator[]=[new Donator()];
 
   constructor(
-    public rest: RestService,
+    public rest: DonatorsService,
     private route: ActivatedRoute,
-    private router: Router,private sanitizer: DomSanitizer
+    private router: Router,private sanitizer: DomSanitizer,public rest2: RestService,
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class DoadoresComponent  implements OnInit{
       this.donators = response.donators;  
       this.donators.forEach(donator => {
         let imageObservable;
-        imageObservable = this.rest.getDonatorImage(donator._id);
+        imageObservable = this.rest2.getDonatorImage(donator._id);
         imageObservable.subscribe((imageBlob) => {
           const objectURL = URL.createObjectURL(imageBlob);
           donator.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
 import { Partner } from '../../../model/partner';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PartnersService } from '../../../services/partners.service';
 
 @Component({
   selector: 'app-parceiro',
@@ -24,9 +25,9 @@ export class ParceiroComponent {
 
 
     constructor(
-      public rest: RestService,
+      public rest: PartnersService,
       private route: ActivatedRoute,
-      private router: Router,private sanitizer: DomSanitizer
+      private router: Router,private sanitizer: DomSanitizer,public rest2: RestService,
     ) {
       this.partner = new Partner();
       const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
@@ -55,7 +56,7 @@ export class ParceiroComponent {
           console.log('Resposta recebida:', response);
           this.partner = response.partner;
           let imageObservable;
-          imageObservable = this.rest.getPartnerImage(this.partner._id);
+          imageObservable = this.rest2.getPartnerImage(this.partner._id);
           imageObservable.subscribe((imageBlob) => {
             const objectURL = URL.createObjectURL(imageBlob);
             this.partner.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);

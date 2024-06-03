@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { Entity } from '../../../model/entity';
 import { FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
+import { EntitiesService } from '../../../services/entities.service';
 
 @Component({
   selector: 'app-registo-entidades',
@@ -21,7 +22,7 @@ export class RegistoEntidadesComponent {
   imagePreview: string | ArrayBuffer | null = null;
 
 
-  constructor(private restService: RestService,private builder: FormBuilder, private formBuilder: FormBuilder) {
+  constructor(private restService: EntitiesService,private builder: FormBuilder, private formBuilder: FormBuilder) {
     this.entity = new Entity();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });

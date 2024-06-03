@@ -5,23 +5,22 @@
         </div>
         <div id="blococentral">
             <h2>Iniciar sessão</h2>
-            <form action="/auth/loginSubmitted" method="POST">
+            <form (ngSubmit)="login()" #myForm="ngForm">
                 <div class="grupo">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" [(ngModel)]="username" required>
                 </div>
                 <div class="grupo">
                     <label for="password">Password:</label>
                     <div class="password-input">
-                        <input type="password" id="password" name="password" placeholder="Password" required>
-                        <i class="mudar" onclick="togglePasswordVisibility()">&#x1F441;</i>
+                        <input type="password" id="password" name="password" placeholder="Password" [(ngModel)]="password" required>
                     </div>
                 </div>
                 <div class="grupo">
                     <input type="checkbox" id="rememberMe" name="rememberMe">
                     <label for="rememberMe">Lembrar-me</label>
                 </div>
-                <button type="submit" id="botao">Entrar</button>
+                <button type="submit" id="botao"  [disabled]="myForm.invalid">Entrar</button>
             </form>
             <div class="recuperarpass">
                 <a href="recuperar-password.html">Recuperar senha?</a>
@@ -29,14 +28,3 @@
         </div>
     </nav>
 </body>
-
-<script>
-function togglePasswordVisibility() {
-            var passwordInput = document.getElementById('password');
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-            } else {
-                passwordInput.type = "password";
-            }
-        }
-</script>

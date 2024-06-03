@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { Donator } from '../../../model/donator';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EntitiesService } from '../../../services/entities.service';
 
 @Component({
   selector: 'app-registardoador',
@@ -19,7 +20,7 @@ export class RegistardoadorComponent {
   selectedFile: File;
   imagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private restService: RestService,private builder: FormBuilder) {
+  constructor(private restService: EntitiesService,private builder: FormBuilder) {
     this.donator = new Donator();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });

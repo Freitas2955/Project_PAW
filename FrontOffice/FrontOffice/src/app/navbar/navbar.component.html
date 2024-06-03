@@ -5,17 +5,21 @@
     </div>
     <div id="opcoesNav">
         <div class="user">
-            <img src="/assets/images/employees/.jpg" alt="profile" width="35" height="35" id="profile">
+            <div id="preview-container">
+                        <div *ngIf="imageUrl">
+                            <img id="preview-image" [src]="imageUrl" alt="Pré-visualização da Imagem" />
+                        </div>
+                    </div>
             <p>
-                <%=username%>
+                {{username}}
             </p>
         </div>
         <div class="drop">
             <img src="/assets/images/arrow_down_icon_242220.png" alt="More options" width="30" height="30"
                 style="border-radius: 20px;">
             <div class="drop-content">
-                <a href="/employees/edit/">Editar Perfil</a>
-                <a href="/auth/logout">Logout</a>
+                <a href="#" (click)="editarPerfil()" onclick="return false;">Editar Perfil</a>
+                <a href="#" (click)="logout()">Logout</a>
             </div>
         </div>
     </div>

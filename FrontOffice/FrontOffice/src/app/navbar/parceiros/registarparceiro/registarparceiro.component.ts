@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { RestService } from '../../../rest.service';
+
 import { Partner } from '../../../model/partner';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
+import { PartnersService } from '../../../services/partners.service';
 
 @Component({
   selector: 'app-registarparceiro',
@@ -23,7 +24,7 @@ export class RegistarparceiroComponent {
   imagePreview: string | ArrayBuffer | null = null;
   ///////////////////////////////
 
-  constructor(private restService: RestService,private builder: FormBuilder) {
+  constructor(private restService: PartnersService,private builder: FormBuilder) {
     this.partner = new Partner();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });

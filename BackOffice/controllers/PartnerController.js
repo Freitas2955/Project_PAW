@@ -69,7 +69,7 @@ partnerController.create = function (req, res) {
 };
 
 partnerController.save = function (req, res) {
-  // const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+  const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   var city = req.body.city;
   regCity = city.charAt(0).toUpperCase() + city.slice(1);
   const data = {
@@ -80,7 +80,7 @@ partnerController.save = function (req, res) {
     postCode: req.body.postCode,
     email: req.body.email,
     city: regCity,
-    //password: hashedPassword,
+    password: hashedPassword,
     approved: false,
   };
   const partnerSave = new Partner(data);

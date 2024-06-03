@@ -7,18 +7,14 @@
 2º Milestone
 -rever autenticacao pq é diferente no angular
 -api paypal
--Dashboard prorpio utilizador com kpis
-Interfaces: 
--dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar)
+(admin:novas entidades para validar)
 -historico de compras
 -Compor a pagina inicial
 -verificacao dos inputs (falta a mensagem)
 -angariador receber 10% de todos os pontos do doador que angariou
--login igual para todos
 -campanhas selecionar para comprar---- nao falta o de criar campanha?
--dividir servicos
-- validacao schemas no backend
-- usar objectid nos schemas
+-validacao schemas no backend---- feito
+-usar objectid nos schemas
 
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
@@ -27,3 +23,5 @@ Freitas:
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
 -Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
+-dividir servicos-----feito
+-login igual para todos--- feito organizar rotas para perfis diferentes e por login no backend

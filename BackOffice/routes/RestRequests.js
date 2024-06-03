@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var request = require("../controllers/RestRequestController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 
 router.get("/",loginController.verifyLoginUser, function (req, res) {
   request.management1(req, res);

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pag-inicial',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './pag-inicial.component.css'
 })
 export class PagInicialComponent {
-
+  constructor(private router: Router){}
+  loadLogin(){
+    this.router.navigate(['/login']);
+  }
 }

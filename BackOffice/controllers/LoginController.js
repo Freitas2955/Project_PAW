@@ -34,7 +34,7 @@ loginController.submittedLogin = function(req, res, next) {
 };
 
 loginController.login = function(req, res, next) {
-    res.render('login')
+    res.render('login/login')
 };
 
 loginController.logout = function(req, res, next) {

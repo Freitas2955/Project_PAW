@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
 import { Entity } from '../../../model/entity';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { EntitiesService } from '../../../services/entities.service';
 
 @Component({
   selector: 'app-entidades',
@@ -17,9 +18,9 @@ export class EntidadesComponent implements OnInit {
   entities: Entity[]=[new Entity()];
 
   constructor(
-    public rest: RestService,
+    public rest: EntitiesService,
     private route: ActivatedRoute,
-    private router: Router,private sanitizer: DomSanitizer
+    private router: Router,private sanitizer: DomSanitizer,public rest2: RestService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class EntidadesComponent implements OnInit {
       this.entities = response.entities;  
       this.entities.forEach(entity=>{
         let imageObservable;
-        imageObservable = this.rest.getEntityImage(entity._id);
+        imageObservable = this.rest2.getEntityImage(entity._id);
         imageObservable.subscribe((imageBlob) => {
           const objectURL = URL.createObjectURL(imageBlob);
           entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);

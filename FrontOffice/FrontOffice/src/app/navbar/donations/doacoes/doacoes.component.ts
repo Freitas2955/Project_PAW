@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Supondo que você esteja usando HttpClient para fazer pedidos HTTP
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { Donation } from '../../../model/donation';
 import { CommonModule } from '@angular/common';
+import { DonationsService } from '../../../services/donations.service';
 
 @Component({
   selector: 'app-doacao',
@@ -19,7 +20,7 @@ export class DoacoesComponent {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    public rest: RestService
+    public rest: DonationsService
   ) {
     this.isDoador = false;
   }

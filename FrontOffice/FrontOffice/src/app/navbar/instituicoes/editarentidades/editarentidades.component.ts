@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { Entity } from '../../../model/entity';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ActivatedRoute } from '@angular/router';
+import { EntitiesService } from '../../../services/entities.service';
 @Component({
   selector: 'app-editarentidades',
   standalone: true,
@@ -23,7 +24,7 @@ export class EditarentidadesComponent {
   imagePreview: string | ArrayBuffer | null = null;
   ///////////////////////////////
 
-  constructor(private rest: RestService,private builder: FormBuilder,private route: ActivatedRoute) {
+  constructor(private rest: EntitiesService,private builder: FormBuilder,private route: ActivatedRoute) {
     this.entity = new Entity();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });

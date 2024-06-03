@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { Donator } from '../../../model/donator';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ActivatedRoute } from '@angular/router';
+import { DonatorsService } from '../../../services/donators.service';
 
 @Component({
   selector: 'app-editardoador',
@@ -24,7 +25,7 @@ export class EditardoadorComponent {
   imagePreview: string | ArrayBuffer | null = null;
   ///////////////////////////////
 
-  constructor(private rest: RestService,private builder: FormBuilder,private route: ActivatedRoute) {
+  constructor(private rest: DonatorsService,private builder: FormBuilder,private route: ActivatedRoute) {
     this.donator = new Donator();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });

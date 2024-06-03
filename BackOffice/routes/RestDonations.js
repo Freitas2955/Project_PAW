@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var donation = require("../controllers/RestDonationController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 // Get all donations
 router.get("/", function (req, res) {
   donation.management(req, res);

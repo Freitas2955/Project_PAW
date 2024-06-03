@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var campaign = require("../controllers/RestCampaignController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 // Get all campaigns
 router.get("/",loginController.verifyLoginUser, function (req, res) {
   campaign.management(req, res);

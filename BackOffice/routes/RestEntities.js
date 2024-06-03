@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var entity = require("../controllers/RestEntityController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 // Get all entitys
 router.get("/",loginController.verifyLoginUser, function (req, res) {
   entity.management1(req, res);

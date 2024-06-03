@@ -1,10 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
 import { Partner } from '../../../model/partner';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PartnersService } from '../../../services/partners.service';
 
 @Component({
   selector: 'app-parceiros',
@@ -17,9 +18,8 @@ export class ParceirosComponent implements OnInit{
   partners: Partner[]=[new Partner()];
 
   constructor(
-    public rest: RestService,
-    private route: ActivatedRoute,
-    private router: Router,private sanitizer: DomSanitizer
+    public rest: PartnersService,
+    private router: Router,private sanitizer: DomSanitizer,public rest2: RestService,
   ) {}
 
 
@@ -34,7 +34,7 @@ export class ParceirosComponent implements OnInit{
       this.partners = response.partners;  
       this.partners.forEach(partner=>{
         let imageObservable;
-        imageObservable = this.rest.getPartnerImage(partner._id);
+        imageObservable = this.rest2.getPartnerImage(partner._id);
         imageObservable.subscribe((imageBlob) => {
           const objectURL = URL.createObjectURL(imageBlob);
           partner.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);

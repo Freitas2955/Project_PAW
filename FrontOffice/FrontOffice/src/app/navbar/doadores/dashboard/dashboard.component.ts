@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { PlotlyService } from '../../../plotly.service';
+import { PlotlyService } from '../../../services/plotly.service';
 import { NavbarComponent } from '../../navbar.component';
 import { Donator } from '../../../model/donator';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Donation } from '../../../model/donation';
+import { DonatorsService } from '../../../services/donators.service';
+import { DonationsService } from '../../../services/donations.service';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -26,16 +28,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private plot: PlotlyService,
-    public rest: RestService,
+    public rest: DonatorsService,
     private route: ActivatedRoute,
-    private router: Router,
-    private sanitizer: DomSanitizer
+    private rest2: DonationsService,
+    private sanitizer: DomSanitizer,public rest3: RestService
   ) {}
 
   
   ngOnInit(): void {
     const idTemp = this.route.snapshot.params['id'];
-    this.rest.getDonatorDonations(idTemp).subscribe((data: any) => {
+    this.rest2.getDonatorDonations(idTemp).subscribe((data: any) => {
       this.donations = data.donations;
 
       if (this.donations) {
@@ -106,7 +108,7 @@ export class DashboardComponent implements OnInit {
         console.log('Resposta recebida:', response);
         this.donator = response.donator;
         let imageObservable;
-        imageObservable = this.rest.getDonatorImage(this.donator._id);
+        imageObservable = this.rest3.getDonatorImage(this.donator._id);
         imageObservable.subscribe((imageBlob) => {
           const objectURL = URL.createObjectURL(imageBlob);
           this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
@@ -119,7 +121,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fazerPedidoPorDoador() {
-    this.rest.getDonatorDonations(this.donatorId).subscribe(
+    this.rest2.getDonatorDonations(this.donatorId).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
         this.donations = response.donations;

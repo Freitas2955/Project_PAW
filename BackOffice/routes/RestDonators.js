@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var donator = require("../controllers/RestDonatorController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 // Get all donators
 router.get("/get", function (req, res) {
   donator.getDonators(req, res);

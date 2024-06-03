@@ -1,10 +1,11 @@
   import { Component, OnInit } from '@angular/core';
   import { NavbarComponent } from '../../navbar.component';
   import { Entity } from '../../../model/entity';
-  import { RestService } from '../../../rest.service';
+  import { RestService } from '../../../services/rest.service';
   import { ActivatedRoute, Router } from '@angular/router';
   import { CommonModule } from '@angular/common';
   import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { EntitiesService } from '../../../services/entities.service';
   
   @Component({
     selector: 'app-entidade',
@@ -23,9 +24,9 @@
 
 
     constructor(
-      public rest: RestService,
+      public rest: EntitiesService,
       private route: ActivatedRoute,
-      private router: Router,private sanitizer: DomSanitizer
+      private router: Router,private sanitizer: DomSanitizer,public rest2: RestService
     ) {
       this.entity = new Entity();
       const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
@@ -54,7 +55,7 @@
           console.log('Resposta recebida:', response);
           this.entity = response.entity;
           let imageObservable;
-          imageObservable = this.rest.getEntityImage(this.entity._id);
+          imageObservable = this.rest2.getEntityImage(this.entity._id);
           imageObservable.subscribe((imageBlob) => {
             const objectURL = URL.createObjectURL(imageBlob);
             this.entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);

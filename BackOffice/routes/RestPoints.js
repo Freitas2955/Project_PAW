@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var point = require("../controllers/RestPointsController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 // Save donation
 router.get("/",loginController.verifyLoginUser, function (req, res) {
     point.edit(req, res);

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var partner = require("../controllers/RestPartnerController.js");
-const loginController = require("../controllers/LoginController.js");
+const loginController = require("../controllers/RestLoginController.js");
 
 router.get("/get", function (req, res) {
   partner.getPartners(req, res);

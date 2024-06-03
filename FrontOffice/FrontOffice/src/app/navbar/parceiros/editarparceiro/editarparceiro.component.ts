@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../navbar.component';
-import { RestService } from '../../../rest.service';
+import { RestService } from '../../../services/rest.service';
 import { Partner } from '../../../model/partner';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ActivatedRoute } from '@angular/router';
+import { PartnersService } from '../../../services/partners.service';
 
 @Component({
   selector: 'app-editarparceiro',
@@ -25,7 +26,7 @@ export class EditarparceiroComponent {
   imagePreview: string | ArrayBuffer | null = null;
   ///////////////////////////////
 
-  constructor(private rest: RestService,private builder: FormBuilder,private route: ActivatedRoute) {
+  constructor(private rest: PartnersService,private builder: FormBuilder,private route: ActivatedRoute) {
     this.partner = new Partner();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
