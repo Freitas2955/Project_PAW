@@ -1,27 +1,36 @@
 import { Injectable } from '@angular/core';
-
 declare let Plotly: any;
 @Injectable({
   providedIn: 'root'
 })
 
+
+@Injectable({
+  providedIn: 'root'
+})
 export class PlotlyService {
-constructor() { }
 
+  constructor() { }
 
-plotLine(title: string, plotDiv: string, x:number[], y:number[]){           
-    let trace = {
-      x: x,    
-      y: y,   
-      type: 'scatter'   
+  plotLine(title: string, divId: string, xData: any[], yData: number[]): void {
+    const trace = {
+      x: xData,
+      y: yData,
+      mode: 'lines+markers',
+      type: 'scatter'
     };
-                  
-    let layout = {
-      title:title
+
+    const layout = {
+      title: title,
+      xaxis: {
+        title: 'Data'
+      },
+      yaxis: {
+        title: 'Pontos Acumulados'
+      },
+      autosize: true 
     };
-    
-    Plotly.newPlot(plotDiv, [trace], layout);     
+
+    Plotly.newPlot(divId, [trace], layout);
   }
-
-  
 }

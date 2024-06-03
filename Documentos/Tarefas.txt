@@ -1,5 +1,4 @@
 1º Milestone 
--verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
 -login lembrar me / recuperar pass 
 -api de mapas para morada(pensar na logica)
 -fazer notificacoes(email)
@@ -23,7 +22,6 @@ Interfaces:
 
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
--verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
 -dashboard de cada um (grafico com evolucao do numero de pontos)(admin:novas entidades para validar) - plotly
 
 Duarte:

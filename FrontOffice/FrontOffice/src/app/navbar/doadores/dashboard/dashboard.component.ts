@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   imageUrl: SafeUrl = '';
   donations: Donation [] = [];
   totalPoints: number=0;
+  totalSpentPoints: number=0;
   totalDonations: number=0;
 
   constructor(
@@ -31,33 +32,74 @@ export class DashboardComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {}
 
+  
   ngOnInit(): void {
-    if (this.donations) {
-      this.donations.sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime());
-    
-      const dates: string[] = [];
-      const cumulativePoints: number[] = [];
-    
-      this.totalDonations = this.donations.length;
-      this.totalPoints = 0; // Certifique-se de redefinir totalPoints
-    
-      for (const donation of this.donations) {
-        const date = new Date(donation.updated_at);
-        dates.push(date.toLocaleDateString());
-        this.totalPoints += Number(donation.points);
-        cumulativePoints.push(this.totalPoints);
-      }
-    
-      //this.plot.plotLine("Evolução do número de pontos", "plot", dates, cumulativePoints);
-    }
+    const idTemp = this.route.snapshot.params['id'];
+    this.rest.getDonatorDonations(idTemp).subscribe((data: any) => {
+      this.donations = data.donations;
 
-    
-    
-    this.donatorId = this.route.snapshot.paramMap.get('id');
-    this.getDonator();
-    this.fazerPedidoPorDoador();
+      if (this.donations) {
+        this.donations.sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime());
+
+        const dates: string[] = [];
+        const cumulativePoints: number[] = [];
+
+        this.totalPoints = 0;
+        this.totalDonations = this.donations.length;
+
+        for (const donation of this.donations) {
+          const date = new Date(donation.updated_at);
+          dates.push(date.toLocaleDateString());
+          this.totalPoints += Number(donation.points);
+          cumulativePoints.push(this.totalPoints);
+        }
+
+        this.plot.plotLine("Evolução do número de pontos", "plot", dates, cumulativePoints);
+      }
+
+      this.donatorId = this.route.snapshot.paramMap.get('id');
+      this.getDonator();
+      this.fazerPedidoPorDoador();
+    });
   }
 
+
+
+  /*
+  ngOnInit(): void {
+    const idTemp = this.route.snapshot.params['id'];
+    this.rest.getDonatorDonations(idTemp).subscribe((data: any) => {
+      this.donations = data.donations;
+
+      if (this.donations) {
+        this.donations.sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime());
+
+        const dates: string[] = [];
+        const cumulativePoints: {date: string, points: number, spentPoints: number}[] = [];
+
+        this.totalPoints = 0;
+        this.totalSpentPoints = 0;
+        this.totalDonations = this.donations.length;
+
+        for (const donation of this.donations) {
+          const date = new Date(donation.updated_at).toLocaleDateString();
+          dates.push(date);
+
+          this.totalPoints += Number(donation.points);
+          this.totalSpentPoints += Number(donation.spent_points || 0); //temos de por os pontos gastos
+
+          cumulativePoints.push({ date, points: this.totalPoints, spentPoints: this.totalSpentPoints });
+        }
+
+        this.plot.plotLine("Evolução dos pontos", "plot", dates, cumulativePoints.map(point => point.points), "Evolução dos pontos gastos", cumulativePoints.map(point => point.spentPoints));
+      }
+
+      this.donatorId = this.route.snapshot.paramMap.get('id');
+      this.getDonator();
+      this.fazerPedidoPorDoador();
+    });
+  }*/
+  
   getDonator(): void {
     this.rest.getDonator(this.donatorId).subscribe(
       (response: any) => {
