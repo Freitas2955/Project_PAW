@@ -16,7 +16,7 @@ Interfaces:
 -verificacao dos inputs (falta a mensagem)
 -angariador receber 10% de todos os pontos do doador que angariou
 -login igual para todos
--campanhas selecionar para comprar
+-campanhas selecionar para comprar---- nao falta o de criar campanha?
 -dividir servicos
 - validacao schemas no backend
 - usar objectid nos schemas
@@ -24,7 +24,7 @@ Interfaces:
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -verificar se o doador tem pontos para comprar - ja n deixa n sei q mensagem mostrar
--dashboard de cada um (doador numero total de pontos,numero total de doacoes,grafico com evolucao do numero de pontos)(admin:novas entidades para validar) - plotly
+-dashboard de cada um (grafico com evolucao do numero de pontos)(admin:novas entidades para validar) - plotly
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil

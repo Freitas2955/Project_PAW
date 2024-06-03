@@ -37,27 +37,40 @@
                 </div>
                 <div id="rightside">
                     <div class="nome">
+
                         <div class="inputContainer">
                             <label for="name">Nome da Instituição:</label>
                             <input type="text" id="name" name="name" [(ngModel)]="entity.name"
                                 placeholder="Nome da Entidade" #name="ngModel" required minlength="3">
                             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
                                 <div *ngIf="name.hasError('required')">
-                                    Name is required.
+                                    Campo obrigatório
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="grupo">
+
                         <div class="inputContainer">
                             <label for="phone">Telemóvel:</label>
-                            <input type="tel" id="phone" name="phone" [(ngModel)]="entity.phone" placeholder="Telefone" required>
+                            <input type="tel" id="phone" name="phone" [(ngModel)]="entity.phone" placeholder="Telefone" required minlength="9" maxlength="9" #phone="ngModel">
+                            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert">
+                                <div *ngIf="phone.errors?.['required']">
+                                    Campo obrigatório
+                                </div>
+                                <div *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength']">
+                                    O número de telefone deve ter exatamente 9 caracteres
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="inputContainer">
                             <label for="email">Email:</label>
                             <input type="email" id="email" name="email" [(ngModel)]="entity.email" placeholder="Email"
                                 required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
                         </div>
+                        
                         <div class="inputContainer">
                             <label for="address">Morada:</label>
                             <input type="text" id="address" name="address" [(ngModel)]="entity.address"

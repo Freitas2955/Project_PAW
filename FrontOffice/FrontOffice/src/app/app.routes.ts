@@ -18,6 +18,7 @@ import { RegistarparceiroComponent } from './navbar/parceiros/registarparceiro/r
 import { DoacaoComponent } from './navbar/donations/doacao/doacao.component';
 import { DoadorComponent } from './navbar/doadores/doador/doador.component';
 import { DoadoresComponent } from './navbar/doadores/doadores/doadores.component';
+import { DashboardComponent } from './navbar/doadores/dashboard/dashboard.component'
 
 export const routes: Routes = [
   { path: '', component: PagInicialComponent },
@@ -42,4 +43,6 @@ export const routes: Routes = [
   { path: 'doadores/show/:id', component: DoadorComponent},
   { path: 'editardoador/:id', component: EditardoadorComponent },
   { path: 'registardoador', component: RegistardoadorComponent },
+
+  {path: 'dashboard/:id', component: DashboardComponent}
 ];
