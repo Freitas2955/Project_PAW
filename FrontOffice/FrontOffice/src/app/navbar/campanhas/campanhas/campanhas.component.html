@@ -20,21 +20,20 @@
       </script>
     </header>
 
-  <div class="entidades">
-    <div class="card" *ngFor="let entity of entities">
+  <div class="campanhas">
+    <div class="card" *ngFor="let campaign of campaigns">
         <div class="content">
             <div class="info">
-                <header><h3>Nome: {{entity.name}}</h3></header>
-                <p>Email: {{entity.email}}</p>
-                <p>Cidade: {{entity.city}}</p>
-                <p>Telemóvel: {{entity.phone}}</p>
+                <header><h3>Nome: {{campaign.name}}</h3></header>
+                <p>Custo: {{campaign.cost}}</p>
+                <p>Descriacao: {{campaign.description}}</p>
                 <div class="detalhes">
-                    <button [routerLink]="['/entidades/show', entity._id]">Detalhes</button>
+                    <button [routerLink]="['/campanhas/show', campaign._id]">Detalhes</button>
                 </div>
             </div>
             <div id="preview-container">
-              <div *ngIf="entity.imageUrl">
-                  <img id="preview-image" [src]="entity.imageUrl" alt="Pré-visualização da Imagem" />
+              <div *ngIf="campaign.imageUrl">
+                  <img id="preview-image" [src]="campaign.imageUrl" alt="Pré-visualização da Imagem" />
               </div>
           </div>
         </div>

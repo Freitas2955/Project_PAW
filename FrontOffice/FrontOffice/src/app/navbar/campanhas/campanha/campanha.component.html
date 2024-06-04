@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<main>
+    <div class="content">
+            <div id="formContent">
+                <div id="leftside">
+                    <h2>Campanha</h2>
+                    <div id="preview-container">
+                        <div *ngIf="campaign.imageUrl">
+                            <img id="preview-image" [src]="campaign.imageUrl" alt="Pré-visualização da Imagem" />
+                        </div>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="description">Descrição:</label>
+                        <p >{{campaign.description}}</p>
+                    </div>
+                </div>
+                <div id="rightside">
+                    <div class="nome">
+                        <div class="inputContainer">
+                            <label for="name">Titulo:</label>
+                            <input type="text" id="name" name="name" value="{{campaign.name}}" readonly>
+                        </div>
+                    </div>
+                    <div class="grupo">
+                        <div class="inputContainer">
+                            <label for="cost">Custos:</label>
+                            <input type="cost" id="cost" name="cost" value="{{campaign.cost}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</main>

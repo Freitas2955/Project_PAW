@@ -20,6 +20,9 @@ import { DoadorComponent } from './navbar/doadores/doador/doador.component';
 import { DoadoresComponent } from './navbar/doadores/doadores/doadores.component';
 import { DashboardComponent } from './navbar/doadores/dashboard/dashboard.component'
 import { AuthGuardGuard } from './guards/auth-guard.guard';
+import { CampanhaComponent } from './navbar/campanhas/campanha/campanha.component';
+import { CampanhasComponent } from './navbar/campanhas/campanhas/campanhas.component';
+import { RegistarcampanhasComponent } from './navbar/campanhas/registarcampanhas/registarcampanhas.component';
 
 export const routes: Routes = [
   { path: '', component: PagInicialComponent },
@@ -45,5 +48,9 @@ export const routes: Routes = [
   { path: 'editardoador/:id', component: EditardoadorComponent ,canActivate: [AuthGuardGuard]},
   { path: 'registardoador', component: RegistardoadorComponent ,canActivate: [AuthGuardGuard]},
 
-  {path: 'dashboard/:id', component: DashboardComponent,canActivate: [AuthGuardGuard]}
+  {path: 'dashboard/:id', component: DashboardComponent,canActivate: [AuthGuardGuard]},
+  {path: 'registarcampanha', component: RegistarcampanhasComponent, canActivate: [AuthGuardGuard]},
+  {path: 'campanha', component: CampanhaComponent, canActivate: [AuthGuardGuard]},
+  {path: 'campanhas', component: CampanhasComponent, canActivate: [AuthGuardGuard]},
+  { path: 'campanhas/show/:id', component: CampanhasComponent ,canActivate: [AuthGuardGuard]},  //nao sei se é campanhas ou campanha /show/id
 ];

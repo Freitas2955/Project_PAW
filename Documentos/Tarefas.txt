@@ -1,7 +1,7 @@
 -login lembrar me / recuperar pass 
 -api de mapas para morada(pensar na logica)
 
--fazer notificacoes(email) (admin:novas entidades para validar)  
+-fazer notificacoes(email)
 
 -api paypal
 -rotas das imagens estao publicas
@@ -24,7 +24,9 @@ instituicoes podem ver pedidos de recolha
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -css dashboard
--campanhas selecionar para comprar---- criar ver so um e apagar.
+
+-campanhas selecionar para comprar---- criar ver so um e apagar.----------feito
+
 - validacao schemas no backend---feito mas se nao respeitar crash.
 
 Duarte:

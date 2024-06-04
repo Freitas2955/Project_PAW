@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<main>
+    <div class="content">
+        <form (ngSubmit)="submitForm()" #myForm="ngForm">
+            <div id="formContent">
+                <div id="leftside">
+                    <h2>Registar Campanha</h2>
+                    <div id="preview-container">
+                        <div *ngIf="imagePreview">
+                            <img id="preview-image" [src]="imagePreview" alt="Pré-visualização da Imagem" />
+                        </div>
+                    </div>
+                    <div id="upload-box">
+                        <input type="file" id="upload-input" name="file" accept="image/*" (change)="onFileSelected($event)" />
+                        <label for="upload-input" id="upload-label">Escolher imagem</label>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="description">Descrição:</label>
+                        <textarea id="description" name="description" [(ngModel)]="campaign.description"
+                            placeholder="Descrição" required></textarea>
+                    </div>
+                </div>
+                <div id="rightside">
+                    <div class="nome">
+                        <div class="inputContainer">
+                            <label for="name">Titulo:</label>
+                            <input type="text" id="name" name="name" [(ngModel)]="campaign.name"
+                                placeholder="Nome da Campanha">
+                        </div>
+                    </div>
+                    <div class="grupo">
+                        <div class="inputContainer">
+                            <label for="cost">Custos:</label>
+                            <input type="cost" id="cost" name="cost" [(ngModel)]="campaign.cost" placeholder="Custos">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" [disabled]="myForm.invalid">Guardar</button>
+        </form>
+    </div>
+</main>
