@@ -1,14 +1,15 @@
 -login lembrar me / recuperar pass 
 -api de mapas para morada(pensar na logica)
-
 -fazer notificacoes(email)
-
 -api paypal
 -rotas das imagens estao publicas
 (admin:novas entidades para validar)-Backoffice
 -historico de compras
 -Compor a pagina inicial
 -angariador receber 10% de todos os pontos do doador que angariou
+-por os filtros a funcionar das paginas verintituicoes/...
+-ao dar update validar schemas
+
 
 
 paginal inicial - sai para o login ou registo (instituicao,parceiro,donator)
@@ -21,13 +22,11 @@ doador nao pode aprovar doacao e entidade nao pode criar pedido de recolha
 instituicoes podem ver pedidos de recolha
 
 
+
+
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -css dashboard
-
--campanhas selecionar para comprar---- criar ver so um e apagar.----------feito
-
-- validacao schemas no backend---feito mas se nao respeitar crash.
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
