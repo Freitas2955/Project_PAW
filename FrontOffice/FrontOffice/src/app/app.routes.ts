@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { EntidadesComponent } from './navbar/instituicoes/entidades/entidades.component';
 import { DoarComponent } from './navbar/doar/doar.component';
-import { LojaComponent } from './navbar/loja/loja.component';
 import { DoacoesComponent } from './navbar/donations/doacoes/doacoes.component';
 import { RegistoEntidadesComponent } from './navbar/instituicoes/registo-entidades/registo-entidades.component';
 import { PagInicialComponent } from './pag-inicial/pag-inicial.component';
@@ -27,8 +26,6 @@ import { RegistarcampanhasComponent } from './navbar/campanhas/registarcampanhas
 export const routes: Routes = [
   { path: '', component: PagInicialComponent },
   { path: 'login', component: LoginComponent },
-
-  { path: 'loja', component: LojaComponent ,canActivate: [AuthGuardGuard]},
 
   { path: 'doacoes/entidade/:idEntidade', component: DoacoesComponent ,canActivate: [AuthGuardGuard]},
   { path: 'doacoes/doador/:idDoador', component: DoacoesComponent ,canActivate: [AuthGuardGuard]},
