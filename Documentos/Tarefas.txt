@@ -1,27 +1,23 @@
-1º Milestone 
 -login lembrar me / recuperar pass 
 -api de mapas para morada(pensar na logica)
--fazer notificacoes(email)
--Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
 
-2º Milestone
--rever autenticacao pq é diferente no angular
+-fazer notificacoes(email) (admin:novas entidades para validar)  
+
 -api paypal
-(admin:novas entidades para validar)
+-rotas das imagens estao publicas
+(admin:novas entidades para validar)-Backoffice
 -historico de compras
 -Compor a pagina inicial
--verificacao dos inputs (falta a mensagem)
 -angariador receber 10% de todos os pontos do doador que angariou
--campanhas selecionar para comprar---- nao falta o de criar campanha?
--validacao schemas no backend---- feito
--usar objectid nos schemas
 
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
--dashboard de cada um (grafico com evolucao do numero de pontos)(admin:novas entidades para validar) - plotly
+-css dashboard
+-campanhas selecionar para comprar---- criar ver so um e apagar.
+- validacao schemas no backend---feito mas se nao respeitar crash.
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
 -Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /entregue/ estraviado)) 
--dividir servicos-----feito
 -login igual para todos--- feito organizar rotas para perfis diferentes e por login no backend
+-objectid
