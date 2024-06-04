@@ -10,6 +10,17 @@
 -Compor a pagina inicial
 -angariador receber 10% de todos os pontos do doador que angariou
 
+
+paginal inicial - sai para o login ou registo (instituicao,parceiro,donator)
+login-dashboard(donator),dashboard(entidades),dashboard(parceiros)
+doadores podem doar, comprar vales, por filtros nas entidades e campanhas
+entidades podem gerir doacoes
+parceiros podem gerir campanhas e ver historico de compras
+ 
+doador nao pode aprovar doacao e entidade nao pode criar pedido de recolha
+instituicoes podem ver pedidos de recolha
+
+
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -css dashboard
