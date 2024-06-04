@@ -34,7 +34,6 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-left: 2px solid #dee1e6;
   }
   
   .user > * {
@@ -43,7 +42,7 @@ header {
   
 
   .caixa {
-    display: none; /* Por padrão, o modal está oculto */
+    display: none; 
     position: fixed;
     z-index: 1;
     left: 0;

@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { EntidadesComponent } from './navbar/instituicoes/entidades/entidades.component';
 import { DoarComponent } from './navbar/doar/doar.component';
-import { LojaComponent } from './navbar/loja/loja.component';
 import { DoacoesComponent } from './navbar/donations/doacoes/doacoes.component';
 import { RegistoEntidadesComponent } from './navbar/instituicoes/registo-entidades/registo-entidades.component';
 import { PagInicialComponent } from './pag-inicial/pag-inicial.component';
@@ -27,26 +26,26 @@ import { RegistarcampanhasComponent } from './navbar/campanhas/registarcampanhas
 export const routes: Routes = [
   { path: '', component: PagInicialComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'entidades', component: EntidadesComponent ,canActivate: [AuthGuardGuard]},
-  { path: 'entidades/show/:id', component: EntidadeComponent ,canActivate: [AuthGuardGuard]},
-  { path: 'doar/:donatorId', component: DoarComponent ,canActivate: [AuthGuardGuard]},
-  { path: 'loja', component: LojaComponent ,canActivate: [AuthGuardGuard]},
+
   { path: 'doacoes/entidade/:idEntidade', component: DoacoesComponent ,canActivate: [AuthGuardGuard]},
   { path: 'doacoes/doador/:idDoador', component: DoacoesComponent ,canActivate: [AuthGuardGuard]},
-  { path: 'doacoes/show/:idDoacao', component: DoacaoComponent,canActivate: [AuthGuardGuard] },
-  { path: 'registoEntidades', component: RegistoEntidadesComponent ,canActivate: [AuthGuardGuard]},
-  { path: 'editarEntidade/:id', component: EditarentidadesComponent ,canActivate: [AuthGuardGuard]},
+  { path: 'doacoes/show/:idDoacao', component: DoacaoComponent,canActivate: [AuthGuardGuard]},
+  { path: 'doar/:donatorId', component: DoarComponent ,canActivate: [AuthGuardGuard]},
 
+  { path: 'registarentidade', component: RegistoEntidadesComponent},
+  { path: 'editarEntidade/:id', component: EditarentidadesComponent ,canActivate: [AuthGuardGuard]},
+  { path: 'entidades/show/:id', component: EntidadeComponent ,canActivate: [AuthGuardGuard]},
+  { path: 'entidades', component: EntidadesComponent ,canActivate: [AuthGuardGuard]},
 
   { path: 'parceiros', component: ParceirosComponent ,canActivate: [AuthGuardGuard]},
   { path: 'parceiros/show/:id', component: ParceiroComponent ,canActivate: [AuthGuardGuard]},
   { path: 'editarparceiro/:id', component: EditarparceiroComponent,canActivate: [AuthGuardGuard]},
-  { path: 'registarparceiro', component: RegistarparceiroComponent,canActivate: [AuthGuardGuard]},
+  { path: 'registarparceiro', component: RegistarparceiroComponent},
 
   { path: 'doadores', component: DoadoresComponent ,canActivate: [AuthGuardGuard]}, //Nao sei quais devo usar??
   { path: 'doadores/show/:id', component: DoadorComponent,canActivate: [AuthGuardGuard]},
   { path: 'editardoador/:id', component: EditardoadorComponent ,canActivate: [AuthGuardGuard]},
-  { path: 'registardoador', component: RegistardoadorComponent ,canActivate: [AuthGuardGuard]},
+  { path: 'registardoador', component: RegistardoadorComponent},
 
   {path: 'dashboard/:id', component: DashboardComponent,canActivate: [AuthGuardGuard]},
   {path: 'registarcampanha', component: RegistarcampanhasComponent, canActivate: [AuthGuardGuard]},
