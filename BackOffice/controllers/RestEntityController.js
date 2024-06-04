@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
-var Partner=require("../models/Partner");
-var Entity=require("../models/Entity");
+var Partner = require("../models/Partner");
+var Entity = require("../models/Entity");
 var path = require("path");
 var fs = require("fs");
 const bcrypt = require("bcryptjs");
@@ -124,7 +124,6 @@ entityController.create = function (req, res) {
   });
 };
 
-
 entityController.save = function (req, res) {
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   var city = req.body.city;
@@ -145,57 +144,21 @@ entityController.save = function (req, res) {
     .then((entity) => {
       if (entity) {
         console.log("Instituicao ja existe");
-        res.json({exists:true})
+        res.json({ exists: true });
       } else {
-        Partner.findOne({ email: req.body.email })
-        .then((partner) => {
-          if(partner){
-            res.json({exists:true})
-          }else{
-            Donator.findOne({ email: req.body.email })
-            .then((donator) => {
-              if(donator){
-                res.json({exists:true})
-              }else{
+        Partner.findOne({ email: req.body.email }).then((partner) => {
+          if (partner) {
+            res.json({ exists: true });
+          } else {
+            Donator.findOne({ email: req.body.email }).then((donator) => {
+              if (donator) {
+                res.json({ exists: true });
+              } else {
                 entitySave
-                .save()
-                .then((savedEntity) => {
-                  console.log("Successfully created an entity.");
-                
-                  var fileDestination = path.join(
-                    __dirname,
-                    "..",
-                    "images",
-                    "entities",
-                    savedEntity._id.toString() + ".jpg"
-                  );
-                  fs.readFile(req.file.path, function (err, data) {
-                    if (err) {
-                      console.error("Error reading file:", err);
-                      return res.status(500).send("Error reading file");
-                    }
-                
-                    fs.writeFile(fileDestination, data, function (err) {
-                      if (err) {
-                        console.error("Error writing file:", err);
-                        return res.status(500).send("Error writing file");
-                      }
-                      fs.unlink(req.file.path, function (err) {
-                        if (err) {
-                          console.error(
-                            "Erro ao remover o arquivo da pasta 'tmp':",
-                            err
-                          );
-                        }
-                      });
-                    });
-                   
-                  });
-                  res.json(savedEntity);
-                })
-                .catch((err) => {
-                  Entity.findOne({ email: req.body.email }).then((savedEntity)=>{
-                
+                  .save()
+                  .then((savedEntity) => {
+                    console.log("Successfully created an entity.");
+
                     var fileDestination = path.join(
                       __dirname,
                       "..",
@@ -203,34 +166,66 @@ entityController.save = function (req, res) {
                       "entities",
                       savedEntity._id.toString() + ".jpg"
                     );
-                    
-                    var fileOrigin = path.join(
-                      __dirname,
-                      "..",
-                      "images",
-                      "employees",
-                      "default" + ".jpg"
-                    );
-                    fs.readFile(fileOrigin, function (err, data) {
+                    fs.readFile(req.file.path, function (err, data) {
                       if (err) {
-                        
+                        console.error("Error reading file:", err);
+                        return res.status(500).send("Error reading file");
                       }
+
                       fs.writeFile(fileDestination, data, function (err) {
                         if (err) {
-                        
+                          console.error("Error writing file:", err);
+                          return res.status(500).send("Error writing file");
                         }
+                        fs.unlink(req.file.path, function (err) {
+                          if (err) {
+                            console.error(
+                              "Erro ao remover o arquivo da pasta 'tmp':",
+                              err
+                            );
+                          }
+                        });
                       });
                     });
+                    res.json(savedEntity);
                   })
-                  
-                  res.json(err)
-                });
-              }
-            })
-          }
-         
+                  .catch((err) => {
+                    Entity.findOne({ email: req.body.email }).then(
+                      (savedEntity) => {
+                        if (savedEntity) {
+                          var fileDestination = path.join(
+                            __dirname,
+                            "..",
+                            "images",
+                            "entities",
+                            savedEntity._id.toString() + ".jpg"
+                          );
 
-        })
+                          var fileOrigin = path.join(
+                            __dirname,
+                            "..",
+                            "images",
+                            "employees",
+                            "default" + ".jpg"
+                          );
+                          fs.readFile(fileOrigin, function (err, data) {
+                            if (err) {
+                            }
+                            fs.writeFile(fileDestination, data, function (err) {
+                              if (err) {
+                              }
+                            });
+                          });
+                        }
+                      }
+                    );
+
+                    res.json(err);
+                  });
+              }
+            });
+          }
+        });
       }
     })
     .catch((err) => {
@@ -276,44 +271,44 @@ entityController.update = function (req, res) {
       console.log("Successfully updated an entity.");
 
       if (req.file) {
-          var fileDestination = path.join(
-            __dirname,
-            "..",
-            "images",
-            "entities",
-            savedEntity._id.toString() + ".jpg"
-          );
+        var fileDestination = path.join(
+          __dirname,
+          "..",
+          "images",
+          "entities",
+          savedEntity._id.toString() + ".jpg"
+        );
 
-          fs.readFile(req.file.path, (err, data) => {
+        fs.readFile(req.file.path, (err, data) => {
+          if (err) {
+            console.error("Error reading file:", err);
+            return res.status(500).send("Error reading file");
+          }
+
+          fs.writeFile(fileDestination, data, (err) => {
             if (err) {
-              console.error("Error reading file:", err);
-              return res.status(500).send("Error reading file");
+              console.error("Error writing file:", err);
+              return res.status(500).send("Error writing file");
             }
 
-            fs.writeFile(fileDestination, data, (err) => {
+            fs.unlink(req.file.path, (err) => {
               if (err) {
-                console.error("Error writing file:", err);
-                return res.status(500).send("Error writing file");
+                console.error("Error removing file from 'tmp' folder:", err);
               }
-
-              fs.unlink(req.file.path, (err) => {
-                if (err) {
-                  console.error("Error removing file from 'tmp' folder:", err);
-                }
-              });
-
-              res.status(200).json(savedEntity);
             });
+
+            res.status(200).json(savedEntity);
           });
-        } else {
-          console.log("Non-image file detected, skipping file save.");
-          fs.unlink(req.file.path, (err) => {
-            if (err) {
-              console.error("Error removing file from 'tmp' folder:", err);
-            }
-          });
-          res.status(200).json(savedEntity);
-        }
+        });
+      } else {
+        console.log("Non-image file detected, skipping file save.");
+        fs.unlink(req.file.path, (err) => {
+          if (err) {
+            console.error("Error removing file from 'tmp' folder:", err);
+          }
+        });
+        res.status(200).json(savedEntity);
+      }
     })
     .catch((err) => {
       console.log(err);

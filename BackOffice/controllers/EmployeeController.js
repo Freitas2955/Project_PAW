@@ -97,40 +97,7 @@ employeeController.save = function (req, res) {
           .save()
           .then((savedEmployee) => {
             console.log("Successfully created an Employee.");
-
-            var fileDestination = path.join(
-              __dirname,
-              "..",
-              "images",
-              "employees",
-              savedEmployee._id.toString() + ".jpg"
-            );
-            fs.readFile(req.file.path, function (err, data) {
-              if (err) {
-                console.error("Error reading file:", err);
-                return res.status(500).send("Error reading file");
-              }
-
-              fs.writeFile(fileDestination, data, function (err) {
-                if (err) {
-                  console.error("Error writing file:", err);
-                  return res.status(500).send("Error writing file");
-                }
-                fs.unlink(req.file.path, function (err) {
-                  if (err) {
-                    console.error(
-                      "Erro ao remover o arquivo da pasta 'tmp':",
-                      err
-                    );
-                  }
-                });
-                res.redirect("/employees/");
-              });
-            });
-          })
-          .catch((err) => {
-            Employee.findOne({ email: req.body.email }).then((savedEmployee)=>{
-
+            if (savedEmployee) {
               var fileDestination = path.join(
                 __dirname,
                 "..",
@@ -138,34 +105,68 @@ employeeController.save = function (req, res) {
                 "employees",
                 savedEmployee._id.toString() + ".jpg"
               );
-              var fileOrigin = path.join(
-                __dirname,
-                "..",
-                "images",
-                "employees",
-                "default" + ".jpg"
-              );
-              fs.readFile(fileOrigin, function (err, data) {
+              fs.readFile(req.file.path, function (err, data) {
                 if (err) {
-                  
+                  console.error("Error reading file:", err);
+                  return res.status(500).send("Error reading file");
                 }
+
                 fs.writeFile(fileDestination, data, function (err) {
                   if (err) {
-                  
+                    console.error("Error writing file:", err);
+                    return res.status(500).send("Error writing file");
                   }
-                //  res.redirect("/employees/");
+                  fs.unlink(req.file.path, function (err) {
+                    if (err) {
+                      console.error(
+                        "Erro ao remover o arquivo da pasta 'tmp':",
+                        err
+                      );
+                    }
+                  });
+                  res.redirect("/employees/");
                 });
               });
-            })
+            }
+          })
+          .catch((err) => {
+            Employee.findOne({ email: req.body.email }).then(
+              (savedEmployee) => {
+                if (savedEmployee) {
+                  var fileDestination = path.join(
+                    __dirname,
+                    "..",
+                    "images",
+                    "employees",
+                    savedEmployee._id.toString() + ".jpg"
+                  );
+                  var fileOrigin = path.join(
+                    __dirname,
+                    "..",
+                    "images",
+                    "employees",
+                    "default" + ".jpg"
+                  );
+                  fs.readFile(fileOrigin, function (err, data) {
+                    if (err) {
+                    }
+                    fs.writeFile(fileDestination, data, function (err) {
+                      if (err) {
+                      }
+                      //  res.redirect("/employees/");
+                    });
+                  });
+                }
+              }
+            );
             res.redirect("/employees/");
-          }); 
+          });
       }
     })
     .catch((err) => {
       console.error("Error:", err);
     });
 };
-
 
 employeeController.edit = function (req, res) {
   Employee.findOne({ _id: req.params.id })

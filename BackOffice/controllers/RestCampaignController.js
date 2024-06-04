@@ -227,29 +227,31 @@ campaignController.save = function (req, res) {
     })
     .catch((err) => {
       Campaign.findOne({ _id: sc._id }).then((savedCampaign) => {
-        var fileDestination = path.join(
-          __dirname,
-          "..",
-          "images",
-          "campaigns",
-          savedCampaign._id.toString() + ".jpg"
-        );
+        if (savedCampaign) {
+          var fileDestination = path.join(
+            __dirname,
+            "..",
+            "images",
+            "campaigns",
+            savedCampaign._id.toString() + ".jpg"
+          );
 
-        var fileOrigin = path.join(
-          __dirname,
-          "..",
-          "images",
-          "campaigns",
-          "default" + ".jpg"
-        );
-        fs.readFile(fileOrigin, function (err, data) {
-          if (err) {
-          }
-          fs.writeFile(fileDestination, data, function (err) {
+          var fileOrigin = path.join(
+            __dirname,
+            "..",
+            "images",
+            "campaigns",
+            "default" + ".jpg"
+          );
+          fs.readFile(fileOrigin, function (err, data) {
             if (err) {
             }
+            fs.writeFile(fileDestination, data, function (err) {
+              if (err) {
+              }
+            });
           });
-        });
+        }
       });
 
       res.redirect("/restcampaigns/");

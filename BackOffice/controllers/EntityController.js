@@ -12,26 +12,25 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-  entityController.getEntities = function (req, res) {
-    let num;
-  
-    (async () => {
-      try {
-        Entity.find({ approved: true })
-          .then((entity) => {
-            res.json({
-              entities: entity,
-            });
-          })
-          .catch((err) => {
-            console.log("Error:", err);
+entityController.getEntities = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      Entity.find({ approved: true })
+        .then((entity) => {
+          res.json({
+            entities: entity,
           });
-      } catch (error) {
-        console.error("Ocorreu um erro ao contar os documentos:", error);
-      }
-    })();
-  };
-  
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
 
 entityController.management1 = function (req, res) {
   let num;
@@ -201,35 +200,33 @@ entityController.save = function (req, res) {
             });
           })
           .catch((err) => {
-            Entity.findOne({ email: req.body.email }).then((savedEntity)=>{
+            Entity.findOne({ email: req.body.email }).then((savedEntity) => {
+              if (savedEntity) {
+                var fileDestination = path.join(
+                  __dirname,
+                  "..",
+                  "images",
+                  "entities",
+                  savedEntity._id.toString() + ".jpg"
+                );
 
-              var fileDestination = path.join(
-                __dirname,
-                "..",
-                "images",
-                "entities",
-                savedEntity._id.toString() + ".jpg"
-              );
-              
-              var fileOrigin = path.join(
-                __dirname,
-                "..",
-                "images",
-                "employees",
-                "default" + ".jpg"
-              );
-              fs.readFile(fileOrigin, function (err, data) {
-                if (err) {
-                  
-                }
-                fs.writeFile(fileDestination, data, function (err) {
+                var fileOrigin = path.join(
+                  __dirname,
+                  "..",
+                  "images",
+                  "employees",
+                  "default" + ".jpg"
+                );
+                fs.readFile(fileOrigin, function (err, data) {
                   if (err) {
-                  
                   }
+                  fs.writeFile(fileDestination, data, function (err) {
+                    if (err) {
+                    }
+                  });
                 });
-              });
-            })
-            
+              }
+            });
             res.redirect("/entities/");
           });
       }

@@ -134,29 +134,31 @@ employeeController.save = function (req, res) {
           .catch((err) => {
             Employee.findOne({ email: req.body.email }).then(
               (savedEmployee) => {
-                var fileDestination = path.join(
-                  __dirname,
-                  "..",
-                  "images",
-                  "employees",
-                  savedEmployee._id.toString() + ".jpg"
-                );
-                var fileOrigin = path.join(
-                  __dirname,
-                  "..",
-                  "images",
-                  "employees",
-                  "default" + ".jpg"
-                );
-                fs.readFile(fileOrigin, function (err, data) {
-                  if (err) {
-                  }
-                  fs.writeFile(fileDestination, data, function (err) {
+                if (savedEmployee) {
+                  var fileDestination = path.join(
+                    __dirname,
+                    "..",
+                    "images",
+                    "employees",
+                    savedEmployee._id.toString() + ".jpg"
+                  );
+                  var fileOrigin = path.join(
+                    __dirname,
+                    "..",
+                    "images",
+                    "employees",
+                    "default" + ".jpg"
+                  );
+                  fs.readFile(fileOrigin, function (err, data) {
                     if (err) {
                     }
-                    //  res.redirect("/employees/");
+                    fs.writeFile(fileDestination, data, function (err) {
+                      if (err) {
+                      }
+                      //  res.redirect("/employees/");
+                    });
                   });
-                });
+                }
               }
             );
             res.redirect("/RestEmployees/");

@@ -13,57 +13,59 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-  campaignController.shop = function (req, res) {
-    let num;
-  
-    (async () => {
-      try {
-        num = await Campaign.countDocuments({});
-        console.log("Número total de documentos:", num);
-        Campaign.find()
-          .then((campaign) => {
-            res.render("../views/campaigns/selecionarCampanha", {
-              campaigns: campaign,
-              number: num,
-              username: req.session.username,
-              userId: req.session.userId,
-              donatorId:req.params.donatorId,
-            });
-          })
-          .catch((err) => {
-            console.log("Error:", err);
-          });
-      } catch (error) {
-        console.error("Ocorreu um erro ao contar os documentos:", error);
-      }
-    })();
-  };
+campaignController.shop = function (req, res) {
+  let num;
 
-  campaignController.shop1 = function (req, res) {
-    let num;
-  
-    (async () => {
-      try {
-        num = await Campaign.countDocuments({partnerName:req.query.partnerName});
-        console.log("Número total de documentos:", num);
-        Campaign.find({partnerName:req.query.partnerName})
-          .then((campaign) => {
-            res.render("../views/campaigns/selecionarCampanha", {
-              campaigns: campaign,
-              number: num,
-              username: req.session.username,
-              userId: req.session.userId,
-              donatorId:req.params.donatorId,
-            });
-          })
-          .catch((err) => {
-            console.log("Error:", err);
+  (async () => {
+    try {
+      num = await Campaign.countDocuments({});
+      console.log("Número total de documentos:", num);
+      Campaign.find()
+        .then((campaign) => {
+          res.render("../views/campaigns/selecionarCampanha", {
+            campaigns: campaign,
+            number: num,
+            username: req.session.username,
+            userId: req.session.userId,
+            donatorId: req.params.donatorId,
           });
-      } catch (error) {
-        console.error("Ocorreu um erro ao contar os documentos:", error);
-      }
-    })();
-  };
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+campaignController.shop1 = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      num = await Campaign.countDocuments({
+        partnerName: req.query.partnerName,
+      });
+      console.log("Número total de documentos:", num);
+      Campaign.find({ partnerName: req.query.partnerName })
+        .then((campaign) => {
+          res.render("../views/campaigns/selecionarCampanha", {
+            campaigns: campaign,
+            number: num,
+            username: req.session.username,
+            userId: req.session.userId,
+            donatorId: req.params.donatorId,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
 
 campaignController.management = function (req, res) {
   let num;
@@ -95,9 +97,11 @@ campaignController.management1 = function (req, res) {
 
   (async () => {
     try {
-      num = await Campaign.countDocuments({partnerName:req.query.partnerName});
+      num = await Campaign.countDocuments({
+        partnerName: req.query.partnerName,
+      });
       console.log("Número total de documentos:", num);
-      Campaign.find({partnerName:req.query.partnerName})
+      Campaign.find({ partnerName: req.query.partnerName })
         .then((campaign) => {
           res.render("../views/campaigns/gestaoCampanhas", {
             campaigns: campaign,
@@ -148,7 +152,7 @@ campaignController.buyMenu = function (req, res) {
         campaign: campaign,
         username: req.session.username,
         userId: req.session.userId,
-        donatorId:req.params.donatorId
+        donatorId: req.params.donatorId,
       });
     })
     .catch((err) => {
@@ -159,7 +163,7 @@ campaignController.buyMenu = function (req, res) {
 campaignController.create = function (req, res) {
   Partner.findOne({ _id: req.params.partnerId })
     .then((partner) => {
-      console.log(partner)
+      console.log(partner);
       res.render("../views/campaigns/registarCampanha", {
         username: req.session.username,
         userId: req.session.userId,
@@ -180,11 +184,11 @@ campaignController.save = function (req, res) {
     partnerName: req.params.partnerName,
   };
   const campaign = new Campaign(data);
-  var sc ;
+  var sc;
   campaign
     .save()
     .then((savedCampaign) => {
-      sc=savedCampaign
+      sc = savedCampaign;
       console.log("Successfully created an Campaign.");
 
       var fileDestination = path.join(
@@ -215,35 +219,34 @@ campaignController.save = function (req, res) {
       });
     })
     .catch((err) => {
-      Campaign.findOne({ _id: sc._id }).then((savedCampaign)=>{
+      Campaign.findOne({ _id: sc._id }).then((savedCampaign) => {
+        if (savedCampaign) {
+          var fileDestination = path.join(
+            __dirname,
+            "..",
+            "images",
+            "campaigns",
+            savedCampaign._id.toString() + ".jpg"
+          );
 
-        var fileDestination = path.join(
-          __dirname,
-          "..",
-          "images",
-          "campaigns",
-          savedCampaign._id.toString() + ".jpg"
-        );
-        
-        var fileOrigin = path.join(
-          __dirname,
-          "..",
-          "images",
-          "campaigns",
-          "default" + ".jpg"
-        );
-        fs.readFile(fileOrigin, function (err, data) {
-          if (err) {
-            
-          }
-          fs.writeFile(fileDestination, data, function (err) {
+          var fileOrigin = path.join(
+            __dirname,
+            "..",
+            "images",
+            "campaigns",
+            "default" + ".jpg"
+          );
+          fs.readFile(fileOrigin, function (err, data) {
             if (err) {
-            
             }
+            fs.writeFile(fileDestination, data, function (err) {
+              if (err) {
+              }
+            });
           });
-        });
-      })
-      
+        }
+      });
+
       res.redirect("/campaigns/");
     });
 };

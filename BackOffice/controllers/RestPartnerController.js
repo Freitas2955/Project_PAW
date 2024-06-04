@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Donator = require("../models/Donator");
-var Partner=require("../models/Partner");
-var Entity=require("../models/Entity");
+var Partner = require("../models/Partner");
+var Entity = require("../models/Entity");
 var path = require("path");
 var fs = require("fs");
 var partnerController = {};
@@ -15,7 +15,6 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-  
 partnerController.getPartners = function (req, res) {
   let num;
   (async () => {
@@ -90,62 +89,27 @@ partnerController.save = function (req, res) {
     .then((partner) => {
       if (partner) {
         res.json({
-         exists:true
-        })
+          exists: true,
+        });
         //res.render("../views/partners/verparceiro");
       } else {
-        Donator.findOne({ email: req.body.email })
-        .then((donator) => {
+        Donator.findOne({ email: req.body.email }).then((donator) => {
           if (donator) {
             res.json({
-              exists:true
-            })
-          }else{
-            Entity.findOne({ email: req.body.email })
-            .then((entity) => {
+              exists: true,
+            });
+          } else {
+            Entity.findOne({ email: req.body.email }).then((entity) => {
               if (entity) {
                 res.json({
-                  exists:true
-                })
-              }else{
+                  exists: true,
+                });
+              } else {
                 partnerSave
-                .save()
-                .then((savedPartner) => {
-                  console.log("Successfully created an Partner.");
-      
-                  var fileDestination = path.join(
-                    __dirname,
-                    "..",
-                    "images",
-                    "partners",
-                    savedPartner._id.toString() + ".jpg"
-                  );
-                  fs.readFile(req.file.path, function (err, data) {
-                    console.log(req.file.path);
-                    if (err) {
-                      console.error("Error reading file:", err);
-                      return res.status(500).send("Error reading file");
-                    }
-      
-                    fs.writeFile(fileDestination, data, function (err) {
-                      if (err) {
-                        console.error("Error writing file:", err);
-                        return res.status(500).send("Error writing file");
-                      }
-                      fs.unlink(req.file.path, function (err) {
-                        if (err) {
-                          console.error(
-                            "Erro ao remover o arquivo da pasta 'tmp':",
-                            err
-                          );
-                        }
-                      });
-                      res.redirect("/RestPartners/");
-                    });
-                  });
-                })
-                .catch((err) => {
-                  Partner.findOne({ email: req.body.email }).then((savedPartner) => {
+                  .save()
+                  .then((savedPartner) => {
+                    console.log("Successfully created an Partner.");
+
                     var fileDestination = path.join(
                       __dirname,
                       "..",
@@ -153,30 +117,67 @@ partnerController.save = function (req, res) {
                       "partners",
                       savedPartner._id.toString() + ".jpg"
                     );
-      
-                    var fileOrigin = path.join(
-                      __dirname,
-                      "..",
-                      "images",
-                      "employees",
-                      "default" + ".jpg"
-                    );
-                    fs.readFile(fileOrigin, function (err, data) {
+                    fs.readFile(req.file.path, function (err, data) {
+                      console.log(req.file.path);
                       if (err) {
+                        console.error("Error reading file:", err);
+                        return res.status(500).send("Error reading file");
                       }
+
                       fs.writeFile(fileDestination, data, function (err) {
                         if (err) {
+                          console.error("Error writing file:", err);
+                          return res.status(500).send("Error writing file");
                         }
+                        fs.unlink(req.file.path, function (err) {
+                          if (err) {
+                            console.error(
+                              "Erro ao remover o arquivo da pasta 'tmp':",
+                              err
+                            );
+                          }
+                        });
+                        res.redirect("/RestPartners/");
                       });
                     });
+                  })
+                  .catch((err) => {
+                    Partner.findOne({ email: req.body.email }).then(
+                      (savedPartner) => {
+                        if (savedPartner) {
+                          var fileDestination = path.join(
+                            __dirname,
+                            "..",
+                            "images",
+                            "partners",
+                            savedPartner._id.toString() + ".jpg"
+                          );
+
+                          var fileOrigin = path.join(
+                            __dirname,
+                            "..",
+                            "images",
+                            "employees",
+                            "default" + ".jpg"
+                          );
+                          fs.readFile(fileOrigin, function (err, data) {
+                            if (err) {
+                            }
+                            fs.writeFile(fileDestination, data, function (err) {
+                              if (err) {
+                              }
+                            });
+                          });
+                        }
+                      }
+                    );
+
+                    //res.redirect("/RestPartners/");
                   });
-      
-                  //res.redirect("/RestPartners/");
-                });
               }
-            })
+            });
           }
-        })
+        });
       }
     })
     .catch((err) => {
@@ -187,7 +188,7 @@ partnerController.save = function (req, res) {
 partnerController.edit = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.json( {
+      res.json({
         partner: partner,
         username: req.session.username,
         userId: req.session.userId,

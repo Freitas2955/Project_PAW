@@ -130,35 +130,34 @@ partnerController.save = function (req, res) {
             });
           })
           .catch((err) => {
-            Partner.findOne({ email: req.body.email }).then((savedPartner)=>{
+            Partner.findOne({ email: req.body.email }).then((savedPartner) => {
+              if (savedPartner) {
+                var fileDestination = path.join(
+                  __dirname,
+                  "..",
+                  "images",
+                  "partners",
+                  savedPartner._id.toString() + ".jpg"
+                );
 
-              var fileDestination = path.join(
-                __dirname,
-                "..",
-                "images",
-                "partners",
-                savedPartner._id.toString() + ".jpg"
-              );
-              
-              var fileOrigin = path.join(
-                __dirname,
-                "..",
-                "images",
-                "employees",
-                "default" + ".jpg"
-              );
-              fs.readFile(fileOrigin, function (err, data) {
-                if (err) {
-                  
-                }
-                fs.writeFile(fileDestination, data, function (err) {
+                var fileOrigin = path.join(
+                  __dirname,
+                  "..",
+                  "images",
+                  "employees",
+                  "default" + ".jpg"
+                );
+                fs.readFile(fileOrigin, function (err, data) {
                   if (err) {
-                  
                   }
+                  fs.writeFile(fileDestination, data, function (err) {
+                    if (err) {
+                    }
+                  });
                 });
-              });
-            })
-            
+              }
+            });
+
             res.redirect("/partners/");
           });
       }
@@ -261,15 +260,15 @@ partnerController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-     
+
       Campaign.find({ partnerId: req.params.id })
-        .then((campaigns)=>{
-          campaigns.forEach(function(campaign){
-            console.log(campaign._id.toString())
-            Campaign.deleteOne({_id:campaign._id.toString()}).then(()=>{
+        .then((campaigns) => {
+          campaigns.forEach(function (campaign) {
+            console.log(campaign._id.toString());
+            Campaign.deleteOne({ _id: campaign._id.toString() }).then(() => {
               console.log("apagado");
-            })
-          })
+            });
+          });
         })
         .catch((err) => {
           console.log(err);
