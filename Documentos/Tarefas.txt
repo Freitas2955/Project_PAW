@@ -11,7 +11,6 @@
 -ao dar update validar schemas
 
 
-
 paginal inicial - sai para o login ou registo (instituicao,parceiro,donator)
 login-dashboard(donator),dashboard(entidades),dashboard(parceiros)
 doadores podem doar, comprar vales, por filtros nas entidades e campanhas
@@ -22,11 +21,10 @@ doador nao pode aprovar doacao e entidade nao pode criar pedido de recolha
 instituicoes podem ver pedidos de recolha
 
 
-
-
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -css dashboard
+-dashboard instituicoes parceiros
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
