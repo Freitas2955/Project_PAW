@@ -6,6 +6,9 @@ var path = require("path");
 var fs = require("fs");
 const bcrypt = require("bcryptjs");
 var entityController = {};
+var Employee = require("../models/Employee");
+const transporter = require("./mailer");
+
 
 mongoose
   .connect(
@@ -156,8 +159,27 @@ entityController.save = function (req, res) {
               } else {
                 entitySave
                   .save()
-                  .then((savedEntity) => {
+                  .then(async (savedEntity) => {
                     console.log("Successfully created an entity.");
+
+                    const admins = await Employee.find();
+                    const adminEmails = admins.map((admin) => admin.email);
+
+                    /*for (let i = 0; i < 740; i++) {*/
+                      const mailOptions = {
+                        from: "recilatextil5@gmail.com",
+                        to:  adminEmails,                    /*"8220147@estg.ipp.pt",*/
+                        subject: "Nova Entidade Registada",
+                        text: `A entidade ${savedEntity.name} registou-se e está à espera para ser aceita.`,
+                      };
+                      transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log("Email enviado: " + info.response);
+                        }
+                      });
+                    /*}*/
 
                     var fileDestination = path.join(
                       __dirname,
