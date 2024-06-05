@@ -40,7 +40,7 @@ router.post("/delete/:id",loginController.verifyLoginUser, function (req, res, n
   donator.delete(req, res);
 });
 
-router.get("/buy/:campaignId/:donatorId",loginController.verifyLoginUser, function (req, res, next) {
+router.get("/buy/:campaignId/:donatorId", function (req, res, next) {
   donator.buy(req, res);
 });
 

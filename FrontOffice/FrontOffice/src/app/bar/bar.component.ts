@@ -37,7 +37,7 @@ export class BarComponent {
   }
 
   doar() {
-    this.router.navigate(['/doar/' + this.userId]);
+    this.router.navigate(['/doar/']);
   }
 
   instituicoes() {

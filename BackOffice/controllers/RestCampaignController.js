@@ -40,6 +40,45 @@ campaignController.shop = function (req, res) {
   })();
 };
 
+campaignController.getCampaigns = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      Campaign.find()
+        .then((campaign) => {
+          res.json({
+            campaigns: campaign,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+campaignController.getPartnerCampaigns = function (req, res) {
+  (async () => {
+    try {
+      Campaign.find({partnerId:req.params.partnerId})
+        .then((campaign) => {
+          res.json({
+            campaigns: campaign,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+
 campaignController.shop1 = function (req, res) {
   let num;
 
@@ -140,10 +179,7 @@ campaignController.show = function (req, res) {
     .then((campaign) => {
       res.json({
         campaign: campaign,
-        username: req.session.username,
-        userId: req.session.userId,
       });
-      res.render("../views/campaigns/vercampanha");
     })
     .catch((err) => {
       console.error("Error:", err);
@@ -314,13 +350,11 @@ campaignController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/restcampaigns/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/restcampaigns");
     });
 };
 

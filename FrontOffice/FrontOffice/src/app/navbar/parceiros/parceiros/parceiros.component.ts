@@ -17,11 +17,26 @@ import { BarComponent } from '../../../bar/bar.component';
 })
 export class ParceirosComponent implements OnInit{
   partners: Partner[]=[new Partner()];
+  username: String | null;
+  userId:String;
+  type:String|null;
 
   constructor(
     public rest: PartnersService,
     private router: Router,private sanitizer: DomSanitizer,public rest2: RestService,
-  ) {}
+  ) {
+    const localStorageData = localStorage.getItem('currentUser');
+    if (localStorageData) {
+      const userData = JSON.parse(localStorageData);
+      this.username = userData.username;
+      this.userId=userData.userId;
+      this.type=userData.userType;
+    }else{
+      this.username="";
+      this.userId="";
+      this.type="";
+    }
+  }
 
 
   ngOnInit(): void {

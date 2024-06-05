@@ -28,6 +28,12 @@
                             <input type="cost" id="cost" name="cost" value="{{campaign.cost}}" readonly>
                         </div>
                     </div>
+                    <div class="grupo">
+                        <div class="inputContainer">
+                            <button *ngIf="type == 'Donator'" (click)="comprar(userId)">Comprar</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
     </div>

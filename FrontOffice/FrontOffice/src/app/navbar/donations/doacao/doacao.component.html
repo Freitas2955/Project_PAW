@@ -53,6 +53,6 @@
             </div>
       </div>
         <div class="buttons">
-            <button *ngIf="!requested && !donation.approved" id="criarPedido" (click)="createRequest($event)">Criar pedido</button>
-            <button *ngIf="!donation.approved" id="aprovarDoacao" (click)="aprovarDoacao(donation._id)">Aprovar doação</button>
+            <button *ngIf="!requested && !donation.approved && type=='Donator'" id="criarPedido" (click)="createRequest($event)">Criar pedido</button>
+            <button *ngIf="!donation.approved && type!='Donator'" id="aprovarDoacao" (click)="aprovarDoacao(donation._id)">Aprovar doação</button>
         </div>

@@ -21,18 +21,35 @@ import { BarComponent } from '../../bar/bar.component';
 })
 
 export class DoarComponent {
-  instituicaoSelecionada: String | undefined;
+  instituicaoSelecionada: String |undefined|null;
   totalPontos:number=0;
   points:Points=new Points();
   popupVisible = false;
   simularVisible = false;
-  entityId: String | undefined;
+  entityId: String | undefined |null;
   entities: Entity[]=[new Entity()];
   donation: Donation=new Donation();
-  constructor(public rest: EntitiesService,public rest2: DonationsService,public rest3: RestService,private restService: RestService,private route: ActivatedRoute,private sanitizer: DomSanitizer) {}
+  username: String | null;
+  userId:String;
+  type:String|null;
+  constructor(public rest: EntitiesService,public rest2: DonationsService,public rest3: RestService,private restService: RestService,private route: ActivatedRoute,private sanitizer: DomSanitizer) {
+    const localStorageData = localStorage.getItem('currentUser');
+  if (localStorageData) {
+    const userData = JSON.parse(localStorageData);
+    this.username = userData.username;
+    this.userId=userData.userId;
+    this.type=userData.userType;
+  }else{
+    this.username="";
+    this.userId="";
+    this.type="";
+  }
+  this.entityId = this.route.snapshot.paramMap.get('entityId');
+  this.instituicaoSelecionada = this.route.snapshot.paramMap.get('entityName');
+}
 
   ngOnInit(): void {
-    this.donation.donatorId = this.route.snapshot.paramMap.get('donatorId');
+    this.donation.donatorId = this.userId;
     this.getEntities();
     this.getPoints();
   }

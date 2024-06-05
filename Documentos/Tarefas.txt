@@ -11,7 +11,7 @@
 
 paginal inicial - sai para o login ou registo (instituicao,parceiro,donator)
 login-dashboard(donator),dashboard(entidades),dashboard(parceiros)
-doadores podem doar, comprar vales, por filtros nas entidades e campanhas
+doadores podem doar, comprar vales, por filtros nas entidades e campanhas -----feito com alguns detalhes por resolver
 entidades podem gerir doacoes
 parceiros podem gerir campanhas e ver historico de compras
  

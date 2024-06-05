@@ -1,8 +1,8 @@
 export class Donation{
   _id?:String;
-  entityId?:String;
-  entityName?: String;
-  donatorId?:string|null;
+  entityId?:String|null;
+  entityName?: String|null;
+  donatorId?:String|null;
   donatorName?:String;
   camisolas:number=0;
   casacos:number=0;

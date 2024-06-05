@@ -1,45 +1,48 @@
 <app-navbar></app-navbar>
 <app-bar></app-bar>
 <main>
-    <header><h1>Instituições</h1>
-        <button onclick="toggleDropdown()" id="filtro">Filtros </button>
-        <div id="dropdownContent" class="dropdown-content" style="display: none;">     <!-- Ver este Drop para que serve? -->
-          <a href="/employees/create">Funcionário</a>
-          <a href="/donators/create">Doador</a>
-          <a href="/entities/create">Instituição</a>
-          <a href="/partners/create">Parceiro</a>
-        </div>
-      <script>
-        function toggleDropdown() {
-          var dropdownContent = document.getElementById("dropdownContent");
-          if (dropdownContent.style.display === "none") {
-            dropdownContent.style.display = "block";
-          } else {
-            dropdownContent.style.display = "none";
-          }
+  <header>
+    <h1>Campanhas</h1>
+    <button onclick="toggleDropdown()" id="filtro">Filtros </button>
+    <div id="dropdownContent" class="dropdown-content" style="display: none;"> <!-- Ver este Drop para que serve? -->
+      <a href="/employees/create">Funcionário</a>
+      <a href="/donators/create">Doador</a>
+      <a href="/entities/create">Instituição</a>
+      <a href="/partners/create">Parceiro</a>
+    </div>
+    <script>
+      function toggleDropdown() {
+        var dropdownContent = document.getElementById("dropdownContent");
+        if (dropdownContent.style.display === "none") {
+          dropdownContent.style.display = "block";
+        } else {
+          dropdownContent.style.display = "none";
         }
-      </script>
-    </header>
+      }
+    </script>
+  </header>
 
-  <div class="campanhas">
-    <div class="card" *ngFor="let campaign of campaigns">
-        <div class="content">
-            <div class="info">
-                <header><h3>Nome: {{campaign.name}}</h3></header>
-                <p>Custo: {{campaign.cost}}</p>
-                <p>Descriacao: {{campaign.description}}</p>
-                <div class="detalhes">
-                    <button [routerLink]="['/campanhas/show', campaign._id]">Detalhes</button>
-                </div>
-            </div>
-            <div id="preview-container">
-              <div *ngIf="campaign.imageUrl">
-                  <img id="preview-image" [src]="campaign.imageUrl" alt="Pré-visualização da Imagem" />
-              </div>
+  <div class="campanhas" >
+    <div class="card" *ngFor="let campaign of campaigns" >
+      <div class="content">
+        <div class="info">
+          <header>
+          <h3>Nome: {{campaign.name}}</h3>
+          </header>
+          <p>Custo: {{campaign.cost}}</p>
+          <p>Descrição: {{campaign.description}} </p>
+          <div class="detalhes" style="display: flex; gap: 5%;">
+            <button *ngIf="type == 'Donator'" (click)="comprar(campaign._id,userId)">Comprar</button>
+            <button [routerLink]="['/campanhas/show', campaign._id]">Detalhes</button>
           </div>
         </div>
+        <div id="preview-container">
+          <div *ngIf="campaign.imageUrl">
+            <img id="preview-image" [src]="campaign.imageUrl" alt="Pré-visualização da Imagem" />
+          </div>
+        </div>
+      </div>
     </div>
-</div> 
+  </div>
 
 </main>
-

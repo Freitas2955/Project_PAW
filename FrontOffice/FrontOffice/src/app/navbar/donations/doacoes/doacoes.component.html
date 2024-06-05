@@ -8,17 +8,17 @@
             <div class="imagem"></div>
             <div class="content">
                 <header>
-                    <h3 *ngIf="isDoador">Entidade:{{ donation.entityName }} </h3>
-                    <h3 *ngIf="!isDoador">Doador:{{ donation.donatorName }} </h3>
+                    <h3 *ngIf="type=='Donator'">Entidade:{{ donation.entityName }} </h3>
+                    <h3 *ngIf="type!='Donator'">Doador:{{ donation.donatorName }} </h3>
                     <button [routerLink]="['/doacoes/show', donation._id]">Detalhes</button>
                     
                 </header>
                 <p *ngIf="donation.approved">Aprovado: Sim </p>
                 <p *ngIf="!donation.approved">Aprovado: Não </p>
                 <p>Pontos: {{ donation.points }}</p>
-                <p *ngIf="isDoador">Data: {{ donation.donatorName }}</p>
-                <p *ngIf="!isDoador">Data: {{ donation.entityName }} </p>
-                <button *ngIf="!isDoador && !donation.approved" (click)="aprovarDoacao(donation._id)">Aprovar doação</button>
+                <p *ngIf="type=='Donator'">Data: {{ donation.donatorName }}</p>
+                <p *ngIf="type!='Donator'">Data: {{ donation.entityName }} </p>
+                <button *ngIf="type!='Donator' && !donation.approved" (click)="aprovarDoacao(donation._id)">Aprovar doação</button>
             </div>
         </div>
 

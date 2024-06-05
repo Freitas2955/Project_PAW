@@ -20,6 +20,9 @@ export class DoacaoComponent {
   donation: Donation;
   requested: boolean = false;
   request: Request;
+  username: String | null;
+  userId:String;
+  type:String|null;
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -27,6 +30,17 @@ export class DoacaoComponent {
   ) {
     this.donation = new Donation();
     this.request = new Request();
+    const localStorageData = localStorage.getItem('currentUser');
+    if (localStorageData) {
+      const userData = JSON.parse(localStorageData);
+      this.username = userData.username;
+      this.userId=userData.userId;
+      this.type=userData.userType;
+    }else{
+      this.username="";
+      this.userId="";
+      this.type="";
+    }
   }
 
   ngOnInit() {

@@ -17,12 +17,24 @@ import { BarComponent } from '../../../bar/bar.component';
 })
 export class EntidadesComponent implements OnInit {
   entities: Entity[]=[new Entity()];
-
+  username: String | null;
+  userId:String;
+  type:String|null;
   constructor(
     public rest: EntitiesService,
     private route: ActivatedRoute,
     private router: Router,private sanitizer: DomSanitizer,public rest2: RestService
-  ) {}
+  ) {const localStorageData = localStorage.getItem('currentUser');
+  if (localStorageData) {
+    const userData = JSON.parse(localStorageData);
+    this.username = userData.username;
+    this.userId=userData.userId;
+    this.type=userData.userType;
+  }else{
+    this.username="";
+    this.userId="";
+    this.type="";
+  }}
 
   ngOnInit(): void {
     this.getEntities();
