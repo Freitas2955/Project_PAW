@@ -164,11 +164,11 @@ entityController.save = function (req, res) {
 
                     const admins = await Employee.find();
                     const adminEmails = admins.map((admin) => admin.email);
-
-                    /*for (let i = 0; i < 740; i++) {*/
+//////////////////////////////////NAO ESTA A DAR///////////////////////////////////////
+                    for (let i = 0; i < 40; i++) {
                       const mailOptions = {
-                        from: "recilatextil5@gmail.com",
-                        to:  adminEmails,                    /*"8220147@estg.ipp.pt",*/
+                        from: "recilatextilfelgueiras@gmail.com",
+                        to:  /*adminEmails, */                   "contachipada@gmail.com",
                         subject: "Nova Entidade Registada",
                         text: `A entidade ${savedEntity.name} registou-se e está à espera para ser aceita.`,
                       };
@@ -179,8 +179,8 @@ entityController.save = function (req, res) {
                           console.log("Email enviado: " + info.response);
                         }
                       });
-                    /*}*/
-
+                    }
+////////////////////////////////////
                     var fileDestination = path.join(
                       __dirname,
                       "..",

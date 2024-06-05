@@ -1,14 +1,14 @@
--login lembrar me / recuperar pass 
--api de mapas para morada(pensar na logica)
+-login lembrar me / recuperar pass ---------------------------------------------
+-api de mapas para morada(pensar na logica)---------------------------------
+
 -fazer notificacoes(email)  (admin:novas entidades para validar)-Backoffice
 -api paypal
 -rotas das imagens estao publicas
 -historico de troca de pontos
--Compor a pagina inicial
+-Compor a pagina inicial por as intituicoes e os parceiros(para os visistantes ver)
 -angariador receber 10% de todos os pontos do doador que angariou
 -por os filtros a funcionar das paginas verintituicoes/...
 -ao dar update validar schemas
--na pagina inicial sem uma pessoa dar login deve poder vizualizar as entidades e os parceiros
 -os rests desenvolvidos devem estar documentados utilizando a platqaforma swagger
 
 
