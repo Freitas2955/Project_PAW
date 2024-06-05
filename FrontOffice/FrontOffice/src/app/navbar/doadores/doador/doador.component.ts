@@ -6,11 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DonatorsService } from '../../../services/donators.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-doador',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule,BarComponent],
   templateUrl: './doador.component.html',
   styleUrl: './doador.component.css',
 })

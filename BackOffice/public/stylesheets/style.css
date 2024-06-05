@@ -31,15 +31,15 @@ header {
   
 #imagensNav {
   display: flex;
-  align-items: center; /* Centraliza verticalmente os itens */
+  align-items: center; 
 }
 
 
 #imagensNav label {
-  font-family: "Lexend", sans-serif; /* Estilo da fonte */
-  font-size: 28px; /* Tamanho da fonte */
-  color: #0698d4; /* Cor do texto */
-  font-weight: bold; /* Peso da fonte (negrito) */
+  font-family: "Lexend", sans-serif; 
+  font-size: 28px; 
+  color: #0698d4; 
+  font-weight: bold; 
 }
 
 

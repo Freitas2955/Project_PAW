@@ -1,0 +1,28 @@
+div {
+    background-color: #fafafb;
+    padding: 0.5% 0%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  li {
+    list-style-type: none;
+    padding: 10px;
+  }
+  
+  li > a {
+    text-decoration: none; 
+    color: #565d6d;
+    font-family: "Lexend", sans-serif;
+    border-radius: 10px;
+    padding: 8px;
+  }
+  
+  li>a:hover {
+    text-decoration: none; 
+    color: white;
+    background-color: #0698d4;
+  }
+  

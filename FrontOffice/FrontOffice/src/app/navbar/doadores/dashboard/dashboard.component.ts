@@ -9,13 +9,14 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Donation } from '../../../model/donation';
 import { DonatorsService } from '../../../services/donators.service';
 import { DonationsService } from '../../../services/donations.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-dashboard-component',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule,BarComponent],
 })
 export class DashboardComponent implements OnInit {
   donator: Donator = {} as Donator;

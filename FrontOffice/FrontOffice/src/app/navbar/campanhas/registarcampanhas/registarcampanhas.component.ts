@@ -6,11 +6,12 @@ import { FormBuilder, FormControl, FormGroup, FormsModule} from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { CampaignsService } from '../../../services/campaigns.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-registarcampanhas',
   standalone: true,
-  imports: [NavbarComponent, FormsModule, CommonModule,ReactiveFormsModule],
+  imports: [NavbarComponent, FormsModule, CommonModule,ReactiveFormsModule,BarComponent],
   templateUrl: './registarcampanhas.component.html',
   styleUrl: './registarcampanhas.component.css'
 })

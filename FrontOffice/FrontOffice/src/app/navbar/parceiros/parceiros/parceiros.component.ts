@@ -6,11 +6,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PartnersService } from '../../../services/partners.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-parceiros',
   standalone: true,
-  imports: [NavbarComponent,CommonModule,RouterModule],
+  imports: [NavbarComponent,CommonModule,RouterModule,BarComponent],
   templateUrl: './parceiros.component.html',
   styleUrl: './parceiros.component.css'
 })

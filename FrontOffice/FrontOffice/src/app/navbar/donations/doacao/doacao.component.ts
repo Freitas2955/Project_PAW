@@ -7,11 +7,12 @@ import { Donation } from '../../../model/donation';
 import { CommonModule } from '@angular/common';
 import { Request } from '../../../model/request';
 import { DonationsService } from '../../../services/donations.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-doacoes',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule,BarComponent],
   templateUrl: './doacao.component.html',
   styleUrl: './doacao.component.css',
 })

@@ -6,11 +6,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EntitiesService } from '../../../services/entities.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-entidades',
   standalone: true,
-  imports: [NavbarComponent,CommonModule,RouterModule],
+  imports: [NavbarComponent,CommonModule,RouterModule,BarComponent],
   templateUrl: './entidades.component.html',
   styleUrl: './entidades.component.css',
 })

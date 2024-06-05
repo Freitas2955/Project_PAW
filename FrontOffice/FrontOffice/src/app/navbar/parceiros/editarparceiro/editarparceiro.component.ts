@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ActivatedRoute } from '@angular/router';
 import { PartnersService } from '../../../services/partners.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-editarparceiro',
   standalone: true,
-  imports: [NavbarComponent,FormsModule, CommonModule,ReactiveFormsModule],
+  imports: [NavbarComponent,FormsModule, CommonModule,ReactiveFormsModule,BarComponent],
   templateUrl: './editarparceiro.component.html',
   styleUrl: './editarparceiro.component.css'
 })

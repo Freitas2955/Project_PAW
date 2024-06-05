@@ -10,11 +10,12 @@ import { Points } from '../../model/points';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EntitiesService } from '../../services/entities.service';
 import { DonationsService } from '../../services/donations.service';
+import { BarComponent } from '../../bar/bar.component';
 
 @Component({
   selector: 'app-doar',
   standalone: true,
-  imports: [NavbarComponent, CommonModule,FormsModule],
+  imports: [NavbarComponent, CommonModule,FormsModule,BarComponent],
   templateUrl: './doar.component.html',
   styleUrl: './doar.component.css',
 })

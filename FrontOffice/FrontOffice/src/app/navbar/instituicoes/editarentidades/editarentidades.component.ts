@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ActivatedRoute } from '@angular/router';
 import { EntitiesService } from '../../../services/entities.service';
+import { BarComponent } from '../../../bar/bar.component';
+
 @Component({
   selector: 'app-editarentidades',
   standalone: true,
-  imports: [NavbarComponent,FormsModule, CommonModule,ReactiveFormsModule],
+  imports: [NavbarComponent,FormsModule, CommonModule,ReactiveFormsModule,BarComponent],
   templateUrl: './editarentidades.component.html',
   styleUrl: './editarentidades.component.css'
 })

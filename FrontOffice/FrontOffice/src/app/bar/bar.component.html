@@ -1,0 +1,38 @@
+<div *ngIf="type == 'Donator'">
+    <li>
+        <a href="#" (click)="dashBoard()" onclick="return false;">DashBoard</a>
+    </li>
+    <li>
+        <a href="#" (click)="doar()" onclick="return false;">Doar</a>
+    </li>
+    <li>
+        <a href="#" (click)="instituicoes()" onclick="return false;">Instituições</a>
+    </li>
+    <li>
+        <a href="#" (click)="parceiros()" onclick="return false;">Parceiros</a>
+    </li>
+    <li>
+        <a href="#" (click)="campanhas()" onclick="return false;">Loja</a>
+    </li>
+</div>
+
+<div *ngIf="type == 'Partner'">
+    <li>
+        <a href="#" (click)="dashBoard()" onclick="return false;">DashBoard</a>
+    </li>
+    <li>
+        <a href="#" (click)="campanhas()" onclick="return false;">Campanhas</a>
+    </li>
+    <li>
+        <a href="#" (click)="compras()">Compras (Histórico) no parceiro</a>
+    </li>
+</div>
+
+<div *ngIf="type == 'Entity'">
+    <li>
+        <a href="#" (click)="doacoes()">Doacoes para a entidade</a>
+    </li>
+    <li>
+        <a href="#" (click)="doadores()">Doadores da entodade</a>
+    </li>
+</div>

@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ActivatedRoute } from '@angular/router';
 import { DonatorsService } from '../../../services/donators.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-editardoador',
   standalone: true,
-  imports: [NavbarComponent,FormsModule, CommonModule,ReactiveFormsModule],
+  imports: [NavbarComponent,FormsModule, CommonModule,ReactiveFormsModule,BarComponent],
   templateUrl: './editardoador.component.html',
   styleUrl: './editardoador.component.css'
 })

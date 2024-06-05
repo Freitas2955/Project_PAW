@@ -6,11 +6,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CampaignsService } from '../../../services/campaigns.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-campanhas',
   standalone: true,
-  imports: [NavbarComponent,CommonModule,RouterModule],
+  imports: [NavbarComponent,CommonModule,RouterModule,BarComponent],
   templateUrl: './campanhas.component.html',
   styleUrl: './campanhas.component.css'
 })

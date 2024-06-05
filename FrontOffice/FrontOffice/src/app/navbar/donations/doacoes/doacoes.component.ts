@@ -6,11 +6,12 @@ import { RestService } from '../../../services/rest.service';
 import { Donation } from '../../../model/donation';
 import { CommonModule } from '@angular/common';
 import { DonationsService } from '../../../services/donations.service';
+import { BarComponent } from '../../../bar/bar.component';
 
 @Component({
   selector: 'app-doacao',
   standalone: true,
-  imports: [NavbarComponent, CommonModule,RouterModule],
+  imports: [NavbarComponent, CommonModule,RouterModule,BarComponent],
   templateUrl: './doacoes.component.html',
   styleUrl: './doacoes.component.css',
 })

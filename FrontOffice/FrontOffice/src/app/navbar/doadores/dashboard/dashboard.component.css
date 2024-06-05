@@ -44,5 +44,13 @@ main {
 
 #plot {
   width: 700px;
-  height: 500px;
+  height: 400px;
 }
+
+@media (max-width: 750px) {
+  #plot>* {
+    width: 200px;
+    width: 300px;
+  }
+}
+
