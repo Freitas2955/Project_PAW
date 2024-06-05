@@ -30,7 +30,7 @@ router.get("/create/:partnerId",loginController.verifyLoginUser, function (req, 
 });
 
 // Save campaign
-router.post("/save/:partnerId/:partnerName", function (req, res) {
+router.post("/save", function (req, res) {
   campaign.save(req, res);
 });
 /*
@@ -45,7 +45,7 @@ router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
 });*/
 
 // Edit update
-router.post("/delete/:id",loginController.verifyLoginUser, function (req, res, next) {
+router.get("/delete/:id", function (req, res, next) {
   campaign.delete(req, res);
 });
 

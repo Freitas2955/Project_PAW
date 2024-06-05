@@ -21,11 +21,25 @@ export class RegistarcampanhasComponent {
   confpassword?: String;
   selectedFile: File;
   imagePreview: string | ArrayBuffer | null = null;
+  username: String | null;
+  userId: String;
+  type: String | null;
 
   constructor(private restService: CampaignsService,private builder: FormBuilder, private formBuilder: FormBuilder) {
     this.campaign = new Campaign();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
+    const localStorageData = localStorage.getItem('currentUser');
+    if (localStorageData) {
+      const userData = JSON.parse(localStorageData);
+      this.username = userData.username;
+      this.userId = userData.userId;
+      this.type = userData.userType;
+    } else {
+      this.username = '';
+      this.userId = '';
+      this.type = '';
+    }
   }
 
   onFileSelected(event: Event) {
@@ -41,7 +55,10 @@ export class RegistarcampanhasComponent {
   }
 
   submitForm(): void {
-      console.log(this.campaign);
+    this.campaign.partnerId=this.userId;
+    this.campaign.partnerName=this.username;
+    console.log(this.campaign);
+      
       this.restService.registerCampaign(this.campaign, this.selectedFile).subscribe(
         (response) => {
           console.log('Campanha registada com sucesso:', response);

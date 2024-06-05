@@ -27,7 +27,7 @@ export class CampanhasComponent {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    public rest2: RestService
+    public rest2: RestService,
   ) {
     const localStorageData = localStorage.getItem('currentUser');
     if (localStorageData) {
@@ -44,7 +44,11 @@ export class CampanhasComponent {
   }
 
   ngOnInit(): void {
-    this.getCampaigns();
+    if (this.type == 'Partner') {
+      this.getPartnerCampaigns();
+    }else{
+      this.getCampaigns();
+    }
   }
 
   getCampaigns(): void {
@@ -88,7 +92,28 @@ export class CampanhasComponent {
         }
       );
     }
-   
+  }
+
+  getPartnerCampaigns(): void {
+    console.log('getCampaigns chamado');
+    this.rest.getPartnerCampaigns(this.userId).subscribe(
+      (response: any) => {
+        console.log('Resposta recebida:', response);
+        this.campaigns = response.campaigns;
+        this.campaigns.forEach((campaign) => {
+          let imageObservable;
+          imageObservable = this.rest2.getCampaignImage(campaign._id);
+          imageObservable.subscribe((imageBlob) => {
+            const objectURL = URL.createObjectURL(imageBlob);
+            campaign.imageUrl =
+              this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          });
+        });
+      },
+      (error) => {
+        console.error('Erro ao procurar campanha', error);
+      }
+    );
   }
 
   comprar(campaignId: String | undefined, donatorId: String): void {
@@ -102,7 +127,19 @@ export class CampanhasComponent {
     );
   }
 
-  seeListOfCamoaigns() {
+  eliminar(campaignId: String | undefined): void {
+    this.rest.deleteCampaign(campaignId).subscribe(
+      (response: any) => {
+        console.log('Resposta recebida:', response);
+      },
+      (error) => {
+        console.error('Erro ao procurar campanha', error);
+      }
+    );
+   window.location.reload()
+  }
+
+  seeListOfCampaigns() {
     this.router.navigate(['/campanhas']);
   }
 }

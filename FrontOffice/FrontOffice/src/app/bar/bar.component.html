@@ -27,15 +27,15 @@
         <a href="#" (click)="campanhas()" onclick="return false;">Campanhas</a>
     </li>
     <li>
-        <a href="#" (click)="compras()">Compras (Histórico) no parceiro</a>
+        <a href="#" (click)="compras()" onclick="return false;">Compras (Histórico) no parceiro</a>
     </li>
 </div>
 
 <div *ngIf="type == 'Entity'">
     <li>
-        <a href="#" (click)="doacoes()">Doacoes para a entidade</a>
+        <a href="#" (click)="doacoes()" onclick="return false;">Doacoes para a entidade</a>
     </li>
     <li>
-        <a href="#" (click)="doadores()">Doadores da entodade</a>
+        <a href="#" (click)="doadores()" onclick="return false;">Doadores da entodade</a>
     </li>
 </div>

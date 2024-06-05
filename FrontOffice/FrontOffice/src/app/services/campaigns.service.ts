@@ -50,4 +50,8 @@ export class CampaignsService {
   buyCampaign(campaignId: String|undefined|null,donatorId:String){
     return this.http.get<any>(endpoint + 'RestDonators/buy/'+campaignId+'/'+donatorId);
   }
+
+  deleteCampaign(campaignId: String|undefined|null){
+    return this.http.get<any>(endpoint + 'RestCampaigns/delete/'+campaignId);
+  }
 }

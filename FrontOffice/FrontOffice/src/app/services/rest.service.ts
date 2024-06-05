@@ -20,40 +20,6 @@ const httpOptions = {
 })
 export class RestService {
   constructor(private http: HttpClient) {}
-  /*
-  registerEntity(entity: Entity, file: File): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('file', file);
-    formData.append('_id', entity._id);
-    return this.http.post<any>(endpoint + 'RestEntities/save', entity, file);
-  }*/
-  
-
-
-
- 
-
-  /////////////////////////////////////////////////
-  /*VER SE SAO PRECISOS OS DOIS
-  uploadFile(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
-    return this.http.post<any>(endpoint + 'file_upload', formData);
-  }
-
-  uploadFileWithData(file: File, title: string): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('title', title);
-    return this.http.post<any>(endpoint + 'file_and_data_upload', formData);
-  }
-  */
-  //////////////////////////////////////////////
-
-  
-
-  /////////////////////////////////////////////
-  
 
 
   getCampaignImage(id: String|undefined): Observable<Blob> {
