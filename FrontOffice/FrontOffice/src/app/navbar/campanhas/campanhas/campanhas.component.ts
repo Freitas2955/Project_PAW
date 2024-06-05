@@ -47,7 +47,7 @@ export class CampanhasComponent {
     });
   }
 
-  seeListOfEntities() {
+  seeListOfCamoaigns() {
     this.router.navigate(['/campanhas']);
   }
 }

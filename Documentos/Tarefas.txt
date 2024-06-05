@@ -1,6 +1,3 @@
--login lembrar me / recuperar pass ---------------------------------------------
--api de mapas para morada(pensar na logica)---------------------------------
-
 -fazer notificacoes(email)  (admin:novas entidades para validar)-Backoffice
 -api paypal
 -rotas das imagens estao publicas
@@ -33,3 +30,4 @@ Duarte:
 -Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /enviado/ estraviado)) 
 -login igual para todos--- feito organizar rotas para perfis diferentes e por login no backend
 -objectid
+-funcao no rest das campanhas
