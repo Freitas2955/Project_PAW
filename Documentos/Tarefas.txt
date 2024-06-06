@@ -31,3 +31,6 @@ Duarte:
 -login igual para todos--- feito organizar rotas para perfis diferentes e por login no backend
 -objectid
 -funcao no rest das campanhas
+
+
+ao criar campannha ta a dar erro mas a criar

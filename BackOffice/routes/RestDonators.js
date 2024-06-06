@@ -6,11 +6,15 @@ const loginController = require("../controllers/RestLoginController.js");
 router.get("/get", function (req, res) {
   donator.getDonators(req, res);
 });
+
+router.get("/getEntityDonators/:id", function (req, res) {
+  donator.getEntityDonators(req, res);
+});
+
 router.get("/",loginController.verifyLoginUser, function (req, res) {
   donator.management(req, res);
 });
 
-// Get single donator by id
 router.get("/show/:id", function (req, res) {
   donator.show(req, res);
 });

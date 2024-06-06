@@ -21,6 +21,10 @@ export class DonatorsService {
     return this.http.get<Donator[]>(endpoint + 'RestDonators/get');
   }
 
+  getEntityDonators(id:String | null): Observable<Donator[]> {
+    return this.http.get<Donator[]>(endpoint + 'RestDonators/getEntityDonators/'+id);
+  }
+
   getDonator(id: String | null): Observable<Donator> {
     return this.http.get<Donator>(endpoint + 'RestDonators/show/' + id);
   }

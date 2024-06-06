@@ -34,6 +34,33 @@ donatorController.getDonators = function (req, res) {
     }
   })();
 };
+
+donatorController.getEntityDonators = function (req, res) {
+  (async () => {
+    try {
+      const donations = await Donation.find({ entityId: req.params.id });
+
+
+      const donatorPromises = donations.map((donation) =>
+        Donator.findOne({ _id: donation.donatorId }).exec()
+      );
+
+
+      const returnedDonators = await Promise.all(donatorPromises);
+
+
+      res.json({
+        donators: returnedDonators,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Ocorreu um erro.",
+        error: error.message,
+      });
+    }
+  })();
+};
+
 donatorController.management = function (req, res) {
   let num;
 
@@ -106,7 +133,7 @@ donatorController.buy = function (req, res) {
             //res.render("../views/donators/verdoador", );
           });
         } else {
-          res.status(500).send('Sem pontos');
+          res.status(500).send("Sem pontos");
           /*
           // Redireciona para a página de detalhes do doador com a mensagem de erro na URL
           const errorMessage = encodeURIComponent('Pontos insuficientes para comprar esta campanha.');
