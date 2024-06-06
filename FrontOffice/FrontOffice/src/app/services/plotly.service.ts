@@ -33,4 +33,19 @@ export class PlotlyService {
 
     Plotly.newPlot(divId, [trace], layout);
   }
+
+
+  plotBar(title: string, divId: string, xData: string[], yData: number[]) {
+    const trace = {
+      x: xData,
+      y: yData,
+      type: 'bar'
+    };
+
+    const layout = {
+      title: title
+    };
+
+    Plotly.newPlot(divId, [trace], layout);
+  }
 }
