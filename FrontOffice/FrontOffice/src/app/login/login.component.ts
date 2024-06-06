@@ -45,13 +45,7 @@ export class LoginComponent {
           username: response.username
         };
         localStorage.setItem('currentUser', JSON.stringify(user));
-        if(user.userType=="Donator"){
-          this.router.navigate(['/dashboard/' + response.userId]);
-        }else if(user.userType=="Entity"){
-          this.router.navigate(['/doacoes/']);
-        }else{
-          this.router.navigate(['/doacoes']);
-        }
+        this.router.navigate(['/dashboard/' + response.userId]);
       } else if (response === null) {
       } else {
         alert('Erro no login!');

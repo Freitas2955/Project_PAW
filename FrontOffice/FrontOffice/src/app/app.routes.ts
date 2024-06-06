@@ -17,7 +17,7 @@ import { RegistarparceiroComponent } from './navbar/parceiros/registarparceiro/r
 import { DoacaoComponent } from './navbar/donations/doacao/doacao.component';
 import { DoadorComponent } from './navbar/doadores/doador/doador.component';
 import { DoadoresComponent } from './navbar/doadores/doadores/doadores.component';
-import { DashboardComponent } from './navbar/doadores/dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { CampanhaComponent } from './navbar/campanhas/campanha/campanha.component';
 import { CampanhasComponent } from './navbar/campanhas/campanhas/campanhas.component';
