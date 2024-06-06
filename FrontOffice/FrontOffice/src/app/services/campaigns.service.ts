@@ -19,8 +19,13 @@ export class CampaignsService {
   constructor(private http: HttpClient) {}
 
   getCampaigns(): Observable<Campaign[]> {
-    return this.http.get<Campaign[]>(endpoint + 'campaigns/get');
+    return this.http.get<Campaign[]>(endpoint + 'RestCampaigns/get');
   }
+
+  getPartnerCampaigns(partnerId:String): Observable<Campaign[]> {
+    return this.http.get<Campaign[]>(endpoint + 'RestCampaigns/get/'+partnerId);
+  }
+
 
   getCampaign(id: String | null): Observable<Campaign> {
     return this.http.get<Campaign>(endpoint + 'RestCampaigns/show/' + id);
@@ -40,5 +45,13 @@ export class CampaignsService {
     });
 
     return this.http.post<any>(endpoint + 'RestCampaigns/save', formData);
+  }
+
+  buyCampaign(campaignId: String|undefined|null,donatorId:String){
+    return this.http.get<any>(endpoint + 'RestDonators/buy/'+campaignId+'/'+donatorId);
+  }
+
+  deleteCampaign(campaignId: String|undefined|null){
+    return this.http.get<any>(endpoint + 'RestCampaigns/delete/'+campaignId);
   }
 }

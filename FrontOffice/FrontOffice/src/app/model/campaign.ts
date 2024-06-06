@@ -6,6 +6,6 @@ export class Campaign{
     description?: String;
     cost?: Number;
     partnerId?: String;
-    partnerName?: String;
+    partnerName?: String|null;
     imageUrl?: SafeUrl;
 }

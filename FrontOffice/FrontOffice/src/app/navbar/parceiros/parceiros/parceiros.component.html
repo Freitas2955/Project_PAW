@@ -32,8 +32,9 @@
           <p>Email: {{partner.email}}</p>
           <p>Cidade: {{partner.city}}</p>
           <p>Telemóvel: {{partner.phone}}</p>
-          <div class="detalhes">
+          <div class="detalhes" style="display: flex; gap: 5%;">
             <button [routerLink]="['/parceiros/show', partner._id]">Detalhes</button>
+            <button *ngIf="type=='Donator'" [routerLink]="['/campanhas/',partner._id]">Ver campanhas</button>
           </div>
         </div>
         <div id="preview-container">

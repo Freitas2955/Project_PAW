@@ -48,9 +48,9 @@ export class LoginComponent {
         if(user.userType=="Donator"){
           this.router.navigate(['/dashboard/' + response.userId]);
         }else if(user.userType=="Entity"){
-          this.router.navigate(['/doacoes/entidade/' + response.userId]);
+          this.router.navigate(['/doacoes/']);
         }else{
-          this.router.navigate(['/doacoes/entidade/' + response.userId]);
+          this.router.navigate(['/doacoes']);
         }
       } else if (response === null) {
       } else {

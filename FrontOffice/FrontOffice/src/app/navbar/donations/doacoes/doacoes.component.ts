@@ -17,13 +17,25 @@ import { BarComponent } from '../../../bar/bar.component';
 })
 export class DoacoesComponent {
   donations: Donation[] = [];
-  isDoador: boolean;
+  username: String | null;
+  userId:String;
+  type:String|null;
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     public rest: DonationsService
   ) {
-    this.isDoador = false;
+    const localStorageData = localStorage.getItem('currentUser');
+  if (localStorageData) {
+    const userData = JSON.parse(localStorageData);
+    this.username = userData.username;
+    this.userId=userData.userId;
+    this.type=userData.userType;
+  }else{
+    this.username="";
+    this.userId="";
+    this.type="";
+  }
   }
 
   ngOnInit() {
@@ -31,17 +43,17 @@ export class DoacoesComponent {
       const idEntidade = params.get('idEntidade');
       const idDoador = params.get('idDoador');
 
-      if (idEntidade) {
+      if (this.type=='Entity') {
         console.log('entidade');
-        this.fazerPedidoPorEntidade(idEntidade);
-      } else if (idDoador) {
+        this.fazerPedidoPorEntidade(this.userId);
+      } else if (this.type=='Donator') {
         console.log('doador');
-        this.fazerPedidoPorDoador(idDoador);
+        this.fazerPedidoPorDoador(this.userId);
       }
     });
   }
 
-  fazerPedidoPorEntidade(idEntidade: string) {
+  fazerPedidoPorEntidade(idEntidade: String) {
     this.rest.getEntityDonations(idEntidade).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
@@ -81,12 +93,11 @@ export class DoacoesComponent {
     location.reload();
   }
 
-  fazerPedidoPorDoador(idDoador: string) {
+  fazerPedidoPorDoador(idDoador: String) {
     this.rest.getDonatorDonations(idDoador).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
         this.donations = response.donations;
-        this.isDoador = true;
         for (let i = 0; i < this.donations.length; i++) {
           let isoDate = this.donations[i].updated_at;
           let date = new Date(isoDate);

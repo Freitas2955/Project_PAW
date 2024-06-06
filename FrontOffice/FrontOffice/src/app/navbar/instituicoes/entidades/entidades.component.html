@@ -29,8 +29,9 @@
                 <p>Email: {{entity.email}}</p>
                 <p>Cidade: {{entity.city}}</p>
                 <p>Telemóvel: {{entity.phone}}</p>
-                <div class="detalhes">
+                <div class="detalhes" style="display: flex; gap: 5%;">
                     <button [routerLink]="['/entidades/show', entity._id]">Detalhes</button>
+                    <button *ngIf="type=='Donator'" [routerLink]="['/doar/',entity._id,entity.name]">Doar</button>
                 </div>
             </div>
             <div id="preview-container">

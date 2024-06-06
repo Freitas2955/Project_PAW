@@ -48,7 +48,12 @@ loginController.submittedLogin = async function (req, res, next) {
     // Retorne as informações do usuário e o token na resposta
     return res
       .status(200)
-      .json({ type: userResult.type, token: loginToken, userId: user._id,username:user.name });
+      .json({
+        type: userResult.type,
+        token: loginToken,
+        userId: user._id,
+        username: user.name,
+      });
   } catch (err) {
     next(err);
   }
@@ -65,6 +70,7 @@ loginController.logout = function (req, res, next) {
 
 loginController.verifyLoginUser = function (req, res, next) {
   const loginToken = req.cookies["login-token"];
+  console.log(loginToken);
   if (loginToken) {
     jwt.verify(loginToken, config.secret, function (err, decoded) {
       if (err) {

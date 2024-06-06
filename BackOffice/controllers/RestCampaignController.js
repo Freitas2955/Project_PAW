@@ -40,6 +40,45 @@ campaignController.shop = function (req, res) {
   })();
 };
 
+campaignController.getCampaigns = function (req, res) {
+  let num;
+
+  (async () => {
+    try {
+      Campaign.find()
+        .then((campaign) => {
+          res.json({
+            campaigns: campaign,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+campaignController.getPartnerCampaigns = function (req, res) {
+  (async () => {
+    try {
+      Campaign.find({partnerId:req.params.partnerId})
+        .then((campaign) => {
+          res.json({
+            campaigns: campaign,
+          });
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    } catch (error) {
+      console.error("Ocorreu um erro ao contar os documentos:", error);
+    }
+  })();
+};
+
+
 campaignController.shop1 = function (req, res) {
   let num;
 
@@ -140,10 +179,7 @@ campaignController.show = function (req, res) {
     .then((campaign) => {
       res.json({
         campaign: campaign,
-        username: req.session.username,
-        userId: req.session.userId,
       });
-      res.render("../views/campaigns/vercampanha");
     })
     .catch((err) => {
       console.error("Error:", err);
@@ -187,76 +223,89 @@ campaignController.save = function (req, res) {
     name: req.body.name,
     description: req.body.description,
     cost: req.body.cost,
-    partnerId: req.params.partnerId,
-    partnerName: req.params.partnerName,
+    partnerId: req.body.partnerId,
+    partnerName: req.body.partnerName,
   };
+
   const campaign = new Campaign(data);
-  var sc;
+
   campaign
     .save()
     .then((savedCampaign) => {
-      sc = savedCampaign;
-      console.log("Successfully created an Campaign.");
+      console.log("Successfully created a Campaign.", savedCampaign);
 
-      var fileDestination = path.join(
+      const fileDestination = path.join(
         __dirname,
         "..",
         "images",
         "campaigns",
         savedCampaign._id.toString() + ".jpg"
       );
-      fs.readFile(req.file.path, function (err, data) {
-        if (err) {
-          console.error("Error reading file:", err);
-          return res.status(500).send("Error reading file");
-        }
 
-        fs.writeFile(fileDestination, data, function (err) {
+      if (req.file && req.file.path) {
+        fs.readFile(req.file.path, function (err, data) {
           if (err) {
-            console.error("Error writing file:", err);
-            return res.status(500).send("Error writing file");
+            console.error("Error reading file:", err);
+            return res.status(500).send("Error reading file");
           }
-          fs.unlink(req.file.path, function (err) {
-            if (err) {
-              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
-            }
-          });
-          res.redirect("/restcampaigns/");
-        });
-      });
-    })
-    .catch((err) => {
-      Campaign.findOne({ _id: sc._id }).then((savedCampaign) => {
-        if (savedCampaign) {
-          var fileDestination = path.join(
-            __dirname,
-            "..",
-            "images",
-            "campaigns",
-            savedCampaign._id.toString() + ".jpg"
-          );
 
-          var fileOrigin = path.join(
-            __dirname,
-            "..",
-            "images",
-            "campaigns",
-            "default" + ".jpg"
-          );
-          fs.readFile(fileOrigin, function (err, data) {
+          fs.writeFile(fileDestination, data, function (err) {
             if (err) {
+              console.error("Error writing file:", err);
+              return res.status(500).send("Error writing file");
             }
-            fs.writeFile(fileDestination, data, function (err) {
+
+            fs.unlink(req.file.path, function (err) {
               if (err) {
+                console.error("Error removing the file from 'tmp' folder:", err);
               }
             });
-          });
-        }
-      });
 
-      res.redirect("/restcampaigns/");
+            res.redirect("/campaigns/");
+          });
+        });
+      } else {
+        console.error("No file uploaded or file path is missing.");
+        res.status(400).send("No file uploaded or file path is missing.");
+      }
+    })
+    .catch((err) => {
+      console.error("Error saving campaign:", err);
+
+      if (campaign._id) {
+        const fileDestination = path.join(
+          __dirname,
+          "..",
+          "images",
+          "campaigns",
+          campaign._id.toString() + ".jpg"
+        );
+
+        const fileOrigin = path.join(
+          __dirname,
+          "..",
+          "images",
+          "campaigns",
+          "default.jpg"
+        );
+
+        fs.readFile(fileOrigin, function (err, data) {
+          if (err) {
+            console.error("Error reading default file:", err);
+          } else {
+            fs.writeFile(fileDestination, data, function (err) {
+              if (err) {
+                console.error("Error writing default file:", err);
+              }
+            });
+          }
+        });
+      }
+
+      res.redirect("/campaigns/");
     });
 };
+
 
 /*
 campaignController.edit = function (req, res) {
@@ -314,13 +363,11 @@ campaignController.update = function (req, res) {
               console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
             }
           });
-          res.redirect("/restcampaigns/");
         });
       });
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/restcampaigns");
     });
 };
 
@@ -351,7 +398,7 @@ campaignController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.redirect("/restcampaigns/");
+      res.json({deleted:true})
     })
     .catch((err) => {
       console.log(err);

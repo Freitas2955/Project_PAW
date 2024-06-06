@@ -27,10 +27,10 @@ export const routes: Routes = [
   { path: '', component: PagInicialComponent },
   { path: 'login', component: LoginComponent },
 
-  { path: 'doacoes/entidade/:idEntidade', component: DoacoesComponent ,canActivate: [AuthGuardGuard]},
-  { path: 'doacoes/doador/:idDoador', component: DoacoesComponent ,canActivate: [AuthGuardGuard]},
+  { path: 'doacoes', component: DoacoesComponent ,canActivate: [AuthGuardGuard]},
   { path: 'doacoes/show/:idDoacao', component: DoacaoComponent,canActivate: [AuthGuardGuard]},
-  { path: 'doar/:donatorId', component: DoarComponent ,canActivate: [AuthGuardGuard]},
+  { path: 'doar/:entityId/:entityName', component: DoarComponent ,canActivate: [AuthGuardGuard]},
+  { path: 'doar', component: DoarComponent ,canActivate: [AuthGuardGuard]},
 
   { path: 'registarentidade', component: RegistoEntidadesComponent},
   { path: 'editarEntidade/:id', component: EditarentidadesComponent ,canActivate: [AuthGuardGuard]},
@@ -49,7 +49,7 @@ export const routes: Routes = [
 
   {path: 'dashboard/:id', component: DashboardComponent,canActivate: [AuthGuardGuard]},
   {path: 'registarcampanha', component: RegistarcampanhasComponent, canActivate: [AuthGuardGuard]},
-  {path: 'campanha', component: CampanhaComponent, canActivate: [AuthGuardGuard]},
   {path: 'campanhas', component: CampanhasComponent, canActivate: [AuthGuardGuard]},
-  { path: 'campanhas/show/:id', component: CampanhasComponent ,canActivate: [AuthGuardGuard]},  //nao sei se é campanhas ou campanha /show/id
+  {path: 'campanhas/:idParceiro', component: CampanhasComponent, canActivate: [AuthGuardGuard]},
+  {path: 'campanhas/show/:id', component: CampanhaComponent ,canActivate: [AuthGuardGuard]},  //nao sei se é campanhas ou campanha /show/id
 ];

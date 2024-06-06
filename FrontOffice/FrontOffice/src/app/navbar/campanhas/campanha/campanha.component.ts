@@ -22,7 +22,9 @@ export class CampanhaComponent {
   selectedFile: File;
 
   imagePreview: string | ArrayBuffer | null = null;
-
+  username: String | null;
+  userId:String;
+  type:String|null;
   constructor(
     public rest: CampaignsService,
     private route: ActivatedRoute,
@@ -31,6 +33,18 @@ export class CampanhaComponent {
     this.campaign = new Campaign();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
+
+    const localStorageData = localStorage.getItem('currentUser');
+    if (localStorageData) {
+      const userData = JSON.parse(localStorageData);
+      this.username = userData.username;
+      this.userId=userData.userId;
+      this.type=userData.userType;
+    }else{
+      this.username="";
+      this.userId="";
+      this.type="";
+    }
   }
 
   ngOnInit(): void {
@@ -53,7 +67,7 @@ export class CampanhaComponent {
     this.rest.getCampaign(this.campaignId).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
-        this.campaign = response.entity;
+        this.campaign = response.campaign;
         let imageObservable;
         imageObservable = this.rest2.getCampaignImage(this.campaign._id);
         imageObservable.subscribe((imageBlob) => {
@@ -66,5 +80,13 @@ export class CampanhaComponent {
         console.error('Erro ao procurar campanha', error);
       }
     );
+  }
+
+  comprar(donatorId:String): void {
+    this.rest.buyCampaign(this.campaignId,donatorId).subscribe((response: any) => {  
+      console.log('Resposta recebida:', response);
+    }, error => {
+      console.error('Erro ao procurar campanha', error);
+    });
   }
 }

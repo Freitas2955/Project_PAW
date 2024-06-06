@@ -7,8 +7,16 @@ router.get("/",loginController.verifyLoginUser, function (req, res) {
   campaign.management(req, res);
 });
 
+router.get("/get", function (req, res) {
+  campaign.getCampaigns(req, res);
+});
+
+router.get("/get/:partnerId", function (req, res) {
+  campaign.getPartnerCampaigns(req, res);
+});
+
 // Get single campaign by id
-router.get("/show/:id",loginController.verifyLoginUser, function (req, res) {
+router.get("/show/:id", function (req, res) {
   campaign.show(req, res);
 });
 
@@ -22,7 +30,7 @@ router.get("/create/:partnerId",loginController.verifyLoginUser, function (req, 
 });
 
 // Save campaign
-router.post("/save/:partnerId/:partnerName",loginController.verifyLoginUser, function (req, res) {
+router.post("/save", function (req, res) {
   campaign.save(req, res);
 });
 /*
@@ -31,13 +39,13 @@ router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
   campaign.edit(req, res);
 });
 
-// Edit update
+ Edit update
 router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
   campaign.update(req, res);
 });*/
 
 // Edit update
-router.post("/delete/:id",loginController.verifyLoginUser, function (req, res, next) {
+router.get("/delete/:id", function (req, res, next) {
   campaign.delete(req, res);
 });
 
