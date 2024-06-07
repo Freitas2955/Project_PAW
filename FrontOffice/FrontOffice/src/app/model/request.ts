@@ -6,4 +6,6 @@ export class Request {
   postCode?: String;
   done?: Boolean;
   city?: String;
+  entityName?: String;
+  updated_at:Date=new Date();
 }

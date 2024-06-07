@@ -8,7 +8,6 @@
 
 -ao dar update validar schemas
 const { error, value } = Entity.validate(req.body);
-  
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
   }
@@ -21,7 +20,7 @@ entidades podem gerir doacoes---feito
 parceiros podem gerir campanhas e ver historico de compras----feito
  
 doador nao pode aprovar doacao e entidade nao pode criar pedido de recolha---feito
-instituicoes podem ver pedidos de recolha
+instituicoes podem ver pedidos de recolha---feito
 
 no registo de um amigo dar pontos ao angariador
 
@@ -29,7 +28,7 @@ ao editar se nao puser imagem da merda
 
 erro ao registar e editar entidade
 
-verificar se a entidade tá aprovada
+verificar se a entidade tá aprovada---feito
 
 ao registar campanhas regista mas da erro
 

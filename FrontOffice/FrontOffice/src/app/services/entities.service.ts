@@ -45,7 +45,7 @@ export class EntitiesService {
   }
 
   getEntities(): Observable<Entity[]> {
-    return this.http.get<Entity[]>(endpoint + 'entities/get',this.getHttpOptions());
+    return this.http.get<Entity[]>(endpoint + 'RestEntities/getApproved',this.getHttpOptions());
   }
 
   getEntity(id: String | null): Observable<Entity> {

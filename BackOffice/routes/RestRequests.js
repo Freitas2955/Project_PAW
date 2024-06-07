@@ -3,17 +3,16 @@ var router = express.Router();
 var request = require("../controllers/RestRequestController.js");
 const loginController = require("../controllers/RestLoginController.js");
 
-router.get("/",loginController.verifyLoginUser, function (req, res) {
-  request.management1(req, res);
+router.get("/getDonatorRequests/:id",loginController.verifyDonatorUser, function (req, res) {
+  request.getDonatorRequests(req, res);
 });
 
-router.get("/naoTerminados",loginController.verifyLoginUser, function (req, res) {
-  request.management2(req, res);
+router.get("/getEntityRequests/:id",loginController.verifyEntityUser, function (req, res) {
+  request.getEntityRequests(req, res);
 });
 
-// Get single request by id
-router.get("/show/:id",loginController.verifyLoginUser, function (req, res) {
-  request.show(req, res);
+router.get("/approve/:id",loginController.verifyEntityUser, function (req, res, next) {
+  request.approve(req, res);
 });
 
 /*
@@ -37,18 +36,13 @@ router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
 // Edit update
 router.post("/update/:id",loginController.verifyLoginUser, function (req, res) {
   request.update(req, res);
-});*/
-
+});
 
 router.post("/delete/:id",loginController.verifyLoginUser, function (req, res, next) {
   request.delete(req, res);
 });
 
 router.post("/approve/:id",loginController.verifyLoginUser, function (req, res, next) {
-  request.approve(req, res);
-});
-
-router.get("/approve/:id",loginController.verifyLoginUser, function (req, res, next) {
   request.approve(req, res);
 });
 
@@ -67,6 +61,6 @@ router.get(
     request.management2Find(req, res);
   }
 );
-
+*/
 
 module.exports = router;

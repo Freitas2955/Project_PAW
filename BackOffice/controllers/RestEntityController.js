@@ -9,13 +9,31 @@ var entityController = {};
 var Employee = require("../models/Employee");
 const transporter = require("./mailer");
 
-
 mongoose
   .connect(
     "mongodb+srv://user:user@basepaw.e8ypv1l.mongodb.net/trabalhoPaw?retryWrites=true&w=majority&appName=BASEPAW"
   )
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
+
+  entityController.getApproved = function (req, res) {
+    let num;
+    (async () => {
+      try {
+        Entity.find({ approved: true })
+          .then((entity) => {
+            res.json({
+              entities: entity,
+            });
+          })
+          .catch((err) => {
+            console.log("Error:", err);
+          });
+      } catch (error) {
+        console.error("Ocorreu um erro ao contar os documentos:", error);
+      }
+    })();
+  };
 
 entityController.management1 = function (req, res) {
   let num;

@@ -74,7 +74,6 @@ export class CampanhaComponent {
           const objectURL = URL.createObjectURL(imageBlob);
           this.campaign.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         });
-
       },
       (error) => {
         console.error('Erro ao procurar campanha', error);

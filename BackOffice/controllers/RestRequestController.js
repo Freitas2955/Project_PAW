@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Request = require("../models/Request");
+var Donation = require("../models/Donation");
 var Donator = require("../models/Donator");
 const bcrypt = require("bcryptjs");
 var path = require("path");
@@ -13,32 +14,51 @@ mongoose
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
-requestController.management1 = function (req, res) {
-  let num;
-
-  (async () => {
-    try {
-      num = await Request.countDocuments({ done: true });
-      console.log("Número total de documentos:", num);
-      Request.find({ done: true })
-        .then((request) => {
-          console.log(req.session.userId);
-          res.json({
-            requests: request,
-            number: num,
-            username: req.session.username,
-            userId: req.session.userId,
-          });
-          //res.render("../views/requests/gestaoPedidosTerminados");
-        })
-        .catch((err) => {
-          console.log("Error:", err);
+  requestController.getDonatorRequests = function (req, res) {
+    let pedidos = [];
+  
+    Donation.find({ donatorId: req.params.id }).then((donations) => {
+      let requestPromises = donations.map((donation) => {
+        return Request.findOne({ donationId: donation._id }).then((request) => {
+          if (request != null) {
+            pedidos.push(request);
+          }
         });
-    } catch (error) {
-      console.error("Ocorreu um erro ao contar os documentos:", error);
-    }
-  })();
-};
+      });
+
+      return Promise.all(requestPromises);
+    }).then(() => {
+      console.log("pedidos", pedidos);
+      res.json({ requests: pedidos });
+    }).catch((err) => {
+      console.error(err);
+      res.status(500).send("Erro no servidor");
+    });
+  };
+  
+
+  requestController.getEntityRequests = function (req, res) {
+    let pedidos = [];
+    Donation.find({ entityId: req.params.id }).then((donations) => {
+      let requestPromises = donations.map((donation) => {
+        return Request.findOne({ donationId: donation._id }).then((request) => {
+          if (request != null) {
+            pedidos.push(request);
+          }
+        });
+      });
+
+      return Promise.all(requestPromises);
+    }).then(() => {
+      console.log(pedidos);
+      res.json({ requests: pedidos });
+    }).catch((err) => {
+      console.error(err);
+      res.status(500).send("Erro no servidor");
+    });
+  };
+  
+
 
 requestController.management2 = function (req, res) {
   let num;
@@ -138,8 +158,6 @@ requestController.show = function (req, res) {
     .then((request) => {
       res.json({
         request: request,
-        username: req.session.username,
-        userId: req.session.userId,
       });
       //res.render("../views/requests/verpedido");
     })
@@ -157,29 +175,28 @@ requestController.create = function (req, res) {
 };*/
 
 requestController.save = function (req, res) {
-  Request.findOne({ donationId: req.params.id })
-    .then((request) => {
-      if (!request) {
-        Donator.findById({ _id: req.body.donatorId }).then((donator) => {
-          const data = {
-            donatorName: donator.name,
-            donationId: req.params.id,
-            address: donator.address,
-            postCode: donator.postCode,
-            city: donator.city,
-            done: false,
-          };
-          const request = new Request(data);
-          request.save().then((savedRequest) => {
-            console.log("Successfully created an Request.");
-            res.json({savedRequest});
-          });
+  Request.findOne({ donationId: req.params.id }).then((request) => {
+    if (!request) {
+      Donator.findById({ _id: req.body.donatorId }).then((donator) => {
+        const data = {
+          donatorName: donator.name,
+          donationId: req.params.id,
+          address: donator.address,
+          postCode: donator.postCode,
+          city: donator.city,
+          done: false,
+        };
+        const request = new Request(data);
+        request.save().then((savedRequest) => {
+          console.log("Successfully created an Request.");
+          res.json({ savedRequest });
         });
-      } else {
-        console.log("Ja existe!");
-        res.json({exists:true})
-      }
-    })
+      });
+    } else {
+      console.log("Ja existe!");
+      res.json({ exists: true });
+    }
+  });
 };
 /*
 requestController.edit = function (req, res) {

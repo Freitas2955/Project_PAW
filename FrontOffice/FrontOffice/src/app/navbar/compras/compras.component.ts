@@ -49,6 +49,21 @@ export class ComprasComponent {
         (response: any) => {
           console.log('Resposta recebida:', response);
           this.purchases = response.purchases;
+          for (let i = 0; i < this.purchases.length; i++) {
+            let isoDate = this.purchases[i].updated_at;
+            let date = new Date(isoDate);
+  
+            let options: Intl.DateTimeFormatOptions = {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            };
+  
+            this.purchases[i].partnerName = date.toLocaleDateString(
+              'pt-pt',
+              options
+            );
+          }
         },
         (error) => {
           console.error('Erro ao procurar campanha', error);
@@ -59,6 +74,21 @@ export class ComprasComponent {
         (response: any) => {
           console.log('Resposta recebida:', response);
           this.purchases = response.purchases;
+          for (let i = 0; i < this.purchases.length; i++) {
+            let isoDate = this.purchases[i].updated_at;
+            let date = new Date(isoDate);
+  
+            let options: Intl.DateTimeFormatOptions = {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            };
+  
+            this.purchases[i].donatorName = date.toLocaleDateString(
+              'pt-pt',
+              options
+            );
+          }
         },
         (error) => {
           console.error('Erro ao procurar campanha', error);

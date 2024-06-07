@@ -63,4 +63,8 @@ export class BarComponent {
   doadores(){
     this.router.navigate(['/doadores/']);
   }
+
+  pedidos(){
+    this.router.navigate(['/pedidos/']);
+  }
 }

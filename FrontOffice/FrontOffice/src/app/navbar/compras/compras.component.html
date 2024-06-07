@@ -8,11 +8,11 @@
             <div class="content">
                 <div class="info">
                     <header>
-                        <h3>Campanha: {{purchase.campaignName}}</h3>
+                    <h3>Campanha: {{purchase.campaignName}}</h3>
                     </header>
                     <p>Custo: {{purchase.cost}}</p>
                     <p>Parceiro: {{purchase.partnerName}} </p>
-                    <p>Data de Compra: {{purchase.updated_at}} </p>
+                    <p>Data de Compra: {{purchase.donatorName}} </p>
                     <div class="detalhes" style="display: flex; gap: 5%;">
                         <button [routerLink]="['/campanhas/show', purchase.campaignId]">Detalhes Campanha</button>
                         <button [routerLink]="['/doadores/show', purchase.partnerId]">Detalhes Parceiro</button>
@@ -29,11 +29,11 @@
             <div class="content">
                 <div class="info">
                     <header>
-                        <h3>Comprador: {{purchase.donatorName}}</h3>
+                    <h3>Comprador: {{purchase.donatorName}}</h3>
                     </header>
                     <p>Custo: {{purchase.cost}}</p>
                     <p>Campanha: {{purchase.campaignName}} </p>
-                    <p>Data de Compra: {{purchase.updated_at}} </p>
+                    <p>Data de Compra: {{purchase.partnerName}} </p>
                     <div class="detalhes" style="display: flex; gap: 5%;">
                         <button [routerLink]="['/campanhas/show', purchase.campaignId]">Detalhes Campanha</button>
                         <button [routerLink]="['/doadores/show', purchase.donatorId]">Detalhes Doador</button>

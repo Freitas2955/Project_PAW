@@ -1,0 +1,43 @@
+
+<app-navbar></app-navbar>
+<app-bar></app-bar>
+
+<main *ngIf="type=='Donator'">
+    <h1>Pedidos</h1>
+    <div class="pedidos">
+        <div class="card" *ngFor="let request of requests">
+            <div class="imagem"></div>
+            <div class="content">
+                <header>
+                    <h3 *ngIf="type=='Donator'">Data:{{ request.entityName }} </h3>
+                    <button [routerLink]="['/doacoes/show', request.donationId]">Detalhes de doação</button>  
+                </header>
+                <p *ngIf="request.done">Terminado: Sim </p>
+                <p *ngIf="!request.done">Terminado: Não </p>
+                <p>Cidade: {{ request.city }}</p>
+                <p>Morada: {{ request.address }}</p>
+                <p>Código Postal: {{ request.city }}</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main *ngIf="type=='Entity'">
+    <h1>Pedidos</h1>
+    <div class="pedidos">
+        <div class="card" *ngFor="let request of requests">
+            <div class="content">
+                <header>
+                    <h3 *ngIf="type!='Donator'">Doador:{{ request.donatorName }} </h3>
+                    <button [routerLink]="['/doacoes/show', request.donationId]">Detalhes de doação</button>  
+                    <button *ngIf="request.done!=true" (click)="aprovarPedido(request._id)">Terminar Pedido</button>  
+                </header>
+                <p *ngIf="request.done">Terminado: Sim </p>
+                <p *ngIf="!request.done">Terminado: Não </p>
+                <p>Cidade: {{ request.city }}</p>
+                <p>Morada: {{ request.address }}</p>
+                <p>Código Postal: {{ request.city }}</p>
+            </div>
+        </div>
+    </div>
+</main>

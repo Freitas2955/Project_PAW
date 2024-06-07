@@ -7,6 +7,10 @@ router.get("/",loginController.verifyLoginUser, function (req, res) {
   entity.management1(req, res);
 });
 
+router.get("/getApproved",loginController.verifyLoginUser, function (req, res) {
+  entity.getApproved(req, res);
+});
+
 router.get("/notApproved",loginController.verifyLoginUser, function (req, res) {
   entity.management2(req, res);
 });

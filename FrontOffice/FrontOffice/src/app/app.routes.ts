@@ -23,6 +23,7 @@ import { CampanhaComponent } from './navbar/campanhas/campanha/campanha.componen
 import { CampanhasComponent } from './navbar/campanhas/campanhas/campanhas.component';
 import { RegistarcampanhasComponent } from './navbar/campanhas/registarcampanhas/registarcampanhas.component';
 import { ComprasComponent } from './navbar/compras/compras.component';
+import { PedidosComponent } from './navbar/pedidos/pedidos.component';
 
 export const routes: Routes = [
   { path: '', component: PagInicialComponent },
@@ -56,4 +57,5 @@ export const routes: Routes = [
 
 
   {path: 'compras', component: ComprasComponent ,canActivate: [AuthGuardGuard]},
+  {path: 'pedidos',component:PedidosComponent,canActivate: [AuthGuardGuard]},
 ];
