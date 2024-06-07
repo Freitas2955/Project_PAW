@@ -3,6 +3,7 @@ var Donator = require("../models/Donator");
 var Campaign = require("../models/Campaign");
 var Donation = require("../models/Donation");
 var Request = require("../models/Request");
+var Purchase = require("../models/Purchase");
 var path = require("path");
 var fs = require("fs");
 var donatorController = {};
@@ -78,11 +79,18 @@ donatorController.buy = function (req, res) {
             },
             { new: true }
           ).then((donator) => {
-            res.render("../views/donators/verdoador", {
-              donator: donator,
-              username: req.session.username,
-              userId: req.session.userId,
-            });
+            const data = {
+              donatorName:donator.name,
+              donatorId:donator._id,
+              cost:campaign.cost,
+              campaignId:campaign._id,
+              campaignName:campaign.name,
+              partnerId:campaign.partnerId,
+            };
+            const purchaseSave = new Purchase(data);
+            purchaseSave.save().then((purchase)=>{
+            })
+            res.redirect("/donators/show/" + donator._id);
           });
         } else {
           /*

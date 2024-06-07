@@ -12,6 +12,8 @@ import { DonationsService } from '../services/donations.service';
 import { BarComponent } from '../bar/bar.component';
 import { EntitiesService } from '../services/entities.service';
 import { Entity } from '../model/entity';
+import { PurchasesService } from '../services/purchases.service';
+import { Purchase } from '../model/purchase';
 @Component({
   selector: 'app-dashboard-component',
   templateUrl: './dashboard.component.html',
@@ -26,13 +28,13 @@ export class DashboardComponent implements OnInit {
   donations: Donation[] = [];
   totalPoints: number = 0;
   totalSpentPoints: number = 0;
-  totalDonations: number = 0;
+  totalContributions: number = 0;
   username: String | null;
   userId: String;
-  entityId:String|null;
+  entityId: String | null;
   type: String | null;
-  entity:Entity=new Entity();
-
+  entity: Entity = new Entity();
+  purchases: Purchase[] = [new Purchase()];
   constructor(
     private plot: PlotlyService,
     public rest: DonatorsService,
@@ -40,7 +42,8 @@ export class DashboardComponent implements OnInit {
     private rest2: DonationsService,
     private sanitizer: DomSanitizer,
     public rest3: RestService,
-    public rest4: EntitiesService
+    public rest4: EntitiesService,
+    public rest5: PurchasesService
   ) {
     const localStorageData = localStorage.getItem('currentUser');
     if (localStorageData) {
@@ -53,96 +56,146 @@ export class DashboardComponent implements OnInit {
       this.userId = '';
       this.type = '';
     }
-    this.entityId=this.userId
+    this.entityId = this.userId;
   }
 
   ngOnInit(): void {
-    if(this.type=="Donator"){
-    const idTemp = this.route.snapshot.params['id'];
-    this.rest2.getDonatorDonations(idTemp).subscribe((data: any) => {
-      this.donations = data.donations;
-
-      if (this.donations) {
-        this.donations.sort(
-          (a, b) =>
-            new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime()
-        );
-
-        const dates: string[] = [];
-        const cumulativePoints: number[] = [];
-
-        this.totalPoints = 0;
-        this.totalDonations = this.donations.length;
-
-        for (const donation of this.donations) {
-          const date = new Date(donation.updated_at);
-          dates.push(date.toLocaleDateString());
-          this.totalPoints += Number(donation.points);
-          cumulativePoints.push(this.totalPoints);
-        }
-
-        this.plot.plotLine(
-          'Evolução do número de pontos',
-          'plot',
-          dates,
-          cumulativePoints
-        );
-      }
-
+    if (this.type == 'Donator') {
       this.donatorId = this.route.snapshot.paramMap.get('id');
       this.getDonator();
       this.fazerPedidoPorDoador();
-    });
-  }else if(this.type=="Entity"){
-    const idTemp = this.route.snapshot.params['id'];
-    this.rest2.getEntityDonations(idTemp).subscribe((data: any) => {
-      this.donations = data.donations;
-
-      if (this.donations) {
-        this.donations.sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime());
-
-        const dates: string[] = [];
-        const cumulativePoints: number[] = [];
-
-        this.totalPoints = 0;
-        this.totalDonations = this.donations.length;
-
-        // Inicializa as contagens de cada tipo de peça
-        let camisolasCount = 0;
-        let casacosCount = 0;
-        let calcasCount = 0;
-        let sapatosCount = 0;
-        let acessoriosCount = 0;
-        let interiorCount = 0;
-        let dinheiroCount = 0;
-
-        for (const donation of this.donations) {
-          const date = new Date(donation.updated_at);
-          dates.push(date.toLocaleDateString());
-          this.totalPoints += Number(donation.points);
-          cumulativePoints.push(this.totalPoints);
-          // Incrementa as contagens de cada tipo de peça
-          camisolasCount += donation.camisolas || 0;
-          casacosCount += donation.casacos || 0;
-          calcasCount += donation.calcas || 0;
-          sapatosCount += donation.sapatos || 0;
-          acessoriosCount += donation.acessorios || 0;
-          interiorCount += donation.interior || 0;
-          dinheiroCount += donation.dinheiro || 0;
-         
+      this.rest5.getDonatorPurchases(this.userId).subscribe(
+        (response: any) => {
+          console.log('Resposta recebida:', response);
+          this.purchases = response.purchases;
+        },
+        (error) => {
+          console.error('Erro ao procurar campanha', error);
         }
-        console.log(camisolasCount)
-        const barData = {
-          x: ['Camisolas', 'Casacos', 'Calças', 'Sapatos', 'Acessórios', 'Interior', 'Dinheiro'],
-          y: [camisolasCount, casacosCount, calcasCount, sapatosCount, acessoriosCount, interiorCount, dinheiroCount],
-          type: 'bar'
-        };
-        // Plota o gráfico de barras
-        this.plot.plotBar("Total de doações por tipo", "plot", barData.x, barData.y);
-      }
-      this.entityId = this.route.snapshot.paramMap.get('id');
-    });
-  }
+      );
+      const idTemp = this.route.snapshot.params['id'];
+      this.rest2.getDonatorDonations(idTemp).subscribe((data: any) => {
+        this.donations = data.donations;
+
+        if (this.donations && this.purchases) {
+          // Unir doações e compras em um único array
+          const allData = [...this.donations, ...this.purchases];
+
+          // Ordenar o array combinado por data
+          allData.sort(
+            (a, b) =>
+              new Date(a.updated_at).getTime() -
+              new Date(b.updated_at).getTime()
+          );
+
+          const dates: string[] = [];
+          const cumulativePoints: number[] = [];
+
+          this.totalPoints = 0;
+          this.totalContributions = allData.length;
+
+          for (const data of allData) {
+            let donationOrPurchase: Donation | Purchase;
+
+            if ('points' in data) {
+              donationOrPurchase = data as Donation;
+              cumulativePoints.push(
+                this.totalPoints + Number(this.totalPoints)
+              );
+              this.totalPoints += Number(donationOrPurchase.points);
+            } else {
+              donationOrPurchase = data as Purchase;
+              cumulativePoints.push(
+                this.totalPoints - Number(donationOrPurchase.cost)
+              );
+              this.totalPoints -= Number(donationOrPurchase.cost);
+            }
+            const date = new Date(donationOrPurchase.updated_at);
+            dates.push(date.toLocaleDateString());
+          }
+
+          this.plot.plotLine(
+            'Evolução do número de pontos e compras',
+            'plot',
+            dates,
+            cumulativePoints
+          );
+        }
+      });
+    } else if (this.type == 'Entity') {
+      const idTemp = this.route.snapshot.params['id'];
+      this.rest2.getEntityDonations(idTemp).subscribe((data: any) => {
+        this.donations = data.donations;
+
+        if (this.donations) {
+          this.donations.sort(
+            (a, b) =>
+              new Date(a.updated_at).getTime() -
+              new Date(b.updated_at).getTime()
+          );
+
+          const dates: string[] = [];
+          const cumulativePoints: number[] = [];
+
+          this.totalPoints = 0;
+          this.totalContributions = this.donations.length;
+
+          // Inicializa as contagens de cada tipo de peça
+          let camisolasCount = 0;
+          let casacosCount = 0;
+          let calcasCount = 0;
+          let sapatosCount = 0;
+          let acessoriosCount = 0;
+          let interiorCount = 0;
+          let dinheiroCount = 0;
+
+          for (const donation of this.donations) {
+            const date = new Date(donation.updated_at);
+            dates.push(date.toLocaleDateString());
+            this.totalPoints += Number(donation.points);
+            cumulativePoints.push(this.totalPoints);
+            // Incrementa as contagens de cada tipo de peça
+            camisolasCount += donation.camisolas || 0;
+            casacosCount += donation.casacos || 0;
+            calcasCount += donation.calcas || 0;
+            sapatosCount += donation.sapatos || 0;
+            acessoriosCount += donation.acessorios || 0;
+            interiorCount += donation.interior || 0;
+            dinheiroCount += donation.dinheiro || 0;
+          }
+          console.log(camisolasCount);
+          const barData = {
+            x: [
+              'Camisolas',
+              'Casacos',
+              'Calças',
+              'Sapatos',
+              'Acessórios',
+              'Interior',
+              'Dinheiro',
+            ],
+            y: [
+              camisolasCount,
+              casacosCount,
+              calcasCount,
+              sapatosCount,
+              acessoriosCount,
+              interiorCount,
+              dinheiroCount,
+            ],
+            type: 'bar',
+          };
+          // Plota o gráfico de barras
+          this.plot.plotBar(
+            'Total de doações por tipo',
+            'plot',
+            barData.x,
+            barData.y
+          );
+        }
+        this.entityId = this.route.snapshot.paramMap.get('id');
+      });
+    }
   }
 
   getDonator(): void {
@@ -189,7 +242,6 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
 
   getEntity(): void {
     this.rest4.getEntity(this.entityId).subscribe(

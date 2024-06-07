@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<app-bar></app-bar>
+
+<main *ngIf="type=='Donator'">
+    <h1>Histórico de compras</h1>
+    <div class="compras">
+        <div class="card" *ngFor="let purchase of purchases">
+            <div class="content">
+                <div class="info">
+                    <header>
+                        <h3>Campanha: {{purchase.campaignName}}</h3>
+                    </header>
+                    <p>Custo: {{purchase.cost}}</p>
+                    <p>Parceiro: {{purchase.partnerName}} </p>
+                    <p>Data de Compra: {{purchase.updated_at}} </p>
+                    <div class="detalhes" style="display: flex; gap: 5%;">
+                        <button [routerLink]="['/campanhas/show', purchase.campaignId]">Detalhes Campanha</button>
+                        <button [routerLink]="['/doadores/show', purchase.partnerId]">Detalhes Parceiro</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main *ngIf="type=='Partner'">
+    <div class="compras">
+        <div class="card" *ngFor="let purchase of purchases">
+            <div class="content">
+                <div class="info">
+                    <header>
+                        <h3>Comprador: {{purchase.donatorName}}</h3>
+                    </header>
+                    <p>Custo: {{purchase.cost}}</p>
+                    <p>Campanha: {{purchase.campaignName}} </p>
+                    <p>Data de Compra: {{purchase.updated_at}} </p>
+                    <div class="detalhes" style="display: flex; gap: 5%;">
+                        <button [routerLink]="['/campanhas/show', purchase.campaignId]">Detalhes Campanha</button>
+                        <button [routerLink]="['/doadores/show', purchase.donatorId]">Detalhes Doador</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

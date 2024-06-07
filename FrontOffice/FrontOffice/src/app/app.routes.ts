@@ -22,6 +22,7 @@ import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { CampanhaComponent } from './navbar/campanhas/campanha/campanha.component';
 import { CampanhasComponent } from './navbar/campanhas/campanhas/campanhas.component';
 import { RegistarcampanhasComponent } from './navbar/campanhas/registarcampanhas/registarcampanhas.component';
+import { ComprasComponent } from './navbar/compras/compras.component';
 
 export const routes: Routes = [
   { path: '', component: PagInicialComponent },
@@ -52,4 +53,7 @@ export const routes: Routes = [
   {path: 'campanhas', component: CampanhasComponent, canActivate: [AuthGuardGuard]},
   {path: 'campanhas/:idParceiro', component: CampanhasComponent, canActivate: [AuthGuardGuard]},
   {path: 'campanhas/show/:id', component: CampanhaComponent ,canActivate: [AuthGuardGuard]},  //nao sei se é campanhas ou campanha /show/id
+
+
+  {path: 'compras', component: ComprasComponent ,canActivate: [AuthGuardGuard]},
 ];

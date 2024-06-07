@@ -53,7 +53,7 @@ export class BarComponent {
   }
 
   compras() {
-    this.router.navigate(['/campanhas/']);
+    this.router.navigate(['/compras/']);
   }
 
   doacoes() {

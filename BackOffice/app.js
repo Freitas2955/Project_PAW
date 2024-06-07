@@ -55,6 +55,7 @@ var campaignsRouter = require("./routes/campaigns");
 var restCampaignsRouter = require("./routes/RestCampaigns");
 var requestsRouter = require("./routes/requests");
 var restrequestsRouter = require("./routes/RestRequests");
+var restPurchasesRouter = require("./routes/RestPurchases");
 const authRouter = require('./routes/auth');
 
 var app = express();
@@ -119,6 +120,7 @@ app.use("/campaigns", campaignsRouter);
 app.use("/RestCampaigns", restCampaignsRouter);
 app.use("/requests", requestsRouter);
 app.use("/RestRequests", restrequestsRouter);
+app.use("/RestPurchases", restPurchasesRouter);
 
 app.use('/auth', authRouter);
 

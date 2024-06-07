@@ -82,7 +82,7 @@ export class EntitiesService {
 
     return this.http.post<any>(
       endpoint + 'RestEntities/update/' + entity._id,
-      formData,this.getHttpOptions()
+      formData
     );
   }
 

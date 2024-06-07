@@ -6,13 +6,7 @@
     <div class="buttons">
       <button *ngIf="type=='Partner'" id="criar" [routerLink]="['/registarcampanha']" id="filtro">Criar
         Campanha</button>
-      <button onclick="toggleDropdown()" id="filtro">Filtros </button>
-      <div id="dropdownContent" class="dropdown-content" style="display: none;"> <!-- Ver este Drop para que serve? -->
-        <a href="/employees/create">Funcionário</a>
-        <a href="/donators/create">Doador</a>
-        <a href="/entities/create">Instituição</a>
-        <a href="/partners/create">Parceiro</a>
-      </div>
+      <button *ngIf="type=='Donator'" id="filtro" [routerLink]="['/compras']">Histórico</button>
     </div>
 
     <script>

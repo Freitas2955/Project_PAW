@@ -5,6 +5,7 @@ var Entity = require("../models/Entity");
 var Campaign = require("../models/Campaign");
 var Donation = require("../models/Donation");
 var Request = require("../models/Request");
+var Purchase = require("../models/Purchase");
 var path = require("path");
 var fs = require("fs");
 var donatorController = {};
@@ -127,9 +128,20 @@ donatorController.buy = function (req, res) {
             },
             { new: true }
           ).then((donator) => {
-            res.json({
-              donator: donator,
-            });
+            const data = {
+              donatorName:donator.name,
+              donatorId:donator._id,
+              cost:campaign.cost,
+              campaignId:campaign._id,
+              campaignName:campaign.name,
+              partnerId:campaign.partnerId,
+            };
+            const purchaseSave = new Purchase(data);
+            purchaseSave.save().then((purchase)=>{
+              res.json({
+                purchase: purchase
+              });
+            })
             //res.render("../views/donators/verdoador", );
           });
         } else {

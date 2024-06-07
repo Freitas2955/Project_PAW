@@ -3,20 +3,42 @@
 
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid nav" >
+  <div class="container-fluid nav">
     <a class="navbar-brand" href="#">Recicla Textil</a>
-    <div class=" navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="#" (click)="loadLogin()" onclick="return false;">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Registe-se</a>
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false" (click)="opcoes()" onclick="return false;">
+            Registe-se
+          </a>
+        </li>
+        <li class="nav-item" class="fade" [ngClass]="{ 'show': show ,'disabled': !show}">
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false" (click)="registerDonator()" onclick="return false;">
+            Doador
+          </a>
+        </li>
+        <li class="nav-item" class="fade" [ngClass]="{'show': show,'disabled': !show}">
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false" (click)="registerEntity()" onclick="return false;">
+            Instituição
+          </a>
+        </li>
+        <li class="nav-item" class="fade" [ngClass]="{'show': show,'disabled': !show}">
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false" (click)="registerPartner()" onclick="return false;">
+            Parceiro
+          </a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
 
 <main>
   <div class="grid">
