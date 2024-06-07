@@ -271,6 +271,12 @@ entityController.edit = function (req, res) {
 };
 
 entityController.update = function (req, res) {
+  const { error, value } = Entity.validate(req.body);
+  
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
+  
   var city = req.body.city;
   var regCity = city.charAt(0).toUpperCase() + city.slice(1);
 

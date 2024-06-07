@@ -7,7 +7,7 @@ router.get("/get", function (req, res) {
   donator.getDonators(req, res);
 });
 
-router.get("/getEntityDonators/:id", function (req, res) {
+router.get("/getEntityDonators/:id",loginController.verifyEntityUser, function (req, res) {
   donator.getEntityDonators(req, res);
 });
 

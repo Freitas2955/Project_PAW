@@ -98,7 +98,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use('/images', express.static(path.join(__dirname, 'images')));
+const loginController = require("./controllers/RestLoginController.js");
+app.use('/images',loginController.verifyLoginUser, express.static(path.join(__dirname, 'images')));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

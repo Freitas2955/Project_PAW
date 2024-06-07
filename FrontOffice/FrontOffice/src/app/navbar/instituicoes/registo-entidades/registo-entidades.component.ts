@@ -21,14 +21,11 @@ export class RegistoEntidadesComponent {
   selectedFile: File;
   imagePreview: string | ArrayBuffer | null = null;
 
-
   constructor(private restService: EntitiesService,private builder: FormBuilder, private formBuilder: FormBuilder) {
     this.entity = new Entity();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
   }
-
-
 
   ///////////////////////////////
   onFileSelected(event: Event) {
@@ -50,8 +47,6 @@ export class RegistoEntidadesComponent {
     }
   }*/
   ///////////////////////
-
-
 
   submitForm(): void {
     if (this.entity.password === this.confpassword) {

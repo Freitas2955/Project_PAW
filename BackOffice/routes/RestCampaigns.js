@@ -7,7 +7,7 @@ router.get("/",loginController.verifyLoginUser, function (req, res) {
   campaign.management(req, res);
 });
 
-router.get("/get", function (req, res) {
+router.get("/get",loginController.verifyLoginUser, function (req, res) {
   campaign.getCampaigns(req, res);
 });
 

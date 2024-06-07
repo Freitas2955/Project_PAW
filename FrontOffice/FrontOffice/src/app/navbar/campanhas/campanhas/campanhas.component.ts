@@ -95,7 +95,7 @@ export class CampanhasComponent {
   }
 
   getPartnerCampaigns(): void {
-    console.log('getCampaigns chamado');
+    console.log('getPartnerCampaigns chamado');
     this.rest.getPartnerCampaigns(this.userId).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);

@@ -19,22 +19,68 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class RestService {
-  constructor(private http: HttpClient) {}
+  headers: HttpHeaders;
+  type: string | number | (string | number)[];
+  token: string | number | (string | number)[];
 
+  constructor(private http: HttpClient) {
+    const localStorageData = localStorage.getItem('currentUser');
+    if (localStorageData) {
+      const userData = JSON.parse(localStorageData);
+      this.token = userData.token;
+      this.type = userData.userType;
+    } else {
+      this.token = '';
+      this.type = '';
+    }
+    this.headers = this.createHeaders();
+  }
 
-  getCampaignImage(id: String|undefined): Observable<Blob> {
-    return this.http.get(endpoint + 'images/campaigns/' + id + '.jpg', { responseType: 'blob' });
+  private createHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'login-token': String(this.token),
+      type: String(this.type),
+    });
+  }
+
+  private getHttpOptions() {
+    return { headers: this.headers };
+  }
+
+  getCampaignImage(id: String | undefined): Observable<Blob> {
+    const options = {
+      headers: this.headers,
+      responseType: 'blob' as 'json'
+    };
+  
+    return this.http.get<Blob>(endpoint + 'images/campaigns/' + id + '.jpg', options);
   }
 
   getPartnerImage(id: String|undefined): Observable<Blob> {
-    return this.http.get(endpoint + 'images/partners/' + id + '.jpg', { responseType: 'blob' });
+    const options = {
+      headers: this.headers,
+      responseType: 'blob' as 'json'
+    };
+
+    return this.http.get<Blob>(endpoint + 'images/partners/' + id + '.jpg', options);
   }
 
   getEntityImage(id: String|undefined): Observable<Blob> {
-    return this.http.get(endpoint + 'images/entities/' + id + '.jpg', { responseType: 'blob' });
+    const options = {
+      headers: this.headers,
+      responseType: 'blob' as 'json'
+    };
+
+    return this.http.get<Blob>(endpoint + 'images/entities/' + id + '.jpg', options);
   }
 
   getDonatorImage(id: String|undefined): Observable<Blob> {
-    return this.http.get(endpoint + 'images/donators/' + id + '.jpg', { responseType: 'blob' });
+    const options = {
+      headers: this.headers,
+      responseType: 'blob' as 'json'
+    };
+
+    return this.http.get<Blob>(endpoint + 'images/donators/' + id + '.jpg', options);
   }
 }
