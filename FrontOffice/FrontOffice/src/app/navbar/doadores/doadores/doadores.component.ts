@@ -7,15 +7,20 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DonatorsService } from '../../../services/donators.service';
 import { BarComponent } from '../../../bar/bar.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-doadores',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, RouterModule, BarComponent],
+  imports: [NavbarComponent, CommonModule, RouterModule, BarComponent,FormsModule],
   templateUrl: './doadores.component.html',
   styleUrl: './doadores.component.css',
 })
 export class DoadoresComponent implements OnInit {
+  searchName: string = '';
+  searchCity: string = '';
+  searchPhone: string = '';
+  filteredDonators: Donator[] = [new Donator()];
   donators: Donator[] = [new Donator()];
   username: String | null;
   userId: String;
@@ -64,6 +69,7 @@ export class DoadoresComponent implements OnInit {
           });
           console.log(donator);
         });
+        this.filteredDonators=this.donators;
       },
       (error) => {
         console.error('Erro ao procurar doador', error);
@@ -86,6 +92,7 @@ export class DoadoresComponent implements OnInit {
           });
           console.log(donator);
         });
+        this.filteredDonators=this.donators;
       },
       (error) => {
         console.error('Erro ao procurar doador', error);
@@ -95,5 +102,25 @@ export class DoadoresComponent implements OnInit {
 
   seeListOfDonators() {
     this.router.navigate(['/doadores']);
+  }
+
+  filterDonations(): void {
+    this.filteredDonators = this.donators.filter((donator) => {
+      const matchesName = donator.name
+        .toLowerCase()
+        .includes(this.searchName.toLowerCase());
+      const matchesCity = donator.city
+        .toLowerCase()
+        .includes(this.searchCity.toLowerCase());
+      const matchesPhone = donator.phone
+        .toString()
+        .toLowerCase()
+        .includes(this.searchPhone.toLowerCase());
+      return matchesName && matchesCity && matchesPhone;
+    });
+  }
+
+  onSearchChange(): void {
+    this.filterDonations();
   }
 }

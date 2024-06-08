@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@a
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EntitiesService } from '../../../services/entities.service';
+import { DonatorsService } from '../../../services/donators.service';
 
 @Component({
   selector: 'app-registardoador',
@@ -20,7 +21,7 @@ export class RegistardoadorComponent {
   selectedFile: File;
   imagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private restService: EntitiesService,private builder: FormBuilder) {
+  constructor(private restService: DonatorsService,private builder: FormBuilder) {
     this.donator = new Donator();
     const defaultContent = new Blob(['Conteúdo inicial'], { type: 'text/plain' });
     this.selectedFile = new File([defaultContent], 'arquivoInicial.txt', { type: 'text/plain' });
@@ -43,7 +44,7 @@ export class RegistardoadorComponent {
   submitForm(): void {
     if (this.donator.password === this.confpassword) {
       console.log(this.donator);
-      this.restService.registerEntity(this.donator, this.selectedFile).subscribe(
+      this.restService.registerDonator(this.donator, this.selectedFile).subscribe(
         (response) => {
           console.log('Instituição registada com sucesso:', response);
         },

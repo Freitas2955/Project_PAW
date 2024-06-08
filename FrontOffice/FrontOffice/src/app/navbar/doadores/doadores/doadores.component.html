@@ -3,27 +3,15 @@
 <main>
   <header>
     <h1>Doadores</h1>
-    <button onclick="toggleDropdown()" id="filtro">Filtros </button>
-    <div id="dropdownContent" class="dropdown-content" style="display: none;"> <!-- Ver este Drop para que serve? -->
-      <a href="/employees/create">Funcionário</a>
-      <a href="/donators/create">Doador</a>
-      <a href="/entities/create">Instituição</a>
-      <a href="/partners/create">Parceiro</a>
+    <div class="search-fields">
+      <input type="text" id="searchName" placeholder="Nome de Doador" [(ngModel)]="searchName" (input)="onSearchChange()" />
+      <input type="text" id="searchCity" placeholder="Cidade" [(ngModel)]="searchCity" (input)="onSearchChange()" />
+      <input type="text" id="searchPhone" placeholder="Telemóvel" [(ngModel)]="searchPhone" (input)="onSearchChange()" />
     </div>
-    <script>
-      function toggleDropdown() {
-        var dropdownContent = document.getElementById("dropdownContent");
-        if (dropdownContent.style.display === "none") {
-          dropdownContent.style.display = "block";
-        } else {
-          dropdownContent.style.display = "none";
-        }
-      }
-    </script>
   </header>
 
   <div class="doadores">
-    <div class="card" *ngFor="let donator of donators">
+    <div class="card" *ngFor="let donator of filteredDonators">
       <div class="content">
         <div class="info">
           <header>

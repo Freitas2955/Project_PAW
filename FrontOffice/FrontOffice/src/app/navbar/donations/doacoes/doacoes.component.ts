@@ -7,35 +7,40 @@ import { Donation } from '../../../model/donation';
 import { CommonModule } from '@angular/common';
 import { DonationsService } from '../../../services/donations.service';
 import { BarComponent } from '../../../bar/bar.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-doacao',
   standalone: true,
-  imports: [NavbarComponent, CommonModule,RouterModule,BarComponent],
+  imports: [NavbarComponent, CommonModule, RouterModule, BarComponent,FormsModule],
   templateUrl: './doacoes.component.html',
   styleUrl: './doacoes.component.css',
 })
 export class DoacoesComponent {
+  searchDonatorName: string = '';
+  searchentityName: string = '';
+  searchApproved: string = '';
   donations: Donation[] = [];
+  filteredDonations: Donation[] = [];
   username: String | null;
-  userId:String;
-  type:String|null;
+  userId: String;
+  type: String | null;
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     public rest: DonationsService
   ) {
     const localStorageData = localStorage.getItem('currentUser');
-  if (localStorageData) {
-    const userData = JSON.parse(localStorageData);
-    this.username = userData.username;
-    this.userId=userData.userId;
-    this.type=userData.userType;
-  }else{
-    this.username="";
-    this.userId="";
-    this.type="";
-  }
+    if (localStorageData) {
+      const userData = JSON.parse(localStorageData);
+      this.username = userData.username;
+      this.userId = userData.userId;
+      this.type = userData.userType;
+    } else {
+      this.username = '';
+      this.userId = '';
+      this.type = '';
+    }
   }
 
   ngOnInit() {
@@ -43,14 +48,16 @@ export class DoacoesComponent {
       const idEntidade = params.get('idEntidade');
       const idDoador = params.get('idDoador');
 
-      if (this.type=='Entity') {
+      if (this.type == 'Entity') {
         console.log('entidade');
         this.fazerPedidoPorEntidade(this.userId);
-      } else if (this.type=='Donator') {
+      } else if (this.type == 'Donator') {
         console.log('doador');
         this.fazerPedidoPorDoador(this.userId);
       }
+      
     });
+    
   }
 
   fazerPedidoPorEntidade(idEntidade: String) {
@@ -74,6 +81,7 @@ export class DoacoesComponent {
             options
           );
         }
+        this.filteredDonations=this.donations;
       },
       (error) => {
         console.error('Erro ao procurar doacoes', error);
@@ -81,7 +89,7 @@ export class DoacoesComponent {
     );
   }
 
-  aprovarDoacao(idDoacao:String|undefined){
+  aprovarDoacao(idDoacao: String | undefined) {
     this.rest.approveDonation(idDoacao).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
@@ -89,7 +97,7 @@ export class DoacoesComponent {
       (error) => {
         console.error('Erro ao procurar doacoes', error);
       }
-    )
+    );
     location.reload();
   }
 
@@ -113,10 +121,31 @@ export class DoacoesComponent {
             options
           );
         }
+        this.filteredDonations=this.donations;
       },
       (error) => {
         console.error('Erro ao procurar doacoes', error);
       }
     );
+  }
+
+  filterDonations(): void {
+    this.filteredDonations = this.donations.filter((donation) => {
+      const matchesDonatorName = donation.donatorName
+        .toLowerCase()
+        .includes(this.searchDonatorName.toLowerCase());
+      const matchesEntityName = donation.entityName
+        .toLowerCase()
+        .includes(this.searchentityName.toLowerCase());
+      const matchesApproved = donation.approved
+        .toString()
+        .toLowerCase()
+        .includes(this.searchApproved.toLowerCase());
+      return matchesDonatorName && matchesEntityName && matchesApproved;
+    });
+  }
+
+  onSearchChange(): void {
+    this.filterDonations();
   }
 }

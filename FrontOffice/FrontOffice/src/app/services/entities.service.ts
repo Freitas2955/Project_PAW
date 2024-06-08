@@ -14,7 +14,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class EntitiesService {
-
   headers: HttpHeaders;
   type: string | number | (string | number)[];
   token: string | number | (string | number)[];

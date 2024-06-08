@@ -2,14 +2,14 @@ import { SafeUrl } from "@angular/platform-browser";
 
 export class Entity{
     _id?: String;
-    name?: String;
-    description?: String;
-    address?: String;
-    city?: String;
+    name: String="";
+    description: String="";
+    address: String="";
+    city: String="";
     postCode?: String;
     email?: String;
     password?: String;
-    phone?: Number;
+    phone: Number=0;
     approved?: Boolean;
     imageUrl?: SafeUrl;
 }

@@ -1,47 +1,36 @@
 <app-navbar></app-navbar>
 <app-bar></app-bar>
 <main>
-    <header><h1>Instituições</h1>
-        <button onclick="toggleDropdown()" id="filtro">Filtros </button>
-        <div id="dropdownContent" class="dropdown-content" style="display: none;">     <!-- Ver este Drop para que serve? -->
-          <a href="/employees/create">Funcionário</a>
-          <a href="/donators/create">Doador</a>
-          <a href="/entities/create">Instituição</a>
-          <a href="/partners/create">Parceiro</a>
-        </div>
-      <script>
-        function toggleDropdown() {
-          var dropdownContent = document.getElementById("dropdownContent");
-          if (dropdownContent.style.display === "none") {
-            dropdownContent.style.display = "block";
-          } else {
-            dropdownContent.style.display = "none";
-          }
-        }
-      </script>
-    </header>
+  <header>
+    <h1>Instituições</h1>
+    <div class="search-fields">
+      <input type="text" id="searchName" placeholder="Nome" [(ngModel)]="searchName" (input)="onSearchChange()" />
+      <input type="text" id="searchCity" placeholder="Cidade" [(ngModel)]="searchCity" (input)="onSearchChange()" />
+      <input type="text" id="searchPhone" placeholder="Telemóvel" [(ngModel)]="searchPhone" (input)="onSearchChange()" />
+    </div>
+  </header>
 
   <div class="entidades">
-    <div class="card" *ngFor="let entity of entities">
-        <div class="content">
-            <div class="info">
-                <header><h3>Nome: {{entity.name}}</h3></header>
-                <p>Email: {{entity.email}}</p>
-                <p>Cidade: {{entity.city}}</p>
-                <p>Telemóvel: {{entity.phone}}</p>
-                <div class="detalhes" style="display: flex; gap: 5%;">
-                    <button [routerLink]="['/entidades/show', entity._id]">Detalhes</button>
-                    <button *ngIf="type=='Donator'" [routerLink]="['/doar/',entity._id,entity.name]">Doar</button>
-                </div>
-            </div>
-            <div id="preview-container">
-              <div *ngIf="entity.imageUrl">
-                  <img id="preview-image" [src]="entity.imageUrl" alt="Pré-visualização da Imagem" />
-              </div>
+    <div class="card" *ngFor="let entity of filteredEntities">
+      <div class="content">
+        <div class="info">
+          <header>
+            <h3>Nome: {{entity.name}}</h3>
+          </header>
+          <p>Email: {{entity.email}}</p>
+          <p>Cidade: {{entity.city}}</p>
+          <p>Telemóvel: {{entity.phone}}</p>
+          <div class="detalhes" style="display: flex; gap: 5%;">
+            <button [routerLink]="['/entidades/show', entity._id]">Detalhes</button>
+            <button *ngIf="type=='Donator'" [routerLink]="['/doar/',entity._id,entity.name]">Doar</button>
           </div>
         </div>
+        <div id="preview-container">
+          <div *ngIf="entity.imageUrl">
+            <img id="preview-image" [src]="entity.imageUrl" alt="Pré-visualização da Imagem" />
+          </div>
+        </div>
+      </div>
     </div>
-</div> 
-
+  </div>
 </main>
-

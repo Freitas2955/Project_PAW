@@ -7,19 +7,24 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EntitiesService } from '../../../services/entities.service';
 import { BarComponent } from '../../../bar/bar.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-entidades',
   standalone: true,
-  imports: [NavbarComponent,CommonModule,RouterModule,BarComponent],
+  imports: [NavbarComponent,CommonModule,RouterModule,BarComponent,FormsModule],
   templateUrl: './entidades.component.html',
   styleUrl: './entidades.component.css',
 })
 export class EntidadesComponent implements OnInit {
+  searchName: string = '';
+  searchCity: string = '';
+  searchPhone: string = '';
   entities: Entity[]=[new Entity()];
   username: String | null;
   userId:String;
   type:String|null;
+  filteredEntities: any[] = [];
   constructor(
     public rest: EntitiesService,
     private route: ActivatedRoute,
@@ -52,13 +57,29 @@ export class EntidadesComponent implements OnInit {
           const objectURL = URL.createObjectURL(imageBlob);
           entity.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         });
+        this.filteredEntities=this.entities;
       })
     }, error => {
       console.error('Erro ao procurar entidade', error);
     });
+
   }
 
   seeListOfEntities() {
     this.router.navigate(['/entidades']);
   }
+
+  filterEntities(): void {
+    this.filteredEntities = this.entities.filter(entity => {
+      const matchesName = entity.name.toLowerCase().includes(this.searchName.toLowerCase());
+      const matchesAddress = entity.city.toLowerCase().includes(this.searchCity.toLowerCase());
+      const matchesDescription = entity.phone.toString().toLowerCase().includes(this.searchPhone.toLowerCase());
+      return matchesName && matchesAddress && matchesDescription;
+    });
+  }
+
+  onSearchChange(): void {
+    this.filterEntities();
+  }
+
 }

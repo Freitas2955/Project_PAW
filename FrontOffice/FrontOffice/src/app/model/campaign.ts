@@ -2,10 +2,11 @@ import { SafeUrl } from "@angular/platform-browser";
 
 export class Campaign{
     _id?:String;
-    name?: String;
+    name: String="";
     description?: String;
     cost?: Number;
     partnerId?: String;
-    partnerName?: String|null;
+    partnerName: String="";
     imageUrl?: SafeUrl;
+    purchases:Number=0;
 }

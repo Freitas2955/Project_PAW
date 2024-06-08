@@ -14,6 +14,8 @@ import { EntitiesService } from '../services/entities.service';
 import { Entity } from '../model/entity';
 import { PurchasesService } from '../services/purchases.service';
 import { Purchase } from '../model/purchase';
+import { CampaignsService } from '../services/campaigns.service';
+import { Campaign } from '../model/campaign';
 @Component({
   selector: 'app-dashboard-component',
   templateUrl: './dashboard.component.html',
@@ -26,6 +28,7 @@ export class DashboardComponent implements OnInit {
   donatorId: string | null = null;
   imageUrl: SafeUrl = '';
   donations: Donation[] = [];
+  campaigns: Campaign[] = [];
   totalPoints: number = 0;
   totalSpentPoints: number = 0;
   totalContributions: number = 0;
@@ -43,7 +46,8 @@ export class DashboardComponent implements OnInit {
     private sanitizer: DomSanitizer,
     public rest3: RestService,
     public rest4: EntitiesService,
-    public rest5: PurchasesService
+    public rest5: PurchasesService,
+    public rest6: CampaignsService
   ) {
     const localStorageData = localStorage.getItem('currentUser');
     if (localStorageData) {
@@ -78,10 +82,8 @@ export class DashboardComponent implements OnInit {
         this.donations = data.donations;
 
         if (this.donations && this.purchases) {
-          // Unir doações e compras em um único array
           const allData = [...this.donations, ...this.purchases];
 
-          // Ordenar o array combinado por data
           allData.sort(
             (a, b) =>
               new Date(a.updated_at).getTime() -
@@ -140,7 +142,6 @@ export class DashboardComponent implements OnInit {
           this.totalPoints = 0;
           this.totalContributions = this.donations.length;
 
-          // Inicializa as contagens de cada tipo de peça
           let camisolasCount = 0;
           let casacosCount = 0;
           let calcasCount = 0;
@@ -154,7 +155,7 @@ export class DashboardComponent implements OnInit {
             dates.push(date.toLocaleDateString());
             this.totalPoints += Number(donation.points);
             cumulativePoints.push(this.totalPoints);
-            // Incrementa as contagens de cada tipo de peça
+
             camisolasCount += donation.camisolas || 0;
             casacosCount += donation.casacos || 0;
             calcasCount += donation.calcas || 0;
@@ -185,7 +186,6 @@ export class DashboardComponent implements OnInit {
             ],
             type: 'bar',
           };
-          // Plota o gráfico de barras
           this.plot.plotBar(
             'Total de doações por tipo',
             'plot',
@@ -195,8 +195,61 @@ export class DashboardComponent implements OnInit {
         }
         this.entityId = this.route.snapshot.paramMap.get('id');
       });
+    } else if (this.type == 'Partner') {
+      this.rest6.getPartnerCampaigns(this.userId).subscribe(
+        (response: any) => {
+          console.log('Resposta recebida:', response);
+          this.campaigns = response.campaigns;
+          this.rest5.getPartnerPurchases(this.userId).subscribe(
+            (response: any) => {
+              this.purchases = response.purchases;
+
+              const campaignPurchaseCounts: { [key: string]: number } = {};
+
+              for (const purchase of this.purchases) {
+                let campaignName = 'Camapanhas Apagadas';
+                for (const campaign of this.campaigns) {
+                  if (campaign._id === purchase.campaignId) {
+                    campaignName = campaign.name.toString() as string;
+                    break;
+                  }
+                }
+                if (!campaignPurchaseCounts[campaignName.toString()]) {
+                  campaignPurchaseCounts[campaignName.toString()] = 0;
+                }
+                campaignPurchaseCounts[campaignName.toString()]++;
+              }
+        
+              const campaignNames = Object.keys(campaignPurchaseCounts);
+              const purchaseCounts = campaignNames.map(
+                (name) => campaignPurchaseCounts[name.toString()]
+              );
+        
+              const barData = {
+                x: campaignNames,
+                y: purchaseCounts,
+                type: 'bar',
+              };
+        
+              this.plot.plotBar(
+                'Número de compras por campanha',
+                'plot',
+                barData.x,
+                barData.y
+              );
+            },
+            (error) => {
+              console.error('Erro ao procurar campanha', error);
+            }
+          );
+        },
+        (error) => {
+          console.error('Erro ao procurar campanha', error);
+        }
+      );
     }
   }
+
 
   getDonator(): void {
     this.rest.getDonator(this.donatorId).subscribe(

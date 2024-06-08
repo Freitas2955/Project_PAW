@@ -6,23 +6,16 @@
     <div class="buttons">
       <button *ngIf="type=='Partner'" id="criar" [routerLink]="['/registarcampanha']" id="filtro">Criar
         Campanha</button>
-      <button *ngIf="type=='Donator'" id="filtro" [routerLink]="['/compras']">Histórico</button>
+      <div class="search-fields">
+        <input type="text" id="searchName" placeholder="Nome de Campanha" [(ngModel)]="searchName"
+          (input)="onSearchChange()" />
+        <input type="text" id="searchPartnerName" placeholder="Nome de Parceiro" [(ngModel)]="searchPartnerName" (input)="onSearchChange()" *ngIf="type=='Donator'" />
+      </div>
     </div>
-
-    <script>
-      function toggleDropdown() {
-        var dropdownContent = document.getElementById("dropdownContent");
-        if (dropdownContent.style.display === "none") {
-          dropdownContent.style.display = "block";
-        } else {
-          dropdownContent.style.display = "none";
-        }
-      }
-    </script>
   </header>
 
   <div class="campanhas">
-    <div class="card" *ngFor="let campaign of campaigns">
+    <div class="card" *ngFor="let campaign of filteredCampaigns">
       <div class="content">
         <div class="info">
           <header>
@@ -30,6 +23,7 @@
           </header>
           <p>Custo: {{campaign.cost}}</p>
           <p>Descrição: {{campaign.description}} </p>
+          <p  *ngIf="type=='Donator'">Parceiro: {{campaign.partnerName}} </p>
           <div class="detalhes" style="display: flex; gap: 5%;">
             <button *ngIf="type == 'Donator'" (click)="comprar(campaign._id,userId)">Comprar</button>
             <button *ngIf="type == 'Partner'" (click)="eliminar(campaign._id)" id="delete">Eliminar</button>

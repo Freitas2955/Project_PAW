@@ -3,8 +3,17 @@
 
 <main>
     <h1>Doacoes</h1>
+    <div class="search-fields">
+        <input type="text" id="searchDonatorName" placeholder="Nome de Doador" [(ngModel)]="searchDonatorName" (input)="onSearchChange()"  *ngIf="type=='Entity'"/>
+        <input type="text" id="searchentityName" placeholder="Nome de entidade" [(ngModel)]="searchentityName" (input)="onSearchChange()" *ngIf="type=='Donator'"/>
+        <select id="searchApproved" [(ngModel)]="searchApproved" (change)="onSearchChange()">
+            <option [ngValue]="''">Aprovação</option>
+            <option [ngValue]="'true'">Aprovadas</option>
+            <option [ngValue]="'false'">Não Aprovadas</option>
+        </select>
+      </div>
     <div class="doacoes">
-        <div class="card" *ngFor="let donation of donations">
+        <div class="card" *ngFor="let donation of filteredDonations">
             <div class="imagem"></div>
             <div class="content">
                 <header>

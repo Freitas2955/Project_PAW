@@ -112,7 +112,11 @@ export class DoarComponent {
 
   submitForm(): void {
     this.donation.entityId=this.entityId;
-    this.donation.entityName=this.instituicaoSelecionada;
+    if (this.instituicaoSelecionada) {
+      this.donation.entityName = this.instituicaoSelecionada;
+    } else {
+      this.donation.entityName = ''; 
+    }    
     console.log(this.donation);
     this.rest2.registerDonation(this.donation).subscribe(
       (response) => {

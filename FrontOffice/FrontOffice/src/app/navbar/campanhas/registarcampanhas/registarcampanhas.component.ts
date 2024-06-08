@@ -56,7 +56,11 @@ export class RegistarcampanhasComponent {
 
   submitForm(): void {
     this.campaign.partnerId=this.userId;
+    if(this.username){
     this.campaign.partnerName=this.username;
+    }else{
+      this.campaign.partnerName=""
+    }
     console.log(this.campaign);
       
       this.restService.registerCampaign(this.campaign, this.selectedFile).subscribe(
