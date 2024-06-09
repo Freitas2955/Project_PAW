@@ -96,8 +96,7 @@ export class DonatorsService {
 
     return this.http.post<any>(
       endpoint + 'RestDonators/update/' + donator._id,
-      formData,
-      this.getHttpOptions()
+      formData
     );
   }
 }

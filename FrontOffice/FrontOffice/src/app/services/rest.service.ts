@@ -54,7 +54,7 @@ export class RestService {
       responseType: 'blob' as 'json'
     };
   
-    return this.http.get<Blob>(endpoint + 'images/campaigns/' + id + '.jpg', options);
+    return this.http.get<Blob>(endpoint + 'FrontImages/campaigns/' + id + '.jpg', options);
   }
 
   getPartnerImage(id: String|undefined): Observable<Blob> {
@@ -63,7 +63,7 @@ export class RestService {
       responseType: 'blob' as 'json'
     };
 
-    return this.http.get<Blob>(endpoint + 'images/partners/' + id + '.jpg', options);
+    return this.http.get<Blob>(endpoint + 'FrontImages/partners/' + id + '.jpg', options);
   }
 
   getEntityImage(id: String|undefined): Observable<Blob> {
@@ -72,7 +72,7 @@ export class RestService {
       responseType: 'blob' as 'json'
     };
 
-    return this.http.get<Blob>(endpoint + 'images/entities/' + id + '.jpg', options);
+    return this.http.get<Blob>(endpoint + 'FrontImages/entities/' + id + '.jpg', options);
   }
 
   getDonatorImage(id: String|undefined): Observable<Blob> {
@@ -81,6 +81,6 @@ export class RestService {
       responseType: 'blob' as 'json'
     };
 
-    return this.http.get<Blob>(endpoint + 'images/donators/' + id + '.jpg', options);
+    return this.http.get<Blob>(endpoint + 'FrontImages/donators/' + id + '.jpg', options);
   }
 }

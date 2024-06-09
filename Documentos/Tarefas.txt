@@ -24,7 +24,7 @@ instituicoes podem ver pedidos de recolha---feito
 
 no registo de um amigo dar pontos ao angariador
 
-ao editar se nao puser imagem da merda
+ao editar se nao puser imagem da merda --------------feito
 
 erro ao registar e editar entidade
 
@@ -48,5 +48,10 @@ Duarte:
 -objectid
 -funcao no rest das campanhas
 
-
 ao criar campannha ta a dar erro mas a criar
+
+filtros nos parceiros
+
+guardar nome no localstorage quando editas user
+
+css campanhas

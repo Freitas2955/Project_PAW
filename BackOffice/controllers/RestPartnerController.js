@@ -7,6 +7,7 @@ var fs = require("fs");
 var partnerController = {};
 const bcrypt = require("bcryptjs");
 const Campaign = require("../models/Campaign");
+const mime = require("mime-types");
 const { exists } = require("../models/Donation");
 mongoose
   .connect(
@@ -72,7 +73,7 @@ partnerController.create = function (req, res) {
 partnerController.save = function (req, res) {
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   var city = req.body.city;
-  regCity = city.charAt(0).toUpperCase() + city.slice(1);
+  var regCity = city.charAt(0).toUpperCase() + city.slice(1);
   const data = {
     name: req.body.name,
     address: req.body.address,
@@ -85,94 +86,85 @@ partnerController.save = function (req, res) {
     approved: false,
   };
   const partnerSave = new Partner(data);
+
   Partner.findOne({ email: req.body.email })
     .then((partner) => {
       if (partner) {
-        res.json({
-          exists: true,
-        });
-        //res.render("../views/partners/verparceiro");
+        res.json({ exists: true });
       } else {
         Donator.findOne({ email: req.body.email }).then((donator) => {
           if (donator) {
-            res.json({
-              exists: true,
-            });
+            res.json({ exists: true });
           } else {
             Entity.findOne({ email: req.body.email }).then((entity) => {
               if (entity) {
-                res.json({
-                  exists: true,
-                });
+                res.json({ exists: true });
               } else {
                 partnerSave
                   .save()
                   .then((savedPartner) => {
-                    console.log("Successfully created an Partner.");
+                    console.log("Successfully created a Partner.");
 
-                    var fileDestination = path.join(
+                    const file = req.file;
+                    const defaultFileOrigin = path.join(__dirname, "..", "images", "employees", "default.jpg");
+                    const fileDestination = path.join(
                       __dirname,
                       "..",
                       "images",
                       "partners",
                       savedPartner._id.toString() + ".jpg"
                     );
-                    fs.readFile(req.file.path, function (err, data) {
-                      console.log(req.file.path);
-                      if (err) {
-                        console.error("Error reading file:", err);
-                        return res.status(500).send("Error reading file");
-                      }
 
-                      fs.writeFile(fileDestination, data, function (err) {
-                        if (err) {
-                          console.error("Error writing file:", err);
-                          return res.status(500).send("Error writing file");
-                        }
-                        fs.unlink(req.file.path, function (err) {
+                    if (file) {
+                      const mimeType = mime.lookup(file.originalname);
+                      if (mimeType && mimeType.startsWith('image/')) {
+                        fs.readFile(file.path, function (err, data) {
                           if (err) {
-                            console.error(
-                              "Erro ao remover o arquivo da pasta 'tmp':",
-                              err
-                            );
+                            console.error("Error reading file:", err);
+                            return res.status(500).send("Error reading file");
                           }
-                        });
-                        res.redirect("/RestPartners/");
-                      });
-                    });
-                  })
-                  .catch((err) => {
-                    Partner.findOne({ email: req.body.email }).then(
-                      (savedPartner) => {
-                        if (savedPartner) {
-                          var fileDestination = path.join(
-                            __dirname,
-                            "..",
-                            "images",
-                            "partners",
-                            savedPartner._id.toString() + ".jpg"
-                          );
 
-                          var fileOrigin = path.join(
-                            __dirname,
-                            "..",
-                            "images",
-                            "employees",
-                            "default" + ".jpg"
-                          );
-                          fs.readFile(fileOrigin, function (err, data) {
+                          fs.writeFile(fileDestination, data, function (err) {
                             if (err) {
+                              console.error("Error writing file:", err);
+                              return res.status(500).send("Error writing file");
                             }
-                            fs.writeFile(fileDestination, data, function (err) {
+                            fs.unlink(file.path, function (err) {
                               if (err) {
+                                console.error("Error removing file from 'tmp' folder:", err);
                               }
                             });
+                            res.redirect("/RestPartners/");
                           });
-                        }
+                        });
+                      } else {
+                        console.warn("Uploaded file is not an image, using default image.");
+                        useDefaultImage();
                       }
-                    );
+                    } else {
+                      console.warn("No file uploaded, using default image.");
+                      useDefaultImage();
+                    }
 
-                    //res.redirect("/RestPartners/");
+                    function useDefaultImage() {
+                      fs.readFile(defaultFileOrigin, function (err, data) {
+                        if (err) {
+                          console.error("Error reading default image:", err);
+                          return res.status(500).send("Error reading default image");
+                        }
+                        fs.writeFile(fileDestination, data, function (err) {
+                          if (err) {
+                            console.error("Error writing default image:", err);
+                            return res.status(500).send("Error writing default image");
+                          }
+                          res.redirect("/RestPartners/");
+                        });
+                      });
+                    }
+                  })
+                  .catch((err) => {
+                    console.error("Error saving partner:", err);
+                    res.status(500).send("Error saving partner");
                   });
               }
             });
@@ -182,21 +174,7 @@ partnerController.save = function (req, res) {
     })
     .catch((err) => {
       console.error("Error:", err);
-    });
-};
-
-partnerController.edit = function (req, res) {
-  Partner.findOne({ _id: req.params.id })
-    .then((partner) => {
-      res.json({
-        partner: partner,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
-      res.render("../views/partners/editarparceiro");
-    })
-    .catch((err) => {
-      console.log("Error:", err);
+      res.status(500).send("Error finding partner");
     });
 };
 
@@ -216,39 +194,59 @@ partnerController.update = function (req, res) {
     },
     { new: true }
   )
-    .then((savedPartner) => {
-      console.log("Successfully edited an Partner.");
+    .then((updatedPartner) => {
+      console.log("Successfully updated the Partner.");
 
-      var fileDestination = path.join(
-        __dirname,
-        "..",
-        "images",
-        "partners",
-        savedPartner._id.toString() + ".jpg"
-      );
-      fs.readFile(req.file.path, function (err, data) {
-        if (err) {
-          console.error("Error reading file:", err);
-          return res.status(500).send("Error reading file");
-        }
+      const file = req.file;
 
-        fs.writeFile(fileDestination, data, function (err) {
-          if (err) {
-            console.error("Error writing file:", err);
-            return res.status(500).send("Error writing file");
-          }
-          fs.unlink(req.file.path, function (err) {
+      if (file) {
+        const mimeType = mime.lookup(file.originalname);
+        if (mimeType && mimeType.startsWith('image/')) {
+          const fileDestination = path.join(
+            __dirname,
+            "..",
+            "images",
+            "partners",
+            updatedPartner._id.toString() + ".jpg"
+          );
+
+          fs.readFile(file.path, function (err, data) {
             if (err) {
-              console.error("Erro ao remover o arquivo da pasta 'tmp':", err);
+              console.error("Error reading file:", err);
+              return res.status(500).send("Error reading file");
+            }
+
+            fs.writeFile(fileDestination, data, function (err) {
+              if (err) {
+                console.error("Error writing file:", err);
+                return res.status(500).send("Error writing file");
+              }
+
+              fs.unlink(file.path, function (err) {
+                if (err) {
+                  console.error("Error removing file from 'tmp' folder:", err);
+                }
+              });
+
+              res.redirect("/RestPartners/");
+            });
+          });
+        } else {
+          console.warn("Uploaded file is not an image, skipping file save.");
+          fs.unlink(file.path, function (err) {
+            if (err) {
+              console.error("Error removing file from 'tmp' folder:", err);
             }
           });
-          res.redirect("/RestPartners/");
-        });
-      });
+          res.status(200).json(updatedPartner);
+        }
+      } else {
+        res.status(200).json(updatedPartner);
+      }
     })
     .catch((err) => {
-      console.log(err);
-      res.redirect("/RestPartners/");
+      console.error("Error updating Partner:", err);
+      res.status(500).send("Error updating Partner");
     });
 };
 

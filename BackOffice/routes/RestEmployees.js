@@ -18,7 +18,7 @@ router.get('/create',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Save employee
-router.post('/save',loginController.verifyLoginUser, function(req, res) {
+router.post('/save', function(req, res) {
   employee.save(req, res);
 });
 
@@ -28,7 +28,7 @@ router.get('/edit/:id',loginController.verifyLoginUser, function(req, res) {
 });
 
 // Edit update
-router.post('/update/:id',loginController.verifyLoginUser, function(req, res) {
+router.post('/update/:id', function(req, res) {
   employee.update(req, res);
 });
 

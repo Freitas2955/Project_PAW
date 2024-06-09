@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 var path = require("path");
 var fs = require("fs");
 var campaignController = {};
+const mime = require("mime-types");
 
 mongoose
   .connect(
@@ -242,67 +243,67 @@ campaignController.save = function (req, res) {
         savedCampaign._id.toString() + ".jpg"
       );
 
-      if (req.file && req.file.path) {
-        fs.readFile(req.file.path, function (err, data) {
-          if (err) {
-            console.error("Error reading file:", err);
-            return res.status(500).send("Error reading file");
-          }
+      const defaultFileOrigin = path.join(
+        __dirname,
+        "..",
+        "images",
+        "campaigns",
+        "default.jpg"
+      );
 
-          fs.writeFile(fileDestination, data, function (err) {
+      if (req.file && req.file.path) {
+        const mimeType = mime.lookup(req.file.originalname);
+        if (mimeType && mimeType.startsWith('image/')) {
+          fs.readFile(req.file.path, function (err, data) {
             if (err) {
-              console.error("Error writing file:", err);
-              return res.status(500).send("Error writing file");
+              console.error("Error reading file:", err);
+              return res.status(500).send("Error reading file");
             }
 
-            fs.unlink(req.file.path, function (err) {
+            fs.writeFile(fileDestination, data, function (err) {
               if (err) {
-                console.error("Error removing the file from 'tmp' folder:", err);
+                console.error("Error writing file:", err);
+                return res.status(500).send("Error writing file");
               }
-            });
 
+              fs.unlink(req.file.path, function (err) {
+                if (err) {
+                  console.error("Error removing the file from 'tmp' folder:", err);
+                }
+              });
+
+              res.redirect("/campaigns/");
+            });
+          });
+        } else {
+          console.warn("Uploaded file is not an image, using default image.");
+          useDefaultImage();
+        }
+      } else {
+        console.warn("No file uploaded, using default image.");
+        useDefaultImage();
+      }
+
+      function useDefaultImage() {
+        fs.readFile(defaultFileOrigin, function (err, data) {
+          if (err) {
+            console.error("Error reading default image:", err);
+            return res.status(500).send("Error reading default image");
+          }
+          fs.writeFile(fileDestination, data, function (err) {
+            if (err) {
+              console.error("Error writing default image:", err);
+              return res.status(500).send("Error writing default image");
+            }
             res.redirect("/campaigns/");
           });
         });
-      } else {
-        console.error("No file uploaded or file path is missing.");
-        res.status(400).send("No file uploaded or file path is missing.");
       }
     })
     .catch((err) => {
       console.error("Error saving campaign:", err);
 
-      if (campaign._id) {
-        const fileDestination = path.join(
-          __dirname,
-          "..",
-          "images",
-          "campaigns",
-          campaign._id.toString() + ".jpg"
-        );
-
-        const fileOrigin = path.join(
-          __dirname,
-          "..",
-          "images",
-          "campaigns",
-          "default.jpg"
-        );
-
-        fs.readFile(fileOrigin, function (err, data) {
-          if (err) {
-            console.error("Error reading default file:", err);
-          } else {
-            fs.writeFile(fileDestination, data, function (err) {
-              if (err) {
-                console.error("Error writing default file:", err);
-              }
-            });
-          }
-        });
-      }
-
-      res.redirect("/campaigns/");
+      res.status(500).send("Error saving campaign");
     });
 };
 

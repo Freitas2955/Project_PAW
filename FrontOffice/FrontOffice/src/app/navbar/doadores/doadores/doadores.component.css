@@ -33,7 +33,7 @@ main {
     justify-self: center;
     width: 80%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1%;
   }
   
@@ -120,3 +120,26 @@ main {
     object-fit: cover; 
   }
   
+  main > header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  
+  .search-fields {
+    align-self: center;
+    margin-bottom: 1%;
+    display: flex;
+    width: 98%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .search-fields > input {
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: #f5f5f5;
+    font-size: 1em;
+    padding: 0.5%;
+  }
