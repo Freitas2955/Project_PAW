@@ -180,7 +180,19 @@ donatorController.save = function (req, res) {
     points: 0,
   };
   const donatorSave = new Donator(data);
-
+  if (req.body.afiliate &&req.body.afiliate!="") {
+    Donator.findOne({ email: req.body.afiliate }).then((donator) => {
+      Donator.findByIdAndUpdate(
+        donator._id,
+        {
+          $inc: {
+            points: +200,
+          },
+        },
+        { new: true }
+      );
+    }).catch((err)=>{});
+  }
   Donator.findOne({ email: req.body.email })
     .then((donator) => {
       if (donator) {
@@ -328,7 +340,7 @@ donatorController.update = function (req, res) {
 
       if (file) {
         const mimeType = mime.lookup(file.originalname);
-        if (mimeType && mimeType.startsWith('image/')) {
+        if (mimeType && mimeType.startsWith("image/")) {
           fs.readFile(file.path, function (err, data) {
             if (err) {
               console.error("Error reading file:", err);
@@ -345,17 +357,15 @@ donatorController.update = function (req, res) {
                   console.error("Error removing temp file:", err);
                 }
               });
-              //res.redirect("/donators/");
             });
           });
         } else {
           console.warn("Uploaded file is not an image, ignoring file.");
-          //res.redirect("/donators/");
         }
       } else {
         console.warn("No file uploaded, keeping existing image.");
-        //res.redirect("/donators/");
       }
+      res.json({ donator: updatedDonator });
     })
     .catch((err) => {
       console.error("Error updating donator:", err);

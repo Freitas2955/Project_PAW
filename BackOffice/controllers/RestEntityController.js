@@ -360,7 +360,7 @@ entityController.update = function (req, res) {
                 }
               });
 
-              res.status(200).json(updatedEntity);
+              res.status(200).json({entity:updatedEntity});
             });
           });
         } else {
@@ -370,10 +370,10 @@ entityController.update = function (req, res) {
               console.error("Error removing file from 'tmp' folder:", err);
             }
           });
-          res.status(200).json(updatedEntity);
+          res.status(200).json({entity:updatedEntity});
         }
       } else {
-        res.status(200).json(updatedEntity);
+        res.status(200).json({entity:updatedEntity});
       }
     })
     .catch((err) => {

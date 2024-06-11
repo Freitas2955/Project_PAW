@@ -68,6 +68,14 @@ export class EditarparceiroComponent {
       this.rest.updatePartner(this.partner, this.selectedFile).subscribe(
         (response) => {
           console.log('Parceiro registado com sucesso:', response);
+          if (response.partner) {
+            let currentUser = JSON.parse(localStorage.getItem('currentUser') as string);
+            if (currentUser) {
+              currentUser.username = response.partner.name;
+  
+              localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            } 
+          }
         },
         (error) => {
           console.error('Erro ao registar Parceiro:', error);

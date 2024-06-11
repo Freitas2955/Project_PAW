@@ -238,10 +238,10 @@ partnerController.update = function (req, res) {
               console.error("Error removing file from 'tmp' folder:", err);
             }
           });
-          res.status(200).json(updatedPartner);
+          res.status(200).json({partner:updatedPartner});
         }
       } else {
-        res.status(200).json(updatedPartner);
+        res.status(200).json({partner:updatedPartner});
       }
     })
     .catch((err) => {

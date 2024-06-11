@@ -67,6 +67,14 @@ export class EditarentidadesComponent {
       this.rest.updateEntity(this.entity, this.selectedFile).subscribe(
         (response) => {
           console.log('Instituição registada com sucesso:', response);
+          if (response.entity) {
+            let currentUser = JSON.parse(localStorage.getItem('currentUser') as string);
+            if (currentUser) {
+              currentUser.username = response.entity.name;
+  
+              localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            } 
+          }
         },
         (error) => {
           console.error('Erro ao registar instituição:', error);

@@ -82,9 +82,8 @@ export class PartnersService {
 
     return this.http.post<any>(
       endpoint + 'RestPartners/update/' + partner._id,
-      formData,this.getHttpOptions()
+      formData
     );
   }
 
-  
 }

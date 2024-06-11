@@ -207,7 +207,7 @@ export class DashboardComponent implements OnInit {
               const campaignPurchaseCounts: { [key: string]: number } = {};
 
               for (const purchase of this.purchases) {
-                let campaignName = 'Camapanhas Apagadas';
+                let campaignName = 'Campanhas Apagadas';
                 for (const campaign of this.campaigns) {
                   if (campaign._id === purchase.campaignId) {
                     campaignName = campaign.name.toString() as string;

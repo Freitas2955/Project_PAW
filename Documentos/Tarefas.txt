@@ -50,8 +50,8 @@ Duarte:
 
 ao criar campannha ta a dar erro mas a criar
 
-filtros nos parceiros
-
-guardar nome no localstorage quando editas user
-
 css campanhas
+
+mostrar pontos na loja
+
+registar pontos ganhos por afiliado
