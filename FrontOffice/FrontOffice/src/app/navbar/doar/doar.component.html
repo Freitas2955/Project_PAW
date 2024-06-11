@@ -1,10 +1,13 @@
 <app-navbar></app-navbar>
 <app-bar></app-bar>
 <main>
+  <div class="form">
   <h1>Doação</h1>
   <form (ngSubmit)="submitForm()" #myForm="ngForm">
+
     <h2>Roupa</h2>
-    <div class="inputRow">
+    <div class="roupa">
+
       <div class="inputBox">
         <label for="Camisolas">Camisolas:</label>
         <input type="number" name="Camisolas" placeholder="Número de peças" [(ngModel)]="donation.camisolas" id="">
@@ -13,8 +16,8 @@
         <label for="Pares de Sapatos">Par de Sapatos:</label>
         <input type="number" name="Pares de Sapatos" placeholder="Número de pares" [(ngModel)]="donation.sapatos" id="">
       </div>
-    </div>
-    <div class="inputRow">
+
+
       <div class="inputBox">
         <label for="Casacos">Casacos:</label>
         <input type="number" name="Casacos" placeholder="Número de peças" [(ngModel)]="donation.casacos" id="">
@@ -24,8 +27,7 @@
         <input type="number" name="Acessorios" placeholder="Número de acessórios" [(ngModel)]="donation.acessorios"
           id="">
       </div>
-    </div>
-    <div class="inputRow">
+
       <div class="inputBox">
         <label for="Calcas">Calças:</label>
         <input type="number" name="Calcas" placeholder="Número de peças" [(ngModel)]="donation.calcas" id="">
@@ -33,19 +35,22 @@
       <div class="inputBox">
         <label for="Roupa Interior">Roupa Interior:</label>
         <input type="number" name="Roupa Interior" placeholder="Número de peças" [(ngModel)]="donation.interior" id="">
+
       </div>
     </div>
     <h2>Dinheiro</h2>
-    <div class="inputRow">
-      <div class="inputBox dinheiro">
+    <div class="dinheiro">
+      <div class="inputBox">
         <label for="Dinheiro">Valor:</label>
         <input type="number" name="Dinheiro" placeholder="Valor" [(ngModel)]="donation.dinheiro" id="">
       </div>
       <div class="inputBox" id="Entidade">
         <label for="Entidade">Instituição:</label>
-        <input type="text" name="Entidade" id="" placeholder="Instituição" [value]="instituicaoSelecionada"
-          [(ngModel)]="donation.entityName" readonly>
-        <button type="button" id="selecionarEntidade" (click)="abrirPopup()">Selecionar Instituição</button>
+        <div class="input-group">
+          <input type="text" name="Entidade" id="" placeholder="Instituição" [value]="instituicaoSelecionada"
+            [(ngModel)]="donation.entityName" readonly>
+          <button type="button" id="selecionarEntidade" (click)="abrirPopup()">Selecionar Instituição</button>
+        </div>
       </div>
     </div>
     <div class="buttons">
@@ -53,7 +58,7 @@
       <button type="submit" id="doar">Doar</button>
     </div>
   </form>
-
+</div>
 
 
 
@@ -86,13 +91,14 @@
                   <img id="preview-image" [src]="entity.imageUrl" alt="Pré-visualização da Imagem" />
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
 
   <div class="popup" *ngIf="simularVisible">
     <div class="popup-content">

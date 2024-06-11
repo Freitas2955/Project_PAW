@@ -180,18 +180,26 @@ donatorController.save = function (req, res) {
     points: 0,
   };
   const donatorSave = new Donator(data);
-  if (req.body.afiliate &&req.body.afiliate!="") {
-    Donator.findOne({ email: req.body.afiliate }).then((donator) => {
-      Donator.findByIdAndUpdate(
-        donator._id,
-        {
-          $inc: {
-            points: +200,
-          },
-        },
-        { new: true }
-      );
-    }).catch((err)=>{});
+  if (req.body.afiliate && req.body.afiliate != "") {
+    Donator.findOne({ email: req.body.afiliate })
+      .then((donator) => {
+        if (donator) {
+          Donator.findByIdAndUpdate(
+            donator._id,
+            {
+              $inc: {
+                points: 200,
+              },
+            },
+            { new: true }
+          ).then((donator2)=>{
+            console.log(donator2)
+          });
+          const donation=new Donation({points:200,donatorId:donator._id,entityId:"null",entityName:"null",donatorName:donator.name,approved:true})
+          donation.save()
+        }
+      })
+      .catch((err) => {});
   }
   Donator.findOne({ email: req.body.email })
     .then((donator) => {

@@ -51,7 +51,3 @@ Duarte:
 ao criar campannha ta a dar erro mas a criar
 
 css campanhas
-
-mostrar pontos na loja
-
-registar pontos ganhos por afiliado

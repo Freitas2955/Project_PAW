@@ -155,3 +155,44 @@ main > header {
   font-size: 1em;
   padding: 0.5%;
 }
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: #fff;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80%;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.popup-content header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#fechar {
+  padding: 2%;
+  border-radius: 10px;
+  background-color: rgb(241, 42, 42);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#fechar:hover {
+  background-color: rgb(208, 33, 33);
+}

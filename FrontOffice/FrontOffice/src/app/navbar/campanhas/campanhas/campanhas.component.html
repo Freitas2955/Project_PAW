@@ -1,3 +1,12 @@
+<div *ngIf="showModal" class="popup">
+  <div class="popup-content">
+    <header style="display: flex; align-items: center;">
+      <p><strong>Sem pontos suficientes</strong></p>
+      <button (click)="closeModal()" id="fechar">Fechar</button>
+    </header>
+  </div>
+</div>
+
 <app-navbar></app-navbar>
 <app-bar></app-bar>
 <main>
@@ -6,10 +15,13 @@
     <div class="buttons">
       <button *ngIf="type=='Partner'" id="criar" [routerLink]="['/registarcampanha']" id="filtro">Criar
         Campanha</button>
+      <h2 *ngIf="type=='Donator'" >
+        Pontos:{{points}}</h2>
       <div class="search-fields">
         <input type="text" id="searchName" placeholder="Nome de Campanha" [(ngModel)]="searchName"
           (input)="onSearchChange()" />
-        <input type="text" id="searchPartnerName" placeholder="Nome de Parceiro" [(ngModel)]="searchPartnerName" (input)="onSearchChange()" *ngIf="type=='Donator'" />
+        <input type="text" id="searchPartnerName" placeholder="Nome de Parceiro" [(ngModel)]="searchPartnerName"
+          (input)="onSearchChange()" *ngIf="type=='Donator'" />
       </div>
     </div>
   </header>
@@ -23,9 +35,9 @@
           </header>
           <p>Custo: {{campaign.cost}}</p>
           <p>Descrição: {{campaign.description}} </p>
-          <p  *ngIf="type=='Donator'">Parceiro: {{campaign.partnerName}} </p>
+          <p *ngIf="type=='Donator'">Parceiro: {{campaign.partnerName}} </p>
           <div class="detalhes" style="display: flex; gap: 5%;">
-            <button *ngIf="type == 'Donator'" (click)="comprar(campaign._id,userId)">Comprar</button>
+            <button *ngIf="type == 'Donator'" (click)="comprar(campaign,userId)">Comprar</button>
             <button *ngIf="type == 'Partner'" (click)="eliminar(campaign._id)" id="delete">Eliminar</button>
             <button [routerLink]="['/campanhas/show', campaign._id]">Detalhes</button>
           </div>

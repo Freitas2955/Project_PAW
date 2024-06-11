@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
   type: String | null;
   entity: Entity = new Entity();
   purchases: Purchase[] = [new Purchase()];
+  numDonations: number = 0;
   constructor(
     private plot: PlotlyService,
     public rest: DonatorsService,
@@ -80,7 +81,12 @@ export class DashboardComponent implements OnInit {
       const idTemp = this.route.snapshot.params['id'];
       this.rest2.getDonatorDonations(idTemp).subscribe((data: any) => {
         this.donations = data.donations;
-
+        this.donations.forEach((donation) => {
+          if (donation.entityName != 'null') {
+            this.numDonations = this.numDonations + 1;
+            console.log(this.numDonations)
+          }
+        });
         if (this.donations && this.purchases) {
           const allData = [...this.donations, ...this.purchases];
 
@@ -128,7 +134,6 @@ export class DashboardComponent implements OnInit {
       const idTemp = this.route.snapshot.params['id'];
       this.rest2.getEntityDonations(idTemp).subscribe((data: any) => {
         this.donations = data.donations;
-
         if (this.donations) {
           this.donations.sort(
             (a, b) =>
@@ -219,18 +224,18 @@ export class DashboardComponent implements OnInit {
                 }
                 campaignPurchaseCounts[campaignName.toString()]++;
               }
-        
+
               const campaignNames = Object.keys(campaignPurchaseCounts);
               const purchaseCounts = campaignNames.map(
                 (name) => campaignPurchaseCounts[name.toString()]
               );
-        
+
               const barData = {
                 x: campaignNames,
                 y: purchaseCounts,
                 type: 'bar',
               };
-        
+
               this.plot.plotBar(
                 'Número de compras por campanha',
                 'plot',
@@ -249,7 +254,6 @@ export class DashboardComponent implements OnInit {
       );
     }
   }
-
 
   getDonator(): void {
     this.rest.getDonator(this.donatorId).subscribe(

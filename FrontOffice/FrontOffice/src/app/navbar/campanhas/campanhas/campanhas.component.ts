@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CampaignsService } from '../../../services/campaigns.service';
 import { BarComponent } from '../../../bar/bar.component';
 import { FormsModule } from '@angular/forms';
+import { DonatorsService } from '../../../services/donators.service';
 
 @Component({
   selector: 'app-campanhas',
@@ -31,13 +32,16 @@ export class CampanhasComponent {
   userId: String;
   type: String | null;
   partnerId?: String | null;
+  points: number = 0;
+  showModal: boolean = false;
 
   constructor(
     public rest: CampaignsService,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    public rest2: RestService
+    public rest2: RestService,
+    public rest3: DonatorsService
   ) {
     const localStorageData = localStorage.getItem('currentUser');
     if (localStorageData) {
@@ -57,6 +61,7 @@ export class CampanhasComponent {
     if (this.type == 'Partner') {
       this.getPartnerCampaigns();
     } else {
+      this.getDonatorPoints();
       this.getCampaigns();
     }
   }
@@ -107,15 +112,20 @@ export class CampanhasComponent {
     );
   }
 
-  comprar(campaignId: String | undefined, donatorId: String): void {
-    this.rest.buyCampaign(campaignId, donatorId).subscribe(
-      (response: any) => {
-        console.log('Resposta recebida:', response);
-      },
-      (error) => {
-        console.error('Erro ao procurar campanha', error);
-      }
-    );
+  comprar(campaign: Campaign, donatorId: String): void {
+    if (this.points < (campaign.cost as number)) {
+      this.showModal = true;
+    } else {
+      this.rest.buyCampaign(campaign._id, donatorId).subscribe(
+        (response: any) => {
+          console.log('Resposta recebida:', response);
+        },
+        (error) => {
+          console.error('Erro ao procurar campanha', error);
+        }
+      );
+      window.location.reload()
+    }
   }
 
   eliminar(campaignId: String | undefined): void {
@@ -148,5 +158,21 @@ export class CampanhasComponent {
 
   onSearchChange(): void {
     this.filterCampaigns();
+  }
+
+  getDonatorPoints(): void {
+    this.rest3.getDonator(this.userId).subscribe(
+      (response: any) => {
+        console.log('Resposta recebida:', response);
+        this.points = response.donator.points;
+      },
+      (error: any) => {
+        console.error('Erro ao procurar doador', error);
+      }
+    );
+  }
+
+  closeModal(){
+    this.showModal=false;
   }
 }

@@ -81,7 +81,7 @@ export class DoacoesComponent {
             options
           );
         }
-        this.filteredDonations=this.donations;
+       this.filteredDonations=this.donations
       },
       (error) => {
         console.error('Erro ao procurar doacoes', error);
@@ -121,7 +121,7 @@ export class DoacoesComponent {
             options
           );
         }
-        this.filteredDonations=this.donations;
+        this.filteredDonations = this.donations.filter((donation) =>{return (donation.entityName.toLowerCase() !== "null")});
       },
       (error) => {
         console.error('Erro ao procurar doacoes', error);
@@ -136,7 +136,7 @@ export class DoacoesComponent {
         .includes(this.searchDonatorName.toLowerCase());
       const matchesEntityName = donation.entityName
         .toLowerCase()
-        .includes(this.searchentityName.toLowerCase());
+        .includes(this.searchentityName.toLowerCase()) && donation.entityName.toLowerCase() !== "null";
       const matchesApproved = donation.approved
         .toString()
         .toLowerCase()
@@ -144,6 +144,7 @@ export class DoacoesComponent {
       return matchesDonatorName && matchesEntityName && matchesApproved;
     });
   }
+  
 
   onSearchChange(): void {
     this.filterDonations();

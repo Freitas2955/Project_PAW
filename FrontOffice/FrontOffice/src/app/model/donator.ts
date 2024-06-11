@@ -11,4 +11,5 @@ export class Donator {
   password?: String;
   points?: Number;
   imageUrl?: SafeUrl;
+  afiliate?:String;
 }
