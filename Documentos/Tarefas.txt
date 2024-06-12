@@ -12,22 +12,10 @@ if (error) {
 -os rests desenvolvidos devem estar documentados utilizando a plataforma swagger
 
 erro ao registar e editar entidade corsa
-
 ao registar campanhas regista mas da erro
-
 problema ao registar cenas com imagem se tiver httpHeaders para login corsa
 
-Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
--css dashboard
--dashboard parceiros historioco de vales trocados, botao para ver vales ativos, numero de pontos gastos 
-
-Duarte:
--nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
--Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /enviado/ estraviado)) 
 -objectid
--funcao no rest das campanhas
 
-ao criar campannha ta a dar erro mas a criar
-
-css campanhas
+css

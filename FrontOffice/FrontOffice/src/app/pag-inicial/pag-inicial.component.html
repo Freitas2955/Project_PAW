@@ -11,26 +11,26 @@
           <a class="nav-link" href="#" (click)="loadLogin()" onclick="return false;">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false" (click)="opcoes()" onclick="return false;">
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" (click)="opcoes()" onclick="return false;">
             Registe-se
           </a>
         </li>
         <li class="nav-item" class="fade" [ngClass]="{ 'show': show ,'disabled': !show}">
-          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false" (click)="registerDonator()" onclick="return false;">
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" (click)="registerDonator()" onclick="return false;">
             Doador
           </a>
         </li>
         <li class="nav-item" class="fade" [ngClass]="{'show': show,'disabled': !show}">
-          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false" (click)="registerEntity()" onclick="return false;">
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" (click)="registerEntity()" onclick="return false;">
             Instituição
           </a>
         </li>
         <li class="nav-item" class="fade" [ngClass]="{'show': show,'disabled': !show}">
-          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false" (click)="registerPartner()" onclick="return false;">
+          <a class="nav-link" href="abrirDropdown" id="registerDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" (click)="registerPartner()" onclick="return false;">
             Parceiro
           </a>
         </li>
@@ -53,6 +53,50 @@
       <div class="image"></div>
     </div>
   </div>
+</main>
 
+<main>
+  <div class="entidades">
+    <h1>Instituições</h1>
+    <div class="card" *ngFor="let entity of filteredEntities">
+      <div class="content">
+        <div class="info">
+          <header>
+            <h3>Nome: {{entity.name}}</h3>
+          </header>
+          <p>Email: {{entity.email}}</p>
+          <p>Cidade: {{entity.city}}</p>
+          <p>Telemóvel: {{entity.phone}}</p>
+        </div>
+        <div id="preview-container">
+          <div *ngIf="entity.imageUrl">
+            <img id="preview-image" [src]="entity.imageUrl" alt="Pré-visualização da Imagem" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
+<main>
+  <div class="parceiros">
+    <h1>Parceiros</h1>
+    <div class="card" *ngFor="let partner of filteredPartners">
+      <div class="content">
+        <div class="info">
+          <header>
+            <h3>Nome: {{partner.name}}</h3>
+          </header>
+          <p>Email: {{partner.email}}</p>
+          <p>Cidade: {{partner.city}}</p>
+          <p>Telemóvel: {{partner.phone}}</p>
+        </div>
+        <div id="preview-container">
+          <div *ngIf="partner.imageUrl">
+            <img id="preview-image" [src]="partner.imageUrl" alt="Pré-visualização da Imagem" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
