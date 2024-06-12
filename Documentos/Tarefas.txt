@@ -7,8 +7,6 @@ if (error) {
   return res.status(400).json({ error: error.details[0].message });
 }
 
--os rests desenvolvidos devem estar documentados utilizando a plataforma swagger
-
 erro ao registar e editar entidade corsa
 ao registar campanhas regista mas da erro
 problema ao registar cenas com imagem se tiver httpHeaders para login corsa
@@ -21,3 +19,5 @@ css
 dashboard instituicoes
 
 meter res status em todos a partir do restdonators
+
+ao ver campanhas de um parceiro ta a mostrar todas

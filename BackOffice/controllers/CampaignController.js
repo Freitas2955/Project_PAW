@@ -222,8 +222,35 @@ campaignController.save = function (req, res) {
           });
         });
       } else {
-        console.error("No file uploaded or file path is missing.");
-        res.status(400).send("No file uploaded or file path is missing.");
+        if (campaign._id) {
+          const fileDestination = path.join(
+            __dirname,
+            "..",
+            "images",
+            "campaigns",
+            campaign._id.toString() + ".jpg"
+          );
+  
+          const fileOrigin = path.join(
+            __dirname,
+            "..",
+            "images",
+            "campaigns",
+            "default.jpg"
+          );
+  
+          fs.readFile(fileOrigin, function (err, data) {
+            if (err) {
+              console.error("Error reading default file:", err);
+            } else {
+              fs.writeFile(fileDestination, data, function (err) {
+                if (err) {
+                  console.error("Error writing default file:", err);
+                }
+              });
+            }
+          });
+        }
       }
     })
     .catch((err) => {
@@ -258,9 +285,8 @@ campaignController.save = function (req, res) {
           }
         });
       }
-
-      res.redirect("/campaigns/");
     });
+    res.redirect("/campaigns/");
 };
 
 /*

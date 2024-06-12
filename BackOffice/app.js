@@ -40,7 +40,6 @@ mongoose
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var employeesRouter = require("./routes/employees");
-var restemployeesRouter = require("./routes/RestEmployees");
 var entitiesRouter = require("./routes/entities");
 var restentitiesRouter = require("./routes/RestEntities");
 var donatorsRouter = require("./routes/donators");
@@ -100,6 +99,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+var swaggerUi = require("swagger-ui-express");
+var swaggerDocument= require('./swagger.json');
+app.use("/docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
+
 const loginController = require("./controllers/LoginController.js");
 const restLoginController = require("./controllers/RestLoginController.js");
 app.use('/EntityImages', express.static(path.join(__dirname, 'images/entities')));
@@ -111,7 +114,6 @@ app.use('/images',loginController.verifyLoginUser, express.static(path.join(__di
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/employees", employeesRouter);
-app.use("/RestEmployees", restemployeesRouter);
 app.use("/entities", entitiesRouter);
 app.use("/RestEntities", restentitiesRouter);
 app.use("/donators", donatorsRouter);
