@@ -44,7 +44,7 @@ export const routes: Routes = [
   { path: 'editarparceiro/:id', component: EditarparceiroComponent,canActivate: [AuthGuardGuard]},
   { path: 'registarparceiro', component: RegistarparceiroComponent},
 
-  { path: 'doadores', component: DoadoresComponent ,canActivate: [AuthGuardGuard]}, //Nao sei quais devo usar??
+  { path: 'doadores', component: DoadoresComponent ,canActivate: [AuthGuardGuard]}, 
   { path: 'doadores/show/:id', component: DoadorComponent,canActivate: [AuthGuardGuard]},
   { path: 'editardoador/:id', component: EditardoadorComponent ,canActivate: [AuthGuardGuard]},
   { path: 'registardoador', component: RegistardoadorComponent},
@@ -53,7 +53,7 @@ export const routes: Routes = [
   {path: 'registarcampanha', component: RegistarcampanhasComponent, canActivate: [AuthGuardGuard]},
   {path: 'campanhas', component: CampanhasComponent, canActivate: [AuthGuardGuard]},
   {path: 'campanhas/:idParceiro', component: CampanhasComponent, canActivate: [AuthGuardGuard]},
-  {path: 'campanhas/show/:id', component: CampanhaComponent ,canActivate: [AuthGuardGuard]},  //nao sei se é campanhas ou campanha /show/id
+  {path: 'campanhas/show/:id', component: CampanhaComponent ,canActivate: [AuthGuardGuard]}, 
 
 
   {path: 'compras', component: ComprasComponent ,canActivate: [AuthGuardGuard]},
