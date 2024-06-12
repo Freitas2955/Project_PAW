@@ -48,7 +48,7 @@ campaignController.getCampaigns = function (req, res) {
     try {
       Campaign.find()
         .then((campaign) => {
-          res.json({
+          res.status(200).json({
             campaigns: campaign,
           });
         })
@@ -57,7 +57,11 @@ campaignController.getCampaigns = function (req, res) {
         });
     } catch (error) {
       console.error("Ocorreu um erro ao contar os documentos:", error);
+      res.status(500).json({
+        error: "Erro interno do servidor",
+      });
     }
+   
   })();
 };
 
@@ -66,7 +70,7 @@ campaignController.getPartnerCampaigns = function (req, res) {
     try {
       Campaign.find({partnerId:req.params.partnerId})
         .then((campaign) => {
-          res.json({
+          res.status(200).json({
             campaigns: campaign,
           });
         })
@@ -75,6 +79,9 @@ campaignController.getPartnerCampaigns = function (req, res) {
         });
     } catch (error) {
       console.error("Ocorreu um erro ao contar os documentos:", error);
+      res.status(500).json({
+        error: "Erro interno do servidor",
+      });
     }
   })();
 };
@@ -163,27 +170,18 @@ campaignController.management1 = function (req, res) {
   })();
 };
 
-/*
-campaignController.list = function (req, res) {
-  Campaign.find()
-    .then((campaign) => {
-      res.render("../views/campaigns/showAll", { campaigns: campaign });
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
-};
-*/
-
 campaignController.show = function (req, res) {
   Campaign.findOne({ _id: req.params.id })
     .then((campaign) => {
-      res.json({
+      res.status(200).json({
         campaign: campaign,
       });
     })
     .catch((err) => {
       console.error("Error:", err);
+      res.status(500).json({
+        error: "Erro interno do servidor",
+      });
     });
 };
 
@@ -295,33 +293,18 @@ campaignController.save = function (req, res) {
               console.error("Error writing default image:", err);
               return res.status(500).send("Error writing default image");
             }
-            res.redirect("/campaigns/");
+            
           });
         });
       }
+      res.status(200).json({campaign:savedCampaign});
     })
     .catch((err) => {
       console.error("Error saving campaign:", err);
 
-      res.status(500).send("Error saving campaign");
+      res.status(500).send("Erro interno do servidor");
     });
 };
-
-
-/*
-campaignController.edit = function (req, res) {
-  Campaign.findOne({ _id: req.params.id })
-    .then((campaign) => {
-      res.render("../views/campaigns/editarcampanha", {
-        campaign: campaign,
-        username: req.session.username,
-        userId: req.session.userId,
-      });
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
-};*/
 
 campaignController.update = function (req, res) {
   Campaign.findByIdAndUpdate(
@@ -366,9 +349,11 @@ campaignController.update = function (req, res) {
           });
         });
       });
+      res.status(200).json({campaign:savedCampaign})
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).send("Erro interno do servidor")
     });
 };
 
@@ -399,11 +384,39 @@ campaignController.delete = function (req, res) {
           console.log("A imagem foi apagada com sucesso!");
         });
       });
-      res.json({deleted:true})
+      res.status(200).send("Campanha eliminada");
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).send("Erro interno do servidor")
     });
 };
 
+
+
+/*
+campaignController.edit = function (req, res) {
+  Campaign.findOne({ _id: req.params.id })
+    .then((campaign) => {
+      res.render("../views/campaigns/editarcampanha", {
+        campaign: campaign,
+        username: req.session.username,
+        userId: req.session.userId,
+      });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
+
+campaignController.list = function (req, res) {
+  Campaign.find()
+    .then((campaign) => {
+      res.render("../views/campaigns/showAll", { campaigns: campaign });
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
+*/
 module.exports = campaignController;

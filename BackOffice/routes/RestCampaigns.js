@@ -20,9 +20,10 @@ router.get("/show/:id",loginController.verifyLoginUser, function (req, res) {
   campaign.show(req, res);
 });
 
+/*
 router.get("/show/:id/:donatorId",loginController.verifyDonatorUser, function (req, res) {
   campaign.buyMenu(req, res);
-});
+});*/
 
 router.post("/save",loginController.verifyPartnerUser, function (req, res) {
   campaign.save(req, res);

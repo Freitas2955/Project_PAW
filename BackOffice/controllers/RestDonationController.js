@@ -44,10 +44,10 @@ donationController.getEntityDonations = function (req, res) {
 
   (async () => {
     try {
-      Donation.find({entityId:req.params.id})
+      Donation.find({ entityId: req.params.id })
         .then((donation) => {
-          res.json({
-            donations: donation
+          res.status(200).json({
+            donations: donation,
           });
         })
         .catch((err) => {
@@ -55,6 +55,7 @@ donationController.getEntityDonations = function (req, res) {
         });
     } catch (error) {
       console.error("Ocorreu um erro ao contar os documentos:", error);
+      res.status(500).send("Erro interno no servidor");
     }
   })();
 };
@@ -64,10 +65,10 @@ donationController.getDonatorDonations = function (req, res) {
 
   (async () => {
     try {
-      Donation.find({donatorId:req.params.id})
+      Donation.find({ donatorId: req.params.id })
         .then((donation) => {
-          res.json({
-            donations: donation
+          res.status(200).json({
+            donations: donation,
           });
         })
         .catch((err) => {
@@ -75,6 +76,7 @@ donationController.getDonatorDonations = function (req, res) {
         });
     } catch (error) {
       console.error("Ocorreu um erro ao contar os documentos:", error);
+      res.status(500).send("Erro interno do servidor");
     }
   })();
 };
@@ -84,16 +86,18 @@ donationController.management2 = function (req, res) {
 
   (async () => {
     try {
-      num = await Donation.countDocuments({donatorName:req.query.donatorName});
+      num = await Donation.countDocuments({
+        donatorName: req.query.donatorName,
+      });
       console.log("Número total de documentos:", num);
-      Donation.find({donatorName:req.query.donatorName})
+      Donation.find({ donatorName: req.query.donatorName })
         .then((donation) => {
-          res.json( {
+          res.json({
             donations: donation,
             number: num,
             username: req.session.username,
             userId: req.session.userId,
-          })
+          });
           //res.render("../views/donations/gestaoDoacoes");
         })
         .catch((err) => {
@@ -104,16 +108,6 @@ donationController.management2 = function (req, res) {
     }
   })();
 };
-/*
-donationController.list = function (req, res) {
-  Donation.find()
-    .then((donation) => {
-      res.redirect("/donations/gerirDoacoes");
-    })
-    .catch((err) => {
-      console.log("Error:", err);
-    });
-};*/
 
 donationController.show = function (req, res) {
   Request.findOne({ donationId: req.params.id })
@@ -121,12 +115,9 @@ donationController.show = function (req, res) {
       if (!request) {
         Donation.findOne({ _id: req.params.id })
           .then((donation) => {
-            res.json( {
+            res.status(200).json({
               donation: donation,
-              username: req.session.username,
-              userId: req.session.userId,
-              requested: false,
-            })
+            });
           })
           .catch((err) => {
             console.error("Error:", err);
@@ -134,11 +125,8 @@ donationController.show = function (req, res) {
       } else {
         Donation.findOne({ _id: req.params.id })
           .then((donation) => {
-            res.json( {
+            res.status(200).json({
               donation: donation,
-              username: req.session.username,
-              userId: req.session.userId,
-              requested: true,
             });
           })
           .catch((err) => {
@@ -148,13 +136,9 @@ donationController.show = function (req, res) {
     })
     .catch((err) => {
       console.log(err);
-      res.json({err:true})
+      res.status(500).send("Erro interno do servidor");
     });
 };
-/*
-donationController.create = function (req, res) {
-  res.render("../views/donations/reg");
-};*/
 
 donationController.save = function (req, res) {
   Points.findOne().then((point) => {
@@ -170,28 +154,118 @@ donationController.save = function (req, res) {
       let donatorId = req.params.id;
       let entityId = req.body.entityId;
       let entityName = req.body.entityName;
-        const donationParams = {
-          camisolas: req.body.camisolas,
-          casacos: req.body.casacos,
-          calcas: req.body.calcas,
-          sapatos: req.body.sapatos,
-          acessorios: req.body.acessorios,
-          interior: req.body.interior,
-          dinheiro: req.body.dinheiro,
-          donatorId: donatorId,
-          donatorName: donator.name,
-          entityId: entityId,
-          entityName: entityName,
-          points: totalPoints,
-          approved: false,
-        };
+      const donationParams = {
+        camisolas: req.body.camisolas,
+        casacos: req.body.casacos,
+        calcas: req.body.calcas,
+        sapatos: req.body.sapatos,
+        acessorios: req.body.acessorios,
+        interior: req.body.interior,
+        dinheiro: req.body.dinheiro,
+        donatorId: donatorId,
+        donatorName: donator.name,
+        entityId: entityId,
+        entityName: entityName,
+        points: totalPoints,
+        approved: false,
+      };
       const donation = new Donation(donationParams);
       donation
         .save()
         .then((savedDonation) => {
           console.log("Successfully created an donation.");
+          res.status(200).json({ donation: savedDonation });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send("Erro interno do servidor");
+        });
+    });
+  });
+};
 
-          /*var fileDestination = path.join(
+donationController.delete = function (req, res) {
+  Donation.deleteOne({ _id: req.params.id })
+    .then(() => {
+      console.log("Donation detected!");
+      Request.find({ donationId: req.params.id }).then((requests) => {
+        requests.forEach(function (request) {
+          console.log(request._id.toString());
+          Request.deleteOne({ _id: request._id.toString() }).then(
+            (deletedRequest) => {
+              console.log("apagado");
+              res.status(200).json({ request: deletedRequest });
+            }
+          );
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Erro interno do servidor");
+    });
+};
+
+donationController.approve = function (req, res) {
+  Donation.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: {
+        approved: true,
+      },
+    },
+    { new: true }
+  )
+    .then((donation) => {
+      console.log(donation);
+      Donator.findByIdAndUpdate(
+        donation.donatorId,
+        {
+          $inc: {
+            points: donation.points,
+          },
+        },
+        { new: true }
+      )
+        .then((updatedDonator) => {
+          Request.findOne({ donationId: donation._id })
+            .then((request) => {
+              // res.redirect("/requests/approve/" + request._id);  ////////////REVER
+            })
+            .catch((err) => {
+              console.log(err);
+              //res.redirect("/RestDonations");
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          //res.redirect("/RestDonations");
+        });
+      res.status(200).json({ donation: savedDonation });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Erro interno do servidor");
+    });
+};
+
+/*
+donationController.create = function (req, res) {
+  res.render("../views/donations/reg");
+};*/
+
+/*
+donationController.list = function (req, res) {
+  Donation.find()
+    .then((donation) => {
+      res.redirect("/donations/gerirDoacoes");
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};*/
+
+/*var fileDestination = path.join(
             __dirname,
             "..",
             "images",
@@ -220,75 +294,4 @@ donationController.save = function (req, res) {
               res.redirect("/RestDonators/");
             });
           });*/
-        })
-        .catch((err) => {
-          console.log(err);
-          res.redirect("/RestDonators/");
-        });
-    });
-  });
-};
-
-donationController.delete = function (req, res) {
-  Donation.deleteOne({ _id: req.params.id })
-    .then(() => {
-      console.log("Donation detected!");
-      Request.find({ donationId: req.params.id })
-        .then((requests)=>{
-          requests.forEach(function(request){
-            console.log(request._id.toString())
-            Request.deleteOne({_id:request._id.toString()}).then(()=>{
-              console.log("apagado");
-            })
-          })
-        })
-      res.redirect("/RestDonations/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-donationController.approve = function (req, res) {
-  Donation.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: {
-        approved: true,
-      },
-    },
-    { new: true }
-  )
-    .then((donation) => {
-      console.log(donation);
-      Donator.findByIdAndUpdate(
-        donation.donatorId,
-        {
-          $inc: {
-            points: donation.points,
-          },
-        },
-        { new: true }
-      )
-        .then((updatedDonator) => {
-          Request.findOne({ donationId: donation._id })
-            .then((request) => {
-             // res.redirect("/requests/approve/" + request._id);  ////////////REVER
-            })
-            .catch((err) => {
-              console.log(err);
-              //res.redirect("/RestDonations");
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-          //res.redirect("/RestDonations");
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-      //res.redirect("/RestDonations");
-    });
-};
-
 module.exports = donationController;
