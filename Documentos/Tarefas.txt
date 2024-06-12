@@ -13,11 +13,3 @@ problema ao registar cenas com imagem se tiver httpHeaders para login corsa
 
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -objectid
-
-css
-
-dashboard instituicoes
-
-meter res status em todos a partir do restdonators
-
-ao ver campanhas de um parceiro ta a mostrar todas

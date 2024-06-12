@@ -13,19 +13,29 @@ mongoose
   .catch((err) => console.error(err));
 
 purchasesController.getDonatorPurchases = function (req, res) {
-  Purchase.find({ donatorId: req.params.id }).then((purchases) => {
-    res.json({
-      purchases: purchases,
+  Purchase.find({ donatorId: req.params.id })
+    .then((purchases) => {
+      res.status(200).json({
+        purchases: purchases,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Erro interno do servidor");
     });
-  }).catch((err)=>{console.log(err)});
 };
 
 purchasesController.getPartnerPurchases = function (req, res) {
-  Purchase.find({ partnerId: req.params.id }).then((purchases) => {
-    res.json({
-      purchases: purchases,
+  Purchase.find({ partnerId: req.params.id })
+    .then((purchases) => {
+      res.status(200).json({
+        purchases: purchases,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Erro interno do servidor");
     });
-  }).catch((err)=>{console.log(err)});
 };
 
 module.exports = purchasesController;

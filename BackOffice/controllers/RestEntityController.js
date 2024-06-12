@@ -22,7 +22,7 @@ entityController.getApproved = function (req, res) {
     try {
       Entity.find({ approved: true })
         .then((entity) => {
-          res.json({
+          res.status(200).json({
             entities: entity,
           });
         })
@@ -31,6 +31,7 @@ entityController.getApproved = function (req, res) {
         });
     } catch (error) {
       console.error("Ocorreu um erro ao contar os documentos:", error);
+      res.status(500).send("Erro interno do servidor")
     }
   })();
 };
@@ -102,15 +103,14 @@ entityController.list = function (req, res) {
 entityController.show = function (req, res) {
   Entity.findOne({ _id: req.params.id })
     .then((entity) => {
-      res.json({
+      res.status(200).json({
         entity: entity,
-        username: req.session.username,
-        userId: req.session.userId,
       });
       //res.render("../views/entities/verinstituicao");
     })
     .catch((err) => {
       console.error("Error:", err);
+      res.status(500).send("Erro interno do servidor")
     });
 };
 
@@ -125,16 +125,13 @@ entityController.approve = function (req, res) {
     { new: true }
   )
     .then((entity) => {
-      res.json({
+      res.status(200).json({
         entity: entity,
-        username: req.session.username,
-        userId: req.session.userId,
       });
-      //res.render("../views/entities/verinstituicao");
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/RestEntities/");
+      res.status(500).send("Erro interno do servidor")
     });
 };
 
@@ -195,7 +192,7 @@ entityController.save = function (req, res) {
           } else {
             Donator.findOne({ email: req.body.email }).then((donator) => {
               if (donator) {
-                res.json({ exists: true });
+                res.status(400).json({ exists: true });
               } else {
                 entitySave
                   .save()
@@ -243,7 +240,7 @@ entityController.save = function (req, res) {
                                 );
                               }
                             });
-                            res.json(savedEntity);
+                            res.status(200).json({entity:savedEntity});
                           });
                         });
                       } else {
@@ -272,7 +269,7 @@ entityController.save = function (req, res) {
                               .status(500)
                               .send("Error writing default image");
                           }
-                          res.json(savedEntity);
+                          res.status(200).json({entity:savedEntity});
                         });
                       });
                     }

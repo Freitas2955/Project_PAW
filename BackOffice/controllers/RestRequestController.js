@@ -29,10 +29,10 @@ mongoose
       return Promise.all(requestPromises);
     }).then(() => {
       console.log("pedidos", pedidos);
-      res.json({ requests: pedidos });
+      res.status(200).json({ requests: pedidos });
     }).catch((err) => {
       console.error(err);
-      res.status(500).send("Erro no servidor");
+      res.status(500).send("Erro interno do servidor");
     });
   };
   
@@ -51,7 +51,7 @@ mongoose
       return Promise.all(requestPromises);
     }).then(() => {
       console.log(pedidos);
-      res.json({ requests: pedidos });
+      res.status(200).json({ requests: pedidos });
     }).catch((err) => {
       console.error(err);
       res.status(500).send("Erro no servidor");
@@ -189,12 +189,12 @@ requestController.save = function (req, res) {
         const request = new Request(data);
         request.save().then((savedRequest) => {
           console.log("Successfully created an Request.");
-          res.json({ savedRequest });
+          res.status(200).json({ savedRequest });
         });
       });
     } else {
       console.log("Ja existe!");
-      res.json({ exists: true });
+      res.status(400).json({ exists: true });
     }
   });
 };
@@ -262,11 +262,11 @@ requestController.approve = function (req, res) {
     { new: true }
   )
     .then((request) => {
-      res.redirect("/RestDonations/show/" + request.donationId);
+      res.status(200).json({request:request})
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/RestRequests/");
+      res.status(500).send("Erro interno do servidor")
     });
 };
 

@@ -53,12 +53,13 @@ pointsController.edit = function (req, res) {
 pointsController.get = function (req, res) {
   Points.findOne()
     .then((points) => {
-      res.json({
+      res.status(200).json({
         points: points,
       });
     })
     .catch((err) => {
       console.log("Error:", err);
+      res.status(500).send("Erro interno do servidor")
     });
 };
 

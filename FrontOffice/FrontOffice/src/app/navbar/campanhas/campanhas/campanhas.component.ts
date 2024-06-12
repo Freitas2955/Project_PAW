@@ -58,11 +58,18 @@ export class CampanhasComponent {
   }
 
   ngOnInit(): void {
-    if (this.type == 'Partner') {
-      this.getPartnerCampaigns();
-    } else {
+    if (this.partnerId) {
+      this.getPartnerCampaigns(this.partnerId as string);
+      if(this.type=="Donator"){
       this.getDonatorPoints();
-      this.getCampaigns();
+      }
+    } else {
+      if (this.type == 'Partner') {
+        this.getPartnerCampaigns(this.userId as string);
+      } else {
+        this.getDonatorPoints();
+        this.getCampaigns();
+      }
     }
   }
 
@@ -89,9 +96,9 @@ export class CampanhasComponent {
     );
   }
 
-  getPartnerCampaigns(): void {
+  getPartnerCampaigns(id:string): void {
     console.log('getPartnerCampaigns chamado');
-    this.rest.getPartnerCampaigns(this.userId).subscribe(
+    this.rest.getPartnerCampaigns(id).subscribe(
       (response: any) => {
         console.log('Resposta recebida:', response);
         this.campaigns = response.campaigns;
@@ -124,7 +131,7 @@ export class CampanhasComponent {
           console.error('Erro ao procurar campanha', error);
         }
       );
-      window.location.reload()
+      window.location.reload();
     }
   }
 
@@ -172,7 +179,7 @@ export class CampanhasComponent {
     );
   }
 
-  closeModal(){
-    this.showModal=false;
+  closeModal() {
+    this.showModal = false;
   }
 }

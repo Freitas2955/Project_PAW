@@ -23,16 +23,16 @@ partnerController.getPartners = function (req, res) {
       console.log("Número total de documentos:", num);
       Partner.find()
         .then((partner) => {
-          res.json({
+          res.status(200).json({
             partners: partner,
           });
-          //res.render("../views/partners/gestaoParceiros");
         })
         .catch((err) => {
           console.log("Error:", err);
         });
     } catch (error) {
       console.error("Ocorreu um erro ao contar os documentos:", error);
+      res.status(500).send("Erro interno do servidor");
     }
   })();
 };
@@ -51,15 +51,13 @@ partnerController.list = function (req, res) {
 partnerController.show = function (req, res) {
   Partner.findOne({ _id: req.params.id })
     .then((partner) => {
-      res.json({
+      res.status(200).json({
         partner: partner,
-        username: req.session.username,
-        userId: req.session.userId,
       });
-      //res.render("../views/partners/verparceiro");
     })
     .catch((err) => {
       console.error("Error:", err);
+      res.status(500).send("Erro interno do servidor")
     });
 };
 
@@ -90,15 +88,15 @@ partnerController.save = function (req, res) {
   Partner.findOne({ email: req.body.email })
     .then((partner) => {
       if (partner) {
-        res.json({ exists: true });
+        res.status(400).json({ exists: true });
       } else {
         Donator.findOne({ email: req.body.email }).then((donator) => {
           if (donator) {
-            res.json({ exists: true });
+            res.status(400).json({ exists: true });
           } else {
             Entity.findOne({ email: req.body.email }).then((entity) => {
               if (entity) {
-                res.json({ exists: true });
+                res.status(400).json({ exists: true });
               } else {
                 partnerSave
                   .save()
@@ -134,7 +132,7 @@ partnerController.save = function (req, res) {
                                 console.error("Error removing file from 'tmp' folder:", err);
                               }
                             });
-                            res.redirect("/RestPartners/");
+                            res.status(200).json({partner:savedPartner})
                           });
                         });
                       } else {
@@ -157,7 +155,7 @@ partnerController.save = function (req, res) {
                             console.error("Error writing default image:", err);
                             return res.status(500).send("Error writing default image");
                           }
-                          res.redirect("/RestPartners/");
+                          res.status(200).json({partner:savedPartner})
                         });
                       });
                     }
@@ -228,7 +226,7 @@ partnerController.update = function (req, res) {
                 }
               });
 
-              res.redirect("/RestPartners/");
+              res.status(200).json({partner:updatedPartner})
             });
           });
         } else {
