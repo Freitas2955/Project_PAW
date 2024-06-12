@@ -15,19 +15,16 @@ router.get("/approve/:id",loginController.verifyEntityUser, function (req, res, 
   request.approve(req, res);
 });
 
+router.post("/save/:id",loginController.verifyDonatorUser, function (req, res) {
+  request.save(req, res);
+});
+
 /*
 // Create request
 router.get("/create",loginController.verifyLoginUser, function (req, res) {
   request.create(req, res);
 });
-*/
 
-// Save request
-router.post("/save/:id", function (req, res) {
-  request.save(req, res);
-});
-
-/*
 // Edit request
 router.get("/edit/:id",loginController.verifyLoginUser, function (req, res) {
   request.edit(req, res);

@@ -1,10 +1,7 @@
 -fazer notificacoes(email)  (admin:novas entidades para validar)-Backoffice
 -api paypal
 
--historico de troca de pontos-----feito
 -Compor a pagina inicial por as intituicoes e os parceiros(para os visistantes ver)
--angariador receber 10% de todos os pontos do doador que angariou
--por os filtros a funcionar das paginas verintituicoes/...-------feito
 
 -ao dar update validar schemas
 const { error, value } = Entity.validate(req.body);
@@ -14,37 +11,20 @@ if (error) {
 
 -os rests desenvolvidos devem estar documentados utilizando a plataforma swagger
 
-login-dashboard(donator)FEITO,dashboard(entidades)FEITO,dashboard(parceiros)FEITO
-doadores podem doar, comprar vales, por filtros nas entidades e campanhas -----feito com alguns detalhes por resolver
-entidades podem gerir doacoes---feito
-parceiros podem gerir campanhas e ver historico de compras----feito
- 
-doador nao pode aprovar doacao e entidade nao pode criar pedido de recolha---feito
-instituicoes podem ver pedidos de recolha---feito
-
-no registo de um amigo dar pontos ao angariador
-
-ao editar se nao puser imagem da merda --------------feito
-
-erro ao registar e editar entidade
-
-verificar se a entidade tá aprovada---feito
+erro ao registar e editar entidade corsa
 
 ao registar campanhas regista mas da erro
 
-problema ao registar cenas com imagem se tiver httpHeaders para login
+problema ao registar cenas com imagem se tiver httpHeaders para login corsa
 
 Freitas:
 -verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -css dashboard
--dashboard instituicoes para ver os donativos feitos, doacoes pendentes, grafico com os tipos de doacao, ----feito falta doacoes pendentes
 -dashboard parceiros historioco de vales trocados, botao para ver vales ativos, numero de pontos gastos 
 
 Duarte:
 -nao deixar registar instituicoes com email igual a doadores--feito testar em todos os tipos de perfil
 -Na base de dados da doacao acrescentar (registo do donativo e o seu estado(recebido /enviado/ estraviado)) 
--login igual para todos--- feito 
--organizar rotas para perfis diferentes e por login no backend(login no backend ta feito so falta por nas rotas)---feito
 -objectid
 -funcao no rest das campanhas
 
