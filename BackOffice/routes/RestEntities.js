@@ -3,7 +3,7 @@ var router = express.Router();
 var entity = require("../controllers/RestEntityController.js");
 const loginController = require("../controllers/RestLoginController.js");
 
-router.get("/getApproved",loginController.verifyLoginUser, function (req, res) {
+router.get("/getApproved", function (req, res) {
   entity.getApproved(req, res);
 });
 

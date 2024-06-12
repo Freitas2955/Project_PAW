@@ -3,7 +3,7 @@ var router = express.Router();
 var partner = require("../controllers/RestPartnerController.js");
 const loginController = require("../controllers/RestLoginController.js");
 
-router.get("/get",loginController.verifyLoginUser, function (req, res) {
+router.get("/get", function (req, res) {
   partner.getPartners(req, res);
 });
 

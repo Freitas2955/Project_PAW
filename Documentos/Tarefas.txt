@@ -1,8 +1,6 @@
 -fazer notificacoes(email)  (admin:novas entidades para validar)-Backoffice
 -api paypal
 
--Compor a pagina inicial por as intituicoes e os parceiros(para os visistantes ver)
-
 -ao dar update validar schemas
 const { error, value } = Entity.validate(req.body);
 if (error) {

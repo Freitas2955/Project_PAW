@@ -63,7 +63,7 @@ export class RestService {
       responseType: 'blob' as 'json'
     };
 
-    return this.http.get<Blob>(endpoint + 'FrontImages/partners/' + id + '.jpg', options);
+    return this.http.get<Blob>(endpoint + 'PartnerImages/' + id + '.jpg', options);
   }
 
   getEntityImage(id: String|undefined): Observable<Blob> {
@@ -72,7 +72,7 @@ export class RestService {
       responseType: 'blob' as 'json'
     };
 
-    return this.http.get<Blob>(endpoint + 'FrontImages/entities/' + id + '.jpg', options);
+    return this.http.get<Blob>(endpoint + 'EntityImages/' + id + '.jpg', options);
   }
 
   getDonatorImage(id: String|undefined): Observable<Blob> {

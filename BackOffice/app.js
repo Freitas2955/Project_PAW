@@ -102,6 +102,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const loginController = require("./controllers/LoginController.js");
 const restLoginController = require("./controllers/RestLoginController.js");
+app.use('/EntityImages', express.static(path.join(__dirname, 'images/entities')));
+app.use('/PartnerImages', express.static(path.join(__dirname, 'images/partners')));
 app.use('/FrontImages',restLoginController.verifyLoginUser, express.static(path.join(__dirname, 'images')));
 app.use('/images',loginController.verifyLoginUser, express.static(path.join(__dirname, 'images')));
 

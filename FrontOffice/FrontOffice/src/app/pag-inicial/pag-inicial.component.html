@@ -56,13 +56,14 @@
 </main>
 
 <main>
+  <h1>Instituições</h1>
   <div class="entidades">
-    <h1>Instituições</h1>
+    
     <div class="card" *ngFor="let entity of filteredEntities">
       <div class="content">
         <div class="info">
           <header>
-            <h3>Nome: {{entity.name}}</h3>
+            <h3>{{entity.name}}</h3>
           </header>
           <p>Email: {{entity.email}}</p>
           <p>Cidade: {{entity.city}}</p>
@@ -78,14 +79,14 @@
   </div>
 </main>
 
-<main>
-  <div class="parceiros">
-    <h1>Parceiros</h1>
+<main style="margin-top: 50vh;">
+  <h1>Parceiros</h1>
+  <div class="entidades">
     <div class="card" *ngFor="let partner of filteredPartners">
       <div class="content">
         <div class="info">
           <header>
-            <h3>Nome: {{partner.name}}</h3>
+            <h3>{{partner.name}}</h3>
           </header>
           <p>Email: {{partner.email}}</p>
           <p>Cidade: {{partner.city}}</p>
