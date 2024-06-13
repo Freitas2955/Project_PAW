@@ -31,7 +31,18 @@
                     <div class="inputContainer">
                         <label for="description">Descrição:</label>
                         <textarea id="description" name="description" [(ngModel)]="entity.description"
-                            placeholder="Descrição" required></textarea>
+                            placeholder="Descrição" #description="ngModel" required minlength="10" maxlength="500"></textarea>
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert">
+                                <div *ngIf="description.hasError('required')">
+                                    Campo obrigatório
+                                </div>
+                                <div *ngIf="description.hasError('minlength')">
+                                    Descrição muito curta (mínimo 10 caracteres)
+                                </div>
+                                <div *ngIf="description.hasError('maxlength')">
+                                    Descrição muito longa (maximo 500 caracteres)
+                                </div>
+                            </div>
                     </div>
 
                 </div>
@@ -41,10 +52,16 @@
                         <div class="inputContainer">
                             <label for="name">Nome da Instituição:</label>
                             <input type="text" id="name" name="name" [(ngModel)]="entity.name"
-                                placeholder="Nome da Entidade" #name="ngModel" required minlength="3">
+                                placeholder="Nome da Entidade" #name="ngModel" required minlength="3" maxlength="100">
                             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
                                 <div *ngIf="name.hasError('required')">
                                     Campo obrigatório
+                                </div>
+                                <div *ngIf="name.hasError('minlength')">
+                                    Nome muito curto (mínimo 3 caracteres)
+                                </div>
+                                <div *ngIf="name.hasError('maxlength')">
+                                    Nome muito longa (maximo 100 caracteres)
                                 </div>
                             </div>
                         </div>
@@ -67,26 +84,65 @@
                         
                         <div class="inputContainer">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" [(ngModel)]="entity.email" placeholder="Email"
+                            <input type="email" id="email" name="email" [(ngModel)]="entity.email" placeholder="Email" #email="ngModel"
                                 required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                                    <div *ngIf="email.hasError('required')">
+                                        Campo obrigatório
+                                    </div>
+                                    <div *ngIf="email.hasError('pattern')">
+                                        Formato de email inválido
+                                    </div>
+                                </div>
                         </div>
                         
                         <div class="inputContainer">
                             <label for="address">Morada:</label>
-                            <input type="text" id="address" name="address" [(ngModel)]="entity.address"
-                                placeholder="Endereço" required>
+                            <input type="text" id="address" name="address" [(ngModel)]="entity.address" #address="ngModel"
+                                placeholder="Morada" required minlength="3" maxlength="100">
+                                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert">
+                                    <div *ngIf="address.hasError('required')">
+                                        Campo obrigatório
+                                    </div>
+                                    <div *ngIf="address.hasError('minlength')">
+                                        Morada curto (mínimo 3 caracteres)
+                                    </div>
+                                    <div *ngIf="address.hasError('maxlength')">
+                                        Morada longa (maximo 100 caracteres)
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     <div class="detalhesMorada">
                         <div class="inputContainer">
                             <label for="postCode">Código Postal:</label>
                             <input type="text" id="postCode" name="postCode" [(ngModel)]="entity.postCode"
-                                placeholder="Código Postal" required>
+                                placeholder="Código Postal" #postCode="ngModel" required pattern="^\d{4}-\d{3}$">
+                                <div *ngIf="postCode.invalid && (postCode.dirty || postCode.touched)" class="alert">
+                                    <div *ngIf="postCode.hasError('required')">
+                                        Campo obrigatório
+                                    </div>
+                                    <div *ngIf="postCode.hasError('pattern')">
+                                        Formato inválido. Use o formato 1234-567
+                                    </div>
+                                </div>
                         </div>
                         <div class="inputContainer">
                             <label for="city">Cidade:</label>
-                            <input type="text" id="city" name="city" [(ngModel)]="entity.city" placeholder="Cidade"
-                                required>
+                            <input type="text" id="city" name="city" [(ngModel)]="entity.city" placeholder="Cidade" #city="ngModel"
+                                required minlength="3" maxlength="25">
+                                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert">
+                                    <div *ngIf="city.hasError('required')">
+                                        Campo obrigatório
+                                    </div>
+                                    <div *ngIf="city.hasError('minlength')">
+                                        Muito curto (mínimo 3 caracteres)
+                                    </div>
+                                    <div *ngIf="city.hasError('maxlength')">
+                                        Muito longa (maximo 25 caracteres)
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>

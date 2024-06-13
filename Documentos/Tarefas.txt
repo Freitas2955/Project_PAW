@@ -11,5 +11,4 @@ erro ao registar e editar entidade corsa
 ao registar campanhas regista mas da erro
 problema ao registar cenas com imagem se tiver httpHeaders para login corsa
 
--verificacao dos inputs (falta a mensagem) fazer a validacao e a crescentar o css do alerta exemplo nome de registar instituicoes
 -objectid

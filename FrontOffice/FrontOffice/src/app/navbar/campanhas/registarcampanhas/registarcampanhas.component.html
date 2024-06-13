@@ -18,7 +18,18 @@
                     <div class="inputContainer">
                         <label for="description">Descrição:</label>
                         <textarea id="description" name="description" [(ngModel)]="campaign.description"
-                            placeholder="Descrição" required></textarea>
+                            placeholder="Descrição" #description="ngModel" required minlength="10" maxlength="500"></textarea>
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert">
+                                <div *ngIf="description.hasError('required')">
+                                    Campo obrigatório
+                                </div>
+                                <div *ngIf="description.hasError('minlength')">
+                                    Descrição muito curta (mínimo 10 caracteres)
+                                </div>
+                                <div *ngIf="description.hasError('maxlength')">
+                                    Descrição muito longa (maximo 500 caracteres)
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <div id="rightside">
@@ -26,13 +37,33 @@
                         <div class="inputContainer">
                             <label for="name">Titulo:</label>
                             <input type="text" id="name" name="name" [(ngModel)]="campaign.name"
-                                placeholder="Nome da Campanha">
+                                placeholder="Nome da Campanha" #name="ngModel" required minlength="3" maxlength="100">
+                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                                    <div *ngIf="name.hasError('required')">
+                                        Campo obrigatório
+                                    </div>
+                                    <div *ngIf="name.hasError('minlength')">
+                                        Titulo muito curto (mínimo 3 caracteres)
+                                    </div>
+                                    <div *ngIf="name.hasError('maxlength')">
+                                        Titulo muito longa (maximo 100 caracteres)
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     <div class="grupo">
                         <div class="inputContainer">
                             <label for="cost">Custos:</label>
-                            <input type="cost" id="cost" name="cost" [(ngModel)]="campaign.cost" placeholder="Custos">
+                            <input type="number" id="cost" name="cost" [(ngModel)]="campaign.cost" placeholder="Custos" 
+                            #cost="ngModel" required minlength="1">
+                            <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" class="alert">
+                                <div *ngIf="cost.hasError('required')">
+                                    Campo obrigatório
+                                </div>
+                                <div *ngIf="cost.hasError('min')">
+                                    Custo inválido (deve ser maior que 0)
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

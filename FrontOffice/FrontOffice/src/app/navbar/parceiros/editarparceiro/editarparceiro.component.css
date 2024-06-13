@@ -106,3 +106,14 @@
   button:disabled {
     background-color: #ccc;
   }
+
+  .alert {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .alert div {
+    margin-bottom: 5px;
+  }
+  
